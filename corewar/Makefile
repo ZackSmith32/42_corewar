@@ -10,14 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-COREWAR = corewar
-
-ASM = asm
+NAME = corewar
 
 LIBFTPRINTF = 
 LIBFTPRINTF_DIR = 
 
-COREWAR_SRC = \
+SRC = \
 	$(addprefix ./src/, \
 
 	)
@@ -30,10 +28,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(COREWARE): $(OBJ) $(LIBFTPRINTF)
-	gcc $(CFLAGS) -o $@ $^
-
-$(ASM): $(OBJ) $(LIBFTPRINTF)
+$(NAME): $(OBJ) $(LIBFTPRINTF)
 	gcc $(CFLAGS) -o $@ $^
 
 %.o: %.c
