@@ -6,3 +6,4 @@
 ./asm/asm
 .o
 .a
+.vscode

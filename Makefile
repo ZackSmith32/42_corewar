@@ -14,7 +14,6 @@ ASM = asm
 
 COREWAR = corewar
 
-
 COREWAR_SRC = ./corewar/corewar
 
 ASM_SRC = ./asm/asm
