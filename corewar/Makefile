@@ -12,8 +12,8 @@
 
 NAME = corewar
 
-LIBFTPRINTF = 
-LIBFTPRINTF_DIR = 
+LIBFT = ./libft/
+LIBFT_DIR = 
 
 SRC = \
 	$(addprefix ./src/, \
@@ -31,7 +31,7 @@ SRC = \
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = -I ../includes
+HEADERS = -I ../includes -I ./libft/includes
 
 CFLAGS = -Wall -Wextra -Werror
 
