@@ -15,7 +15,7 @@
 
 #include <stdint.h>
 
-struct		s_game
+struct			s_game
 {
 	char				arena[MEM_SIZE];
 	struct s_champ		*champs;
@@ -24,14 +24,26 @@ struct		s_game
 	struct s_champ		*winner;
 };
 
-struct		s_champ
+struct			s_champ
 {
   	char			prog_name[PROG_NAME_LENGTH + 1];
   	char			comment[COMMENT_LENGTH + 1];
 	unsigned int	lives;
 };
 
-extern		int16_t		g_flags;
+typedef struct	s_op
+{
+	char		*name_short;
+	int
+	t_arg_type	arg_type;
+	int
+	int
+	char		*name_long;
+	int
+	int
+}				t_op;
+
+extern int16_t	g_flags;
 
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2
@@ -42,20 +54,21 @@ extern		int16_t		g_flags;
 /*
 ** flags_get.c
 */
-int			flags_get(int *argc, char ***argv);
+int				flags_get(int *argc, char ***argv);
 
 /*
 ** game_init.c
 */
-int			game_init(int argc, char **argv, struct s_game *game);
+int				game_init(int argc, char **argv, struct s_game *game);
 
 /*
 ** game_step/game_step.c
 */
-int			game_step(struct s_game *game);
+int				game_step(struct s_game *game);
 
 /*
 ** game_print/game_print.c
 */
+int				game_print(struct s_game *game);
 
 #endif

@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <corewar.h>
+#include <op.h>
+
 int			flags_get(int *argc, char ***argv)
 {
 	(void)(argc);

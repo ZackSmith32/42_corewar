@@ -20,6 +20,7 @@ SRC = \
 		corewar.c \
 		flags_get.c \
 		game_init.c \
+		op.c \
 		$(addprefix game_print/, \
 			game_print.c \
 		) \

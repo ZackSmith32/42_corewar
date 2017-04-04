@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO: whats a sexy way to handle our errors
+#include <corewar.h>
+#include <op.h>
+
+//TODO: what's a sexy way to handle our errors
+//TODO: priotity one: get everything to compile
+//TODO: what's up with t_op? Figure out what is inside of t_op
 
 int16_t	g_flags;
 
@@ -31,7 +36,7 @@ int				main(int argc, char **argv)
 	{
 		handle_error(&game);
 	}
-	while (game->winner != NULL)
+	while (game->winner == NULL)
 	{
 		if (game_step(&game) || game_print(&game))
 		{

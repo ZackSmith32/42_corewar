@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int			game_step(struct s_game *game)
+#include <corewar.h>
+#include <op.h>
+
+int			game_print(struct s_game *game)
 {
 	(void)(game);
 	return (0);

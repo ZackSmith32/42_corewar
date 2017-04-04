@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <corewar.h>
+#include <op.h>
+
 int			game_init(int argc, char **argv, struct s_game *game);
 {
 	(void)(argc);
