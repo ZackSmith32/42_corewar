@@ -10,34 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO: whats a sexy way to handle our errors
+#ifndef COREWAR_H
+# define COREWAR_H
 
-int32_t	g_flags;
+#include <stdint.h>
 
-static void		handle_error(struct s_game *game)
+struct		s_game
 {
-	free_game(game);
-	exit(1);
-}
+	char				arena[MEM_SIZE];
+	struct s_champ		*champs;
+	struct t_vect		*pc;
+	unsigned int		time_to_death;
+	struct s_champ		*winner;
+};
 
-int				main(int argc, char **argv)
+struct		s_champ
 {
-	struct s_game	game;
+  	char			prog_name[PROG_NAME_LENGTH + 1];
+  	char			comment[COMMENT_LENGTH + 1];
+	unsigned int	lives;
+};
 
-	ft_bzero(&game, sizeof(game));
-	if (-1 == flags_get(&argc, &argv))
-		return (1);
-	if (-1 == game_init(argc, argv, &game))
-	{
-		handle_error(&game);
-	}
-	while (game->winner != NULL)
-	{
-		if (game_step(&game)|| game_print(&game))
-		{
-			handle_error(&game);
-		}
-	}
-	free_game(&game);
-	return (0);
-}
+extern		int32_t		g_flags;
+
+# define	FLAG_V		0x1
+# define	FLAG_N		0x2
+# define	FLAG_D		0x4
+# define	FLAG_S		0x8
+# define	FLAG_B		0x10
+
+/*
+** flags_get.c
+*/
+int			flags_get(int *argc, char ***argv);
+
+/*
+** game_init.c
+*/
+int			game_init(int argc, char **argv, struct s_game *game);
+
+/*
+** game_step/game_step.c
+*/
+int			game_step(struct s_game *game);
+
+/*
+** game_print/game_print.c
+*/
+int			game_print(struct s_game *game);
+
+#endif
