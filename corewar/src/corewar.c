@@ -14,10 +14,11 @@
 #include <op.h>
 #include <errno.h>
 #include <libft.h>
+#include <unistd.h>
 
-//TODO: what's a sexy way to handle our errors
 //TODO: priotity one: get everything to compile
 //TODO: what's up with t_op? Figure out what is inside of t_op
+//TODO: .gitignore not ignoring corewar executable
 
 int16_t				g_flags = 0;
 int32_t				g_error = 0;
@@ -50,12 +51,13 @@ int					main(int argc, char **argv)
 	{
 		handle_error(&game);
 	}
-	while (game->winner == NULL)
+	while (game.winner == NULL)
 	{
 		if (game_step(&game) || game_print(&game))
 		{
 			handle_error(&game);
 		}
+		ft_printf("hello world\n");
 	}
 	free_game(&game);
 	return (0);

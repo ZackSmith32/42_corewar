@@ -14,6 +14,8 @@
 # define COREWAR_H
 
 # include <stdint.h>
+# include <libft.h>
+# include <op.h>
 
 struct			s_champ
 {
@@ -38,7 +40,7 @@ struct			s_game
 {
 	char				arena[MEM_SIZE];
 	struct s_champ		*champs;
-	struct t_vect		*processes;
+	t_vec				processes;
 	unsigned int		time_to_death;
 	struct s_champ		*winner;
 };
@@ -46,13 +48,13 @@ struct			s_game
 typedef struct	s_op
 {
 	char		*name_short;
-	int
+	int			i_dont_know;
 	t_arg_type	arg_type;
-	int
-	int
+	int			i_dont_know2;
+	int			i_dont_know3;
 	char		*name_long;
-	int
-	int
+	int			i_dont_know4;
+	int			i_dont_know5;
 }				t_op;
 
 extern int16_t	g_flags;
@@ -84,5 +86,10 @@ int				game_step(struct s_game *game);
 ** game_print/game_print.c
 */
 int				game_print(struct s_game *game);
+
+/*
+**
+*/
+void			free_game(struct s_game *game);
 
 #endif

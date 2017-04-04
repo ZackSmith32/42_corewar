@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include <op.h>
 
-int			game_step(struct s_game *game)
+void			free_game(struct s_game *game)
 {
 	(void)(game);
-	game->winner = (void*)1;
-	return (0);
 }

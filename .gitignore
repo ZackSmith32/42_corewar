@@ -4,6 +4,6 @@
 ./corewar/corewar
 ./asm
 ./asm/asm
-.o
-.a
+*.o
+*.a
 .vscode

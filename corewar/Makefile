@@ -12,13 +12,14 @@
 
 NAME = corewar
 
-LIBFT = ./libft/
-LIBFT_DIR = 
+LIBFT = ./libft/libft.a
+LIBFT_DIR = ./libft
 
 SRC = \
 	$(addprefix ./src/, \
 		corewar.c \
 		flags_get.c \
+		free.c \
 		game_init.c \
 		op.c \
 		$(addprefix game_print/, \
@@ -37,14 +38,14 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFTPRINTF)
+$(NAME): $(OBJ) $(LIBFT)
 	gcc $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
 
-$(LIBFTPRINTF): force
-	cd $(LIBFTPRINTF_DIR) && $(MAKE)
+$(LIBFT): force
+	cd $(LIBFT_DIR) && $(MAKE)
 
 force:
 	@true
