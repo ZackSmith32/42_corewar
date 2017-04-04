@@ -18,7 +18,6 @@
 
 //TODO: priotity one: get everything to compile
 //TODO: what's up with t_op? Figure out what is inside of t_op
-//TODO: .gitignore not ignoring corewar executable
 
 int16_t				g_flags = 0;
 int32_t				g_error = 0;
