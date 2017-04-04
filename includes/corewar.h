@@ -27,12 +27,15 @@ struct			s_champ
 */
 struct			s_pc
 {
-	unsigned char	registors[8] //TODO: how many registers are there and what size are they?
+	unsigned char	registors[REG_NUMBER];
 	_Bool			cary;
 	size_t			location; //TODO: index or pointer?
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
 };
 
+/*
+** game.pc is a a vector of processes
+*/
 struct			s_game
 {
 	char				arena[MEM_SIZE];
