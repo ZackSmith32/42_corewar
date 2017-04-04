@@ -23,24 +23,22 @@ struct			s_champ
 };
 
 /*
-** pc stands for process
+** pc is the locaiton of the next instruction of execute
 */
-struct			s_pc
+
+struct			s_process
 {
 	unsigned char	registors[REG_NUMBER];
 	_Bool			cary;
-	size_t			location; //TODO: index or pointer?
+	void			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
 };
 
-/*
-** game.pc is a a vector of processes
-*/
 struct			s_game
 {
 	char				arena[MEM_SIZE];
 	struct s_champ		*champs;
-	struct t_vect		*pc;
+	struct t_vect		*processes;
 	unsigned int		time_to_death;
 	struct s_champ		*winner;
 };
@@ -59,6 +57,7 @@ typedef struct	s_op
 
 extern int16_t	g_flags;
 extern t_op		g_op_tab[17];
+extern int32_t	g_error;
 
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2
