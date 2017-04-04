@@ -13,7 +13,25 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-#include <stdint.h>
+# include <stdint.h>
+
+struct			s_champ
+{
+  	char			prog_name[PROG_NAME_LENGTH + 1];
+  	char			comment[COMMENT_LENGTH + 1];
+	unsigned int	lives;
+};
+
+/*
+** pc stands for process
+*/
+struct			s_pc
+{
+	unsigned char	registors[8] //TODO: how many registers are there and what size are they?
+	_Bool			cary;
+	size_t			location; //TODO: index or pointer?
+	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
+};
 
 struct			s_game
 {
@@ -22,13 +40,6 @@ struct			s_game
 	struct t_vect		*pc;
 	unsigned int		time_to_death;
 	struct s_champ		*winner;
-};
-
-struct			s_champ
-{
-  	char			prog_name[PROG_NAME_LENGTH + 1];
-  	char			comment[COMMENT_LENGTH + 1];
-	unsigned int	lives;
 };
 
 typedef struct	s_op
@@ -44,6 +55,7 @@ typedef struct	s_op
 }				t_op;
 
 extern int16_t	g_flags;
+extern t_op		g_op_tab[17];
 
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2

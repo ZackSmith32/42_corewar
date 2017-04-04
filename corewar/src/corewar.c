@@ -17,7 +17,7 @@
 //TODO: priotity one: get everything to compile
 //TODO: what's up with t_op? Figure out what is inside of t_op
 
-int16_t	g_flags;
+int16_t			g_flags;
 
 static void		handle_error(struct s_game *game)
 {
