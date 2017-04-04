@@ -12,7 +12,7 @@
 
 //TODO: whats a sexy way to handle our errors
 
-int32_t	g_flags;
+int16_t	g_flags;
 
 static void		handle_error(struct s_game *game)
 {
@@ -33,7 +33,7 @@ int				main(int argc, char **argv)
 	}
 	while (game->winner != NULL)
 	{
-		if (game_step(&game)|| game_print(&game))
+		if (game_step(&game) || game_print(&game))
 		{
 			handle_error(&game);
 		}

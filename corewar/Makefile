@@ -17,12 +17,20 @@ LIBFTPRINTF_DIR =
 
 SRC = \
 	$(addprefix ./src/, \
-
+		corewar.c \
+		flags_get.c \
+		game_init.c \
+		$(addprefix game_print/, \
+			game_print.c \
+		) \
+		$(addprefix game_step/, \
+			game_step.c \
+		) \
 	)
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = -I ./src -I 
+HEADERS = -I ../includes
 
 CFLAGS = -Wall -Wextra -Werror
 
