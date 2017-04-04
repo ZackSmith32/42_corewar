@@ -28,7 +28,7 @@ struct			s_champ
 ** pc is the locaiton of the next instruction of execute
 */
 
-struct			s_process
+struct				s_process
 {
 	unsigned char	registors[REG_NUMBER];
 	_Bool			cary;
@@ -36,7 +36,7 @@ struct			s_process
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
 };
 
-struct			s_game
+struct				s_game
 {
 	char				arena[MEM_SIZE];
 	struct s_champ		*champs;
@@ -45,11 +45,11 @@ struct			s_game
 	struct s_champ		*winner;
 };
 
-typedef struct	s_op
+typedef struct		s_op
 {
 	char		*name_short;
-	int			i_dont_know;
-	t_arg_type	arg_type;
+	int			argc;
+	t_arg_type	arg_type[MAX_ARGS_NUMBER];
 	int			i_dont_know2;
 	int			i_dont_know3;
 	char		*name_long;
@@ -57,9 +57,9 @@ typedef struct	s_op
 	int			i_dont_know5;
 }				t_op;
 
-extern int16_t	g_flags;
-extern t_op		g_op_tab[17];
-extern int32_t	g_error;
+extern int16_t		g_flags;
+extern t_op	const	g_op_tab[17];
+extern int32_t		g_error;
 
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2
@@ -70,26 +70,26 @@ extern int32_t	g_error;
 /*
 ** flags_get.c
 */
-int				flags_get(int *argc, char ***argv);
+int					flags_get(int *argc, char ***argv);
 
 /*
 ** game_init.c
 */
-int				game_init(int argc, char **argv, struct s_game *game);
+int					game_init(int argc, char **argv, struct s_game *game);
 
 /*
 ** game_step/game_step.c
 */
-int				game_step(struct s_game *game);
+int					game_step(struct s_game *game);
 
 /*
 ** game_print/game_print.c
 */
-int				game_print(struct s_game *game);
+int					game_print(struct s_game *game);
 
 /*
 **
 */
-void			free_game(struct s_game *game);
+void				free_game(struct s_game *game);
 
 #endif

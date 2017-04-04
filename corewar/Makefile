@@ -45,14 +45,14 @@ $(NAME): $(OBJ) $(LIBFT)
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
 
 $(LIBFT): force
-	cd $(LIBFT_DIR) && $(MAKE)
+	$(MAKE) -C $(LIBFT_DIR)
 
 force:
 	@true
 
 clean:
 	rm -f $(OBJ)
-	cd ./$(LIBFTPRINTF_DIR) && $(MAKE) fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 fclean: clean
 	rm -f $(NAME)
 re: fclean all
