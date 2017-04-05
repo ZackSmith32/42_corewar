@@ -52,7 +52,7 @@ int					main(int argc, char **argv)
 	}
 	while (game.winner == NULL)
 	{
-		if (game_step(&game) || game_print(&game))
+		if (-1 == game_step(&game) || -1 == game_print(&game))
 		{
 			handle_error(&game);
 		}

@@ -14,6 +14,7 @@
 # define COREWAR_H
 
 # include <stdint.h>
+# include <stdbool.h>
 # include <libft.h>
 # include <op.h>
 
@@ -22,6 +23,7 @@ struct			s_champ
   	char			prog_name[PROG_NAME_LENGTH + 1];
   	char			comment[COMMENT_LENGTH + 1];
 	unsigned int	lives;
+	_Bool			alive;
 };
 
 /*
@@ -39,9 +41,12 @@ struct				s_process
 struct				s_game
 {
 	char				arena[MEM_SIZE];
-	struct s_champ		*champs;
+	struct s_champ		champs[MAX_PLAYERS];
+	unsigned int		champ_count;
 	t_vec				processes;
-	unsigned int		time_to_death;
+	unsigned int		cycles_max;
+	unsigned int		cycles_to_death;
+	struct s_champ		*last_live_champ;
 	struct s_champ		*winner;
 };
 
@@ -53,8 +58,8 @@ typedef struct		s_op
 	int			op_code;
 	int			cycle_req;
 	char		*name_long;
-	int			i_dont_know4;
-	int			i_dont_know5;
+	_Bool		i_dont_know4;
+	_Bool		i_dont_know5;
 }				t_op;
 
 extern int16_t		g_flags;
