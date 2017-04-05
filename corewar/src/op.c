@@ -15,6 +15,7 @@
 
 t_op const	g_op_tab[17] =
 {
+	{0, 0, {0}, 0, 1, 0, 0, 0}, //MOVE FORWARD FUNCTION
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
@@ -40,22 +41,27 @@ t_op const	g_op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
+static int	move_one(struct s_game *game, struct s_process *process)
+{
+	move_pc(&game->arena, &process->pc, 1);
+}
+
 int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
-	&increment,
+	&move_one,
 	&live,
 	&ld,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL
-}
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one,
+	&move_one
+};

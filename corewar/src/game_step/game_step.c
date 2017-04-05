@@ -67,12 +67,17 @@ static void				step_processes(struct s_game *game)
 			// get function pointer from global array
 			// assumes adding funciton pointer to g_op_tab
 			// assumes adding next_op_code to s_process
-			g_op_pointers[p->op_code](game, p);
-			// p->pc += g_op_tab[pc->op_code].argc * 4 + 1;
+			if (-1 == g_op_pointers[p->op_code](game, p))
+			{
+				//TODO: FUNCTION FAILER
+			}
 			p->op_code = *((int *)p->pc);
-		}	
-		i++;
+			if (p->op_code > NUMBER_OF_FUNCTIONS)
+				p->op_code == 0;
+			p->countdown = g_op_tab[op_code].cycles_required;
+		}
 	}
+	i++;
 }
 
 /*

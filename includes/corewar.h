@@ -41,7 +41,7 @@ struct				s_process
 
 struct				s_game
 {
-	char				arena[MEM_SIZE];
+	uint8_t				arena[MEM_SIZE];
 	struct s_champ		champs[MAX_PLAYERS];
 	unsigned int		champ_count;
 	t_vec				processes;
@@ -57,7 +57,7 @@ typedef struct		s_op
 	int			argc;
 	t_arg_type	arg_type[MAX_ARGS_NUMBER];
 	int			op_code;
-	int			cycle_req;
+	int			cycles_required;
 	char		*name_long;
 	_Bool		i_dont_know4;
 	_Bool		i_dont_know5;
@@ -73,6 +73,8 @@ extern int32_t		g_error;
 # define	FLAG_D		0x4
 # define	FLAG_S		0x8
 # define	FLAG_B		0x10
+
+# define	NUMBER_OF_FUNCTIONS 17;
 
 /*
 ** flags_get.c
@@ -98,5 +100,8 @@ int					game_print(struct s_game *game);
 **
 */
 void				free_game(struct s_game *game);
+
+//NEEDS TO BE CREATED:
+void				move_pc(uint8_t *arena, void **pc, int move); //whats the max move size?
 
 #endif
