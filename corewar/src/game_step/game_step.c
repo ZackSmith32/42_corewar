@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 09:34:46 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/05 10:59:56 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,37 @@ static void				step_processes(struct s_game *game)
 {
 	struct s_process	*p;
 	size_t				i;
+	int					op_code;
+	void				*op_pointer;
 
 	while ((p = (struct s_process *)ft_vecindex(game->processes, i)))
 	{
+		// should we move this to below the if statement? and put in an else
 		p->countdown--;
 		if (p->countdown == 0)
-		{			
+		{	
 			//TODO: call function and set pc
 			// read op_code from 'game.arena'
+			// need to add IDX_MOD?
+			op_code = *((int *)(p->pc));
 			// get function pointer from global array
-			// pass function pointer and game to "instruction_executer"
+			// assumes adding funciton pointer to g_op_tab
+			if (-1 == op_lookup(op_code, op_pointer))
+				return (-1);
+			op_pointer(game, p);
 		}	
 		i++;
 	}
 }
+
+/*
+**	Operation requirements:
+**		> move PC
+**		> update last_live_champ
+**		> update countdown
+**		> update cary
+**		> update registries
+*/
 
 /*
 **	If (end of game)
