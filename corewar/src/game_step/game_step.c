@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 13:45:55 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/05 16:15:14 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ static void				step_processes(struct s_game *game)
 /*
 **	Operation requirements:
 **		> update last_live_champ
-**		> update countdown
 **		> update cary
 **		> update registries
+**		> *for live update lives
 */
 
 /*
