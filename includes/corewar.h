@@ -50,8 +50,8 @@ typedef struct		s_op
 	char		*name_short;
 	int			argc;
 	t_arg_type	arg_type[MAX_ARGS_NUMBER];
-	int			i_dont_know2;
-	int			i_dont_know3;
+	int			op_code;
+	int			cycle_req;
 	char		*name_long;
 	int			i_dont_know4;
 	int			i_dont_know5;
