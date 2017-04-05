@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
+/*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburson <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/03/04 18:52:04 by mburson          ###   ########.fr       */
+/*   Updated: 2017/04/05 13:46:56 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void			handle_error(struct s_game *game)
 int					main(int argc, char **argv)
 {
 	struct s_game	game;
+	char *champions[MAX_PLAYERS + 1];
 
 	ft_bzero(&game, sizeof(game));
 	if (-1 == flags_get(&argc, &argv))

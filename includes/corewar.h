@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
+/*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburson <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/03/04 18:52:04 by mburson          ###   ########.fr       */
+/*   Updated: 2017/04/05 13:44:18 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct				s_process
 	_Bool			cary;
 	void			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
+	unsigned int	op_code;
 };
 
 struct				s_game
@@ -64,6 +65,7 @@ typedef struct		s_op
 
 extern int16_t		g_flags;
 extern t_op	const	g_op_tab[17];
+extern int			(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t		g_error;
 
 # define	FLAG_V		0x1

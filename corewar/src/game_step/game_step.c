@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 12:21:34 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/05 13:45:55 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void				step_processes(struct s_game *game)
 {
 	struct s_process	*p;
 	size_t				i;
-	void				(*op_pointer)(struct s_game*, struct s_process*);
 
 	while ((p = (struct s_process *)ft_vecindex(game->processes, i)))
 	{
@@ -68,12 +67,9 @@ static void				step_processes(struct s_game *game)
 			// get function pointer from global array
 			// assumes adding funciton pointer to g_op_tab
 			// assumes adding next_op_code to s_process
-
-			op_pointer = NULL;
-			if (-1 == op_lookup(p->next_op_code, op_pointer))
-				return (-1);
-			op_pointer(game, p);
-			p->next_op_code = *((int *)p->pc);
+			g_op_pointers[p->op_code](game, p);
+			// p->pc += g_op_tab[pc->op_code].argc * 4 + 1;
+			p->op_code = *((int *)p->pc);
 		}	
 		i++;
 	}
@@ -81,7 +77,6 @@ static void				step_processes(struct s_game *game)
 
 /*
 **	Operation requirements:
-**		> move PC
 **		> update last_live_champ
 **		> update countdown
 **		> update cary
