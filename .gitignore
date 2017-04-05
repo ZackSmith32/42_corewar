@@ -1,8 +1,6 @@
 ._*
 .DS_Store
-/corewar
 /corewar/corewar
-/asm
 /asm/asm
 *.o
 *.a

@@ -101,7 +101,11 @@ int					game_print(struct s_game *game);
 */
 void				free_game(struct s_game *game);
 
-//NEEDS TO BE CREATED:
-void				move_pc(uint8_t *arena, void **pc, int move); //whats the max move size?
+/*
+** helpers.c
+** idealy these fuctnions will move to more appropriate folders
+*/
+//what's the max move size?
+void				move_pc(uint8_t *arena, void **pc, int move); 
 
 #endif
