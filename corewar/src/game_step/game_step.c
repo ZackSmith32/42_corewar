@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 11:29:40 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/05 12:21:34 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,24 @@ static void				step_processes(struct s_game *game)
 {
 	struct s_process	*p;
 	size_t				i;
-	int					op_code;
 	void				(*op_pointer)(struct s_game*, struct s_process*);
 
 	while ((p = (struct s_process *)ft_vecindex(game->processes, i)))
 	{
-		// should we move this to below the if statement? and put in an else
+		// operations execute at the end of their last cycle
 		p->countdown--;
 		if (p->countdown == 0)
 		{	
 			//TODO: call function and set pc
-			// read op_code from 'game.arena'
-			op_code = *((int *)(p->pc));
 			// get function pointer from global array
 			// assumes adding funciton pointer to g_op_tab
-			if (-1 == op_lookup(op_code, op_pointer))
+			// assumes adding next_op_code to s_process
+
+			op_pointer = NULL;
+			if (-1 == op_lookup(p->next_op_code, op_pointer))
 				return (-1);
 			op_pointer(game, p);
+			p->next_op_code = *((int *)p->pc);
 		}	
 		i++;
 	}
