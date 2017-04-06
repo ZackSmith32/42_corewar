@@ -25,6 +25,7 @@ static char const	*g_error_msg[] = {
 	"no error",
 	"generic error",
 	"file format issue"
+	"flag format issue"
 };
 
 static void			handle_error(struct s_game *game)
@@ -47,7 +48,9 @@ int					main(int argc, char **argv)
 	char			*champions[MAX_PLAYERS + 1];
 
 	if (-1 == flags_get(&argc, &argv, (char ***)&champions, &flag))
-		return (1);
+	{
+		handle_error(NULL);
+	}
 	if (-1 == game_init((const char ***)&champions, &game))
 	{
 		handle_error(&game);

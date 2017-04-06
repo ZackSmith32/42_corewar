@@ -91,9 +91,7 @@ int			flags_get(int *ac, char ***av, char ***champ, struct s_flag *flag)
 			&& ++(***av) == 0)
 		if (-1 == (flag_set[func_code])(ac, av, champ, flag))
 		{
-			ft_putstr_fd("ERROR: flags_set -- ", 2); //handle error
-			ft_putchar_fd(flags[func_code], 2);
-			ft_putchar_fd('\n', 2);
+			g_error = 4;
 			return (-1);
 		}
 	return (0);
