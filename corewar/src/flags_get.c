@@ -13,21 +13,20 @@
 #include <corewar.h>
 #include <op.h>
 
-static int	flag_d(int *ac, char ***av, char ***champ, struct s_flag *flag)
+static int	flag_d(int *ac, char ***av, char ***champ)
 {
 	(void)champ;
 	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9')
 		return (-1);
-	flag->cycle_to_dump_exit = ft_atoui(**av); //set params
-	g_flags |= (1 << (FLAG_D)); //set g_flags
+	g_flags.cycle_to_dump_exit = ft_atoui(**av); //set params
+	g_flags.list |= (1 << (FLAG_D)); //set g_flags
 	return (0);
 }
 
-static int	flag_n(int *ac, char ***av, char ***champ, struct s_flag *flag)
+static int	flag_n(int *ac, char ***av, char ***champ)
 {
 	unsigned int	i;
 
-	(void)flag;
 	i = 0;
 	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9'
 			&& MAX_PLAYERS <= (i = ft_atoui(**av)) && *champ[i] != NULL
@@ -37,46 +36,44 @@ static int	flag_n(int *ac, char ***av, char ***champ, struct s_flag *flag)
 	return (0);
 }
 
-static int	flag_p(int *ac, char ***av, char ***champ, struct s_flag *flag)
+static int	flag_p(int *ac, char ***av, char ***champ)
 {
 	(void)ac;
 	(void)av;
 	(void)champ;
-	(void)flag;
-	g_flags |= (1 << (FLAG_P));
+	g_flags.list |= (1 << (FLAG_P));
 	return (0);
 }
 
-static int	flag_s(int *ac, char ***av, char ***champ, struct s_flag *flag)
+static int	flag_s(int *ac, char ***av, char ***champ)
 {
 	(void)champ;
 	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9')
 		return (-1);
-	flag->cycle_intervals_to_dump = ft_atoui(**av);
-	g_flags |= (1 << (FLAG_D));
+	g_flags.cycle_intervals_to_dump = ft_atoui(**av);
+	g_flags.list |= (1 << (FLAG_D));
 	return (0);
 }
 
-static int	flag_v(int *ac, char ***av, char ***champ, struct s_flag *flag)
+static int	flag_v(int *ac, char ***av, char ***champ)
 {
 	int	hex;
 
 	(void)champ;
 	hex = 0;
 	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '8'
-			&& 16 <= (hex = ft_atoui(**av)) && hex != (hex & -hex))
+			&& 31 <= (hex = ft_atoui(**av)))
 		return (-1);
-	flag->verbosity_level |= (1 << (hex));
-	g_flags |= (1 << (FLAG_V));
+	g_flags.verbosity_level |= (1 << (hex));
+	g_flags.list |= (1 << (FLAG_V));
 	return (0);
 }
 
-int			flags_get(int *ac, char ***av, char ***champ, struct s_flag *flag)
+int			flags_get(int *ac, char ***av, char ***champ)
 {
 	char		*flags;
 	uintmax_t	func_code;
-	int			(*flag_set[NFLAGS])
-					(int *ac, char ***av, char ***champ, struct s_flag *flag);
+	int			(*flag_set[NFLAGS])(int *ac, char ***av, char ***champ);
 
 	flag_set[0] = &flag_d;
 	flag_set[1] = &flag_n;
@@ -89,7 +86,7 @@ int			flags_get(int *ac, char ***av, char ***champ, struct s_flag *flag)
 	while (--(*ac) && ++(*av) && **av && ***av == '-'
 			&& (func_code = ft_strchr(flags, ++(***av)) - flags) < NFLAGS
 			&& ++(***av) == 0)
-		if (-1 == (flag_set[func_code])(ac, av, champ, flag))
+		if (-1 == (flag_set[func_code])(ac, av, champ))
 		{
 			g_error = 4;
 			return (-1);

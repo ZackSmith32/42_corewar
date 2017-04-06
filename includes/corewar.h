@@ -32,9 +32,10 @@ struct				s_champ
 
 struct					s_flag
 {
+	int16_t				list; //bit list
 	unsigned int		cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
-	int16_t				verbosity_level; // -option v
+	int16_t				verbosity_level; // -option v bit list
 };
 
 /*
@@ -74,10 +75,10 @@ typedef struct		s_op
 	_Bool		i_dont_know5;
 }				t_op;
 
-extern int16_t		g_flags;
-extern t_op	const	g_op_tab[17];
-extern int			(*g_op_pointers[17])(struct s_game*, struct s_process*);
-extern int32_t		g_error;
+extern struct s_flag	g_flags;
+extern t_op	const		g_op_tab[17];
+extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
+extern int32_t			g_error;
 
 # define	VALID_FLAGS	"dnpsv"
 # define	NFLAGS		5
@@ -92,8 +93,7 @@ extern int32_t		g_error;
 /*
 ** flags_get.c
 */
-int					flags_get(int *ac, char ***av, char ***champ, 
-								struct s_flag *flag);
+int					flags_get(int *ac, char ***av, char ***champ);
 
 /*
 ** game_init.c

@@ -19,7 +19,6 @@
 //TODO: priotity one: get everything to compile
 //TODO: what's up with t_op? Figure out what is inside of t_op
 
-int16_t				g_flags = 0;
 int32_t				g_error = 0;
 static char const	*g_error_msg[] = {
 	"no error",
@@ -44,10 +43,9 @@ static void			handle_error(struct s_game *game)
 int					main(int argc, char **argv)
 {
 	struct s_game	game;
-	struct s_flag	flag;
 	char			*champions[MAX_PLAYERS + 1];
 
-	if (-1 == flags_get(&argc, &argv, (char ***)&champions, &flag))
+	if (-1 == flags_get(&argc, &argv, (char ***)&champions))
 	{
 		handle_error(NULL);
 	}
