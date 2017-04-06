@@ -18,7 +18,7 @@
 # include <libft.h>
 # include <op.h>
 # include <unistd.h>
-# include <sy/types.h>
+# include <sys/types.h>
 # include <sys/stat.h>
 # include <fctl.h>
 
@@ -28,6 +28,13 @@ struct				s_champ
   	char			comment[COMMENT_LENGTH + 1];
 	unsigned int	lives;
 	_Bool			alive;
+};
+
+struct					s_flag
+{
+	unsigned int		cycle_intervals_to_dump; // -option s
+	unsigned int		cycle_to_dump_exit; // -option d
+	int16_t				verbosity_level; // -option v
 };
 
 /*
@@ -72,18 +79,21 @@ extern t_op	const	g_op_tab[17];
 extern int			(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t		g_error;
 
+# define	VALID_FLAGS	"dnpsv"
+# define	NFLAGS		5
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2
 # define	FLAG_D		0x4
 # define	FLAG_S		0x8
-# define	FLAG_B		0x10
+# define	FLAG_P		0x10
 
 # define	NUMBER_OF_FUNCTIONS 17;
 
 /*
 ** flags_get.c
 */
-int					flags_get(int *argc, char ***argv);
+int					flags_get(int *ac, char ***av, char ***champ, 
+								struct s_flag *flag);
 
 /*
 ** game_init.c
