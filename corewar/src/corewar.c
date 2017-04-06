@@ -43,11 +43,11 @@ static void			handle_error(struct s_game *game)
 int					main(int argc, char **argv)
 {
 	struct s_game	game;
-	char *champions[MAX_PLAYERS + 1];
+	char			*champions[MAX_PLAYERS + 1];
 
-	if (-1 == flags_get(&argc, &argv))
+	if (-1 == flags_get(&argc, &argv, (char ***)&champions, &(game.flag)))
 		return (1);
-	if (-1 == game_init(champions, &game))
+	if (-1 == game_init((const char ***)&champions, &game))
 	{
 		handle_error(&game);
 	}
