@@ -17,8 +17,12 @@
 # include <stdbool.h>
 # include <libft.h>
 # include <op.h>
+# include <unistd.h>
+# include <sy/types.h>
+# include <sys/stat.h>
+# include <fctl.h>
 
-struct			s_champ
+struct				s_champ
 {
   	char			prog_name[PROG_NAME_LENGTH + 1];
   	char			comment[COMMENT_LENGTH + 1];
@@ -84,7 +88,7 @@ int					flags_get(int *argc, char ***argv);
 /*
 ** game_init.c
 */
-int					game_init(int argc, char **argv, struct s_game *game);
+int					game_init(char const ***champs, struct s_game *game);
 
 /*
 ** game_step/game_step.c
@@ -103,7 +107,7 @@ void				free_game(struct s_game *game);
 
 /*
 ** helpers.c
-** idealy these fuctnions will move to more appropriate folders
+** idealy these functions will move to more appropriate folders
 */
 //what's the max move size?
 void				move_pc(uint8_t *arena, void **pc, int move); 
