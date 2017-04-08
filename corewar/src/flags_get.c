@@ -61,8 +61,8 @@ static int	flag_v(int *ac, char ***av, char ***champ)
 
 	(void)champ;
 	hex = 0;
-	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '8'
-			&& 31 <= (hex = ft_atoui(**av)))
+	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9'
+			&& 31 < (hex = ft_atoui(**av)))
 		return (-1);
 	g_flags.verbosity_level |= (1 << (hex));
 	g_flags.list |= (1 << (FLAG_V));
@@ -83,10 +83,10 @@ int			flags_get(int *ac, char ***av, char ***champ)
 	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS + 1);
 	ft_bzero(&g_flags, sizeof(g_flags));
 	flags = VALID_FLAGS;
-	while (--(*ac) && ++(*av) && **av && ***av == '-'
-			&& (func_code = ft_strchr(flags, ++(***av)) - flags) < NFLAGS
-			&& ++(***av) == 0)
-		if (-1 == (flag_set[func_code])(ac, av, champ))
+	while (--(*ac) && ++(*av) && **av && ***av == '-')
+		if ((func_code = ft_strchr(flags, ++(***av)) - flags) < NFLAGS
+			&& ++(***av) == 0 
+			&& -1 == (flag_set[func_code])(ac, av, champ))
 		{
 			g_error = 4;
 			return (-1);
