@@ -19,8 +19,6 @@ MEMORY			=ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c
 MEMORY			+=ft_memchr.c ft_memcmp.c ft_memalloc.c ft_memdel.c ft_memdup.c
 MEMORY			+=ft_memrealloc.c ft_memreallocf.c ft_memjoinf.c ft_delgrid.c
 
-GNL				=get_next_line.c ft_getint_base.c
-
 TYPE			=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c
 TYPE			+=ft_iswhitespace.c ft_isprint.c ft_toupper.c ft_tolower.c
 TYPE			+=ft_isupper.c ft_islower.c
@@ -56,7 +54,6 @@ MATRIX			=ftmx_id.c ftmx_scale.c ftmx_translate.c ftmx_mult.c
 VECTOR			=ft_initialize_vec.c ft_grow_vec.c ft_vecapp.c
 
 FILENAMES		=$(addprefix memory/, $(MEMORY))
-FILENAMES		+=$(addprefix gnl/, $(GNL))
 FILENAMES		+=$(addprefix ft_io/, $(FT_IO))
 FILENAMES		+=$(addprefix leftovers/, $(LEFTOVERS))
 FILENAMES		+=$(addprefix type/, $(TYPE))

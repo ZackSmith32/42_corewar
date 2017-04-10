@@ -43,7 +43,9 @@ t_op const	g_op_tab[] =
 
 static int	move_one(struct s_game *game, struct s_process *process)
 {
-	move_pc((void*)&game->arena, &process->pc, 1);
+	//move_pc((void*)&game->arena, &process->pc, 1);
+	(void)(game);
+	(void)(process);
 	return (0);
 }
 

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include <op.h>
 
 static int	flag_d(int *ac, char ***av, char ***champ)
 {
