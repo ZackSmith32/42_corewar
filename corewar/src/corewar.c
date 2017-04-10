@@ -49,7 +49,7 @@ int					main(int argc, char **argv)
 	{
 		handle_error(NULL);
 	}
-	if (-1 == game_init((const char ***)&champions, &game))
+	if (-1 == game_init(champions, &game))
 	{
 		handle_error(&game);
 	}

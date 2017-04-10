@@ -16,7 +16,7 @@ LIBFT = ./libft/libft.a
 LIBFT_DIR = ./libft
 
 SRC = \
-	$(addprefix ./src/, \
+	$(addprefix src/, \
 		corewar.c \
 		flags_get.c \
 		free.c \
@@ -28,6 +28,17 @@ SRC = \
 		$(addprefix game_step/, \
 			game_step.c \
 		) \
+	) \
+	$(addprefix maxlib/list/, \
+		lstadd.c \
+		lstdel.c \
+		lstdelone.c \
+		lstiter.c \
+		lstmap.c \
+		lstprint.c \
+		lstpush.c \
+		lstreverse.c \
+		lstsort.c \
 	)
 
 OBJ = $(SRC:.c=.o)

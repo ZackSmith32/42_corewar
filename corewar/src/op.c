@@ -13,7 +13,7 @@
 #include <op.h>
 #include <corewar.h>
 
-t_op const	g_op_tab[17] =
+t_op const	g_op_tab[] =
 {
 	{0, 0, {0}, 0, 1, 0, 0, 0}, //MOVE FORWARD FUNCTION
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
@@ -43,13 +43,14 @@ t_op const	g_op_tab[17] =
 
 static int	move_one(struct s_game *game, struct s_process *process)
 {
-	move_pc(&game->arena, &process->pc, 1);
+	move_pc((void*)&game->arena, &process->pc, 1);
+	return (0);
 }
 
 int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&move_one,
-	&live,
-	&ld,
+	&move_one,
+	&move_one,
 	&move_one,
 	&move_one,
 	&move_one,

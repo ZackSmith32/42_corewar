@@ -54,10 +54,11 @@ static struct s_champ	*pick_winner(struct s_game *game)
 
 static void				step_processes(struct s_game *game)
 {
+	t_list				*link;
 	struct s_process	*p;
-	size_t				i;
 
-	while ((p = (struct s_process *)ft_vecindex(game->processes, i)))
+	link = game->processes;
+	while (link && (p = link->content))
 	{
 		// operations execute at the end of their last cycle
 		p->countdown--;
@@ -73,11 +74,11 @@ static void				step_processes(struct s_game *game)
 			}
 			p->op_code = *((int *)p->pc);
 			if (p->op_code > NUMBER_OF_FUNCTIONS)
-				p->op_code == 0;
-			p->countdown = g_op_tab[op_code].cycles_required;
+				p->op_code = 0;
+			p->countdown = g_op_tab[p->op_code].cycles_required;
 		}
 	}
-	i++;
+	link = link->next;
 }
 
 /*
@@ -97,14 +98,11 @@ static void				step_processes(struct s_game *game)
 
 int						game_step(struct s_game *game)
 {
-	size_t		i;
-
 	step_processes(game);
-	i = 0;
 	game->cycles_to_death--;
 	if (game->cycles_to_death == 0)
 	{
-		if (game->cycles < CYCLE_DELTA
+		if (game->cycles_max < CYCLE_DELTA
 			|| lives_update_return_count(game->champs, game->champ_count) < 2)
 			game->winner = pick_winner(game);
 		else

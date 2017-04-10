@@ -29,28 +29,36 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 	}
 	if (-1 == (size = read(fd, loc, header.prog_size)))
 		return (-1);
-	if (size != head.prog_size)
+	if (size != header.prog_size)
 	{
 		g_error = 2;
 		return (-1);
 	}
 	if (-1 == close(fd))
 		return (-1);
-	champ->prog_name = header.prog_name;
-	champ->comment = header.comment;
+	//champ->prog_name = header.prog_name;
+	ft_memmove(champ->prog_name, header.prog_name, sizeof(header.prog_name));
+	//champ->comment = header.comment;
+	ft_memmove(champ->comment, header.comment, sizeof(header.comment));
 	champ->alive = true;
 	return (0);
 }
 
-int			add_process(t_vec *processes, void *loc)
+//TODO: init op_code and countdown
+static int	add_process(t_list **processes, void *pc)
 {
-	//TODO: kyle, how do i vector??
-	(void)(process);
-	(void)(loc);
+	struct s_process	*p;
+
+	if (NULL == (p = (struct s_process*)malloc(sizeof(*p))))
+		return (-1);
+	ft_bzero(p, sizeof(*p));
+	lstadd(processes, (void*)p);
+	p->registors[0] = 1;//TODO: SET THIS TO BE THE RIGHT ID
+	p->pc = pc;
 	return (0);
 }
 
-int			game_init(char const **champs, struct s_game *game)
+int			game_init(char **champs, struct s_game *game)
 {
 	int		champ_count;
 	size_t	offset;
