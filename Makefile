@@ -10,27 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
-ASM = asm
-
 COREWAR = corewar
+COREWAR_SRC = ./src_corewar/corewar
 
-COREWAR_SRC = ./corewar/corewar
+ASM = asm
+ASM_SRC = ./src_asm/asm
 
-ASM_SRC = ./asm/asm
-
-all: $(ASM) $(COREWAR)
+all: $(COREWAR)
 
 $(ASM): $(ASM_SRC)
-    cp @< .
+	cp $< .
 
 $(COREWAR): $(COREWAR_SRC)
-    cp @< .
+	cp $< .
 
 $(ASM_SRC): force
-    $(MAKE) -C ./asm
+	$(MAKE) -C ./src_asm
 
 $(COREWAR_SRC): force
-    $(MAKE) -C ./corewar
+	$(MAKE) -C ./src_corewar
 
 force:
 	@true

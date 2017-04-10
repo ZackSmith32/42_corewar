@@ -19,6 +19,8 @@
 //TODO: priotity one: get everything to compile
 //TODO: what's up with t_op? Figure out what is inside of t_op
 
+//bypassed flags_get with function below, flags_get isnt in the makefile for the moment as it does not compile
+
 int32_t				g_error = 0;
 static char const	*g_error_msg[] = {
 	"no error",
@@ -38,6 +40,15 @@ static void			handle_error(struct s_game *game)
 		ft_dprintf(STDERR_FILENO, "corewar: ERROR: %s\n", g_error_msg[g_error]);
 	}
 	exit(1);
+}
+
+//hack
+int					flags_get(int *ac, char ***av, char ***champ)
+{
+	(void)(ac);
+	(*champ)[0] = (*av)[0];
+	(*champ)[1] = NULL;
+	return (0);
 }
 
 int					main(int argc, char **argv)

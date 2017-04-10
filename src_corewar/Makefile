@@ -18,7 +18,6 @@ LIBFT_DIR = ./libft
 SRC = \
 	$(addprefix src/, \
 		corewar.c \
-		flags_get.c \
 		free.c \
 		game_init.c \
 		op.c \
