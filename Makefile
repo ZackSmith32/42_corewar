@@ -11,9 +11,11 @@
 # **************************************************************************** #
 
 COREWAR = corewar
+COREWAR_DIR = ./src_corewar/
 COREWAR_SRC = ./src_corewar/corewar
 
 ASM = asm
+ASM_DIR = ./src_asm/
 ASM_SRC = ./src_asm/asm
 
 all: $(COREWAR)
@@ -25,17 +27,17 @@ $(COREWAR): $(COREWAR_SRC)
 	cp $< .
 
 $(ASM_SRC): force
-	$(MAKE) -C ./src_asm
+	$(MAKE) -C $(ASM_DIR)
 
 $(COREWAR_SRC): force
-	$(MAKE) -C ./src_corewar
+	$(MAKE) -C $(COREWAR_DIR)
 
 force:
 	@true
 
 clean:
-	rm -f $(OBJ)
-	cd ./$(LIBFTPRINTF_DIR) && $(MAKE) fclean
+	$(MAKE) fclean -C $(COREWAR_DIR)
+	#$(MAKE) fclean -C $(ASM_DIR)
 fclean: clean
 	rm -f $(NAME)
 re: fclean all

@@ -31,8 +31,7 @@ static char const	*g_error_msg[] = {
 
 static void			handle_error(struct s_game *game)
 {
-
-	free_game(game);
+	(void)(game); //is there anything that needs to be free'd in game?
 	if (errno)
 		perror("corewar: ERROR");
 	else
@@ -43,11 +42,11 @@ static void			handle_error(struct s_game *game)
 }
 
 //hack
-int					flags_get(int *ac, char ***av, char ***champ)
+int					flags_get(int *ac, char ***av, char **champ)
 {
 	(void)(ac);
-	(*champ)[0] = (*av)[0];
-	(*champ)[1] = NULL;
+	champ[0] = (*av)[0];
+	champ[1] = NULL;
 	return (0);
 }
 
@@ -56,7 +55,7 @@ int					main(int argc, char **argv)
 	struct s_game	game;
 	char			*champions[MAX_PLAYERS + 1];
 
-	if (-1 == flags_get(&argc, &argv, (char ***)&champions))
+	if (-1 == flags_get(&argc, &argv, champions))
 	{
 		handle_error(NULL);
 	}

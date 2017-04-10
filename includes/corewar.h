@@ -101,7 +101,7 @@ extern int32_t			g_error;
 /*
 ** flags_get.c
 */
-int					flags_get(int *ac, char ***av, char ***champ);
+int					flags_get(int *ac, char ***av, char **champ);
 
 /*
 ** game_init.c
