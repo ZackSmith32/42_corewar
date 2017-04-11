@@ -10,34 +10,60 @@
 #                                                                              #
 # **************************************************************************** #
 
-COREWAR = corewar
-COREWAR_DIR = ./src_corewar/
-COREWAR_SRC = ./src_corewar/corewar
+NAME = corewar
 
-ASM = asm
-ASM_DIR = ./src_asm/
-ASM_SRC = ./src_asm/asm
+LIBFT = ./libft/libft.a
+LIBFT_DIR = ./libft
 
-all: $(COREWAR)
+SRC = \
+	$(addprefix src/, \
+		corewar.c \
+		free.c \
+		game_init.c \
+		flags_get.c \
+		op.c \
+		$(addprefix game_print/, \
+			game_print.c \
+		) \
+		$(addprefix game_step/, \
+			game_step.c \
+		) \
+	) \
+	$(addprefix maxlib/list/, \
+		lstadd.c \
+		lstdel.c \
+		lstdelone.c \
+		lstiter.c \
+		lstmap.c \
+		lstprint.c \
+		lstpush.c \
+		lstreverse.c \
+		lstsort.c \
+	)
 
-$(ASM): $(ASM_SRC)
-	cp $< .
+OBJ = $(SRC:.c=.o)
 
-$(COREWAR): $(COREWAR_SRC)
-	cp $< .
+HEADERS = -I ../includes -I ./libft/includes
 
-$(ASM_SRC): force
-	$(MAKE) -C $(ASM_DIR)
+CFLAGS = -Wall -Wextra -Werror -g
 
-$(COREWAR_SRC): force
-	$(MAKE) -C $(COREWAR_DIR)
+all: $(NAME)
+
+$(NAME): $(OBJ) $(LIBFT)
+	gcc $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
+
+$(LIBFT): force
+	$(MAKE) -C $(LIBFT_DIR)
 
 force:
 	@true
 
 clean:
-	$(MAKE) fclean -C $(COREWAR_DIR)
-	#$(MAKE) fclean -C $(ASM_DIR)
+	rm -f $(OBJ)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 fclean: clean
 	rm -f $(NAME)
 re: fclean all

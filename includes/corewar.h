@@ -17,13 +17,28 @@
 # include <stdbool.h>
 # include <libft.h>
 # include <op.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <stdio.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <list.h>
 
-struct			s_champ
+struct				s_champ
 {
   	char			prog_name[PROG_NAME_LENGTH + 1];
   	char			comment[COMMENT_LENGTH + 1];
 	unsigned int	lives;
 	_Bool			alive;
+};
+
+struct					s_flag
+{
+	int16_t				list; //bit list
+	unsigned int		cycle_intervals_to_dump; // -option s
+	unsigned int		cycle_to_dump_exit; // -option d
+	int16_t				verbosity_level; // -option v bit list
 };
 
 /*
@@ -39,12 +54,17 @@ struct				s_process
 	unsigned int	op_code;
 };
 
+/*
+** processes will be added to the front, so the yongest process is in front
+** and they are incremented through front to back
+*/
+
 struct				s_game
 {
 	uint8_t				arena[MEM_SIZE];
 	struct s_champ		champs[MAX_PLAYERS];
 	unsigned int		champ_count;
-	t_vec				processes;
+	t_list				*processes;
 	unsigned int		cycles_max;
 	unsigned int		cycles_to_death;
 	struct s_champ		*last_live_champ;
@@ -63,28 +83,30 @@ typedef struct		s_op
 	_Bool		i_dont_know5;
 }				t_op;
 
-extern int16_t		g_flags;
-extern t_op	const	g_op_tab[17];
-extern int			(*g_op_pointers[17])(struct s_game*, struct s_process*);
-extern int32_t		g_error;
+extern struct s_flag	g_flags;
+extern t_op	const		g_op_tab[];
+extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
+extern int32_t			g_error;
 
+# define	VALID_FLAGS	"dnpsv"
+# define	NFLAGS		5
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2
 # define	FLAG_D		0x4
 # define	FLAG_S		0x8
-# define	FLAG_B		0x10
+# define	FLAG_P		0x10
 
-# define	NUMBER_OF_FUNCTIONS 17;
+# define	NUMBER_OF_FUNCTIONS 17
 
 /*
 ** flags_get.c
 */
-int					flags_get(int *argc, char ***argv);
+int					flags_get(int *ac, char ***av, char **champ);
 
 /*
 ** game_init.c
 */
-int					game_init(int argc, char **argv, struct s_game *game);
+int					game_init(char **champs, struct s_game *game);
 
 /*
 ** game_step/game_step.c
@@ -103,7 +125,7 @@ void				free_game(struct s_game *game);
 
 /*
 ** helpers.c
-** idealy these fuctnions will move to more appropriate folders
+** idealy these functions will move to more appropriate folders
 */
 //what's the max move size?
 void				move_pc(uint8_t *arena, void **pc, int move); 
