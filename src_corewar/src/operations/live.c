@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/05 16:30:26 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/11 14:37:22 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 **		x > move pc
 */
 
-int				live(struct game *game, struct s_process *process)
+int		live(struct game *game, struct s_process *process)
 {
-	char				*pc;
-	unsigned int		player_name;
+	char			*pc;
+	unsigned int	player_name;
 
 	pc = (char *)process->pc;
 	pc++;
@@ -31,4 +31,11 @@ int				live(struct game *game, struct s_process *process)
 	game->last_live_champ = game->champs[player_name] 
 	move_pc(&game->arena, &process->pc, 5);
 	return (1);
+}
+
+int		ld(sturct game *game, struct s_process *process)
+{
+	char			*pc;
+
+	pc = (char *)
 }
