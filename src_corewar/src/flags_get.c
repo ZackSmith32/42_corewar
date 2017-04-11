@@ -12,7 +12,7 @@
 
 #include <corewar.h>
 
-static int	flag_d(int *ac, char ***av, char ***champ)
+static int	flag_d(int *ac, char ***av, char **champ)
 {
 	(void)champ;
 	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9')
@@ -22,20 +22,20 @@ static int	flag_d(int *ac, char ***av, char ***champ)
 	return (0);
 }
 
-static int	flag_n(int *ac, char ***av, char ***champ)
+static int	flag_n(int *ac, char ***av, char **champ)
 {
 	unsigned int	i;
 
 	i = 0;
 	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9'
-			&& MAX_PLAYERS <= (i = ft_atoui(**av)) && *champ[i] != NULL
+			&& MAX_PLAYERS <= (i = ft_atoui(**av)) && champ[i] != NULL
 			&& --(*ac) && ++(*av) && **av)
 		return (-1);
-	*champ[i] = **av;
+	champ[i] = **av;
 	return (0);
 }
 
-static int	flag_p(int *ac, char ***av, char ***champ)
+static int	flag_p(int *ac, char ***av, char **champ)
 {
 	(void)ac;
 	(void)av;
@@ -44,7 +44,7 @@ static int	flag_p(int *ac, char ***av, char ***champ)
 	return (0);
 }
 
-static int	flag_s(int *ac, char ***av, char ***champ)
+static int	flag_s(int *ac, char ***av, char **champ)
 {
 	(void)champ;
 	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9')
@@ -54,7 +54,7 @@ static int	flag_s(int *ac, char ***av, char ***champ)
 	return (0);
 }
 
-static int	flag_v(int *ac, char ***av, char ***champ)
+static int	flag_v(int *ac, char ***av, char **champ)
 {
 	int	hex;
 
@@ -68,11 +68,11 @@ static int	flag_v(int *ac, char ***av, char ***champ)
 	return (0);
 }
 
-int			flags_get(int *ac, char ***av, char ***champ)
+int			flags_get(int *ac, char ***av, char **champ)
 {
 	char		*flags;
 	uintmax_t	func_code;
-	int			(*flag_set[NFLAGS])(int *ac, char ***av, char ***champ);
+	int			(*flag_set[NFLAGS])(int *ac, char ***av, char **champ);
 
 	flag_set[0] = &flag_d;
 	flag_set[1] = &flag_n;

@@ -22,6 +22,7 @@
 //bypassed flags_get with function below, flags_get isnt in the makefile for the moment as it does not compile
 
 int32_t				g_error = 0;
+struct s_flag			g_flags;
 static char const	*g_error_msg[] = {
 	"no error",
 	"generic error",
@@ -42,6 +43,7 @@ static void			handle_error(struct s_game *game)
 }
 
 //hack
+/*
 int					flags_get(int *ac, char ***av, char **champ)
 {
 	(void)(ac);
@@ -49,6 +51,7 @@ int					flags_get(int *ac, char ***av, char **champ)
 	champ[1] = NULL;
 	return (0);
 }
+*/
 
 int					main(int argc, char **argv)
 {
