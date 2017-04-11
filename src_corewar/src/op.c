@@ -6,12 +6,24 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/05 13:43:55 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/11 12:23:15 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <op.h>
 #include <corewar.h>
+
+/*
+**	t_op contents:
+**		> short name
+**		> number of args it takes
+**		> array: the args it takes
+**		> number code of operation
+**		> 5/10/6/20/25/50/1000/2
+**		> long name
+**		> 0/1 : yes/no : carry?? (doesn't match up)
+**		> 0/1
+*/
 
 t_op const	g_op_tab[] =
 {

@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 16:15:14 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/11 12:51:34 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ static struct s_champ	*pick_winner(struct s_game *game)
 	return (game->last_live_champ);
 }
 
+/*
+**	step_process:
+**	
+**	p = link->content = ??, what does the linked list do?
+**	
+**	for all processes
+**		decrement countdown
+**		if coutdown == 0
+**			execute command (command will move process pointer forward)
+**			add new op code to process
+**			set countdown for new op_code
+*/
+
 static void				step_processes(struct s_game *game)
 {
 	t_list				*link;
@@ -67,7 +80,7 @@ static void				step_processes(struct s_game *game)
 			//TODO: call function and set pc
 			// get function pointer from global array
 			// assumes adding funciton pointer to g_op_tab
-			// assumes adding next_op_code to s_process
+			// assumes adding op_code to s_process
 			if (-1 == g_op_pointers[p->op_code](game, p))
 			{
 				//TODO: FUNCTION FAILER
@@ -90,10 +103,14 @@ static void				step_processes(struct s_game *game)
 */
 
 /*
-**	If (end of game)
-** 		> pick winner
-**	else
-**		> update cycles
+**	game_step:
+**
+**	updata processes
+**	if (end of round aka cycles to death == 0)
+** 		if (no more rounds possible)
+**			pick winner
+**		else
+**			decrement cycles max and reset cycles to death
 */
 
 int						game_step(struct s_game *game)
