@@ -6,3 +6,6 @@
 *.a
 .vscode
 *.swp
+test_ind.c
+*.out
+notes
