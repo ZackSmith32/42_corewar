@@ -69,7 +69,8 @@ int			game_init(char **champs, struct s_game *game)
 	champ_count = 0;
 	while (champs[champ_count])
 		champ_count++;
-	offset = MEM_SIZE / champ_count;
+	if (champ_count)
+		offset = MEM_SIZE / champ_count;
 	start_loc = 0;
 	i = 0;
 	while (i < champ_count)
