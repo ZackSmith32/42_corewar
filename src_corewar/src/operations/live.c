@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/13 11:04:37 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/13 14:58:11 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,43 +103,20 @@ int		convert_little_endian(char *ptr, unsigned char size);
 **		: How do we want to deal with processing numbers with unknown size?
 */
 
-int		ld(sturct game *game, struct s_process *process)
+struct	op_parameter
 {
-	char			*pc;
-	char			first_arg[REG_SIZE];
-	// indirect offset only needs to hold the number of bytes to offset.  
-	// it's possible for the user to set this value to any number of bytes
-	// which is why I'm keeping this as a char with adjustable size
-	char			indirect_offset[IND_SIZE];
-	unsigned char	byte_count;
-	unsigned int	parameter_encoding;
+	uint8_t		reg[1];
+	uint8_t		val[DIR_SIZE]
+};
 
-	pc = (char *)process->pc;
-	byte_count = 1;
-	parameter_encoding = (unsigned int)(pc + byte_count);
-	byte_count += 5;
-	
-	// register: 1 byte
-	if (parameter_encoding && 0x3 == 0x1)
-		ft_memcpy(first_arg, )
-	
-	// direct: DIR_SIZE
-	else if (parameter_encoding && 0x3 == 0x2)
-		first_arg = ()
+int		ld(strct game *game, struct s_process *process)
+{
+	struct op_parameter	params[2];
 
-	// indirect: IND_SIZE
-	else if (parameter_encoding && 0x3 == 0x3)
-	{
-		// get indirect offset
-		ft_memcpy(indirect_offset, pc + byte_count, IND_SIZE);
+	parse_parameters(game, process, params);
+	ft_memmove(process->registors[(unit_8)args[1]->reg], (uint64)args[0]->val);
 
-		// convert indirect offset to a number
-		// get memory at that address and return it.
-		ft_memcpy(first_arg, (pc + convert_little_endian(indirect_offset, IND_SIZE)), REG_SIZE);
-		byte_count += IND_SIZE
-	}
-	arg_direct = (char)(pc + 4)
-	if (parameter_encoding)
+
 
 }
 
@@ -151,12 +128,31 @@ char			valid_param_encoding();
 
 unsigned char	get_argument(void *pc, char arg_number, unsigned char *bytes_read, );
 
+
+
+
+if (parameter_encoding && 0x3 == 0x1)
+	{
+		read_vm(pc + byte_count, 1, first_arg);
+		byte_count += 1;
+	}
+	
+	// direct: DIR_SIZE
+	else if (parameter_encoding && 0x3 == 0x2)
+	{
+		read_vm(pc + byte_count, DIR_SIZE, first_arg);
+		byte_count += DIR_SIZE;
+	}
+
+	// indirect: IND_SIZE
+	else if (parameter_encoding && 0x3 == 0x3)
+	{
+		read_vm(pc + byte_count, IND_SIZE, arg_offset);
+		read_vm(pc + (uint64_t)art_offset, REG_SIZE, first_arg);
+		byte_count += IND_SIZE;
+	}
+
 */
-
-
-
-
-
 
 
 
