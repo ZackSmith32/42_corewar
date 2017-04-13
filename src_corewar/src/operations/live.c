@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/12 09:50:18 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/13 10:46:25 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,24 @@
 **		x > update last_live_champ
 **		x > move pc
 */
+
+void	little_endian_to_big(char *ptr, int size)
+{
+	char	temp;
+	int		start;
+	int		end;
+
+	start = 0;
+	end = size - 1;
+	while (start < end)
+	{
+		temp = ptr[start];
+		ptr[start] = ptr[end];
+		ptr[end] = temp;
+		start++;
+		end--;
+	}
+}
 
 int		live(struct game *game, struct s_process *process)
 {
