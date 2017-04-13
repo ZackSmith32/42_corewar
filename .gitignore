@@ -6,7 +6,6 @@
 /corewar
 *.o
 *.a
-.vscode
 *.swp
 test_ind.c
 *.out
