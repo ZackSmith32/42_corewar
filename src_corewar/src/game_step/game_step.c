@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/11 14:37:25 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/13 10:26:24 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void				step_processes(struct s_game *game)
 /*
 **	game_step:
 **
-**	updata processes
+**	update processes
 **	if (end of round aka cycles to death == 0)
 ** 		if (no more rounds possible)
 **			pick winner
