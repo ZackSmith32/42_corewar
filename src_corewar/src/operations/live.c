@@ -6,10 +6,11 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/13 14:58:11 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/13 21:10:28 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <corewar.h>
 /*
 **	Live requirements:
 **		x > update lives
@@ -99,11 +100,20 @@ int		convert_little_endian(char *ptr, unsigned char size);
 }
 
 /*
-**	TODO: What is INDEX_MOD?
-**		: How do we want to deal with processing numbers with unknown size?
+**	TODO : what opperations need to do / what needs to be done before the operation 
+**		1. identify if the encoding meets the operations requirements
+**			> what happens if the encoding changes to something that is legit?
+**			> what happens if the encoding isn't legit at the beginning?
+**		2. store the total length of the operation and params
+**		3. wait for countdown
+**		*** After this is what the operation should do ***
+**		4. validate the parameters again, I think against what they were to start
+**		5. attempt to execute the operation, validating that parameters and encoding
+**			are as expected, if not jump to next operation based on stored value from
+**			pre computation of length.
 */
 
-struct	op_parameter
+union			u_parameter
 {
 	uint8_t		reg[1];
 	uint8_t		val[DIR_SIZE]
@@ -120,39 +130,6 @@ int		ld(strct game *game, struct s_process *process)
 
 }
 
-/*
-unsigned long long	convert_binary_to_long_long(char *ptr, unsigned char size);
-
-char			valid_param_encoding();
-// will be spefic for each
-
-unsigned char	get_argument(void *pc, char arg_number, unsigned char *bytes_read, );
-
-
-
-
-if (parameter_encoding && 0x3 == 0x1)
-	{
-		read_vm(pc + byte_count, 1, first_arg);
-		byte_count += 1;
-	}
-	
-	// direct: DIR_SIZE
-	else if (parameter_encoding && 0x3 == 0x2)
-	{
-		read_vm(pc + byte_count, DIR_SIZE, first_arg);
-		byte_count += DIR_SIZE;
-	}
-
-	// indirect: IND_SIZE
-	else if (parameter_encoding && 0x3 == 0x3)
-	{
-		read_vm(pc + byte_count, IND_SIZE, arg_offset);
-		read_vm(pc + (uint64_t)art_offset, REG_SIZE, first_arg);
-		byte_count += IND_SIZE;
-	}
-
-*/
 
 
 

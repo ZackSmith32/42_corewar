@@ -9,3 +9,4 @@
 test_ind.c
 *.out
 notes
+test_params.c
