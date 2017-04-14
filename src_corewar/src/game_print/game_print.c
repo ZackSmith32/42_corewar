@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include <op.h>
 
 int			game_print(struct s_game *game)
 {

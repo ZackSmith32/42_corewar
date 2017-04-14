@@ -23,6 +23,7 @@ SRC = \
 		op.c \
 		$(addprefix game_print/, \
 			game_print.c \
+			print_hex.c \
 		) \
 		$(addprefix game_step/, \
 			game_step.c \

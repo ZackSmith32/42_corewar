@@ -65,6 +65,11 @@ int			game_init(char **champs, struct s_game *game)
 	size_t	start_loc;
 	int		i;
 
+	unsigned int hex_test = 0xFAFA;
+
+	printf("%x\n", hex_test);
+	print_hex(&hex_test, sizeof(hex_test));
+
 	ft_bzero(game, sizeof(*game));
 	champ_count = 0;
 	while (champs[champ_count])

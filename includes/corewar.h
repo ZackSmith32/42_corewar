@@ -114,9 +114,10 @@ int					game_init(char **champs, struct s_game *game);
 int					game_step(struct s_game *game);
 
 /*
-** game_print/game_print.c
+** game_print/
 */
 int					game_print(struct s_game *game);
+void				print_hex(void *loc, size_t size);
 
 /*
 **

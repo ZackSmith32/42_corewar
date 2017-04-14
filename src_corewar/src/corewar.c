@@ -51,6 +51,9 @@ int					flags_get(int *ac, char ***av, char **champ)
 	return (0);
 }
 
+
+get_arguments(void *loc, t_op, &int, &char, )
+
 int					main(int argc, char **argv)
 {
 	struct s_game	game;
