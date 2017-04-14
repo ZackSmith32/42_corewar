@@ -46,13 +46,10 @@ static void			handle_error(struct s_game *game)
 int					flags_get(int *ac, char ***av, char **champ)
 {
 	(void)(ac);
-	champ[0] = (*av)[0];
+	champ[0] = (*av)[1];
 	champ[1] = NULL;
 	return (0);
 }
-
-
-get_arguments(void *loc, t_op, &int, &char, )
 
 int					main(int argc, char **argv)
 {

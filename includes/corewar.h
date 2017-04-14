@@ -98,6 +98,8 @@ extern int32_t			g_error;
 
 # define	NUMBER_OF_FUNCTIONS 17
 
+# define	MAGIC_NUMBER 0xF383EA00
+
 /*
 ** flags_get.c
 */
