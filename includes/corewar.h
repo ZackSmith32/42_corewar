@@ -47,8 +47,8 @@ struct					s_flag
 
 struct				s_process
 {
-	unsigned char	registors[REG_NUMBER];
-	_Bool			cary;
+	unsigned short	registors[REG_NUMBER];
+	_Bool			carry;
 	void			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
 	unsigned int	op_code;

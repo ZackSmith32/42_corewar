@@ -48,6 +48,9 @@
 #define NAME_CMD_STRING			".name"
 #define COMMENT_CMD_STRING		".comment"
 
+/*
+** REG_NUMBER cannot be larger than 256
+*/
 #define REG_NUMBER				16
 
 #define CYCLE_TO_DIE			1536

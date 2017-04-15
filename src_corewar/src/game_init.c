@@ -54,14 +54,14 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 }
 
 //TODO: init op_code and countdown
-static int	add_process(t_list **processes, void *pc)
+static int	add_process(t_list **processes, void *pc, unsigned short live)
 {
 	struct s_process	*p;
 
 	if (NULL == (p = (struct s_process*)malloc(sizeof(*p))))
 		return (-1);
 	ft_bzero(p, sizeof(*p));
-	p->registors[0] = 1;//TODO: SET THIS TO BE THE RIGHT ID
+	p->registors[0] = live;
 	p->pc = pc;
 	lstadd(processes, lstnew((void*)p));
 	return (0);
@@ -84,9 +84,11 @@ int			game_init(char **champs, struct s_game *game)
 	i = 0;
 	while (i < champ_count)
 	{
-		if (-1 == load_champion(champs[i], game->arena + start_loc, &(game->champs[i])))
+		if (-1 == load_champion(champs[i],
+								game->arena + start_loc, &(game->champs[i])))
 			return (-1);
-		if (-1 == add_process(&game->processes, game->arena + start_loc))
+		if (-1 == add_process(&game->processes,
+								game->arena + start_loc, ~(unsigned short)i))
 			return (-1);
 		i++;
 		start_loc += offset;
