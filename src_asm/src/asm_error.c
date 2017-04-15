@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   asm_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/14 18:43:23 by kdavis           ###   ########.fr       */
+/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
+/*   Updated: 2017/04/14 19:31:24 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include <asm.h>
 
-# include <corewar.h>
+static const char	*g_error_message[] =
+{
+};
 
-/*
-** Command notes:
-** 
-**		Label_chars are the only valid characters for function names
-*/
-
-/*
-** sti: 1st parameter may be indirect or direct, 2nd parameter must be indirect
-*/
-
-void	asm_error();
-
-struct	s_assembler
-#endif
+void	asm_error(int ern, int fd)
+{
+	akssk
+	if (ern != 0)
+		close(fd);
+	exit(1);
+}
