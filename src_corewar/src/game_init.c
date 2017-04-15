@@ -12,6 +12,16 @@
 
 #include <corewar.h>
 
+static unsigned int		fix_end(unsigned int n)
+{
+	return (
+		((n >> 24) & 0xFF)
+		| ((n >> 8) & 0xFF00)
+		| ((n << 8 ) & 0xFF0000)
+		| (n << 24)
+	);
+}
+
 static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 {
 	header_t	header;
@@ -27,6 +37,7 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 		g_error = 2;
 		return (-1);
 	}
+	header.prog_size = fix_end(header.prog_size);
 	if (-1 == (size = read(fd, loc, header.prog_size)))
 		return (-1);
 	if (size != header.prog_size)
@@ -65,11 +76,17 @@ int			game_init(char **champs, struct s_game *game)
 	size_t	start_loc;
 	int		i;
 
+	unsigned int hex_test = 0xFAFA;
+
+	printf("%x\n", hex_test);
+	print_hex(&hex_test, sizeof(hex_test));
+
 	ft_bzero(game, sizeof(*game));
 	champ_count = 0;
 	while (champs[champ_count])
 		champ_count++;
-	offset = MEM_SIZE / champ_count;
+	if (champ_count)
+		offset = MEM_SIZE / champ_count;
 	start_loc = 0;
 	i = 0;
 	while (i < champ_count)
