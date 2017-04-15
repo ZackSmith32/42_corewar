@@ -90,8 +90,8 @@ static void				step_processes(struct s_game *game)
 				p->op_code = 0;
 			p->countdown = g_op_tab[p->op_code].cycles_required;
 		}
+		link = link->next;
 	}
-	link = link->next;
 }
 
 /*

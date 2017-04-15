@@ -35,6 +35,7 @@ SRC = \
 		lstdelone.c \
 		lstiter.c \
 		lstmap.c \
+		lstnew.c \
 		lstprint.c \
 		lstpush.c \
 		lstreverse.c \

@@ -12,8 +12,35 @@
 
 #include <corewar.h>
 
-int			game_print(struct s_game *game)
+void		print_process(struct s_process *process)
 {
-	(void)(game);
+	size_t	i;
+
+	i = 0;
+	while (i < REG_NUMBER)
+	{
+		ft_printf("r%zu: %hhx\n", i, process->registors[i]);
+		i++;
+	}
+}
+
+int				game_print(struct s_game *game)
+{
+	t_list	*link;
+	size_t	i;
+
+	print_hex(game->arena, MEM_SIZE);
+	ft_putchar('\n');
+
+	link = game->processes;
+	i = 0;
+	while (link)
+	{
+		ft_printf("process %zu\n", i);
+		print_process(link->content);
+		link = link->next;
+		i++;
+	}
+
 	return (0);
 }

@@ -47,9 +47,7 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 	}
 	if (-1 == close(fd))
 		return (-1);
-	//champ->prog_name = header.prog_name;
 	ft_memmove(champ->prog_name, header.prog_name, sizeof(header.prog_name));
-	//champ->comment = header.comment;
 	ft_memmove(champ->comment, header.comment, sizeof(header.comment));
 	champ->alive = true;
 	return (0);
@@ -63,23 +61,18 @@ static int	add_process(t_list **processes, void *pc)
 	if (NULL == (p = (struct s_process*)malloc(sizeof(*p))))
 		return (-1);
 	ft_bzero(p, sizeof(*p));
-	lstadd(processes, (void*)p);
 	p->registors[0] = 1;//TODO: SET THIS TO BE THE RIGHT ID
 	p->pc = pc;
+	lstadd(processes, lstnew((void*)p));
 	return (0);
 }
 
 int			game_init(char **champs, struct s_game *game)
 {
-	int		champ_count;
-	size_t	offset;
-	size_t	start_loc;
-	int		i;
-
-	unsigned int hex_test = 0xFAFA;
-
-	printf("%x\n", hex_test);
-	print_hex(&hex_test, sizeof(hex_test));
+	int			champ_count;
+	size_t		offset;
+	size_t		start_loc;
+	int			i;
 
 	ft_bzero(game, sizeof(*game));
 	champ_count = 0;
