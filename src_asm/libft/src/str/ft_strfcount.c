@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_fsplcount.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/12/21 12:29:32 by kdavis            #+#    #+#             */
+/*   Updated: 2017/01/28 18:54:31 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <stdlib.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Counts the number of chunks delimited by the characters specified by function
+**	dchar.
+*/
 
-void	asm_error(int ern, int fd)
+unsigned int		ft_strfcount(const char *s, int (*dchar)(int))
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	unsigned int	word_count;
+
+	word_count = 0;
+	while (*s)
+	{
+		while (dchar(*s) && *s)
+			s++;
+		while (!(dchar(*s)) && *s)
+			s++;
+		word_count++;
+	}
+	if (dchar(*(s - 1)))
+		word_count--;
+	return (word_count);
 }

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_printf(wrapper).c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/11/28 15:49:50 by kdavis            #+#    #+#             */
+/*   Updated: 2016/11/28 15:50:40 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "ft_printf.h"
+#include <stdarg.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Wrapper version of ft_printf, which prints the format string to stdout.
+*/
 
-void	asm_error(int ern, int fd)
+int	ft_printf(const char *format, ...)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	va_list	ap;
+	int		size;
+
+	va_start(ap, format);
+	size = ft_vdprintf(1, format, ap);
+	va_end(ap);
+	return (size);
 }

@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/21 18:33:58 by kdavis            #+#    #+#             */
+/*   Updated: 2016/09/27 09:41:09 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <string.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Copies 'len' characters from src into dst. If len is larger than src then
+** the remaining characters copied are '\0'.
+*/
 
-void	asm_error(int ern, int fd)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	size_t	index;
+
+	index = 0;
+	while (index < len && src[index])
+	{
+		dst[index] = src[index];
+		index++;
+	}
+	index--;
+	while (++index < len)
+		dst[index] = '\0';
+	return (dst);
 }

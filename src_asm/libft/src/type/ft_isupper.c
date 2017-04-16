@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/30 11:51:18 by kdavis            #+#    #+#             */
+/*   Updated: 2016/09/30 11:52:15 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+/*
+** Return 1 if 'c' is a upper case alphabetical character.
+*/
 
-static const char	*g_error_message[] =
+int	ft_isupper(int c)
 {
-	"error",
-	"error opening a file",
-};
-
-void	asm_error(int ern, int fd)
-{
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	return (0);
 }

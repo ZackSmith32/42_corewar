@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/22 17:49:05 by kdavis            #+#    #+#             */
+/*   Updated: 2016/11/28 09:47:37 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "ft_io.h"
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Converts a string of numbers into an int. If the value of the digit string
+** is larger than max long long or smaller than min long long return -1 or 0
+** respectivley.
+*/
 
-void	asm_error(int ern, int fd)
+int	ft_atoi(const char *str)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	return ((int)(ft_atoll(str)));
 }

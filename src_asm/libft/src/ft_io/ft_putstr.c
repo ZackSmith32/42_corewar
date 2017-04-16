@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/24 10:39:21 by kdavis            #+#    #+#             */
+/*   Updated: 2016/11/28 09:57:13 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <unistd.h>
+#include "ft_io.h"
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** 'Write' a string to the standard output.
+*/
 
-void	asm_error(int ern, int fd)
+void	ft_putstr(char const *s)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	if (!s)
+	{
+		write(1, "(null)", 6);
+		return ;
+	}
+	write(1, s, ft_strlen(s));
 }

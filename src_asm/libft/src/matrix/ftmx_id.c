@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   mx_id.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2017/01/03 13:15:32 by kdavis            #+#    #+#             */
+/*   Updated: 2017/01/03 15:42:29 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <ft_matrix.h>
+#include <stdlib.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** mx_id creates an identity matrix of size dim x dim.
+*/
 
-void	asm_error(int ern, int fd)
+float	*mx_id(int dim)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	float	*temp;
+	int		size;
+	int		diagonal;
+	int		i;
+
+	size = dim * dim;
+	diagonal = dim + 1;
+	if (!(temp = (float*)malloc(sizeof(float) * size)))
+		return (NULL);
+	i = -1;
+	while (++i < size)
+		temp[i] = (i % diagonal ? 0 : 1);
+	return (temp);
 }

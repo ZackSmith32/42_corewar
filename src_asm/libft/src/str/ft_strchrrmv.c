@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_strchrrmv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/10/14 12:10:10 by kdavis            #+#    #+#             */
+/*   Updated: 2016/10/17 09:18:23 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "libft.h"
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+**	Removes all instances of char c from str.
+*/
 
-void	asm_error(int ern, int fd)
+char	*ft_strchrrmv(char *str, char c)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	int		newlen;
+	int		i;
+	int		j;
+	char	*result;
+
+	i = 0;
+	j = 0;
+	newlen = ft_strlen(str) - ft_strctchr(str, c);
+	result = ft_strnew(newlen);
+	while (str[i])
+	{
+		if (str[i] != c)
+			result[j++] = str[i];
+		i++;
+	}
+	return (result);
 }

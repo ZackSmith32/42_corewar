@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_xorswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/12/09 09:27:32 by kdavis            #+#    #+#             */
+/*   Updated: 2016/12/09 09:38:05 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+/*
+** ft_xorswap uses the xor bit operator to swap the values of two pointers.
+*/
 
-static const char	*g_error_message[] =
+void	ft_xorswapi(int *a, int *b)
 {
-	"error",
-	"error opening a file",
-};
-
-void	asm_error(int ern, int fd)
-{
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	if (a && b && a != b)
+	{
+		*a = *a ^ *b;
+		*b = *b ^ *a;
+		*a = *a ^ *b;
+	}
 }

@@ -6,24 +6,21 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/02/23 19:31:28 by mburson          ###   ########.fr        #
+#    Updated: 2017/04/15 15:51:37 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = asm
 
-LIBFTPRINTF = 
-LIBFTPRINTF_DIR = 
+MAKE = make
 
-SRC = \
-	$(addprefix ./src/, \
+FILES = asm.c\
+		asm_error.c
 
-	)
-
+SRC	= $(addprefix src/, $(FILES))
 OBJ = $(SRC:.c=.o)
 
 HEADERS = -I ./src -I 
-
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)

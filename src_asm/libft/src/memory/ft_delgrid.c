@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_delgrid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/12/21 20:25:27 by kdavis            #+#    #+#             */
+/*   Updated: 2016/12/22 15:34:10 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <ft_memory.h>
 
-static const char	*g_error_message[] =
+void	ft_delgrid(void ***grid)
 {
-	"error",
-	"error opening a file",
-};
+	size_t	i;
 
-void	asm_error(int ern, int fd)
-{
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	i = 0;
+	if (!grid)
+		return ;
+	while (*(*grid + i))
+	{
+		ft_memdel(*grid + i);
+		i++;
+	}
+	ft_memdel((void**)grid);
 }

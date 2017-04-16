@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/23 13:51:00 by kdavis            #+#    #+#             */
+/*   Updated: 2016/09/27 12:39:58 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+/*
+** Concatenates string 2 to the end of string 1, can cause major issues if
+** there is not enough space at the end of string 1 to place string 2.
+** Generally is a better idea to use ft_strlcat instead.
+*/
 
-static const char	*g_error_message[] =
+char	*ft_strcat(char *s1, const char *s2)
 {
-	"error",
-	"error opening a file",
-};
+	char		*tail;
+	const char	*srctail;
 
-void	asm_error(int ern, int fd)
-{
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	tail = s1;
+	srctail = s2;
+	while (*tail)
+		tail++;
+	while (*srctail)
+		*tail++ = *srctail++;
+	*tail = '\0';
+	return (s1);
 }

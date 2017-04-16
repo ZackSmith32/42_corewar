@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/22 20:48:15 by kdavis            #+#    #+#             */
+/*   Updated: 2016/12/08 13:05:12 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <string.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Copies 'n' bytes from the src C-string to the dst C-string.
+*/
 
-void	asm_error(int ern, int fd)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	char	*tail;
+	char	*srctail;
+
+	tail = (char *)dst;
+	srctail = (char *)src;
+	while (n > 0)
+	{
+		*tail = *srctail;
+		tail++;
+		srctail++;
+		n--;
+	}
+	return (dst);
 }

@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/24 15:27:08 by kdavis            #+#    #+#             */
+/*   Updated: 2016/09/29 07:37:53 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "libft.h"
+#include <string.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Applies function 'f' to each character of string 's' and returns a new
+** string created from the succesive application of f.
+*/
 
-void	asm_error(int ern, int fd)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	char	*map;
+	char	*tail;
+
+	if (!s || !f)
+		return (NULL);
+	if (!(map = ft_strnew(ft_strlen(s))))
+		return (NULL);
+	tail = map;
+	while (*s)
+		*tail++ = f(*(char *)s++);
+	return (map);
 }

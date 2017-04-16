@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_vec_foreach.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2017/04/04 17:21:45 by kdavis            #+#    #+#             */
+/*   Updated: 2017/04/04 17:30:29 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <ft_vector.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** ft_vec_foreach takes in a function pointer and applies that function to
+** every element in the array.
+*/
 
-void	asm_error(int ern, int fd)
+int	ft_vec_foreach(t_vec *self, int (f)(void*))
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	void	*element;
+	size_t	i;
+
+	i = 0;
+	while ((element = ft_vecindex(self, i)))
+	{
+		if (!f(element))
+			return (0);
+		i++;
+	}
+	return (1);
 }

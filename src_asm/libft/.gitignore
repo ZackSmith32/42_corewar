@@ -1,0 +1,13 @@
+#ignore test files
+test*
+
+#ignore executables
+a.out
+
+#ignore hidden files
+.*
+!.gitignore
+
+#ignore library and .o files
+*.o
+*.a

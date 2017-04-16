@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_ullsize_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/11/10 09:45:53 by kdavis            #+#    #+#             */
+/*   Updated: 2016/11/10 13:37:24 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <string.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** ft_ullsize_base calculates the number of characters present in an unsigned
+** long long for the particular base.
+*/
 
-void	asm_error(int ern, int fd)
+size_t	ft_ullsize_base(unsigned long long value, unsigned long long base)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	size_t	size;
+
+	if (base == 1)
+		return (value);
+	size = 1;
+	while (value / base != 0)
+	{
+		size++;
+		value /= base;
+	}
+	return (size);
 }

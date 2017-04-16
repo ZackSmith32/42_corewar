@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   pf_alloc_ret.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/12/07 16:13:01 by kdavis            #+#    #+#             */
+/*   Updated: 2016/12/07 16:13:34 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "ft_memory.h"
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Return statement in the case that an allocation fails.
+*/
 
-void	asm_error(int ern, int fd)
+int	pf_alloc_ret(int ret, char *s1, char *s2, char *s3)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	(s1 ? ft_memdel((void *)&s1) : 0);
+	(s2 ? ft_memdel((void *)&s2) : 0);
+	(s3 ? ft_memdel((void *)&s3) : 0);
+	return (ret);
 }

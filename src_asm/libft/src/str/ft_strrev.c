@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/10/09 16:50:03 by kdavis            #+#    #+#             */
+/*   Updated: 2016/10/17 09:16:44 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "libft.h"
+#include <string.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Takes in a string and reverses it.
+*/
 
-void	asm_error(int ern, int fd)
+char	*ft_strrev(char *str)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	char	*tail;
+	char	*head;
+	char	temp;
+
+	if (!str)
+		return (NULL);
+	head = str;
+	tail = str + ft_strlen(str) - 1;
+	while (tail > head)
+	{
+		temp = *head;
+		*head++ = *tail;
+		*tail-- = temp;
+	}
+	return (str);
 }

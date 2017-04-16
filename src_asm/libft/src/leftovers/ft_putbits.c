@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_putbits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/10/09 10:59:20 by kdavis            #+#    #+#             */
+/*   Updated: 2016/10/09 18:42:07 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include "libft.h"
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Prints the bit_size bits of block. Useful for visulaizing bit wise
+** opperations.
+*/
 
-void	asm_error(int ern, int fd)
+void	ft_putbits(unsigned long long block, int bit_size)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	char	*bits;
+
+	if (!(bits = ft_bitstoa(block, bit_size)))
+		ft_putstr("ft_putbits could not allocate enough space");
+	else
+		ft_putstr(bits);
 }

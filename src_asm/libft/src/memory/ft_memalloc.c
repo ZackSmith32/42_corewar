@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/25 18:30:19 by kdavis            #+#    #+#             */
+/*   Updated: 2016/11/28 10:02:43 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <stdlib.h>
+#include <string.h>
+#include "ft_memory.h"
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Allocates a fresh 'size' chunk in memory with each byte allocated to 0.
+*/
 
-void	asm_error(int ern, int fd)
+void	*ft_memalloc(size_t size)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	void *memory;
+
+	if (!(memory = (void *)malloc(size)))
+		return (NULL);
+	ft_bzero(memory, size);
+	return (memory);
 }

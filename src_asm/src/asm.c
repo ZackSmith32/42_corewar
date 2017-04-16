@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/14 19:12:16 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/15 12:54:56 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ static int	read_header(int fd, struct header_s *header)
 int	main(int argc, char **argv)
 {
 	struct header_s	header;
+	int				fd;
 
 	if (argc != 2)
 		return (ft_printf("Usage:./asm champion.s\n"));
+	if ((fd = open(argv[2], O_RDONLY)) == -1)
+		asm_error(1, 0);
 	ft_bzero(&header, sizeof(header));
+	header.magic = COREWAR_EXEC_MAGIC;
 	return (0);
 }

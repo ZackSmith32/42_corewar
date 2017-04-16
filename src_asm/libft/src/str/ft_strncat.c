@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:56:50 by kdavis           ###   ########.fr       */
+/*   Created: 2016/09/23 15:30:05 by kdavis            #+#    #+#             */
+/*   Updated: 2016/09/27 12:41:13 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
+#include <string.h>
 
-static const char	*g_error_message[] =
-{
-	"error",
-	"error opening a file",
-};
+/*
+** Concatenates 'n' characters from s2 to the end of s1.
+*/
 
-void	asm_error(int ern, int fd)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	if (ern >= 0)
-		ft_putendl_fd(2, g_error_message[ern]); 
-	if (ern != 0)
-		close(fd);
-	exit(1);
+	char		*tail;
+	const char	*srctail;
+
+	tail = s1;
+	srctail = s2;
+	while (*tail)
+		tail++;
+	while (*srctail && n-- > 0)
+		*tail++ = *srctail++;
+	*tail = '\0';
+	return (s1);
 }
