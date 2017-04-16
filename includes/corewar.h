@@ -47,8 +47,8 @@ struct					s_flag
 
 struct				s_process
 {
-	unsigned char	registors[REG_NUMBER];
-	_Bool			cary;
+	unsigned short	registors[REG_NUMBER];
+	_Bool			carry;
 	void			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
 	unsigned int	op_code;
@@ -98,6 +98,8 @@ extern int32_t			g_error;
 
 # define	NUMBER_OF_FUNCTIONS 17
 
+# define	MAGIC_NUMBER 0xF383EA00
+
 /*
 ** flags_get.c
 */
@@ -114,9 +116,10 @@ int					game_init(char **champs, struct s_game *game);
 int					game_step(struct s_game *game);
 
 /*
-** game_print/game_print.c
+** game_print/
 */
 int					game_print(struct s_game *game);
+void				print_hex(void *loc, size_t size);
 
 /*
 **

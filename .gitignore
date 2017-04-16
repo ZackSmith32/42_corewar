@@ -1,10 +1,11 @@
 ._*
 .DS_Store
-/corewar/corewar
-/asm/asm
+/src_corewar/corewar
+/src_asm/asm
+/asm
+/corewar
 *.o
 *.a
-.vscode
 *.swp
 test_ind.c
 *.out

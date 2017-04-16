@@ -19,7 +19,8 @@
 //TODO: priotity one: get everything to compile
 //TODO: what's up with t_op? Figure out what is inside of t_op
 
-//bypassed flags_get with function below, flags_get isnt in the makefile for the moment as it does not compile
+//NOTE: program breaks after first loop
+//NOTE: bypassed flags_get with function below, flags_get isnt in the makefile for the moment as it does not compile
 
 int32_t				g_error = 0;
 struct s_flag			g_flags;
@@ -43,15 +44,13 @@ static void			handle_error(struct s_game *game)
 }
 
 //hack
-/*
 int					flags_get(int *ac, char ***av, char **champ)
 {
 	(void)(ac);
-	champ[0] = (*av)[0];
+	champ[0] = (*av)[1];
 	champ[1] = NULL;
 	return (0);
 }
-*/
 
 int					main(int argc, char **argv)
 {
@@ -72,7 +71,7 @@ int					main(int argc, char **argv)
 		{
 			handle_error(&game);
 		}
-		ft_printf("hello world\n");
+		break ;
 	}
 	free_game(&game);
 	return (0);
