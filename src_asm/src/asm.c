@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/15 12:54:56 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/15 20:29:33 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	g_error = 0;
 
 static int	read_header(int fd, struct header_s *header)
 {
+	header->magic = COREWAR_EXEC_MAGIC;
 }
 
 int	main(int argc, char **argv)

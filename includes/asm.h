@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/14 18:43:23 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/15 20:28:47 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 ** sti: 1st parameter may be indirect or direct, 2nd parameter must be indirect
 */
 
-void	asm_error();
+void	asm_error(int ern, int fd);
 
-struct	s_assembler
 #endif
