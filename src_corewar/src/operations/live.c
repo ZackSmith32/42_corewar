@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/13 10:46:25 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/13 11:04:37 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,15 @@ int		ld(sturct game *game, struct s_process *process)
 	byte_count += 5;
 	
 	// register: 1 byte
-	if (parameter_encoding >> 30 == 0x1)
+	if (parameter_encoding && 0x3 == 0x1)
 		ft_memcpy(first_arg, )
 	
 	// direct: DIR_SIZE
-	else if (parameter_encoding >> 30 == 0x2)
+	else if (parameter_encoding && 0x3 == 0x2)
 		first_arg = ()
 
 	// indirect: IND_SIZE
-	else if (parameter_encoding >> 30 == 0x3)
+	else if (parameter_encoding && 0x3 == 0x3)
 	{
 		// get indirect offset
 		ft_memcpy(indirect_offset, pc + byte_count, IND_SIZE);
