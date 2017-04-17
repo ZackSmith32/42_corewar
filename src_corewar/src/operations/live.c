@@ -6,36 +6,17 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/13 11:04:37 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 15:03:59 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
-
 /*
 **	Live requirements:
 **		x > update lives
 **		x > update last_live_champ
 **		x > move pc
 */
-
-void	little_endian_to_big(char *ptr, int size)
-{
-	char	temp;
-	int		start;
-	int		end;
-
-	start = 0;
-	end = size - 1;
-	while (start < end)
-	{
-		temp = ptr[start];
-		ptr[start] = ptr[end];
-		ptr[end] = temp;
-		start++;
-		end--;
-	}
-}
 
 int		live(struct s_game *game, struct s_process *process)
 {
@@ -58,109 +39,84 @@ int		live(struct s_game *game, struct s_process *process)
 **		> what this means is that instead of being able to cast the value
 **			we have to process the bits ourselves
 */
-/*
-void	reverse_bytes(char *ptr, unsigned char size)
-{
-	unsigned char	len;
-	unsigned char	i;
-	char			*tmp;
 
-	len = ft_strlen(ptr) - 1;
-	tmp = ft_strdup(ptr);
+/*
+**	TODO : what opperations need to do / what needs to be done before the operation 
+**		1. identify if the encoding meets the operations requirements
+**			> what happens if the encoding changes to something that is legit?
+**			> what happens if the encoding isn't legit at the beginning?
+**		2. store the total length of the operation and params
+**		3. wait for countdown
+**		*** After this is what the operation should do ***
+**		4. validate the parameters again, I think against what they were to start
+**		5. attempt to execute the operation, validating that parameters and encoding
+**			are as expected, if not jump to next operation based on stored value from
+**			pre computation of length.
+*/
+
+typedef uint16_t		t_indirect;
+typedef uint32_t		t_register;
+typedef uint32_t		t_direct;
+
+union			u_val
+{
+	uint8_t		arr[sizeof(uint64_t)];
+	uint64_t	val;
+}
+
+struct			s_parameter
+{
+	uint8_t		param_type;
+	u_val		val; // TODO: discuss what size to make val
+};
+
+int				mod_params(uint8_t size, uint8_t *val, uint8_t mod_val)
+{
+	uint8_t		i;
+
 	i = 0;
-	len--;
-	while (len >= 0)
+	while (i < size)
 	{
-		len[i] = tmp[len];
+		*val = *((uint64_t *)val) % mod_val;
 		i++;
-		len--;
 	}
+	return (1);
 }
 
-
-int		convert_little_endian(char *ptr, unsigned char size);
+int				mod_params(uint8_t size, uint8_t *val, uint8_t mod_val)
 {
-	unsigned char	byte_index;
-	unsigned char	bit_index;
-	unsigned char	power;
-	unsigned int	num;
+	uint64_t	temp;
+	uint8_t		i;
 
-	// reverse_bytes(ptr, size)
-	power = 0;
-	i = 0;
-	while (ptr[byte_index])
-	{
-		bit_index = 0;
-		while (bit_index < 8)
-		{
-			num += (ptr[i] & 128) * power;
-			power = power * 2;
-			bit_index++;
-		}
-		byte_index++;
-	}
+	temp = *((uint64_t *)val) % mod_val;
+	ft_memmove(val, &temp, DIR_SIZE);
+	return (1);
 }
-*/
-/*
-**	TODO: What is INDEX_MOD?
-**		: How do we want to deal with processing numbers with unknown size?
-*/
 
 /*
-int		ld(sturct game *game, struct s_process *process)
+**	reutrn -1 when the parameters do not match the required formatting.
+*/
+
+int		ld(strct game *game, struct s_process *process)
 {
-	char			*pc;
-	char			first_arg[REG_SIZE];
-	// indirect offset only needs to hold the number of bytes to offset.  
-	// it's possible for the user to set this value to any number of bytes
-	// which is why I'm keeping this as a char with adjustable size
-	char			indirect_offset[IND_SIZE];
-	unsigned char	byte_count;
-	unsigned int	parameter_encoding;
+	struct s_parameter	params[3]; // parse params doens't know how many params to get don't want to error out.
 
-	pc = (char *)process->pc;
-	byte_count = 1;
-	parameter_encoding = (unsigned int)(pc + byte_count);
-	byte_count += 5;
+	if (-1 == parse_parameters(process, params))
+		return (-1);
+	if (params[2].param_type != 0) // check for only 2 parameters
+		return (-1);
+	if (!(params[0] == DIR_CODE || params[0] == IND_CODE)) // check param encoding
+		return (-1);
+	if (params[1] != REG_CODE) // check param encoding
+		return (-1);
 	
-	// register: 1 byte
-	if (parameter_encoding && 0x3 == 0x1)
-		ft_memcpy(first_arg, )
-	
-	// direct: DIR_SIZE
-	else if (parameter_encoding && 0x3 == 0x2)
-		first_arg = ()
+	params[0].val = *((uint64_t *)process[0].val) % IDX_MOD;
 
-	// indirect: IND_SIZE
-	else if (parameter_encoding && 0x3 == 0x3)
-	{
-		// get indirect offset
-		ft_memcpy(indirect_offset, pc + byte_count, IND_SIZE);
+	ft_memmove(process->registors[(unit_8)args[1]->reg], (uint64)args[0]->val);
 
-		// convert indirect offset to a number
-		// get memory at that address and return it.
-		ft_memcpy(first_arg, (pc + convert_little_endian(indirect_offset, IND_SIZE)), REG_SIZE);
-		byte_count += IND_SIZE
-	}
-	arg_direct = (char)(pc + 4)
-	if (parameter_encoding)
+
 
 }
-*/
-
-/*
-unsigned long long	convert_binary_to_long_long(char *ptr, unsigned char size);
-
-char			valid_param_encoding();
-// will be spefic for each
-
-unsigned char	get_argument(void *pc, char arg_number, unsigned char *bytes_read, );
-
-*/
-
-
-
-
 
 
 
