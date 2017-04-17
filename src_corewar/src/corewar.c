@@ -43,7 +43,7 @@ static void			handle_error(struct s_game *game)
 	exit(1);
 }
 
-//hack
+/*
 int					flags_get(int *ac, char ***av, char **champ)
 {
 	(void)(ac);
@@ -51,6 +51,7 @@ int					flags_get(int *ac, char ***av, char **champ)
 	champ[1] = NULL;
 	return (0);
 }
+*/
 
 int					main(int argc, char **argv)
 {

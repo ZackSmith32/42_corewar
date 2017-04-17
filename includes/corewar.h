@@ -36,6 +36,7 @@ struct					s_flag
 	unsigned int		cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
+	_Bool				flag_test;
 };
 
 /*
@@ -90,8 +91,8 @@ extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
 
-# define	VALID_FLAGS	"dnpsv"
-# define	NFLAGS		5
+# define	VALID_FLAGS	"dnpsvf"
+# define	NFLAGS		6
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2
 # define	FLAG_D		0x4
