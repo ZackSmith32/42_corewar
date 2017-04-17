@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 10:10:08 by kdavis            #+#    #+#             */
-/*   Updated: 2017/01/03 15:50:34 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/15 20:22:37 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <ft_printf.h>
 # include <ft_memory.h>
 # include <get_next_line.h>
-# include "../../../includes/list.h"
+# include <list.h>
 
 char				*ft_bitstoa(unsigned long long block, int bit_size);
 void				ft_putbits(unsigned long long block, int bit_size);

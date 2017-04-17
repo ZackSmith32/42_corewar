@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/11 12:23:15 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/13 14:56:21 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 **		> number of args it takes
 **		> array: the args it takes
 **		> number code of operation
-**		> 5/10/6/20/25/50/1000/2
+**		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
 **		> long name
 **		> 0/1 : yes/no : carry?? (doesn't match up)
 **		> 0/1
