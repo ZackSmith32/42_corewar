@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/15 20:24:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/16 19:45:08 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,10 @@ void				move_pc(uint8_t *arena, uint8_t **pc, int move);
 int					move_one(struct s_game *game, struct s_process *process);
 int					live(struct s_game *game, struct s_process *process);
 
+/*
+** parse_parameters
+*/
+int					parse_parameters(struct s_process *process,
+						union u_parameter *parameters);
 
 #endif
