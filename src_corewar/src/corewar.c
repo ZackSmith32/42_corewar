@@ -27,7 +27,7 @@ struct s_flag			g_flags;
 static char const	*g_error_msg[] = {
 	"no error",
 	"generic error",
-	"file format issue"
+	"file format issue",
 	"flag format issue"
 };
 
@@ -61,7 +61,8 @@ int					main(int argc, char **argv)
 	size_t	i;
 
 	i = 15;
-	if (-1 == flags_get(&argc, &argv, champions))
+	(void)argc;
+	if (-1 == flags_get(&argv, champions))
 	{
 		handle_error(NULL);
 	}
