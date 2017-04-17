@@ -28,6 +28,10 @@ SRC = \
 		$(addprefix game_step/, \
 			game_step.c \
 		) \
+		$(addprefix operations/, \
+			utilites.c \
+			live.c \
+		) \
 	) \
 	$(addprefix maxlib/list/, \
 		lstadd.c \

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <corewar.h>
+
 /*
 **	Live requirements:
 **		x > update lives
@@ -35,7 +37,7 @@ void	little_endian_to_big(char *ptr, int size)
 	}
 }
 
-int		live(struct game *game, struct s_process *process)
+int		live(struct s_game *game, struct s_process *process)
 {
 	char			*pc;
 	unsigned int	player_name;
@@ -44,9 +46,10 @@ int		live(struct game *game, struct s_process *process)
 	player_name = ~(unsigned int)(pc + 1);
 	if (player_name > game->champ_count)
 		return (-1);
-	(game->champs[player_name]).lives++;
-	game->last_live_champ = game->champs[player_name] 
-	move_pc(&game->arena, &process->pc, 5);
+	game->lives++;
+	process->called_live = true;
+	game->last_live_champ = &game->champs[player_name];
+	move_pc(game->arena, &process->pc, 5);
 	return (1);
 }
 
@@ -55,7 +58,7 @@ int		live(struct game *game, struct s_process *process)
 **		> what this means is that instead of being able to cast the value
 **			we have to process the bits ourselves
 */
-
+/*
 void	reverse_bytes(char *ptr, unsigned char size)
 {
 	unsigned char	len;
@@ -97,12 +100,13 @@ int		convert_little_endian(char *ptr, unsigned char size);
 		byte_index++;
 	}
 }
-
+*/
 /*
 **	TODO: What is INDEX_MOD?
 **		: How do we want to deal with processing numbers with unknown size?
 */
 
+/*
 int		ld(sturct game *game, struct s_process *process)
 {
 	char			*pc;
@@ -142,6 +146,7 @@ int		ld(sturct game *game, struct s_process *process)
 	if (parameter_encoding)
 
 }
+*/
 
 /*
 unsigned long long	convert_binary_to_long_long(char *ptr, unsigned char size);

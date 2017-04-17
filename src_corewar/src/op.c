@@ -53,17 +53,9 @@ t_op const	g_op_tab[] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-static int	move_one(struct s_game *game, struct s_process *process)
-{
-	//move_pc((void*)&game->arena, &process->pc, 1);
-	(void)(game);
-	(void)(process);
-	return (0);
-}
-
 int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&move_one,
-	&move_one,
+	&live,
 	&move_one,
 	&move_one,
 	&move_one,
