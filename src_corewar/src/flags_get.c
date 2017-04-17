@@ -66,11 +66,21 @@ static int	flag_v(char ***av, char **champ)
 
 	(void)champ;
 	hex = 0;
-	if (++(*av) && **av && ***av < '0' && ***av > '9'
-			&& 31 < (hex = ft_atoui(**av)))
-		return (-1);
-	g_flags.verbosity_level |= (1 << (hex));
-	g_flags.list |= FLAG_V;
+	if (++(*av) && **av && ***av >= '0' && ***av <= '9'
+			&& 31 >= (hex = ft_atoui(**av)))
+	{
+		g_flags.verbosity_level |= hex;
+		g_flags.list |= FLAG_V;
+		return (0);
+	}
+	return (-1);
+}
+
+static int	flag_f(char ***av, char **champ)
+{
+	(void)av;
+	(void)champ;
+	g_flags.flag_test = 1;
 	return (0);
 }
 
@@ -89,21 +99,12 @@ static void	print_flag_status(void)
 			g_flags.flag_test);
 	ft_printf("cycle_intervals_to_dump=%d\n", g_flags.cycle_intervals_to_dump);
 	ft_printf("cycle_to_dump_exit=%d\n", g_flags.cycle_to_dump_exit);
-	ft_printf("verbosity_level %d%d%d%d%d\n",
-			g_flags.verbosity_level & 0x1,
-			g_flags.verbosity_level & 0x2,
-			g_flags.verbosity_level & 0x4,
-			g_flags.verbosity_level & 0x8,
-			g_flags.verbosity_level & 0x10);
-	ft_printf("g_error=%d\n\n", g_error);
-}
-
-static int	flag_f(char ***av, char **champ)
-{
-	(void)av;
-	(void)champ;
-	g_flags.flag_test = 1;
-	return (0);
+	ft_printf("verbosity_level %d%d%d%d%d\n\n",
+			g_flags.verbosity_level & 0x1 ? 1 : 0,
+			g_flags.verbosity_level & 0x2 ? 1 : 0,
+			g_flags.verbosity_level & 0x4 ? 1 : 0,
+			g_flags.verbosity_level & 0x8 ? 1 : 0,
+			g_flags.verbosity_level & 0x10 ? 1 : 0);
 }
 
 static int	fill_champ(char ***av, char **champ)
@@ -145,8 +146,6 @@ int			flags_get(char ***av, char **champ)
 				&& -1 == (flag_set[func_code])(av, champ))
 		{
 			g_error = 3;
-			if (g_flags.flag_test)
-				print_flag_status();
 			return (-1);
 		}
 		if (g_flags.flag_test)
@@ -154,6 +153,5 @@ int			flags_get(char ***av, char **champ)
 	}
 	if (**av && -1 == fill_champ(av, champ) && (g_error = 3))
 			return (-1);
-	exit(0);
 	return (0);
 }

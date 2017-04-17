@@ -7,9 +7,8 @@
 			"request": "launch",
 			"program": "${workspaceRoot}/corewar",
 			"args":	[
-						"-f",
-						"-n", "1", "zork1.cor",
-						"-n", "4", "zork4.cor",
+						"-n", "1", "resources/zork.cor",
+						"-n", "4", "resources/zork.cor",
 			 			"resources/zork.cor"
 					],
 			"stopAtEntry": false,
