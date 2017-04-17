@@ -57,6 +57,9 @@ int					main(int argc, char **argv)
 	struct s_game	game;
 	char			*champions[MAX_PLAYERS + 1];
 
+	size_t	i;
+
+	i = 15;
 	if (-1 == flags_get(&argc, &argv, champions))
 	{
 		handle_error(NULL);
@@ -65,14 +68,18 @@ int					main(int argc, char **argv)
 	{
 		handle_error(&game);
 	}
-	while (game.winner == NULL)
+	while (game.game_over == false)
 	{
-		if (-1 == game_step(&game) || -1 == game_print(&game))
+		if (-1 == game_print(&game) || -1 == game_step(&game))
 		{
 			handle_error(&game);
 		}
-		break ;
+		i--;
+		if (i == 0)
+			break ;
 	}
+	if (-1 == game_print(&game))
+		handle_error(&game);
 	free_game(&game);
 	return (0);
 }

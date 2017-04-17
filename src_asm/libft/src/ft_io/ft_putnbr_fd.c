@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 13:46:56 by zsmith           ###   ########.fr       */
+/*   Created: 2016/09/24 10:52:53 by kdavis            #+#    #+#             */
+/*   Updated: 2016/11/28 09:54:27 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <corewar.h>
-#include <libft.h>
-#include <op.h>
+#include "ft_io.h"
 
-void		move_pc(uint8_t *arena, void **pc, int move)
+/*
+** Takes an int and prints it into the appropriate file directory in base 10.
+*/
+
+void	ft_putnbr_fd(int n, int fd)
 {
-	move = move % MEM_SIZE;
-	*pc += move;
-	if (*pc < arena)
-		*pc += MEM_SIZE;
-	else if (*pc > arena)
-		*pc -= MEM_SIZE;
+	ft_putsbase_fd(n, 10, fd, 0);
 }

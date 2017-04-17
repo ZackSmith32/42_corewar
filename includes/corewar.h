@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 13:44:18 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/15 20:24:42 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <list.h>
 
 struct				s_champ
 {
   	char			prog_name[PROG_NAME_LENGTH + 1];
   	char			comment[COMMENT_LENGTH + 1];
-	unsigned int	lives;
-	_Bool			alive;
 };
 
 struct					s_flag
@@ -43,20 +40,23 @@ struct					s_flag
 
 /*
 ** pc is the locaiton of the next instruction of execute
+** called_live: if the process called the live operation in the last cycle
 */
 
 struct				s_process
 {
 	unsigned short	registors[REG_NUMBER];
 	_Bool			carry;
-	void			*pc;
+	uint8_t			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
-	unsigned int	op_code;
+	uint8_t			op_code;
+	_Bool			called_live;
 };
 
 /*
 ** processes will be added to the front, so the yongest process is in front
 ** and they are incremented through front to back
+** check_count: number of checks sense decrementing cycles to die
 */
 
 struct				s_game
@@ -65,10 +65,12 @@ struct				s_game
 	struct s_champ		champs[MAX_PLAYERS];
 	unsigned int		champ_count;
 	t_list				*processes;
-	unsigned int		cycles_max;
 	unsigned int		cycles_to_death;
+	unsigned int		current_cycles;
+	unsigned int		check_count;
 	struct s_champ		*last_live_champ;
-	struct s_champ		*winner;
+	_Bool				game_over;
+	unsigned int		lives;
 };
 
 typedef struct		s_op
@@ -122,15 +124,18 @@ int					game_print(struct s_game *game);
 void				print_hex(void *loc, size_t size);
 
 /*
-**
+** free.c
 */
 void				free_game(struct s_game *game);
 
+
 /*
-** helpers.c
-** idealy these functions will move to more appropriate folders
+** operations/
 */
-//what's the max move size?
-void				move_pc(uint8_t *arena, void **pc, int move); 
+//TODO: what's the max move size?
+void				move_pc(uint8_t *arena, uint8_t **pc, int move);
+int					move_one(struct s_game *game, struct s_process *process);
+int					live(struct s_game *game, struct s_process *process);
+
 
 #endif

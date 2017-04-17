@@ -32,6 +32,7 @@ void		print_hex(void *loc, size_t size)
 	while (size)
 	{
 		print_byte_in_hex(*loc_conv);
+		ft_putchar(' ');
 		loc_conv++;
 		size--;
 	}

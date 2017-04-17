@@ -49,7 +49,6 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 		return (-1);
 	ft_memmove(champ->prog_name, header.prog_name, sizeof(header.prog_name));
 	ft_memmove(champ->comment, header.comment, sizeof(header.comment));
-	champ->alive = true;
 	return (0);
 }
 
@@ -63,6 +62,7 @@ static int	add_process(t_list **processes, void *pc, unsigned short live)
 	ft_bzero(p, sizeof(*p));
 	p->registors[0] = live;
 	p->pc = pc;
+	p->countdown = 1;
 	lstadd(processes, lstnew((void*)p));
 	return (0);
 }
@@ -80,6 +80,8 @@ int			game_init(char **champs, struct s_game *game)
 		champ_count++;
 	if (champ_count)
 		offset = MEM_SIZE / champ_count;
+	game->champ_count = champ_count;
+	game->cycles_to_death = CYCLE_TO_DIE;
 	start_loc = 0;
 	i = 0;
 	while (i < champ_count)

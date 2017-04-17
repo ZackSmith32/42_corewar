@@ -13,46 +13,6 @@
 #include <corewar.h>
 
 /*
-** returns number of champs alive
-*/
-
-static unsigned int		lives_update_return_count(struct s_champ *champ,
-															unsigned int count)
-{
-	unsigned int	i;
-	unsigned int	remaining;
-
-	i = 0;
-	remaining = 0;
-	while (i < count)
-	{
-		if (champ[i].lives == 0)
-			champ[i].alive = false;
-		else if (champ[i].alive == true)
-		{
-			champ[i].lives = 0;
-			remaining++;
-		}
-		i++;
-	}
-	return (remaining);
-}
-
-static struct s_champ	*pick_winner(struct s_game *game)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (i < game->champ_count)
-	{
-		if (game->champs[i].alive == true)
-			return (&game->champs[i]);
-		i++;
-	}
-	return (game->last_live_champ);
-}
-
-/*
 **	step_process:
 **	
 **	p = link->content = ??, what does the linked list do?
@@ -68,6 +28,7 @@ static struct s_champ	*pick_winner(struct s_game *game)
 static void				step_processes(struct s_game *game)
 {
 	t_list				*link;
+
 	struct s_process	*p;
 
 	link = game->processes;
@@ -83,9 +44,9 @@ static void				step_processes(struct s_game *game)
 			// assumes adding op_code to s_process
 			if (-1 == g_op_pointers[p->op_code](game, p))
 			{
-				//TODO: FUNCTION FAILER
+				move_pc(game->arena, &p->pc, 1);
 			}
-			p->op_code = *((int *)p->pc);
+			p->op_code = *p->pc;
 			if (p->op_code > NUMBER_OF_FUNCTIONS)
 				p->op_code = 0;
 			p->countdown = g_op_tab[p->op_code].cycles_required;
@@ -94,39 +55,40 @@ static void				step_processes(struct s_game *game)
 	}
 }
 
-/*
-**	Operation requirements:
-**		> update last_live_champ
-**		> update cary
-**		> update registries
-**		> *for live update lives
-*/
+static void					kill_processes(t_list **processes)
+{
+	t_list *tail;
 
-/*
-**	game_step:
-**
-**	update processes
-**	if (end of round aka cycles to death == 0)
-** 		if (no more rounds possible)
-**			pick winner
-**		else
-**			decrement cycles max and reset cycles to death
-*/
+	tail = *processes;
+	while (*processes)
+	{
+		while (((struct s_process*)(*processes)->content)->called_live == false)
+		{
+			lstdelone(processes, &free);
+		}
+		processes = &(*processes)->next;
+	}
+}
 
 int						game_step(struct s_game *game)
 {
 	step_processes(game);
-	game->cycles_to_death--;
-	if (game->cycles_to_death == 0)
+	game->current_cycles++;
+	if (game->current_cycles == game->cycles_to_death)
 	{
-		if (game->cycles_max < CYCLE_DELTA
-			|| lives_update_return_count(game->champs, game->champ_count) < 2)
-			game->winner = pick_winner(game);
-		else
+		kill_processes(&game->processes);
+		if (game->lives >= NBR_LIVE || game->check_count >= MAX_CHECKS)
 		{
-			game->cycles_max -= CYCLE_DELTA;
-			game->cycles_to_death = game->cycles_max;
+			game->check_count = 0;
+			if (game->processes == NULL || game->cycles_to_death <= CYCLE_DELTA)
+				game->game_over = true;
+			else
+				game->cycles_to_death -= CYCLE_DELTA;
 		}
+		else
+			game->check_count++;
+		game->lives = 0;
+		game->current_cycles = 0;
 	}
 	return (0);
 }
