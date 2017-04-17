@@ -12,56 +12,61 @@
 
 #include <corewar.h>
 
-static int	flag_d(int *ac, char ***av, char **champ)
+static int	flag_d(char ***av, char **champ)
 {
 	(void)champ;
-	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9')
-		return (-1);
-	g_flags.cycle_to_dump_exit = ft_atoui(**av); //set params
-	g_flags.list |= FLAG_D; //set g_flags
-	return (0);
+	if (++(*av) && **av && ***av >= '0' && ***av <= '9')
+	{
+		g_flags.cycle_to_dump_exit = ft_atoui(**av); //set params
+		g_flags.list |= FLAG_D; //set g_flags
+		return (0);
+	}
+	return (-1);
 }
 
-static int	flag_n(int *ac, char ***av, char **champ)
+static int	flag_n(char ***av, char **champ)
 {
 	unsigned int	i;
 
 	i = 0;
-	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9'
-			&& MAX_PLAYERS <= (i = ft_atoui(**av)) && champ[i] != NULL
-			&& --(*ac) && ++(*av) && **av)
-		return (-1);
-	champ[i] = **av;
-	g_flags.list |= FLAG_N;
-	return (0);
+	if (++(*av) && **av && ***av >= '0' && ***av <= '9'
+			&& MAX_PLAYERS > (i = ft_atoui(**av) - 1) && champ[i] == NULL
+			&& ++(*av) && **av)
+	{
+		champ[i] = **av;
+		g_flags.list |= FLAG_N;
+		return (0);
+	}
+	return (-1);
 }
 
-static int	flag_p(int *ac, char ***av, char **champ)
+static int	flag_p(char ***av, char **champ)
 {
-	(void)ac;
 	(void)av;
 	(void)champ;
 	g_flags.list |= FLAG_P;
 	return (0);
 }
 
-static int	flag_s(int *ac, char ***av, char **champ)
+static int	flag_s(char ***av, char **champ)
 {
 	(void)champ;
-	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9')
-		return (-1);
-	g_flags.cycle_intervals_to_dump = ft_atoui(**av);
-	g_flags.list |= FLAG_S;
-	return (0);
+	if (++(*av) && **av && ***av >= '0' && ***av <= '9')
+	{
+		g_flags.cycle_intervals_to_dump = ft_atoui(**av);
+		g_flags.list |= FLAG_S;
+		return (0);
+	}
+	return (-1);
 }
 
-static int	flag_v(int *ac, char ***av, char **champ)
+static int	flag_v(char ***av, char **champ)
 {
 	unsigned int	hex;
 
 	(void)champ;
 	hex = 0;
-	if (--(*ac) && ++(*av) && **av && ***av < '0' && ***av > '9'
+	if (++(*av) && **av && ***av < '0' && ***av > '9'
 			&& 31 < (hex = ft_atoui(**av)))
 		return (-1);
 	g_flags.verbosity_level |= (1 << (hex));
@@ -84,28 +89,45 @@ static void	print_flag_status(void)
 			g_flags.flag_test);
 	ft_printf("cycle_intervals_to_dump=%d\n", g_flags.cycle_intervals_to_dump);
 	ft_printf("cycle_to_dump_exit=%d\n", g_flags.cycle_to_dump_exit);
-	ft_printf("verbosity_level %d%d%d%d%d\n\n",
+	ft_printf("verbosity_level %d%d%d%d%d\n",
 			g_flags.verbosity_level & 0x1,
 			g_flags.verbosity_level & 0x2,
 			g_flags.verbosity_level & 0x4,
 			g_flags.verbosity_level & 0x8,
 			g_flags.verbosity_level & 0x10);
+	ft_printf("g_error=%d\n\n", g_error);
 }
 
-static int	flag_f(int *ac, char ***av, char **champ)
+static int	flag_f(char ***av, char **champ)
 {
-	(void)ac;
 	(void)av;
 	(void)champ;
 	g_flags.flag_test = 1;
 	return (0);
 }
 
-int			flags_get(int *ac, char ***av, char **champ)
+static int	fill_champ(char ***av, char **champ)
+{
+	size_t	i;
+
+	i = 0;
+	while (**av && ***av)
+	{
+		while (champ[i])
+			i++;
+		if (MAX_PLAYERS < i)
+			return (-1);
+		champ[i] = **av;
+		++(*av);
+	}
+	return (0);
+}
+
+int			flags_get(char ***av, char **champ)
 {
 	char		*flags;
 	uintmax_t	func_code;
-	int			(*flag_set[NFLAGS])(int *ac, char ***av, char **champ);
+	int			(*flag_set[NFLAGS])(char ***av, char **champ);
 
 	flag_set[0] = &flag_d;
 	flag_set[1] = &flag_n;
@@ -116,22 +138,22 @@ int			flags_get(int *ac, char ***av, char **champ)
 	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS + 1);
 	ft_bzero(&g_flags, sizeof(g_flags));
 	flags = VALID_FLAGS;
-	while (--(*ac) && ++(*av) && **av && ***av == '-' && ++(**av))
+	while (++(*av) && **av && ***av == '-' && ++(**av))
 	{
-		ft_putstr("ac="); ft_putnbr(*ac); ft_putstr(" av="); ft_putendl(**av); //TEST
 		if ((func_code = ft_strchr(flags, ***av) - flags) < NFLAGS
-			&& ++(**av) && ***av == 0
-			&& -1 == (flag_set[func_code])(ac, av, champ))
+				&& ++(**av) && ***av == 0
+				&& -1 == (flag_set[func_code])(av, champ))
 		{
-			g_error = 4;
+			g_error = 3;
+			if (g_flags.flag_test)
+				print_flag_status();
 			return (-1);
 		}
-
-		ft_printf("function code #%d\n", func_code); //TEST
 		if (g_flags.flag_test)
 			print_flag_status();
 	}
-	ft_putstr("exit ac="); ft_putnbr(*ac); ft_putstr(" exit av="); ft_putendl(**av);
-	exit(0); //TEST
+	if (**av && -1 == fill_champ(av, champ) && (g_error = 3))
+			return (-1);
+	exit(0);
 	return (0);
 }
