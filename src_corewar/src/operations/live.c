@@ -6,10 +6,11 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/13 11:04:37 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/13 21:10:28 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <corewar.h>
 /*
 **	Live requirements:
 **		x > update lives
@@ -99,63 +100,35 @@ int		convert_little_endian(char *ptr, unsigned char size);
 }
 
 /*
-**	TODO: What is INDEX_MOD?
-**		: How do we want to deal with processing numbers with unknown size?
+**	TODO : what opperations need to do / what needs to be done before the operation 
+**		1. identify if the encoding meets the operations requirements
+**			> what happens if the encoding changes to something that is legit?
+**			> what happens if the encoding isn't legit at the beginning?
+**		2. store the total length of the operation and params
+**		3. wait for countdown
+**		*** After this is what the operation should do ***
+**		4. validate the parameters again, I think against what they were to start
+**		5. attempt to execute the operation, validating that parameters and encoding
+**			are as expected, if not jump to next operation based on stored value from
+**			pre computation of length.
 */
 
-int		ld(sturct game *game, struct s_process *process)
+union			u_parameter
 {
-	char			*pc;
-	char			first_arg[REG_SIZE];
-	// indirect offset only needs to hold the number of bytes to offset.  
-	// it's possible for the user to set this value to any number of bytes
-	// which is why I'm keeping this as a char with adjustable size
-	char			indirect_offset[IND_SIZE];
-	unsigned char	byte_count;
-	unsigned int	parameter_encoding;
+	uint8_t		reg[1];
+	uint8_t		val[DIR_SIZE]
+};
 
-	pc = (char *)process->pc;
-	byte_count = 1;
-	parameter_encoding = (unsigned int)(pc + byte_count);
-	byte_count += 5;
-	
-	// register: 1 byte
-	if (parameter_encoding && 0x3 == 0x1)
-		ft_memcpy(first_arg, )
-	
-	// direct: DIR_SIZE
-	else if (parameter_encoding && 0x3 == 0x2)
-		first_arg = ()
+int		ld(strct game *game, struct s_process *process)
+{
+	struct op_parameter	params[2];
 
-	// indirect: IND_SIZE
-	else if (parameter_encoding && 0x3 == 0x3)
-	{
-		// get indirect offset
-		ft_memcpy(indirect_offset, pc + byte_count, IND_SIZE);
+	parse_parameters(game, process, params);
+	ft_memmove(process->registors[(unit_8)args[1]->reg], (uint64)args[0]->val);
 
-		// convert indirect offset to a number
-		// get memory at that address and return it.
-		ft_memcpy(first_arg, (pc + convert_little_endian(indirect_offset, IND_SIZE)), REG_SIZE);
-		byte_count += IND_SIZE
-	}
-	arg_direct = (char)(pc + 4)
-	if (parameter_encoding)
+
 
 }
-
-/*
-unsigned long long	convert_binary_to_long_long(char *ptr, unsigned char size);
-
-char			valid_param_encoding();
-// will be spefic for each
-
-unsigned char	get_argument(void *pc, char arg_number, unsigned char *bytes_read, );
-
-*/
-
-
-
-
 
 
 
