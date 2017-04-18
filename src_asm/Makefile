@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/15 20:05:09 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/17 21:03:36 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,11 @@ NAME = asm
 
 MAKE = make
 
-FILES = asm.c\
-		asm_error.c
+FILES =	asm.c\
+		asm_error.c\
+		read_header.c\
+		endian_switch.c\
+		skip_padding.c\
 
 SRC	= $(addprefix src/, $(FILES))
 OBJ = $(addprefix build/, $(FILES:.c=.o))
