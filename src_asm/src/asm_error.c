@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 21:53:44 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 22:09:48 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static const char	*g_error_message[] =
 	"Writing output program to %s\n",
 	"error allocating memory\n",
 	"error opening file\n",
-	"error reading or closing file\n",
+	"error closing file\n",
+	"error reading file\n",
+	"error writing to file\n",
 	"Syntax error at token [%s][%03d:%03d] %s\n"
 };
 

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 21:52:29 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 22:10:23 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	read_name(t_asm *master)
 {
 	if (!(master->cp = next_token(master->file.arr)))
-		return (3);
+		return (6);
 	return (0);
 }
 

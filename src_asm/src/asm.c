@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 21:51:23 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 22:15:28 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	read_file(char *name, t_vec *file)
 			return (1);
 		}
 	}
-	if (ret == -1 || close(fd) == -1)
-		return (3);
+	if (close(fd) == -1 || ret == -1)
+		return (ret == -1 ? 4 : 3);
 	if (file->len == file->total)
 		if (!(ft_grow_vec(file, file->len * file->size + 1)))
 			return (1);
@@ -54,7 +54,8 @@ static int	write_file(char *name, t_asm *master)
 {
 	char	*end;
 	size_t	dist;
-/*	int		fd;*/
+	int		fd;
+	int		ern;
 
 	dist = 0;
 	ft_printf("Trying to rename name\n");///
@@ -63,8 +64,12 @@ static int	write_file(char *name, t_asm *master)
 	if (!(master->name = ft_strndup(name, dist + 4)))
 		return (1);
 	ft_memmove(master->name + dist, ".cor", 4);
+	if ((fd = open(master->name, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR)) == -1)
+		return (2);
+	ern = write(fd, master, sizeof(*master));
+	if ((close(fd) == -1) ||  ern == -1)
+		return (ern == -1 ? 5 : 3);
 	return (0);
-/*	if ((fd = open(master->name*/
 }
 
 int	main(int argc, char **argv)
