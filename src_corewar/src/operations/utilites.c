@@ -42,10 +42,24 @@ uint8_t		*mask_pc(uint8_t *ptr, size_t offset)
 uint8_t		*ft_memmove_core(uint8_t *arena, uint8_t *src,
 													uint8_t *dst, size_t size)
 {
-	while (size)
+	size_t	i;
+
+	if (dst > src)
 	{
-		size--;
-		*mask_pc(dst, arena, size) = *mask_pc(src, arena, size);
+		i = 0;
+		while (i)
+		{
+			*mask_pc(dst, arena, i) = *mask_pc(src, arena, i);
+			i++;
+		}
+	}
+	else
+	{
+		while (size)
+		{
+			size--;
+			*mask_pc(dst, arena, size) = *mask_pc(src, arena, size);
+		}
 	}
 }
 /*
