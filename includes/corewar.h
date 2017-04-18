@@ -166,8 +166,8 @@ void				free_game(struct s_game *game);
 void				move_pc(uint8_t *arena, uint8_t **pc, int move);
 int					move_one(struct s_game *game, struct s_process *process);
 uint8_t				*mask_pc(uint8_t *ptr, size_t offset);
-uint8_t				*ft_memmove_core(uint8_t arena, uint8_t src,
-													uint8_t dst, size_t size);
+uint8_t				*ft_memmove_core(uint8_t arena, uint8_t *src,
+													uint8_t *dst, size_t size);
 
 /*
 ** /operations/live
