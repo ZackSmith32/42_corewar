@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/17 17:41:16 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 18:35:57 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ union			u_val
 	uint64_t	val;
 };
 
-struct			s_parameter
+struct				s_parameter
 {
-	uint8_t		param_type;
+	uint8_t			param_type;
 	union u_val		param_val; // TODO: discuss what size to make val
 };
 
@@ -153,13 +153,12 @@ int					live(struct s_game *game, struct s_process *process);
 /*
 ** /operations/parse_parameters
 */
-int					parse_parameters(struct s_process *process,
-						struct s_parameter *params);
+int			parse_parameters(struct s_process *process,
+				struct s_parameter *params, uint8_t *byte_index);
 
 /*
 ** /operations/validate_parameters
 */
-char				parse_and_validate_parameters(struct s_process *process,
-						struct s_parameter *params);
-
+char		parse_and_validate_parameters(struct s_process *process,
+				struct s_parameter *params, uint8_t *byte_index);
 #endif

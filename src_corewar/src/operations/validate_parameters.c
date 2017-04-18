@@ -42,12 +42,13 @@ int				check_param_type(t_op op, char parameter_encoding)
 	return (0);
 }
 
-char		parse_and_validate_parameters(struct s_process *process, struct s_parameter *params)
+char		parse_and_validate_parameters(struct s_process *process,
+				struct s_parameter *params, uint8_t *byte_index)
 {
 	if (-1 == check_param_count(g_op_tab[process->op_code], *((process->pc) + 1)))
 		return (-1);
 	if (-1 == check_param_type(g_op_tab[process->op_code], *((process->pc) + 1)))
 		return (-1);
-	parse_parameters(process, params);
+	parse_parameters(process, params, byte_count);
 	return (0);
 }

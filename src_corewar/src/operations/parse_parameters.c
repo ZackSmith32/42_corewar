@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 15:01:25 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/17 17:51:38 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 18:20:35 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,18 @@ void		get_param_value(uint8_t parameter_type, uint8_t *ptr,
 **		parameters array
 */
 int			parse_parameters(struct s_process *process,
-				struct s_parameter *params)
+				struct s_parameter *params, uint8_t *byte_index)
 {
 	uint8_t		parameter_encoding;
-	uint8_t		byte_index;
 	uint8_t		parameter_index;
 
 	parameter_encoding = *(process->pc + 1);
-	byte_index = 2;
+	*byte_index = 2;
 	parameter_index = 0;
 	while (parameter_index < g_op_tab[process->op_code].argc)
 	{
 		get_param_value(parameter_encoding, process->pc,
-			&(params[parameter_index]), &byte_index);
+			&(params[parameter_index]), byte_index);
 		parameter_encoding = parameter_encoding << 2;
 		parameter_index++;
 	}
