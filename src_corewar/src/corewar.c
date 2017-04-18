@@ -51,7 +51,7 @@ int					main(int argc, char **argv)
 
 	size_t	i;
 
-	i = 15;
+	i = g_flags.cycle_to_dump_exit;
 	(void)argc;
 	if (-1 == flags_get(&argv, champions))
 	{
@@ -68,7 +68,7 @@ int					main(int argc, char **argv)
 			handle_error(&game);
 		}
 		i--;
-		if (i == 0)
+		if (i == 1)
 			break ;
 	}
 	if (-1 == game_print(&game))
