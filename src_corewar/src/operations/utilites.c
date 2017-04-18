@@ -32,8 +32,9 @@ uint8_t		*mask_pc(uint8_t *ptr, size_t offset)
 {
 	uint8_t		*wrap;
 
+	offset = offset % MEM_SIZE;
 	if (ptr - g_first_mem_slot + offset < MEM_SIZE)
 		return (ptr + offset);
-	wrap = (ptr - g_ptr_first_mem_slot) % MEM_SIZE;
-	return (ptr + wrap);
+	wrap = ((ptr + offset) - g_first_mem_slot) % MEM_SIZE;
+	return (g_first_mem_slot + wrap);
 }

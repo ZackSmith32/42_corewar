@@ -104,7 +104,7 @@ extern struct s_flag	g_flags;
 extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
-extern uint8_t			*g_ptr_first;
+extern uint8_t			g_first_mem_slot;
 
 
 /*

@@ -35,7 +35,7 @@ int		live(struct s_game *game, struct s_process *process)
 
 /*
 **	TODO : !! change what is being stored for indirect
-**		 : registers are little endian?
+**		 : registers are big endian : because it's more right
 **		 : test what happens when the register is over written with an incorrect
 **		 	value
 **		 : do we need the union? a: yes.  storing register, not what is in the register
