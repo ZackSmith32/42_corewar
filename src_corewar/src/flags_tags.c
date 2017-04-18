@@ -63,11 +63,16 @@ int	flag_s(char ***av, char **champ)
 int	flag_v(char ***av, char **champ)
 {
 	unsigned int	hex;
+	char			**nxt;
 
 	(void)champ;
 	hex = 0;
-	if (++(*av) && **av && ***av >= '0' && ***av <= '9'
-			&& 31 >= (hex = ft_atoui(**av)))
+	nxt = *av + 1;
+	if (nxt && *nxt && **nxt >= '0' && **nxt <= '9' && ++(*av))
+		hex = ft_atoui(**av);
+	else
+		hex = 31;
+	if (31 >= hex)
 	{
 		g_flags.verbosity_level |= hex;
 		g_flags.list |= FLAG_V;
