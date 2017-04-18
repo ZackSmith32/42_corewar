@@ -21,6 +21,7 @@ SRC = \
 		free.c \
 		game_init.c \
 		flags_get.c \
+		flags_tags.c \
 		op.c \
 		$(addprefix game_print/, \
 			game_print.c \
