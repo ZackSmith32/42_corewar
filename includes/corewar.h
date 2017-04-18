@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/16 19:45:08 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 17:20:13 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,18 @@ typedef struct		s_op
 	_Bool		i_dont_know5;
 }				t_op;
 
+union			u_val
+{
+	uint8_t		arr[sizeof(uint64_t)];
+	uint64_t	val;
+}
+
+struct			s_parameter
+{
+	uint8_t		param_type;
+	u_val		param_val; // TODO: discuss what size to make val
+};
+
 extern struct s_flag	g_flags;
 extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
@@ -138,9 +150,15 @@ int					move_one(struct s_game *game, struct s_process *process);
 int					live(struct s_game *game, struct s_process *process);
 
 /*
-** parse_parameters
+** /operations/parse_parameters
 */
 int					parse_parameters(struct s_process *process,
 						union u_parameter *parameters);
+
+/*
+** /operations/validate_parameters
+*/
+char				parse_and_validate_parameters(struct s_process *process,
+						struct s_parameter *params)
 
 #endif
