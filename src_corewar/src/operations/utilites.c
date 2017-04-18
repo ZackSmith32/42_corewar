@@ -15,7 +15,6 @@
 int			move_one(struct s_game *game, struct s_process *process)
 {
 	move_pc(game->arena, &process->pc, 1);
-	ft_printf("moving one\n");
 	return (0);
 }
 

@@ -20,7 +20,7 @@ void		print_process(uint8_t *arena, struct s_process *process)
 	ft_printf("   pc: %zu\n", (size_t)(process->pc - arena));
 	ft_printf("   countdown: %u\n", process->countdown);
 	ft_printf("   op_code: %u\n", process->op_code);
-	ft_printf("   caled_live: %u\n", process->called_live);
+	ft_printf("   called_live: %u\n", process->called_live);
 	i = 0;
 	while (i < REG_NUMBER)
 	{
@@ -46,10 +46,13 @@ void		print_processes(uint8_t *arena, t_list *processes)
 
 int				game_print(struct s_game *game)
 {
-	print_hex(game->arena, MEM_SIZE / 16);
-	ft_putchar('\n');
-	print_processes(game->arena, game->processes);
-	ft_putchar('\n');
-	ft_printf("current_cycles: %u\n", game->current_cycles);
+	if (g_flags.list & FLAG_V)
+	{
+		print_hex(game->arena, MEM_SIZE);
+		ft_putchar('\n');
+		print_processes(game->arena, game->processes);
+		ft_putchar('\n');
+		ft_printf("current_cycles: %u\n", game->current_cycles);
+	}
 	return (0);
 }

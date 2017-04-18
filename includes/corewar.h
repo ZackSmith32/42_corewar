@@ -103,6 +103,10 @@ extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
 
+/*
+** FLAG_V: debug output
+*/
+
 # define	VALID_FLAGS	"dnpsvf"
 # define	NFLAGS		6
 # define	FLAG_V		0x1
