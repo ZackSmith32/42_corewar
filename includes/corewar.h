@@ -121,6 +121,15 @@ extern int32_t			g_error;
 int					flags_get(char ***av, char **champ);
 
 /*
+** flags_tags.c
+*/
+int					flag_d(char ***av, char **champ);
+int					flag_n(char ***av, char **champ);
+int					flag_p(char ***av, char **champ);
+int					flag_s(char ***av, char **champ);
+int					flag_v(char ***av, char **champ);
+
+/*
 ** game_init.c
 */
 int					game_init(char **champs, struct s_game *game);
