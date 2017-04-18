@@ -39,14 +39,15 @@ uint8_t		*mask_pc(uint8_t *ptr, size_t offset)
 	return (g_first_mem_slot + wrap);
 }
 
-/*
-**	TODO : we need a ft_memmove_core where the src is masked.
-
-uint8_t		*ft_memmove_core(uint8_t src, uint8_t dst, size_t size)
+uint8_t		*ft_memmove_core(uint8_t arena, uint8_t src,
+													uint8_t dst, size_t size)
 {
-
+	while (size)
+	{
+		size--;
+		*mask_pc(dst, arena, size) = *mask_pc(src, arena, size);
+	}
 }
-*/
 /*
 **	returns a copy of input with reversed bytes
 */
