@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 20:52:58 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 21:53:44 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static const char	*g_error_message[] =
 {
-	"Writing output program to %s.cor",
-	"error allocating memory",
-	"error opening file",
-	"error reading or closing file",
-	"Syntax error at token [%s][%03d:%03d] %s"
+	"Writing output program to %s\n",
+	"error allocating memory\n",
+	"error opening file\n",
+	"error reading or closing file\n",
+	"Syntax error at token [%s][%03d:%03d] %s\n"
 };
 
 static int	find_position(char *file, char *cursor, int *col)
@@ -50,9 +50,7 @@ int	asm_error(t_asm *master, int ern)
 	if (ern > 0)
 		ft_dprintf(2, g_error_message[ern], "TOKEN", row, col, "token"); 
 	else
-		ft_dprintf(1, g_error_message[ern], ); 
+		ft_dprintf(1, g_error_message[ern], master->name); 
 	ft_memdel(&master->file.arr);
-	if (fd != 0)
-		close(fd);
 	return(ern);
 }

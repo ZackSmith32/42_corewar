@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 21:20:50 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 21:51:23 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,24 @@ static int	read_file(char *name, t_vec *file)
 static int	write_file(char *name, t_asm *master)
 {
 	char	*end;
+	size_t	dist;
+/*	int		fd;*/
 
-	end = ft_strrchr(name);
+	dist = 0;
+	ft_printf("Trying to rename name\n");///
+	if ((end = ft_strrchr(name, '.')))
+		dist = end - name;
+	if (!(master->name = ft_strndup(name, dist + 4)))
+		return (1);
+	ft_memmove(master->name + dist, ".cor", 4);
+	return (0);
+/*	if ((fd = open(master->name*/
 }
 
 int	main(int argc, char **argv)
 {
 	t_asm			master;
 	int				ern;
-	int				fd;
 
 	if (argc != 2)
 		return (ft_printf("Usage:./asm champion.s\n"));

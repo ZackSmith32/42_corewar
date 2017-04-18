@@ -6,9 +6,11 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 21:04:17 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 21:52:29 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <asm.h>
 
 int	read_name(t_asm *master)
 {
@@ -19,11 +21,12 @@ int	read_name(t_asm *master)
 
 int	read_header(t_asm *master)
 {
+	int	ern;
 /*	size_t	len;*/
 
 	master->header.magic = flip_uint32(COREWAR_EXEC_MAGIC);
-	if ((g_error = read_name(master)) != 0)
-		return (g_error);
+	if ((ern = read_name(master)) != 0)
+		return (ern);
 /*	end = ft_memccpy(m->header.prog_name, m->file.arr, '"', PROG_NAME_LENGTH);
 	if (end)
 		*(((char*)end) - 1) = 0;*/

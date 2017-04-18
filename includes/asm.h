@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 21:16:43 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 21:50:53 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ char	*next_token(char *cp);
 /*
 ** read_header.c
 */
-int	read_name(t_asm *master)
-int	read_header(t_asm *master)
+int	read_name(t_asm *master);
+int	read_header(t_asm *master);
 #endif
