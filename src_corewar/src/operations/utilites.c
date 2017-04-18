@@ -28,15 +28,15 @@ void		move_pc(uint8_t *arena, uint8_t **pc, int move)
 		*pc -= MEM_SIZE;
 }
 
-uint8_t		*mask_pc(uint8_t *ptr, size_t offset)
+uint8_t		*mask_pc(uint8_t *ptr, uint8_t *arena, size_t offset)
 {
 	uint8_t		*wrap;
 
 	offset = offset % MEM_SIZE;
-	if (ptr - g_first_mem_slot + offset < MEM_SIZE)
+	if (ptr - arena + offset < MEM_SIZE)
 		return (ptr + offset);
-	wrap = ((ptr + offset) - g_first_mem_slot) % MEM_SIZE;
-	return (g_first_mem_slot + wrap);
+	wrap = ((ptr + offset) - arena) % MEM_SIZE;
+	return (arena + wrap);
 }
 
 /*
@@ -46,6 +46,8 @@ uint8_t		*ft_memmove_core(uint8_t src, uint8_t dst, size_t size)
 {
 
 }
+
+
 */
 /*
 **	returns a copy of input with reversed bytes

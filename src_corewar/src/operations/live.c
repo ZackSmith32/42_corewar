@@ -34,11 +34,12 @@ int		live(struct s_game *game, struct s_process *process)
 }
 
 /*
-**	TODO : store everything in big endian, convert when necessary
+**	TODO : x store everything in big endian, convert when necessary
 **		 : x !! change what is being stored for indirect
 **		 : x registers are big endian : because it's more right
 **		 : test what happens when the register is over written with an incorrect
 **		 	value
+**			> depending on this we may be able to get rid of byte count
 **		 : x do we need the union? a: yes.  storing register, not what is in the register
 **		 : what about negative numbers?
 */
@@ -50,7 +51,7 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 	uint16_t			ind_offset;
 	uint8_t				reg;
 
-	if (-1 == parse_and_validate_parameters(process, params, &byte_offset))
+	if (-1 == parse_and_validate_parameters(game, process, params, &byte_offset))
 		return (-1);
 	if (params[1].param_val.val < REG_NUMBER) //  should it be '<=' ?
 		reg = params[1].param_val.val;
