@@ -40,12 +40,12 @@ int		live(struct s_game *game, struct s_process *process)
 int		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc]; // parse params doens't know how many params to get don't want to error out.
-	uint8_t				byte_index;
+	uint8_t				byte_offset;
 	uint64_t			number_to_store;
 
-	byte_index = 0;
+	byte_offset = 0;
 
-	if (-1 == parse_and_validate_parameters(process, params, &byte_index))
+	if (-1 == parse_and_validate_parameters(process, params, &byte_offset))
 		return (-1);
 
 	number_to_store = params[0].param_val.val % IDX_MOD;
