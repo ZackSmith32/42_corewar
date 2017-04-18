@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/17 22:27:49 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 23:11:04 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ int		live(struct s_game *game, struct s_process *process)
 }
 
 /*
-**	TODO : 
+**	TODO : !! change what is being stored for indirect
 **		 : registers are little endian?
 **		 : test what happens when the register is over written with an incorrect
 **		 	value
+**		 : do we need the union? a: yes.  storing register, not what is in the register
 */
 
-int		ld(struct s_game *game, struct s_process *process)
+int8_t		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc]; // parse params doens't know how many params to get don't want to error out.
 	uint8_t				byte_offset;
@@ -64,6 +65,22 @@ int		ld(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
+int8_t		st(struct s_game *game, struct s_process *process)
+{
+	struct s_parameter	params[g_op_tab[3].argc]; 
+	uint8_t				byte_offset;
+	uint64_t			number_to_store;
+
+	byte_offset = 0;
+
+	if (-1 == parse_and_validate_parameters(process, params, &byte_offset))
+		return (-1);
+	if (params[1].params_type == T_REG)
+		process->registors[params[1].param_val.vall] = params[1].param_val.val;
+	if (params[1].params_type == T_IND)
+		
+
+}
 
 
 

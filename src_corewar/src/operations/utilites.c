@@ -27,3 +27,13 @@ void		move_pc(uint8_t *arena, uint8_t **pc, int move)
 	else if (*pc > arena + MEM_SIZE)
 		*pc -= MEM_SIZE;
 }
+
+uint8_t		*mask_pc(uint8_t *ptr, size_t offset)
+{
+	uint8_t		*wrap;
+
+	if (ptr - g_first_mem_slot + offset < MEM_SIZE)
+		return (ptr + offset);
+	wrap = (ptr - g_ptr_first_mem_slot) % MEM_SIZE;
+	return (ptr + wrap);
+}

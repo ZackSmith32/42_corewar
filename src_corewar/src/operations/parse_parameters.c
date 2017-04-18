@@ -22,7 +22,7 @@ void	read_vm(uint8_t *ptr, size_t size, uint8_t *ret)
 	while (end > 0)
 	{
 		end--;
-		ret[start] = ptr[end];
+		ret[start] = mask_pc(ptr, end);
 		start++;
 	}
 }

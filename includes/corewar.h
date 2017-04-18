@@ -104,7 +104,7 @@ extern struct s_flag	g_flags;
 extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
-
+extern uint8_t			*g_ptr_first;
 
 
 /*
@@ -160,11 +160,16 @@ void				free_game(struct s_game *game);
 
 
 /*
-** operations/
+** operations/utilities
 */
 //TODO: what's the max move size?
 void				move_pc(uint8_t *arena, uint8_t **pc, int move);
 int					move_one(struct s_game *game, struct s_process *process);
+uint8_t				*mask_pc(uint8_t *ptr, size_t offset);
+
+/*
+** /operations/live
+*/
 int					live(struct s_game *game, struct s_process *process);
 
 /*
