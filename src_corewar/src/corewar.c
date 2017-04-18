@@ -28,7 +28,7 @@ struct s_flag			g_flags;
 static char const	*g_error_msg[] = {
 	"no error",
 	"generic error",
-	"file format issue"
+	"file format issue",
 	"flag format issue"
 };
 
@@ -44,7 +44,7 @@ static void			handle_error(struct s_game *game)
 	exit(1);
 }
 
-//hack
+/*
 int					flags_get(int *ac, char ***av, char **champ)
 {
 	(void)(ac);
@@ -52,6 +52,7 @@ int					flags_get(int *ac, char ***av, char **champ)
 	champ[1] = NULL;
 	return (0);
 }
+*/
 
 int					main(int argc, char **argv)
 {
@@ -61,7 +62,8 @@ int					main(int argc, char **argv)
 	size_t	i;
 
 	i = 15;
-	if (-1 == flags_get(&argc, &argv, champions))
+	(void)argc;
+	if (-1 == flags_get(&argv, champions))
 	{
 		handle_error(NULL);
 	}

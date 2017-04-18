@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/15 20:24:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 18:35:57 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct					s_flag
 	unsigned int		cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
+	_Bool				flag_test;
 };
 
 /*
@@ -85,13 +86,25 @@ typedef struct		s_op
 	_Bool		i_dont_know5;
 }				t_op;
 
+union			u_val
+{
+	uint8_t		arr[sizeof(uint64_t)];
+	uint64_t	val;
+};
+
+struct				s_parameter
+{
+	uint8_t			param_type;
+	union u_val		param_val; // TODO: discuss what size to make val
+};
+
 extern struct s_flag	g_flags;
 extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
 
-# define	VALID_FLAGS	"dnpsv"
-# define	NFLAGS		5
+# define	VALID_FLAGS	"dnpsvf"
+# define	NFLAGS		6
 # define	FLAG_V		0x1
 # define	FLAG_N		0x2
 # define	FLAG_D		0x4
@@ -105,7 +118,16 @@ extern int32_t			g_error;
 /*
 ** flags_get.c
 */
-int					flags_get(int *ac, char ***av, char **champ);
+int					flags_get(char ***av, char **champ);
+
+/*
+** flags_tags.c
+*/
+int					flag_d(char ***av, char **champ);
+int					flag_n(char ***av, char **champ);
+int					flag_p(char ***av, char **champ);
+int					flag_s(char ***av, char **champ);
+int					flag_v(char ***av, char **champ);
 
 /*
 ** game_init.c
@@ -137,5 +159,15 @@ void				move_pc(uint8_t *arena, uint8_t **pc, int move);
 int					move_one(struct s_game *game, struct s_process *process);
 int					live(struct s_game *game, struct s_process *process);
 
+/*
+** /operations/parse_parameters
+*/
+int			parse_parameters(struct s_process *process,
+				struct s_parameter *params, uint8_t *byte_index);
 
+/*
+** /operations/validate_parameters
+*/
+char		parse_and_validate_parameters(struct s_process *process,
+				struct s_parameter *params, uint8_t *byte_index);
 #endif
