@@ -63,7 +63,7 @@ static int	add_process(t_list **processes, void *pc, unsigned short live)
 	p->registors[0] = live;
 	p->pc = pc;
 	p->countdown = 1;
-	lstadd(processes, lstnew((void*)p));
+	lstpush(processes, lstnew((void*)p));
 	return (0);
 }
 

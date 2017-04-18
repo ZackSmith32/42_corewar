@@ -16,8 +16,9 @@
 #include <libft.h>
 #include <unistd.h>
 
-//TODO: priotity one: get everything to compile
+//TODO: what's the maximum champion size?
 //TODO: what's up with t_op? Figure out what is inside of t_op
+//TODO: if no player ever calls live who wins?
 
 //NOTE: program breaks after first loop
 //NOTE: bypassed flags_get with function below, flags_get isnt in the makefile for the moment as it does not compile
@@ -42,16 +43,6 @@ static void			handle_error(struct s_game *game)
 	}
 	exit(1);
 }
-
-/*
-int					flags_get(int *ac, char ***av, char **champ)
-{
-	(void)(ac);
-	champ[0] = (*av)[1];
-	champ[1] = NULL;
-	return (0);
-}
-*/
 
 int					main(int argc, char **argv)
 {

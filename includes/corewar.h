@@ -30,7 +30,7 @@ struct				s_champ
   	char			comment[COMMENT_LENGTH + 1];
 };
 
-struct					s_flag
+struct				s_flag
 {
 	int16_t				list; //bit list
 	unsigned int		cycle_intervals_to_dump; // -option s
@@ -86,10 +86,12 @@ typedef struct		s_op
 	_Bool		i_dont_know5;
 }				t_op;
 
-union			u_val
+typedef uint64_t		op_arg_t;
+
+union				u_val
 {
-	uint8_t		arr[sizeof(uint64_t)];
-	uint64_t	val;
+	uint8_t		arr[sizeof(op_arg_t)];
+	op_arg_t	val;
 };
 
 struct				s_parameter
@@ -102,6 +104,12 @@ extern struct s_flag	g_flags;
 extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
+
+
+
+/*
+** FLAG_V: debug output
+*/
 
 # define	VALID_FLAGS	"dnpsvf"
 # define	NFLAGS		6
@@ -163,11 +171,11 @@ int					live(struct s_game *game, struct s_process *process);
 ** /operations/parse_parameters
 */
 int			parse_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_index);
+				struct s_parameter *params, uint8_t *byte_offset);
 
 /*
 ** /operations/validate_parameters
 */
 char		parse_and_validate_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_index);
+				struct s_parameter *params, uint8_t *byte_offset);
 #endif

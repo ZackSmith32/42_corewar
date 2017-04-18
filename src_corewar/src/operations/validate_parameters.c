@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   live.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
+/*   Updated: 2017/04/17 20:13:15 by zsmith           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <corewar.h>
 
@@ -29,26 +39,27 @@ int				check_param_type(t_op op, char parameter_encoding)
 	i = 0;
 	while (i < op.argc)
 	{
-		if ((parameter_encoding & 0xc0) == 0x40)
+		if (((parameter_encoding & 0xc0) >> 6 )== REG_CODE)
 			flag = T_REG;
-		else if ((parameter_encoding & 0xc0) == 0x80)
+		else if (((parameter_encoding & 0xc0) >> 6) == DIR_CODE)
 			flag = T_DIR;
-		else if ((parameter_encoding & 0xc0) == 0xc0)
+		else if (((parameter_encoding & 0xc0) >> 6) == IND_CODE)
 			flag = T_IND;
 		if ((flag & op.arg_type[i]) == 0)
 			return (-1);
+		parameter_encoding = parameter_encoding << 2;
 		i++;
 	}
 	return (0);
 }
 
 char		parse_and_validate_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_index)
+				struct s_parameter *params, uint8_t *byte_offset)
 {
 	if (-1 == check_param_count(g_op_tab[process->op_code], *((process->pc) + 1)))
 		return (-1);
 	if (-1 == check_param_type(g_op_tab[process->op_code], *((process->pc) + 1)))
 		return (-1);
-	parse_parameters(process, params, byte_index);
+	parse_parameters(process, params, byte_offset);
 	return (0);
 }

@@ -26,30 +26,34 @@ void	read_vm(uint8_t *ptr, size_t size, uint8_t *ret)
 		start++;
 	}
 }
-
+/*
+**	TODO: make sure to accound for functions taht wrap around memory
+**
+*/
 void		get_param_value(uint8_t parameter_type, uint8_t *ptr,
-				struct s_parameter *parameter, uint8_t *byte_index)
+				struct s_parameter *parameter, uint8_t *byte_offset)
 {
 	uint8_t			ind_offset[IND_SIZE];
 
-	if ((parameter_type & 0xc0) == 0x40)
+	parameter_type = (parameter_type & 0xc0) >> 6;
+	if (parameter_type == REG_CODE)
 	{
-		read_vm(ptr + *byte_index, 1, parameter->param_val.arr);
+		read_vm(ptr + *byte_offset, 1, parameter->param_val.arr);
 		parameter->param_type = T_REG;
-		*byte_index += REG_SIZE;
+		*byte_offset += REG_SIZE;
 	}
-	else if ((parameter_type & 0xc0) == 0x80)
+	else if (parameter_type == DIR_CODE)
 	{
-		read_vm(ptr + *byte_index, DIR_SIZE, parameter->param_val.arr);
+		read_vm(ptr + *byte_offset, DIR_SIZE, parameter->param_val.arr);
 		parameter->param_type = T_DIR;
-		*byte_index += REG_SIZE;
+		*byte_offset += REG_SIZE;
 	}
-	else if ((parameter_type & 0xc0) == 0xc0)
+	else if (parameter_type == IND_CODE)
 	{
-		read_vm(ptr + *byte_index, IND_SIZE, ind_offset);
-		read_vm(ptr + *(uint16_t *)ind_offset, REG_SIZE, parameter->param_val.arr);
+		read_vm(ptr + *byte_offset, IND_SIZE, ind_offset);
+		read_vm(ptr + *(op_arg_t *)ind_offset, REG_SIZE, parameter->param_val.arr);
 		parameter->param_type = T_IND;
-		*byte_index += REG_SIZE;
+		*byte_offset += REG_SIZE;
 	}
 }
 
@@ -58,18 +62,18 @@ void		get_param_value(uint8_t parameter_type, uint8_t *ptr,
 **		parameters array
 */
 int			parse_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_index)
+				struct s_parameter *params, uint8_t *byte_offset)
 {
 	uint8_t		parameter_encoding;
 	uint8_t		parameter_index;
 
 	parameter_encoding = *(process->pc + 1);
-	*byte_index = 2;
+	*byte_offset = 2;
 	parameter_index = 0;
 	while (parameter_index < g_op_tab[process->op_code].argc)
 	{
 		get_param_value(parameter_encoding, process->pc,
-			&(params[parameter_index]), byte_index);
+			&(params[parameter_index]), byte_offset);
 		parameter_encoding = parameter_encoding << 2;
 		parameter_index++;
 	}
