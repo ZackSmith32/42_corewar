@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/11 16:06:33 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 14:43:49 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define REG_CODE				1
 # define DIR_CODE				2
 # define IND_CODE				3
-
 
 #define MAX_ARGS_NUMBER			4
 #define MAX_PLAYERS				4

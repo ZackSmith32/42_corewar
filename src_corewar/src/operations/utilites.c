@@ -11,15 +11,19 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include <libft.h>
-#include <op.h>
 
-void		move_pc(uint8_t *arena, void **pc, int move)
+int			move_one(struct s_game *game, struct s_process *process)
+{
+	move_pc(game->arena, &process->pc, 1);
+	return (0);
+}
+
+void		move_pc(uint8_t *arena, uint8_t **pc, int move)
 {
 	move = move % MEM_SIZE;
 	*pc += move;
 	if (*pc < arena)
 		*pc += MEM_SIZE;
-	else if (*pc > arena)
+	else if (*pc > arena + MEM_SIZE)
 		*pc -= MEM_SIZE;
 }

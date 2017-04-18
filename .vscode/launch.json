@@ -6,7 +6,13 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceRoot}/corewar",
-			"args": ["resources/zork.cor"],
+			"args":	[
+						"-f",
+						"-v",
+						"-n", "1", "resources/zork.cor",
+						"-n", "4", "resources/zork.cor",
+			 			"resources/zork.cor"
+					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
 			"environment": [],

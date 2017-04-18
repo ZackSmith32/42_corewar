@@ -16,8 +16,9 @@
 #include <libft.h>
 #include <unistd.h>
 
-//TODO: priotity one: get everything to compile
+//TODO: what's the maximum champion size?
 //TODO: what's up with t_op? Figure out what is inside of t_op
+//TODO: if no player ever calls live who wins?
 
 //NOTE: program breaks after first loop
 //NOTE: bypassed flags_get with function below, flags_get isnt in the makefile for the moment as it does not compile
@@ -27,7 +28,7 @@ struct s_flag			g_flags;
 static char const	*g_error_msg[] = {
 	"no error",
 	"generic error",
-	"file format issue"
+	"file format issue",
 	"flag format issue"
 };
 
@@ -43,21 +44,16 @@ static void			handle_error(struct s_game *game)
 	exit(1);
 }
 
-//hack
-int					flags_get(int *ac, char ***av, char **champ)
-{
-	(void)(ac);
-	champ[0] = (*av)[1];
-	champ[1] = NULL;
-	return (0);
-}
-
 int					main(int argc, char **argv)
 {
 	struct s_game	game;
 	char			*champions[MAX_PLAYERS + 1];
 
-	if (-1 == flags_get(&argc, &argv, champions))
+	size_t	i;
+
+	i = 15;
+	(void)argc;
+	if (-1 == flags_get(&argv, champions))
 	{
 		handle_error(NULL);
 	}
@@ -65,14 +61,18 @@ int					main(int argc, char **argv)
 	{
 		handle_error(&game);
 	}
-	while (game.winner == NULL)
+	while (game.game_over == false)
 	{
-		if (-1 == game_step(&game) || -1 == game_print(&game))
+		if (-1 == game_print(&game) || -1 == game_step(&game))
 		{
 			handle_error(&game);
 		}
-		break ;
+		i--;
+		if (i == 0)
+			break ;
 	}
+	if (-1 == game_print(&game))
+		handle_error(&game);
 	free_game(&game);
 	return (0);
 }
