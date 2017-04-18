@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 21:50:53 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/18 14:02:28 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 # include <corewar.h>
 
-/*#define	END_S2(x) (0xFF & (x >> 8)) | (0xFF00 & (x << 8))
-
-#define	END_S4(x) (0xFF & (x >> 24)) | (0xFF00 & (x >> 8)) | (0xFF0000 & (x << 8)) | (0xFF000000 & (x << 24))
-#define	END_S8(x)*/
+#define OUTPUT	master->output
+#define HEADER	master->header
 
 /*
 ** Command notes:
@@ -33,6 +31,7 @@
 typedef struct	s_asm
 {
 	header_t	header;
+	t_vec		output;
 	t_vec		file;
 	char		*cp;
 	char		*name;
@@ -57,4 +56,11 @@ char	*next_token(char *cp);
 */
 int	read_name(t_asm *master);
 int	read_header(t_asm *master);
+
+/*
+** File parsing operations
+**
+**	Need functions for parsing each command type.
+*/
+
 #endif

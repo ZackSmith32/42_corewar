@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 22:54:46 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/18 14:21:33 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static int	write_file(char *name, t_asm *master)
 	ft_memmove(master->name + dist, ".cor", 4);
 	if ((fd = open(master->name, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR)) == -1)
 		return (2);
-	ern = write(fd, master, sizeof(*master));
+	if ((ern = write(fd, &HEADER, sizeof(HEADER))) != -1)
+		ern = write(fd, OUTPUT.arr, OUTPUT.len * OUTPUT.size);
 	if ((close(fd) == -1) ||  ern == -1)
 		return (ern == -1 ? 5 : 3);
 	return (0);

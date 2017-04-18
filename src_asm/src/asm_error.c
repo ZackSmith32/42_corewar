@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 22:44:15 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/18 14:20:39 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static const char	*g_error_message[] =
 	"error closing file\n",
 	"error reading file\n",
 	"error writing to file\n",
-	"Syntax error at token [%s][%03d:%03d] %s\n"
+	"Syntax error at token [TOKEN][%03d:%03d] %s\n"
+	"Lexical error at [%d:%d]\n"
 };
 
 static int	find_position(char *file, char *cursor, int *col)
@@ -54,7 +55,7 @@ int	asm_error(t_asm *master, int ern)
 	row = find_position((char*)master->file.arr, master->cp, &col);
 	ft_printf("cursor at r:%d c:%d\n", row, col);
 	if (ern > 0)
-		ft_dprintf(2, g_error_message[ern], "TOKEN", row, col, "token"); 
+		ft_dprintf(2, g_error_message[ern], row, col, "token"); 
 	else
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	ft_memdel(&master->file.arr);
