@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/17 20:27:38 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 22:27:49 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ int		live(struct s_game *game, struct s_process *process)
 }
 
 /*
-**	TODO : what register number is the PC? 0?
-**		 : registers are little endian
+**	TODO : 
+**		 : registers are little endian?
+**		 : test what happens when the register is over written with an incorrect
+**		 	value
 */
 
 int		ld(struct s_game *game, struct s_process *process)
@@ -51,7 +53,7 @@ int		ld(struct s_game *game, struct s_process *process)
 
 	number_to_store = params[0].param_val.val % IDX_MOD;
 
-	if (params[1].param_val.val < REG_NUMBER && params[1].param_val.val != 0)
+	if (params[1].param_val.val < REG_NUMBER)
 		ft_memmove(process->registors[params[1].param_val.val], 
 			number_to_store, REG_SIZE);
 	else
