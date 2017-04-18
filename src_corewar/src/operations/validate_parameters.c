@@ -49,6 +49,6 @@ char		parse_and_validate_parameters(struct s_process *process,
 		return (-1);
 	if (-1 == check_param_type(g_op_tab[process->op_code], *((process->pc) + 1)))
 		return (-1);
-	parse_parameters(process, params, byte_count);
+	parse_parameters(process, params, byte_index);
 	return (0);
 }
