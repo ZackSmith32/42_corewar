@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/17 17:28:36 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 17:43:19 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,21 @@ int		live(struct s_game *game, struct s_process *process)
 	process->called_live = true;
 	game->last_live_champ = &game->champs[player_name];
 	move_pc(game->arena, &process->pc, 5);
-	return (1);
+	return (0);
 }
 
 
 
-int		ld(strct game *game, struct s_process *process)
+int		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc]; // parse params doens't know how many params to get don't want to error out.
 
 	if (-1 == parse_and_validate_parameters(process, params))
 		return (-1);
 	
-	ft_memmove(process->registors[(unit_8)args[1]->reg], (uint64)args[0]->val);
+	move_pc(game->arena, &process->pc, 5);
+	return (0);
+	// ft_memmove(process->registors[(unit_8)args[1]->reg], (uint64)args[0]->val);
 }
 
 

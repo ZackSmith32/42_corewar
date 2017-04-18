@@ -21,7 +21,7 @@ int				check_param_count(t_op op, char parameter_encoding)
 **	Validate that the parameter encoding byte matches the parameters that are 
 **		alowed for this operation
 */
-int				check_param_type(t_op op, s_parameter *params)
+int				check_param_type(t_op op, char parameter_encoding)
 {
 	uint8_t		i;
 	uint8_t		flag;
@@ -35,7 +35,7 @@ int				check_param_type(t_op op, s_parameter *params)
 			flag = T_DIR;
 		else if ((parameter_encoding & 0xc0) == 0xc0)
 			flag = T_IND;
-		if ((flag & arg_type[i]) == 0)
+		if ((flag & op.arg_type[i]) == 0)
 			return (-1);
 		i++;
 	}
@@ -48,6 +48,6 @@ char		parse_and_validate_parameters(struct s_process *process, struct s_paramete
 		return (-1);
 	if (-1 == check_param_type(g_op_tab[process->op_code], *((process->pc) + 1)))
 		return (-1);
-	parse_parameters(process, parameters);
-	return (0)
+	parse_parameters(process, params);
+	return (0);
 }

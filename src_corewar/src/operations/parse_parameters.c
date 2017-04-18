@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 15:01:25 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/17 17:09:29 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/17 17:51:38 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,21 @@ void		get_param_value(uint8_t parameter_type, uint8_t *ptr,
 	if ((parameter_type & 0xc0) == 0x40)
 	{
 		read_vm(ptr + *byte_index, 1, parameter->param_val.arr);
-		parameter->parameter_type = T_REG;
-		*byte_index += REG_SIZE
+		parameter->param_type = T_REG;
+		*byte_index += REG_SIZE;
 	}
 	else if ((parameter_type & 0xc0) == 0x80)
 	{
 		read_vm(ptr + *byte_index, DIR_SIZE, parameter->param_val.arr);
-		parameter->parameter_type = T_DIR;
-		*byte_index += REG_SIZE
+		parameter->param_type = T_DIR;
+		*byte_index += REG_SIZE;
 	}
 	else if ((parameter_type & 0xc0) == 0xc0)
 	{
 		read_vm(ptr + *byte_index, IND_SIZE, ind_offset);
 		read_vm(ptr + *(uint16_t *)ind_offset, REG_SIZE, parameter->param_val.arr);
-		parameter->parameter_type = T_IND
-		*byte_index += REG_SIZE
+		parameter->param_type = T_IND;
+		*byte_index += REG_SIZE;
 	}
 }
 
@@ -58,7 +58,7 @@ void		get_param_value(uint8_t parameter_type, uint8_t *ptr,
 **		parameters array
 */
 int			parse_parameters(struct s_process *process,
-				struct s_parameter *parameters)
+				struct s_parameter *params)
 {
 	uint8_t		parameter_encoding;
 	uint8_t		byte_index;
@@ -70,7 +70,7 @@ int			parse_parameters(struct s_process *process,
 	while (parameter_index < g_op_tab[process->op_code].argc)
 	{
 		get_param_value(parameter_encoding, process->pc,
-			&(parameters[parameter_index]), &byte_index);
+			&(params[parameter_index]), &byte_index);
 		parameter_encoding = parameter_encoding << 2;
 		parameter_index++;
 	}

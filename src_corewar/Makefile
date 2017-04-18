@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/02/23 19:31:28 by mburson          ###   ########.fr        #
+#    Updated: 2017/04/17 17:44:45 by zsmith           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRC = \
 		$(addprefix operations/, \
 			utilites.c \
 			live.c \
+			validate_parameters.c \
+			parse_parameters.c \
 		) \
 	) \
 	$(addprefix maxlib/list/, \
