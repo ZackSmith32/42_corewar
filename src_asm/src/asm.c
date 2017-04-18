@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 22:34:43 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 22:54:46 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,5 @@ int	main(int argc, char **argv)
 		return (asm_error(&master, ern));
 	//ft_printf("%s", master.file.arr);///
 	ern = write_file(argv[1], &master);
-	ft_printf("hello\n");
 	return (asm_error(&master, ern));
 }
