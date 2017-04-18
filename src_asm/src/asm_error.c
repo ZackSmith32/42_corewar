@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 22:09:48 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 22:44:15 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,21 @@ static int	find_position(char *file, char *cursor, int *col)
 	char	*next;
 	int		row;
 
-	row = 1;
 	if(!(file))
 		return (0);
 	next = ft_strchr(file, '\n');
+	row = 0;
 	while (next && next < cursor)
 	{
 		file = next;
 		next = ft_strchr(file, '\n');
+		if (next)
+			next++;
+		row++;
 	}
 	if (cursor && file)
-		*col = cursor - file;
-	return (row);
+		*col = (cursor - file) + 1;
+	return (row ? row : 1);
 }
 
 int	asm_error(t_asm *master, int ern)
@@ -47,8 +50,9 @@ int	asm_error(t_asm *master, int ern)
 	int	row;
 	int	col;
 
-	col = 0;
+	col = 1;
 	row = find_position((char*)master->file.arr, master->cp, &col);
+	ft_printf("cursor at r:%d c:%d\n", row, col);
 	if (ern > 0)
 		ft_dprintf(2, g_error_message[ern], "TOKEN", row, col, "token"); 
 	else

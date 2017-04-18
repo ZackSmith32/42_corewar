@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/17 22:15:28 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/17 22:34:43 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	write_file(char *name, t_asm *master)
 	int		ern;
 
 	dist = 0;
-	ft_printf("Trying to rename name\n");///
 	if ((end = ft_strrchr(name, '.')))
 		dist = end - name;
 	if (!(master->name = ft_strndup(name, dist + 4)))
@@ -84,7 +83,8 @@ int	main(int argc, char **argv)
 		return (asm_error(&master, ern));
 	if ((ern = read_header(&master)))
 		return (asm_error(&master, ern));
-//	ft_printf("%s", master.file.arr);///
+	//ft_printf("%s", master.file.arr);///
 	ern = write_file(argv[1], &master);
+	ft_printf("hello\n");
 	return (asm_error(&master, ern));
 }
