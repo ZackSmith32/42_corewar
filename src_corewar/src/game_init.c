@@ -72,11 +72,12 @@ int			game_init(char **champs, struct s_game *game)
 	size_t		offset;
 	size_t		start_loc;
 	int			i;
+	int			j;
 
 	ft_bzero(game, sizeof(*game));
 	champ_count = 0;
 	while (i < MAX_PLAYERS)
-		if (champs[champ_count])
+		if (champs[i])
 			champ_count++;
 	if (champ_count == 0)
 	{
@@ -88,15 +89,20 @@ int			game_init(char **champs, struct s_game *game)
 	game->cycles_to_death = CYCLE_TO_DIE;
 	start_loc = 0;
 	i = 0;
-	while (i < champ_count)
+	j = 0;
+	while (i < MAX_PLAYERS)
 	{
-		if (-1 == load_champion(champs[i],
-								game->arena + start_loc, &(game->champs[i])))
-			return (-1);
-		if (-1 == add_process(&game->processes,
-								game->arena + start_loc, ~(unsigned short)i))
-			return (-1);
+		if (champs[i])
+		{
+			if (-1 == load_champion(champs[j],
+						game->arena + start_loc, &(game->champs[i])))
+				return (-1);
+			if (-1 == add_process(&game->processes,
+						game->arena + start_loc, ~(unsigned short)i))
+				return (-1);
+		}
 		i++;
+		j++;
 		start_loc += offset;
 	}
 	return (0);
