@@ -36,23 +36,27 @@ void		print_processes(uint8_t *arena, t_list *processes)
 	if (!(g_flags.verbosity_level & V_PROCESS))
 		return ;
 	i = 0;
-	ft_putchar('\n');
 	while (processes)
 	{
-		ft_printf("\n\033[%um\033[1mprocess %03zu\033[0m", i % 8 + 30, i);
+		ft_printf("\n\033[%um\033[1mprocess %03zu\033[0m", i % 7 + 31, i);
 		print_process(arena, processes->content);
 		processes = processes->next;
 		i++;
 	}
 }
 
-void		print_game_state(struct s_game game)
+void		print_game_state(struct s_game *game)
 {
 	if (!(g_flags.verbosity_level & V_STATE))
 		return ;
-	ft_printf("\ncycles current/death:%4u/%4u\n  lives:%3u  last live: %s",
-			game.current_cycles, game.cycles_to_death,
-			game.lives, game.last_live_champ->prog_name);
+	ft_printf("\ncycles current/death:%4u/%4u  lives:%3u",
+			game->current_cycles, game->cycles_to_death, game->lives);
+//TODO: game->last_live_champ not stored properly
+	/*
+			(game.last_live_champ) ?
+			game.champs[game->last_live_champ - game->champs].prog_name :
+			NULL);
+			*/
 }
 
 int				game_print(struct s_game *game)
@@ -66,10 +70,10 @@ int				game_print(struct s_game *game)
 			print_hex(game->arena, MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
 		{
-			print_game_state(*game);
+			print_game_state(game);
 			print_processes(game->arena, game->processes);
 		}
-		usleep(500);
+		usleep(100000);
 	}
 	return (0);
 }
