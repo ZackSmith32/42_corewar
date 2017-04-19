@@ -20,12 +20,12 @@
 
 int		live(struct s_game *game, struct s_process *process)
 {
-	uint8_t			*pc;
 	unsigned int	player_name;
 
-	pc = process->pc;
-	player_name = ~(unsigned int)(pc + 1);
-
+	player_name = *mask_ptr(game->arena, process->pc + 1);
+	player_name <<= 16;
+	player_name &= *mask_ptr(game->arena, process->pc + 2);
+	player_name = ~player_name;
 	game->lives++;
 	process->called_live = true;
 	game->last_live_champ = &game->champs[player_name];
@@ -75,6 +75,15 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 }
 */
 
+/*
+int8_t		ld(struct s_game *game, struct s_process *process)
+{
+	struct s_parameter	params[g_op_tab[2].argc];
+
+
+	move_pc(game->arena, &process->pc, calc_offset(params, g_op_tab[3].argc));
+}
+*/
 int8_t		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc]; 
