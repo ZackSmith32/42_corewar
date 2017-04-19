@@ -29,7 +29,8 @@ static char const	*g_error_msg[] = {
 	"no error",
 	"generic error",
 	"file format issue",
-	"flag format issue"
+	"flag format issue",
+	"no champs found"
 };
 
 static void			handle_error(struct s_game *game)
