@@ -74,6 +74,18 @@ struct				s_game
 	unsigned int		lives;
 };
 
+/*
+**	t_op contents:
+**		> short name
+**		> number of args it takes
+**		> array: the args it takes
+**		> number code of operation
+**		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
+**		> long name
+**		> 0: no encoding byte 1: encoding byte
+**		> index flag: (direct and indirect are same size) 0/1
+*/
+
 typedef struct		s_op
 {
 	char		*name_short;
