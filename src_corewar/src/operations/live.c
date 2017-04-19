@@ -79,11 +79,25 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 int8_t		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc];
+	uint16_t			load_me;
+	uint8_t				*ind_ptr;
 
+	if (-1 == parse_and_validate_parameters(game->arena, process, params))
+		return (-1);
+	if (params[0].type == IND)
+		load_me = params[0].val.val % sizeof(load_me);
+	else if (params[0].type == IND)
+	{
+		ind_ptr = mask_ptr(game->arena, process->pc + params[0].val.val);
+
+	}
+	return (-1);
+	process->registors[params[1].val.val] = load_me;
 
 	move_pc(game->arena, &process->pc, calc_offset(params, g_op_tab[3].argc));
 }
 */
+
 int8_t		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc]; 

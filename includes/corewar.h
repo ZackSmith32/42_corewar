@@ -179,8 +179,6 @@ void					move_pc(uint8_t *arena, uint8_t **pc, int move);
 int						move_one(struct s_game *game,
 							struct s_process *process);
 uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
-void					memmove_arena(uint8_t *arena, uint8_t *src,
-							uint8_t *dst, size_t size);
 size_t					sizeof_param(enum e_param_type param_type);
 size_t					calc_offset(struct s_parameter *params, int argc);
 
@@ -195,6 +193,8 @@ int						live(struct s_game *game, struct s_process *process);
 int						parse_parameters(uint8_t *arena,
 							struct s_process *process,
 							struct s_parameter *params);
+void					memmove_arg(uint8_t *arena, uint8_t *src,
+							uint8_t *dst, size_t size);
 
 /*
 ** /operations/validate_parameters

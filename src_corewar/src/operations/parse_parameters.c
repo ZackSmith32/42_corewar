@@ -13,8 +13,8 @@
 #include <corewar.h>
 
 
-static void					memmove_arg(uint8_t *arena, uint8_t *src,
-								uint8_t *dst, size_t size)
+void					memmove_arg(uint8_t *arena, uint8_t *src,
+							uint8_t *dst, size_t size)
 {
 	size_t	i;
 

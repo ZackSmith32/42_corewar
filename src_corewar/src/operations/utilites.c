@@ -33,34 +33,6 @@ uint8_t		*mask_ptr(uint8_t *arena, uint8_t *ptr)
 	return(ptr);
 }
 
-/*
-** could be inproved by checking where/if it wrappes and then calling
-** ft_memmove
-*/
-void		memmove_arena(uint8_t *arena, uint8_t *src,
-													uint8_t *dst, size_t size)
-{
-	size_t	i;
-
-	if (dst > src)
-	{
-		i = 0;
-		while (i)
-		{
-			*mask_ptr(arena, dst + i) = *mask_ptr(arena, src + i);
-			i++;
-		}
-	}
-	else
-	{
-		while (size)
-		{
-			size--;
-			*mask_ptr(arena, dst + size) = *mask_ptr(arena, src + size);
-		}
-	}
-}
-
 size_t						sizeof_param(enum e_param_type param_type)
 {
 	if (param_type == REG)
