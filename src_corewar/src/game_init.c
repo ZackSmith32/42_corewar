@@ -77,8 +77,11 @@ int			game_init(char **champs, struct s_game *game)
 	champ_count = 0;
 	i = 0;
 	while (i < MAX_PLAYERS)
+	{
 		if (champs[i])
 			champ_count++;
+		i++;
+	}
 	if (champ_count == 0)
 	{
 		g_error = 4;
@@ -95,7 +98,7 @@ int			game_init(char **champs, struct s_game *game)
 		if (champs[i])
 		{
 			if (
-				-1 == load_champion(champs[champ_count],
+				-1 == load_champion(champs[i],
 						game->arena + start_loc, &(game->champs[champ_count]))
 				|| -1 == add_process(&game->processes,
 						game->arena + start_loc, ~(unsigned short)champ_count)
