@@ -79,7 +79,7 @@ int8_t		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc]; 
 
-	if (-1 == parse_and_validate_parameters(game, process, params))
+	if (-1 == parse_and_validate_parameters(game->arena, process, params))
 		return (-1);
 	if (params[1].type == REG)
 		process->registors[params[1].val.val] = params[1].val.val;
