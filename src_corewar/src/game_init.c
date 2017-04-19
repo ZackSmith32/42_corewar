@@ -12,6 +12,11 @@
 
 #include <corewar.h>
 
+/*
+** changes endianess of an unsigned in
+** champs are compiled with big endian and this runs in little endian
+*/
+
 static unsigned int		fix_end(unsigned int n)
 {
 	return (
@@ -37,7 +42,8 @@ static int				load_champion(char const *file,
 		return (-1);
 	}
 	header.prog_size = fix_end(header.prog_size);
-	if (-1 == (size = read(fd, loc, header.prog_size))
+	if (header.prog_size > CHAMP_MAX_SIZE
+		|| -1 == (size = read(fd, loc, header.prog_size + 1))
 		|| size != header.prog_size)
 	{
 		g_error = 2;
@@ -50,10 +56,19 @@ static int				load_champion(char const *file,
 	return (0);
 }
 
+/*
+** process.coundown is decremented at the start of each step
+** so it needs to start out at 1
+**
+** process are added to the front of the linked list so that the last process
+** added becomes the first process
+*/
+
 static int				add_process(t_list **processes, void *pc,
 							unsigned short live)
 {
 	struct s_process	*p;
+	t_list				*link;
 
 	if (NULL == (p = (struct s_process*)malloc(sizeof(*p))))
 		return (-1);
@@ -61,7 +76,9 @@ static int				add_process(t_list **processes, void *pc,
 	p->registors[0] = live;
 	p->pc = pc;
 	p->countdown = 1;
-	lstpush(processes, lstnew((void*)p));
+	if (NULL == (link = lstnew((void*)p)))
+		return (-1);
+	lstadd(processes, link);
 	return (0);
 }
 
