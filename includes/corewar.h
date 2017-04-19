@@ -115,7 +115,11 @@ extern int32_t			g_error;
 
 
 /*
-** FLAG_V: debug output
+**	FLAG_V: debug output set
+**	FLAG_N: chamption position set
+**	FLAG_D: dump memory and exit after set cycles
+**	FLAG_S: dump memory after set cycles and repeat
+**	FLAG_P: pretty visual printing
 */
 
 # define	VALID_FLAGS	"dnpsvf"
@@ -158,7 +162,7 @@ int						game_step(struct s_game *game);
 ** game_print/
 */
 int						game_print(struct s_game *game);
-void					print_hex(void *loc, size_t size);
+void					print_hex(void *loc, size_t size, t_list *processes);
 
 /*
 ** free.c
