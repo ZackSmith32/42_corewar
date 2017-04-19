@@ -53,7 +53,7 @@ int					main(int argc, char **argv)
 
 	ft_bzero((void *)&output, sizeof(output));
 	(void)argc;
-	if (-1 == flags_get(&argv, champions))
+	if (-1 == flags_get(argc, &argv, champions))
 	{
 		handle_error(NULL);
 	}
