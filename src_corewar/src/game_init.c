@@ -52,7 +52,6 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 	return (0);
 }
 
-//TODO: init op_code and countdown
 static int	add_process(t_list **processes, void *pc, unsigned short live)
 {
 	struct s_process	*p;
@@ -76,22 +75,34 @@ int			game_init(char **champs, struct s_game *game)
 
 	ft_bzero(game, sizeof(*game));
 	champ_count = 0;
-	while (champs[champ_count])
-		champ_count++;
-	if (champ_count)
-		offset = MEM_SIZE / champ_count;
+	i = 0;
+	while (i < MAX_PLAYERS)
+		if (champs[i])
+			champ_count++;
+	if (champ_count == 0)
+	{
+		g_error = 4;
+		return (-1);
+	}
+	offset = MEM_SIZE / champ_count; 
 	game->champ_count = champ_count;
 	game->cycles_to_death = CYCLE_TO_DIE;
 	start_loc = 0;
 	i = 0;
-	while (i < champ_count)
+	champ_count = 0;
+	while (i < MAX_PLAYERS)
 	{
-		if (-1 == load_champion(champs[i],
-								game->arena + start_loc, &(game->champs[i])))
-			return (-1);
-		if (-1 == add_process(&game->processes,
-								game->arena + start_loc, ~(unsigned short)i))
-			return (-1);
+		if (champs[i])
+		{
+			if (
+				-1 == load_champion(champs[champ_count],
+						game->arena + start_loc, &(game->champs[champ_count]))
+				|| -1 == add_process(&game->processes,
+						game->arena + start_loc, ~(unsigned short)champ_count)
+			)
+				return (-1);
+			champ_count++;
+		}
 		i++;
 		start_loc += offset;
 	}
