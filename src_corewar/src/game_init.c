@@ -17,20 +17,19 @@ static unsigned int		fix_end(unsigned int n)
 	return (
 		((n >> 24) & 0xFF)
 		| ((n >> 8) & 0xFF00)
-		| ((n << 8 ) & 0xFF0000)
-		| (n << 24)
-	);
+		| ((n << 8) & 0xFF0000)
+		| (n << 24));
 }
 
-static int	load_champion(char const *file, void *loc, struct s_champ *champ)
+static int				load_champion(char const *file,
+							void *loc, struct s_champ *champ)
 {
 	header_t	header;
 	int			fd;
 	ssize_t		size;
 
-	if (-1 == (fd = open(file, O_RDONLY)))
-		return (-1);
-	if (-1 == (size = read(fd, &header, sizeof(header))))
+	if (-1 == (fd = open(file, O_RDONLY))
+		|| -1 == (size = read(fd, &header, sizeof(header))))
 		return (-1);
 	if (size != sizeof(header))
 	{
@@ -38,9 +37,8 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 		return (-1);
 	}
 	header.prog_size = fix_end(header.prog_size);
-	if (-1 == (size = read(fd, loc, header.prog_size)))
-		return (-1);
-	if (size != header.prog_size)
+	if (-1 == (size = read(fd, loc, header.prog_size))
+		|| size != header.prog_size)
 	{
 		g_error = 2;
 		return (-1);
@@ -52,7 +50,8 @@ static int	load_champion(char const *file, void *loc, struct s_champ *champ)
 	return (0);
 }
 
-static int	add_process(t_list **processes, void *pc, unsigned short live)
+static int				add_process(t_list **processes, void *pc,
+							unsigned short live)
 {
 	struct s_process	*p;
 
@@ -66,14 +65,39 @@ static int	add_process(t_list **processes, void *pc, unsigned short live)
 	return (0);
 }
 
-int			game_init(char **champs, struct s_game *game)
+static int				add_champs_processes(char **champs, struct s_game *game)
 {
-	int			champ_count;
 	size_t		offset;
-	size_t		start_loc;
+	uint8_t		*start_loc;
+	int			champ_index;
 	int			i;
 
-	ft_bzero(game, sizeof(*game));
+	offset = MEM_SIZE / game->champ_count;
+	start_loc = game->arena;
+	i = 0;
+	champ_index = 0;
+	while (i < MAX_PLAYERS)
+	{
+		if (champs[i])
+		{
+			if (-1 == load_champion(champs[i], start_loc,
+					game->champs + champ_index)
+				|| -1 == add_process(&game->processes, start_loc,
+					~(unsigned short)champ_index))
+				return (-1);
+			champ_index++;
+		}
+		i++;
+		start_loc += offset;
+	}
+	return (0);
+}
+
+int						game_init(char **champs, struct s_game *game)
+{
+	int			champ_count;
+	int			i;
+
 	champ_count = 0;
 	i = 0;
 	while (i < MAX_PLAYERS)
@@ -87,27 +111,10 @@ int			game_init(char **champs, struct s_game *game)
 		g_error = 4;
 		return (-1);
 	}
-	offset = MEM_SIZE / champ_count; 
+	ft_bzero(game, sizeof(*game));
 	game->champ_count = champ_count;
 	game->cycles_to_death = CYCLE_TO_DIE;
-	start_loc = 0;
-	i = 0;
-	champ_count = 0;
-	while (i < MAX_PLAYERS)
-	{
-		if (champs[i])
-		{
-			if (
-				-1 == load_champion(champs[i],
-						game->arena + start_loc, &(game->champs[champ_count]))
-				|| -1 == add_process(&game->processes,
-						game->arena + start_loc, ~(unsigned short)champ_count)
-			)
-				return (-1);
-			champ_count++;
-		}
-		i++;
-		start_loc += offset;
-	}
+	if (-1 == add_champs_processes(champs, game))
+		return (-1);
 	return (0);
 }
