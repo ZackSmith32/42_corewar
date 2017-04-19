@@ -77,7 +77,7 @@ int			flags_get(int ac, char ***av, char **champ)
 	int			(*flag_set[NFLAGS])(char ***av, char **champ);
 
 	if (ac == 1)
-		print_usage();
+		print_usage(**av);
 	fill_flag_set(flag_set);
 	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS + 1);
 	ft_bzero(&g_flags, sizeof(g_flags));
