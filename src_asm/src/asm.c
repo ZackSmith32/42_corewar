@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/18 15:48:35 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 15:08:41 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_printf("Usage:./asm champion.s\n"));
 	ft_bzero(&master, sizeof(master));
-	if ((ern = read_file(argv[1], &master.file)))
+	if ((ern = read_file(argv[1], &master.input.file)))
 		return (asm_error(&master, ern));
 	master.cp = master.file.arr;
 	if ((ern = read_header(&master)))

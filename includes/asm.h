@@ -6,11 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/04/19 13:13:13 by kdavis           ###   ########.fr       */
-=======
-/*   Updated: 2017/04/18 14:02:28 by kdavis           ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2017/04/19 15:58:47 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +28,11 @@
 ** sti: 1st parameter may be indirect or direct, 2nd parameter must be indirect
 */
 
-<<<<<<< HEAD
 
 typedef struct	s_label
 {
 	char		*name;
-	uint32_t	address;
+	union u_val	address;
 }				t_label;
 
 /*
@@ -45,12 +40,14 @@ typedef struct	s_label
 ** position of our parsing in the file.
 **
 ** file:	vector containing the input file as a string
+** labels:	vector containing pointers to the t_label struct
 ** cp:		char pointer to the current position in the file
 */
 
 typedef struct s_reading
 {
 	t_vec		file;
+	t_vec		labels;
 	char		*cp;
 }				t_reading;
 
@@ -69,14 +66,6 @@ typedef struct	s_asm
 	header_t	header;
 	t_reading	input;
 	t_vec		output;
-=======
-typedef struct	s_asm
-{
-	header_t	header;
-	t_vec		output;
-	t_vec		file;
-	char		*cp;
->>>>>>> master
 	char		*name;
 }				t_asm;
 
