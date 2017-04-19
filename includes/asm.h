@@ -6,7 +6,11 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/04/19 13:13:13 by kdavis           ###   ########.fr       */
+=======
+/*   Updated: 2017/04/18 14:02:28 by kdavis           ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +32,7 @@
 ** sti: 1st parameter may be indirect or direct, 2nd parameter must be indirect
 */
 
+<<<<<<< HEAD
 
 typedef struct	s_label
 {
@@ -64,6 +69,14 @@ typedef struct	s_asm
 	header_t	header;
 	t_reading	input;
 	t_vec		output;
+=======
+typedef struct	s_asm
+{
+	header_t	header;
+	t_vec		output;
+	t_vec		file;
+	char		*cp;
+>>>>>>> master
 	char		*name;
 }				t_asm;
 

@@ -22,7 +22,7 @@ void	read_vm(uint8_t *ptr, size_t size, uint8_t *ret)
 	while (end > 0)
 	{
 		end--;
-		ret[start] = ptr[end];
+		ret[start] = mask_pc(ptr, end);
 		start++;
 	}
 }
@@ -33,8 +33,6 @@ void	read_vm(uint8_t *ptr, size_t size, uint8_t *ret)
 void		get_param_value(uint8_t parameter_type, uint8_t *ptr,
 				struct s_parameter *parameter, uint8_t *byte_offset)
 {
-	uint8_t			ind_offset[IND_SIZE];
-
 	parameter_type = (parameter_type & 0xc0) >> 6;
 	if (parameter_type == REG_CODE)
 	{
@@ -50,8 +48,8 @@ void		get_param_value(uint8_t parameter_type, uint8_t *ptr,
 	}
 	else if (parameter_type == IND_CODE)
 	{
-		read_vm(ptr + *byte_offset, IND_SIZE, ind_offset);
-		read_vm(ptr + *(op_arg_t *)ind_offset, REG_SIZE, parameter->param_val.arr);
+		read_vm(ptr + *byte_offset, IND_SIZE, parameter->param_val.arr);
+		// read_vm(ptr + *(op_arg_t *)ind_offset, REG_SIZE, parameter->param_val.arr);
 		parameter->param_type = T_IND;
 		*byte_offset += REG_SIZE;
 	}
@@ -67,7 +65,7 @@ int			parse_parameters(struct s_process *process,
 	uint8_t		parameter_encoding;
 	uint8_t		parameter_index;
 
-	parameter_encoding = *(process->pc + 1);
+	parameter_encoding = *(mask_pc(process->pc, 1));
 	*byte_offset = 2;
 	parameter_index = 0;
 	while (parameter_index < g_op_tab[process->op_code].argc)
