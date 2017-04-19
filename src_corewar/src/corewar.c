@@ -48,10 +48,10 @@ int					main(int argc, char **argv)
 {
 	struct s_game	game;
 	char			*champions[MAX_PLAYERS + 1];
-
+	t_strvec		output;
 	size_t	i;
 
-	i = g_flags.cycle_to_dump_exit;
+	ft_bzero((void *)&output, sizeof(output));
 	(void)argc;
 	if (-1 == flags_get(&argv, champions))
 	{
@@ -61,9 +61,10 @@ int					main(int argc, char **argv)
 	{
 		handle_error(&game);
 	}
+	i = g_flags.cycle_to_dump_exit;
 	while (game.game_over == false)
 	{
-		if (-1 == game_print(&game) || -1 == game_step(&game))
+		if (-1 == game_print(&game, &output) || -1 == game_step(&game))
 		{
 			handle_error(&game);
 		}
@@ -71,8 +72,9 @@ int					main(int argc, char **argv)
 		if (i == 1)
 			break ;
 	}
-	if (-1 == game_print(&game))
+	if (-1 == game_print(&game, &output))
 		handle_error(&game);
+	ft_memdel((void *)output.str);
 	free_game(&game);
 	return (0);
 }

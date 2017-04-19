@@ -163,8 +163,12 @@ int						game_step(struct s_game *game);
 /*
 ** game_print/
 */
-int						game_print(struct s_game *game);
-void					print_hex(void *loc, size_t size, t_list *processes);
+char					*ft_strnjoin(char const *s1, char const *s2,
+							size_t s2_len);
+int						ft_jasprintf(t_strvec *ret, const char *format, ...);
+int						game_print(struct s_game *game, t_strvec *out);
+void					print_hex(t_strvec *out, void *loc, size_t size,
+							t_list *processes);
 
 /*
 ** free.c

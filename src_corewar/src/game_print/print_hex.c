@@ -12,7 +12,7 @@
 
 #include <corewar.h>
 
-static void		print_byte_in_hex(uint8_t byte, int pc_num)
+static void		print_byte_in_hex(t_strvec *out, uint8_t byte, int pc_num)
 {
 	uint8_t	c;
 
@@ -21,15 +21,15 @@ static void		print_byte_in_hex(uint8_t byte, int pc_num)
 	byte = byte > 9 ? byte - 10 + 'A': byte + '0';
 	c = c > 9 ? c - 10 + 'A' : c + '0';
 	if (pc_num != -1)
-		ft_printf("\033[%um\033[7m", pc_num % 7 + 31);
+		ft_jasprintf(out, "\033[%um\033[7m", pc_num % 7 + 31);
 	else if (byte != '0' || c != '0')
-		write(1, "\033[36m", 5);
-	write(1, &byte, 1);
-	write(1, &c, 1);
-	write(1, "\033[0m", 4);
+		ft_jasprintf(out, "\033[36m");
+	ft_jasprintf(out, "%c", byte);
+	ft_jasprintf(out, "%c", c);
+	ft_jasprintf(out, "\033[0m ");
 }
 
-void		print_hex(void *loc, size_t size, t_list *processes)
+void		print_hex(t_strvec *out, void *loc, size_t size, t_list *processes)
 {
 	uint8_t	*loc_conv;
 	t_list	*node;
@@ -42,8 +42,7 @@ void		print_hex(void *loc, size_t size, t_list *processes)
 		while (node
 				&& ((struct s_process *)node->content)->pc != loc_conv && ++i)
 			node = node->next;
-		print_byte_in_hex(*loc_conv,(node) ? i : -1);
-		ft_putchar(' ');
+		print_byte_in_hex(out, *loc_conv,(node) ? i : -1);
 		loc_conv++;
 		size--;
 	}
