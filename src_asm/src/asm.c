@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/18 14:21:33 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/18 15:48:35 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&master, sizeof(master));
 	if ((ern = read_file(argv[1], &master.file)))
 		return (asm_error(&master, ern));
+	master.cp = master.file.arr;
 	if ((ern = read_header(&master)))
 		return (asm_error(&master, ern));
 	//ft_printf("%s", master.file.arr);///

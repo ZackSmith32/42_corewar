@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/18 14:33:04 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/18 19:28:58 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 int	read_name(t_asm *master)
 {
-	if (!(master->cp = next_token(master->file.arr)) ||
-			ft_strncmp(master->cp, ".name", 5))
+	size_t	name_len;
+
+	name_len = ft_strlen(NAME_CMD_STRING);
+	if ((next_token(&master->cp) == -1) ||
+			ft_strncmp(master->cp, NAME_CMD_STRING, name_len))
+		return (7);
+	master->cp += name_len;
+	if (next_token(&master->cp))
 		return (7);
 	ft_printf("%.5s\n", master->cp);
 	return (0);

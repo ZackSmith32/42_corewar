@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/18 14:02:28 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/18 20:05:40 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@
 
 /*
 ** sti: 1st parameter may be indirect or direct, 2nd parameter must be indirect
+*/
+
+
+/*
+** header:	header struct comtaining magic, name, prog_size, comment
+** output:	vector containing the byte code array
+** file:	vector containing the input file as a string
+** cp:		char pointer to the current position in the file
+** name:	Name of the output file
 */
 
 typedef struct	s_asm
