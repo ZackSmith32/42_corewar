@@ -51,7 +51,7 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 	uint8_t				reg;
 
 	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, pc_temp, params, &byte_offset))
+	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	if (params[1].param_val.val < REG_NUMBER) //  should it be '<=' ?
 		reg = params[1].param_val.val;
@@ -68,20 +68,21 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 		// ft_memmove_corewar(mask_ptr(process->pc, ind_offset),
 		// 	process->registors[reg], REG_SIZE);
 	}
-	printf("in : ld : move pc forward %d\n", byte_offset);
+	printf("in : ld : move pc forward %d\n", 4);
 	move_pc(game->arena, &process->pc, 5);
 	return (0);
 }
 
 int8_t		st(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[3].argc]; 
+	struct s_parameter	params[g_op_tab[3].argc];
+		uint8_t				*pc_temp;
 	uint8_t				byte_offset;
 	// uint64_t			number_to_store;
 
 	byte_offset = 0;
 
-	if (-1 == parse_and_validate_parameters(game, process, params, &byte_offset))
+	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	if (params[1].param_type == T_REG)
 		process->registors[params[1].param_val.val] = params[1].param_val.val;

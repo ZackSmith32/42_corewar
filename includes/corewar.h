@@ -194,15 +194,15 @@ int						live(struct s_game *game, struct s_process *process);
 /*
 ** /operations/parse_parameters
 */
-int			parse_parameters(struct s_game *game, struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_offset);
+int			parse_parameters(struct s_game *game, struct s_process *process, 
+				struct s_parameter *params,
+				uint8_t **pc_temp);
 void					memmove_arg(uint8_t *arena, uint8_t *src,
 							uint8_t *dst, size_t size);
 
 /*
 ** /operations/validate_parameters
 */
-char		parse_and_validate_parameters(struct s_game *game,
-				uint8_t *params, uint8_t op_code,
-				uint8_t *byte_offset);
+char		parse_and_validate_parameters(struct s_game *game, struct s_process *process,
+				uint8_t **pc_temp, struct s_parameter *params);
 #endif
