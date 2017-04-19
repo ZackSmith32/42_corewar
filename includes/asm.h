@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 13:03:50 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 13:13:13 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct s_reading
 }				t_reading;
 
 /*
+** t_asm is a master struct that holds information that we will need to use throughout
+** 		the program
+**
 ** header:	header struct comtaining magic, name, prog_size, comment
 ** input:	The input file and current reading thread
 ** output:	vector containing the byte code array

@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/13 14:56:21 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 13:47:57 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 **		> number code of operation
 **		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
 **		> long name
-**		> 0/1 : yes/no : carry?? (doesn't match up)
-**		> 0/1
+**		> 0: no encoding byte 1: encoding byte
+**		> index flag: (direct and indirect are same size) 0/1
 */
 
 t_op const	g_op_tab[] =

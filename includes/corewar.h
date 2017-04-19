@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/17 18:35:57 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/19 13:52:01 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct		s_op
 	int			op_code;
 	int			cycles_required;
 	char		*name_long;
-	_Bool		i_dont_know4;
-	_Bool		i_dont_know5;
+	_Bool		encoding_byte;
+	_Bool		index_flag;
 }				t_op;
 
 typedef uint64_t		op_arg_t;
