@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/17 22:28:43 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/18 20:51:06 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ FILES =	asm.c\
 		read_header.c\
 		endian_switch.c\
 		skip_padding.c\
+		op.c\
 
 SRC	= $(addprefix src/, $(FILES))
 OBJ = $(addprefix build/, $(FILES:.c=.o))

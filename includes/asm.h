@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/18 20:05:40 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 13:03:50 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,38 @@
 */
 
 
+typedef struct	s_label
+{
+	char		*name;
+	uint32_t	address;
+}				t_label;
+
 /*
-** header:	header struct comtaining magic, name, prog_size, comment
-** output:	vector containing the byte code array
+** t_reading is a struct that holds the file we are reading as well as the current
+** position of our parsing in the file.
+**
 ** file:	vector containing the input file as a string
 ** cp:		char pointer to the current position in the file
+*/
+
+typedef struct s_reading
+{
+	t_vec		file;
+	char		*cp;
+}				t_reading;
+
+/*
+** header:	header struct comtaining magic, name, prog_size, comment
+** input:	The input file and current reading thread
+** output:	vector containing the byte code array
 ** name:	Name of the output file
 */
 
 typedef struct	s_asm
 {
 	header_t	header;
+	t_reading	input;
 	t_vec		output;
-	t_vec		file;
-	char		*cp;
 	char		*name;
 }				t_asm;
 
