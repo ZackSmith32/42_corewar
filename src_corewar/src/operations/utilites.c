@@ -18,6 +18,7 @@ int			move_one(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
+
 void		move_pc(uint8_t *arena, uint8_t **pc, int move)
 {
 	*pc = mask_ptr(arena, *pc + move);
@@ -33,45 +34,70 @@ uint8_t		*mask_ptr(uint8_t *arena, uint8_t *ptr)
 	return(ptr);
 }
 
-size_t						sizeof_param(enum e_param_type param_type)
-{
-	if (param_type == REG)
-		return (REG_SIZE);
-	if (param_type == DIR)
-		return (DIR_SIZE);
-	if (param_type == IND)
-		return (IND_SIZE);
-	return (NO_PARAM);
-}
-size_t					calc_offset(struct s_parameter *params, int argc)
-{
-	size_t	size;
-
-	size = 2;
-	while (argc)
-	{
-		argc--;
-		size += sizeof_param(params[argc].type);
-	}
-	return (size);
-}
-
-/*
-**	returns a copy of input with reversed bytes
-
-uint8_t		*reverse_bytes(uint8_t *arena, uint8_t *ptr, size_t size)
+void		reverse_bytes(uint8_t *arena, uint8_t *ptr, size_t size)
 {
 	uint8_t		temp[sizeof(op_arg_t)];
 	uint8_t		i;
 
-	ft_memmove_core(arena, ptr, temp, size);
 	i = 0;
 	while (size > 0)
 	{
 		size--;
-		temp[i] = *mask_ptr(arena, ptr, size);
+		temp[i] = *mask_ptr(arena, ptr);
 		i++;
 	}
-	return (temp);
 }
-*/
+
+
+
+uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < size)
+	{
+		norm_ptr[i] = *mask_ptr(arena, &arena_ptr[i]);
+		i++;
+	}
+	return (norm_ptr);
+}
+
+uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < size)
+	{
+		*mask_ptr(arena, &arena_ptr[i]) = norm_ptr[i];
+	}
+	return (arena_ptr);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

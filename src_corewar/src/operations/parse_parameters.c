@@ -12,60 +12,57 @@
 
 #include <corewar.h>
 
-
-void					memmove_arg(uint8_t *arena, uint8_t *src,
-							uint8_t *dst, size_t size)
+/*
+**	TODO : make sure to accound for functions taht wrap around memory
+**		 : change read_vm to ft_memmove_core
+*/
+struct s_parameter	get_param_value(struct s_game *game, uint8_t parameter_type,
+				struct s_process process, uint8_t *byte_offset)
 {
-	size_t	i;
+	struct s_parameter		parameter;
 
-	if (dst > src)
+	if (parameter_type == REG_CODE)
 	{
-		i = 0;
-		while (i)
-		{
-			*(dst + i) = *mask_ptr(arena, src + i);
-			i++;
-		}
+		read_arena(game->arena, process->pc, parameter.param_val.arr, 1);
+		parameter.param_type = T_REG;
+		*byte_offset += 1;
 	}
-	else
+	else if (parameter_type == DIR_CODE)
 	{
-		while (size)
-		{
-			size--;
-			*(dst + size) = *mask_ptr(arena, src + size);
-		}
+		if (g_op_tab[process->op_code].dir_as_ind)
+			read_arena(game->arena, process->pc, parameter.param_val.arr, IND_SIZE);
+		else
+			read_arena(game->arena, process->pc, parameter.param_val.arr, REG_SIZE);
+		parameter.param_type = T_DIR;
+		*byte_offset += REG_SIZE;
 	}
-}
-
-static union u_val		get_param_value(uint8_t *arena, t_param_type type,
-							uint8_t *arg)
-{
-	union u_val		val;
-
-	memmove_arg(arena, arg, val.arr, sizeof_param(type));
-	return (val);
+	else (parameter_type == IND_CODE)
+	{
+		read_arena(game->arena, process->pc, parameter.param_val.arr, IND_SIZE);
+		parameter.param_type = T_IND;
+		*byte_offset += IND_SIZE;
+	}
+	return (parameter);
 }
 
 /*
 **	Itterate through parameter encoding byte, collect corresponding data into
 **		parameters array
 */
-int			parse_parameters(uint8_t *arena, struct s_process *process,
-				struct s_parameter *params)
+int			parse_parameters(struct s_game *game, struct s_process *process,
+				struct s_parameter *params, uint8_t *byte_offset)
 {
 	uint8_t		parameter_encoding;
-	uint8_t		i;
-	uint8_t		*parameter_ptr;
+	uint8_t		parameter_index;
 
-	parameter_encoding = *(mask_ptr(arena, process->pc + 1));
-	parameter_ptr = mask_ptr(arena, process->pc + 1);
-	i = 0;
-	while (i < g_op_tab[process->op_code].argc)
+	parameter_encoding = *(mask_ptr(game->arena, process->pc + 1));
+	*byte_offset = 2;
+	parameter_index = 0;
+	while (parameter_index < g_op_tab[process->op_code].argc)
 	{
-		params[i].type = parameter_encoding >> (6 - (2 * i)) & 0x3;
-		params[i].val = get_param_value(arena, params[i].type, parameter_ptr);
-		parameter_ptr += sizeof_param(params[i].type);
-		i++;
+		params[parameter_index] = get_param_value(game, parameter_encoding, process, byte_offset);
+		parameter_encoding = parameter_encoding << 2;
+		parameter_index++;
 	}
 	return (1);
 }

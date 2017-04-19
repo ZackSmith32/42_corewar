@@ -20,12 +20,12 @@
 
 int		live(struct s_game *game, struct s_process *process)
 {
+	uint8_t			*pc;
 	unsigned int	player_name;
 
-	player_name = *mask_ptr(game->arena, process->pc + 1);
-	player_name <<= 16;
-	player_name &= *mask_ptr(game->arena, process->pc + 2);
-	player_name = ~player_name;
+	pc = process->pc;
+	player_name = ~(unsigned int)(pc + 1);
+
 	game->lives++;
 	process->called_live = true;
 	game->last_live_champ = &game->champs[player_name];
@@ -44,15 +44,14 @@ int		live(struct s_game *game, struct s_process *process)
 **		 : what about negative numbers?
 */
 
-/*
 int8_t		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc]; // parse params doens't know how many params to get don't want to error out.
-	uint8_t				byte_offset;
-	uint16_t			ind_offset;
+	uint8_t				*pc_temp;
 	uint8_t				reg;
 
-	if (-1 == parse_and_validate_parameters(game, process, params, &byte_offset))
+	pc_temp = process->pc;
+	if (-1 == parse_and_validate_parameters(game, pc_temp, params, &byte_offset))
 		return (-1);
 	if (params[1].param_val.val < REG_NUMBER) //  should it be '<=' ?
 		reg = params[1].param_val.val;
@@ -60,54 +59,46 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 		return (-1);
 	if (params[0].param_type == T_DIR)
 	{
-		ft_memmove_core(game->arena, params[0].param_val.arr,
-			process->registors[reg], REG_SIZE);
+		// ft_memmove_corewar(params[0].param_val.arr,
+		// 	process->registors[reg], REG_SIZE);
 	} 
 	else if (params[0].param_type == T_IND)
 	{
-		read_vm(params[0].param_val.val, IND_SIZE, &ind_offset);
-		ft_memmove_core(game->arena, mask_ptr(process->pc, ind_offset), //why is the mask here? memmove already masks
-			process->registors[reg], REG_SIZE);
+		// read_arena(params[0].param_val.val, IND_SIZE, &ind_offset);
+		// ft_memmove_corewar(mask_ptr(process->pc, ind_offset),
+		// 	process->registors[reg], REG_SIZE);
 	}
-	printf("in : ld : move pc forward %d\n", byte_index);
+	printf("in : ld : move pc forward %d\n", byte_offset);
 	move_pc(game->arena, &process->pc, 5);
 	return (0);
 }
-*/
-
-/*
-int8_t		ld(struct s_game *game, struct s_process *process)
-{
-	struct s_parameter	params[g_op_tab[2].argc];
-	uint16_t			load_me;
-	uint8_t				*ind_ptr;
-
-	if (-1 == parse_and_validate_parameters(game->arena, process, params))
-		return (-1);
-	if (params[0].type == IND)
-		load_me = params[0].val.val % sizeof(load_me);
-	else if (params[0].type == IND)
-	{
-		ind_ptr = mask_ptr(game->arena, process->pc + params[0].val.val);
-
-	}
-	return (-1);
-	process->registors[params[1].val.val] = load_me;
-
-	move_pc(game->arena, &process->pc, calc_offset(params, g_op_tab[3].argc));
-}
-*/
 
 int8_t		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc]; 
+	uint8_t				byte_offset;
+	// uint64_t			number_to_store;
 
-	if (-1 == parse_and_validate_parameters(game->arena, process, params))
+	byte_offset = 0;
+
+	if (-1 == parse_and_validate_parameters(game, process, params, &byte_offset))
 		return (-1);
-	if (params[1].type == REG)
-		process->registors[params[1].val.val] = params[1].val.val;
-	if (params[1].type == IND)
-		(void)(NULL); //TODO
-	move_pc(game->arena, &process->pc, calc_offset(params, g_op_tab[3].argc));
+	if (params[1].param_type == T_REG)
+		process->registors[params[1].param_val.val] = params[1].param_val.val;
+	if (params[1].param_type == T_IND)
+		;
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

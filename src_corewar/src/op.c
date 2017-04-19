@@ -21,8 +21,8 @@
 **		> number code of operation
 **		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
 **		> long name
-**		> 0/1 : yes/no : carry?? (doesn't match up)
-**		> 0/1
+**		> includes parameter encoding byte
+**		> directs are treated as IND_SIZE
 */
 
 t_op const	g_op_tab[] =
