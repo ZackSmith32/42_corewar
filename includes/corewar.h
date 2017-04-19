@@ -24,13 +24,13 @@
 # include <errno.h>
 # include <fcntl.h>
 
-struct				s_champ
+struct					s_champ
 {
   	char			prog_name[PROG_NAME_LENGTH + 1];
   	char			comment[COMMENT_LENGTH + 1];
 };
 
-struct				s_flag
+struct					s_flag
 {
 	int16_t				list; //bit list
 	unsigned int		cycle_intervals_to_dump; // -option s
@@ -44,7 +44,7 @@ struct				s_flag
 ** called_live: if the process called the live operation in the last cycle
 */
 
-struct				s_process
+struct					s_process
 {
 	unsigned short	registors[REG_NUMBER];
 	_Bool			carry;
@@ -60,7 +60,7 @@ struct				s_process
 ** check_count: number of checks sense decrementing cycles to die
 */
 
-struct				s_game
+struct					s_game
 {
 	uint8_t				arena[MEM_SIZE];
 	struct s_champ		champs[MAX_PLAYERS];
@@ -74,7 +74,7 @@ struct				s_game
 	unsigned int		lives;
 };
 
-typedef struct		s_op
+typedef struct			s_op
 {
 	char		*name_short;
 	int			argc;
@@ -94,17 +94,24 @@ union				u_val
 	op_arg_t	val;
 };
 
-struct				s_parameter
+typedef enum				e_param_type
 {
-	uint8_t			param_type;
-	union u_val		param_val; // TODO: discuss what size to make val
+	NO_PARAM = 0,
+	REG = REG_CODE,
+	DIR = DIR_CODE,
+	IND = IND_CODE,
+}							t_param_type;
+
+struct					s_parameter
+{
+	t_param_type		type;
+	union u_val			val;
 };
 
 extern struct s_flag	g_flags;
 extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
-extern uint8_t			g_first_mem_slot;
 
 
 /*
@@ -126,63 +133,67 @@ extern uint8_t			g_first_mem_slot;
 /*
 ** flags_get.c
 */
-int					flags_get(char ***av, char **champ);
+int						flags_get(char ***av, char **champ);
 
 /*
 ** flags_tags.c
 */
-int					flag_d(char ***av, char **champ);
-int					flag_n(char ***av, char **champ);
-int					flag_p(char ***av, char **champ);
-int					flag_s(char ***av, char **champ);
-int					flag_v(char ***av, char **champ);
+int						flag_d(char ***av, char **champ);
+int						flag_n(char ***av, char **champ);
+int						flag_p(char ***av, char **champ);
+int						flag_s(char ***av, char **champ);
+int						flag_v(char ***av, char **champ);
 
 /*
 ** game_init.c
 */
-int					game_init(char **champs, struct s_game *game);
+int						game_init(char **champs, struct s_game *game);
 
 /*
 ** game_step/game_step.c
 */
-int					game_step(struct s_game *game);
+int						game_step(struct s_game *game);
 
 /*
 ** game_print/
 */
-int					game_print(struct s_game *game);
-void				print_hex(void *loc, size_t size);
+int						game_print(struct s_game *game);
+void					print_hex(void *loc, size_t size);
 
 /*
 ** free.c
 */
-void				free_game(struct s_game *game);
+void					free_game(struct s_game *game);
 
 
 /*
 ** operations/utilities
 */
-//TODO: what's the max move size?
-void				move_pc(uint8_t *arena, uint8_t **pc, int move);
-int					move_one(struct s_game *game, struct s_process *process);
-uint8_t				*mask_pc(uint8_t *ptr, size_t offset);
-uint8_t				*ft_memmove_core(uint8_t arena, uint8_t *src,
-													uint8_t *dst, size_t size);
+void					move_pc(uint8_t *arena, uint8_t **pc, int move);
+int						move_one(struct s_game *game,
+							struct s_process *process);
+uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
+void					memmove_arena(uint8_t *arena, uint8_t *src,
+							uint8_t *dst, size_t size);
+size_t					sizeof_param(enum e_param_type param_type);
+size_t					calc_offset(struct s_parameter *params, int argc);
 
 /*
 ** /operations/live
 */
-int					live(struct s_game *game, struct s_process *process);
+int						live(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters
 */
-int			parse_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_offset);
+int						parse_parameters(uint8_t *arena,
+							struct s_process *process,
+							struct s_parameter *params);
 
 /*
 ** /operations/validate_parameters
 */
-char		parse_and_validate_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_offset);
+char					parse_and_validate_parameters(uint8_t *arena,
+							struct s_process *process,
+							struct s_parameter *params);
 #endif

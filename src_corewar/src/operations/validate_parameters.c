@@ -53,14 +53,15 @@ int				check_param_type(t_op op, char parameter_encoding)
 	return (0);
 }
 
-char		parse_and_validate_parameters(struct s_game *game,
-				struct s_process *process, struct s_parameter *params,
-				uint8_t *byte_offset)
+char		parse_and_validate_parameters(uint8_t *arena,
+				struct s_process *process, struct s_parameter *params)
 {
-	if (-1 == check_param_count(g_op_tab[process->op_code], *mask_pc(process->pc, 1)))
+	if (-1 == check_param_count(g_op_tab[process->op_code],
+									*mask_ptr(arena, process->pc + 1)))
 		return (-1);
-	if (-1 == check_param_type(g_op_tab[process->op_code], *mask_pc(process->pc, 1)))
+	if (-1 == check_param_type(g_op_tab[process->op_code],
+										*mask_ptr(arena, process->pc + 1)))
 		return (-1);
-	parse_parameters(game, process, params, byte_offset);
+	parse_parameters(arena, process, params);
 	return (0);
 }

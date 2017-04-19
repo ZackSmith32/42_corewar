@@ -44,6 +44,7 @@ int		live(struct s_game *game, struct s_process *process)
 **		 : what about negative numbers?
 */
 
+/*
 int8_t		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc]; // parse params doens't know how many params to get don't want to error out.
@@ -57,48 +58,33 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 		reg = params[1].param_val.val;
 	else
 		return (-1);
-	if (params[0].param_type = T_DIR)
+	if (params[0].param_type == T_DIR)
 	{
-		ft_memmove_corewar(params[0].param_val.arr,
+		ft_memmove_core(game->arena, params[0].param_val.arr,
 			process->registors[reg], REG_SIZE);
 	} 
-	else if (params[0].param_type = T_IND)
+	else if (params[0].param_type == T_IND)
 	{
 		read_vm(params[0].param_val.val, IND_SIZE, &ind_offset);
-		ft_memmove_corewar(mask_pc(process->pc, ind_offset),
+		ft_memmove_core(game->arena, mask_ptr(process->pc, ind_offset), //why is the mask here? memmove already masks
 			process->registors[reg], REG_SIZE);
 	}
 	printf("in : ld : move pc forward %d\n", byte_index);
 	move_pc(game->arena, &process->pc, 5);
 	return (0);
 }
+*/
 
 int8_t		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc]; 
-	uint8_t				byte_offset;
-	uint64_t			number_to_store;
 
-	byte_offset = 0;
-
-	if (-1 == parse_and_validate_parameters(process, params, &byte_offset))
+	if (-1 == parse_and_validate_parameters(game, process, params))
 		return (-1);
-	if (params[1].params_type == T_REG)
-		process->registors[params[1].param_val.vall] = params[1].param_val.val;
-	if (params[1].params_type == T_IND)
-		
-
+	if (params[1].type == REG)
+		process->registors[params[1].val.val] = params[1].val.val;
+	if (params[1].type == IND)
+		(void)(NULL); //TODO
+	move_pc(game->arena, &process->pc, calc_offset(params, g_op_tab[3].argc));
+	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
