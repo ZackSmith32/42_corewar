@@ -28,7 +28,6 @@
 static void				step_processes(struct s_game *game)
 {
 	t_list				*link;
-
 	struct s_process	*p;
 
 	link = game->processes;
@@ -37,11 +36,7 @@ static void				step_processes(struct s_game *game)
 		// operations execute at the end of their last cycle
 		p->countdown--;
 		if (p->countdown == 0)
-		{	
-			//TODO: call function and set pc
-			// get function pointer from global array
-			// assumes adding funciton pointer to g_op_tab
-			// assumes adding op_code to s_process
+		{
 			if (-1 == g_op_pointers[p->op_code](game, p))
 			{
 				move_pc(game->arena, &p->pc, 1);
@@ -55,7 +50,7 @@ static void				step_processes(struct s_game *game)
 	}
 }
 
-static void					kill_processes(t_list **processes)
+static void				kill_processes(t_list **processes)
 {
 	t_list *tail;
 
