@@ -110,7 +110,12 @@ static int				add_champs_processes(char **champs, struct s_game *game)
 	return (0);
 }
 
-int						game_init(char **champs, struct s_game *game)
+/*
+** initalizes the game struct and take as arguments a list of champ files and a
+** pointer to the game that is being initized
+*/
+
+int						init_game_struct(char **champs, struct s_game *game)
 {
 	int			champ_count;
 	int			i;

@@ -14,5 +14,5 @@
 
 void			free_game(struct s_game *game)
 {
-	(void)(game);
+	lstdel(&game->processes, &free);
 }

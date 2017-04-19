@@ -139,7 +139,7 @@ extern int32_t			g_error;
 /*
 ** flags/
 */
-int						flags_get(int ac, char ***av, char **champ);
+int						parse_args(int ac, char ***av, char **champ);
 int						flag_d(char ***av, char **champ);
 int						flag_n(char ***av, char **champ);
 int						flag_p(char ***av, char **champ);
@@ -150,7 +150,7 @@ void					print_usage(char *filename);
 /*
 ** game_init.c
 */
-int						game_init(char **champs, struct s_game *game);
+int						init_game_struct(char **champs, struct s_game *game);
 
 /*
 ** game_step/game_step.c

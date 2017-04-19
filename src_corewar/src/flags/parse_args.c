@@ -70,7 +70,7 @@ static void	fill_flag_set(int (*flag_set[NFLAGS])(char ***av, char **champ))
 	flag_set[5] = &flag_f;
 }
 
-int			flags_get(int ac, char ***av, char **champ)
+int			parse_args(int ac, char ***av, char **champ)
 {
 	char		*flags;
 	uintmax_t	func_code;
