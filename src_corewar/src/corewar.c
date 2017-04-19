@@ -21,8 +21,8 @@
 ** TODO: what's up with t_op? Figure out what is inside of t_op
 ** TODO: if no player ever calls live who wins
 ** NOTE: program breaks after first loop
-** NOTE: bypassed parse_args with function below, parse_args isnt in the makefile
-**        for the moment as it does not compile
+** NOTE: bypassed parse_args with function below, parse_args isnt in the
+**        makefile for the moment as it does not compile
 */
 
 int32_t				g_error = 0;
