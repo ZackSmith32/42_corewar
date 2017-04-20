@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 22:25:41 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 22:35:18 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ static int	read_quotes(char *dst, char *src, size_t max_size, int *col)
 
 int	read_commands(header_t *header, char *line, int *col, t_cmdinfo *info)
 {
-	size_t		len;
 	int			ern;
 
-	len = ft_strlen(COMMENT_CMD_STRING);
 	ft_printf("Reading commands:%.6s\n", line);///
 	if (!ft_strncmp(line, COMMENT_CMD_STRING, info->comment_cmd_len))
 	{
