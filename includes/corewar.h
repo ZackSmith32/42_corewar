@@ -175,7 +175,6 @@ void					print_hex(t_strvec *out, void *loc, size_t size,
 */
 void					free_game(struct s_game *game);
 
-
 /*
 ** operations/utilities
 */
@@ -194,6 +193,7 @@ void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 ** /operations/live
 */
 int						live(struct s_game *game, struct s_process *process);
+int		ld(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters

@@ -56,7 +56,7 @@ t_op const	g_op_tab[] =
 int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&move_one,
 	&live,
-	&move_one,
+	&ld,
 	&move_one,
 	&move_one,
 	&move_one,

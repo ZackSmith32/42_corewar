@@ -58,7 +58,7 @@ int		live(struct s_game *game, struct s_process *process)
 */
 
 
-int8_t		ld(struct s_game *game, struct s_process *process)
+int		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc];
 	uint8_t				*pc_temp;
@@ -75,7 +75,8 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 	else if (params[0].param_type == T_IND)
 	{
 		reverse_bytes(params[0].param_val.arr, IND_SIZE, ind_offset.arr);
-		read_arena(game->arena, process->pc + ind_offset.val, (uint8_t *)&process->registors[params[1].param_val.val], REG_SIZE);
+		read_arena(game->arena, process->pc + ind_offset.val, 
+			(uint8_t *)&process->registors[params[1].param_val.val], REG_SIZE);
 	}
 	printf("in : ld : move pc forward %d\n", 4);
 	return (0);
