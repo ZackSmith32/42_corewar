@@ -16,7 +16,7 @@ void				set_parameter(uint8_t *arena, uint8_t **pc_temp,
 						struct s_parameter *parameter, uint8_t size)
 {
 	read_arena(arena, *pc_temp, (*parameter).param_val.arr, size);
-	*pc_temp = mask_ptr(arena, *pc_temp += size);
+	*pc_temp = mask_ptr(read_arena, *pc_temp += size);
 }
 
 struct s_parameter	get_param_value(struct s_game *game, 
