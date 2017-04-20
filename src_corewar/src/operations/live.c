@@ -28,7 +28,8 @@ int		live(struct s_game *game, struct s_process *process)
 
 	game->lives++;
 	process->called_live = true;
-	game->last_live_champ = &game->champs[player_name];
+	if (player_name < game->champ_count)
+		game->last_live_champ = &game->champs[player_name];
 	move_pc(game->arena, &process->pc, 5);
 	return (0);
 }
@@ -54,7 +55,8 @@ int		live(struct s_game *game, struct s_process *process)
 **			operations prototype.  PC += 1
 **		> if register number exceeds max registers, then wait till end of countdown, and 
 **			then move PC to next operation
-**
+**		> registers are zero based, so add a '- 1' when searching for a register index
+**			> this is confirmed by zord which calls r1 for its name.
 */
 
 
@@ -76,7 +78,8 @@ int		ld(struct s_game *game, struct s_process *process)
 	{
 		reverse_bytes(params[0].param_val.arr, IND_SIZE, ind_offset.arr);
 		read_arena(game->arena, process->pc + ind_offset.val, 
-			(uint8_t *)&process->registors[params[1].param_val.val], REG_SIZE);
+			(uint8_t *)&process->registors[params[1].param_val.val - 1],
+			REG_SIZE);
 	}
 	printf("in : ld : move pc forward %d\n", 4);
 	return (0);

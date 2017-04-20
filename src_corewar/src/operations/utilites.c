@@ -47,7 +47,8 @@ void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest)
 	}
 }
 
-uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size)
+uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr,
+				uint8_t *norm_ptr, size_t size)
 {
 	size_t		i;
 
@@ -60,7 +61,8 @@ uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size
 	return (norm_ptr);
 }
 
-uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size)
+uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr,
+				uint8_t *norm_ptr, size_t size)
 {
 	size_t		i;
 
