@@ -25,6 +25,7 @@ int	ft_asprintf(char **ret, const char *format, ...)
 	int			size;
 
 	va_start(ap, format);
+	ft_bzero((void *)&result, sizeof(result));
 	size = ft_vasprintf(&result, format, ap);
 	va_end(ap);
 	if (!(*ret = ft_strndup(result.str, result.len)))

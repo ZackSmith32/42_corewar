@@ -19,9 +19,12 @@ SRC = \
 	$(addprefix src/, \
 		corewar.c \
 		free.c \
-		game_init.c \
-		flags_get.c \
-		flags_tags.c \
+		init_game_struct.c \
+		$(addprefix flags/, \
+			parse_args.c \
+			flags_tags.c \
+			flags_usage.c \
+		) \
 		op.c \
 		$(addprefix game_print/, \
 			game_print.c \

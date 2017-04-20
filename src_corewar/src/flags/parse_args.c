@@ -70,12 +70,14 @@ static void	fill_flag_set(int (*flag_set[NFLAGS])(char ***av, char **champ))
 	flag_set[5] = &flag_f;
 }
 
-int			flags_get(char ***av, char **champ)
+int			parse_args(int ac, char ***av, char **champ)
 {
 	char		*flags;
 	uintmax_t	func_code;
 	int			(*flag_set[NFLAGS])(char ***av, char **champ);
 
+	if (ac == 1)
+		print_usage(**av);
 	fill_flag_set(flag_set);
 	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS + 1);
 	ft_bzero(&g_flags, sizeof(g_flags));

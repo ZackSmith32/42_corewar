@@ -78,6 +78,7 @@ extern int				(*g_farray[15])(t_vdata *, t_pfflag *, t_strvec *);
 */
 
 int						ft_dprintf(int fd, const char *format, ...);
+int						ft_asprintf(char **ret, const char *format, ...);
 int						ft_printf(const char *format, ...);
 int						ft_vasprintf(t_strvec *ret, const char *fm, va_list ap);
 int						ft_vdprintf(int fd, const char *format, va_list ap);

@@ -137,23 +137,20 @@ extern int32_t			g_error;
 # define	MAGIC_NUMBER 0xF383EA00
 
 /*
-** flags_get.c
+** flags/
 */
-int						flags_get(char ***av, char **champ);
-
-/*
-** flags_tags.c
-*/
+int						parse_args(int ac, char ***av, char **champ);
 int						flag_d(char ***av, char **champ);
 int						flag_n(char ***av, char **champ);
 int						flag_p(char ***av, char **champ);
 int						flag_s(char ***av, char **champ);
 int						flag_v(char ***av, char **champ);
+void					print_usage(char *filename);
 
 /*
 ** game_init.c
 */
-int						game_init(char **champs, struct s_game *game);
+int						init_game_struct(char **champs, struct s_game *game);
 
 /*
 ** game_step/game_step.c
@@ -163,8 +160,12 @@ int						game_step(struct s_game *game);
 /*
 ** game_print/
 */
-int						game_print(struct s_game *game);
-void					print_hex(void *loc, size_t size, t_list *processes);
+char					*ft_strnjoin(char const *s1, char const *s2,
+							size_t s2_len);
+int						ft_jasprintf(t_strvec *ret, const char *format, ...);
+int						game_print(struct s_game *game, t_strvec *out);
+void					print_hex(t_strvec *out, void *loc, size_t size,
+							t_list *processes);
 
 /*
 ** free.c

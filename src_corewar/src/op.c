@@ -27,7 +27,7 @@
 
 t_op const	g_op_tab[] =
 {
-	{0, 0, {0}, 0, 1, 0, 0, 0}, //MOVE FORWARD FUNCTION
+	{0, 0, {0}, 0, 1, 0, 0, 0},
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
