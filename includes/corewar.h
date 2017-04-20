@@ -132,15 +132,15 @@ extern int32_t			g_error;
 # define	FLAG_D		0x4
 # define	FLAG_S		0x8
 # define	FLAG_P		0x10
-# define	V_STATE		0x8
-# define	V_PROCESS	0x10
+# define	V_STATE		0x1
+# define	V_PROCESS	0x2
 
 # define	NUMBER_OF_FUNCTIONS 17
 
 # define	MAGIC_NUMBER 0xF383EA00
 
 /*
-** flags/
+** args/
 */
 int						parse_args(int ac, char ***av, char **champ);
 int						flag_d(char ***av, char **champ);

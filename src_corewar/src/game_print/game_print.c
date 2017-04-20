@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
+/*   game_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburson <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/03/04 18:52:04 by mburson          ###   ########.fr       */
+/*   Created: 2017/03/28 23:57:01 by aphan             #+#    #+#             */
+/*   Updated: 2017/03/29 21:09:22 by aphan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_process(t_strvec *out, uint8_t *arena, struct s_process *process)
+void		print_process(t_strvec *out, uint8_t *arena,
+				struct s_process *process)
 {
 	size_t	i;
 
@@ -38,7 +39,8 @@ void		print_processes(t_strvec *out, uint8_t *arena, t_list *processes)
 	i = 0;
 	while (processes)
 	{
-		ft_jasprintf(out, "\n\033[%um\033[1mprocess %03zu\033[0m", i % 7 + 31, i);
+		ft_jasprintf(out, "\n\033[%um\033[1mprocess %03zu\033[0m",
+			i % 7 + 31, i);
 		print_process(out, arena, processes->content);
 		processes = processes->next;
 		i++;
@@ -53,7 +55,7 @@ void		print_game_state(t_strvec *out, struct s_game *game)
 			game->current_cycles, game->cycles_to_death, game->lives);
 }
 
-int	ft_jasprintf(t_strvec *ret, const char *format, ...)
+int			ft_jasprintf(t_strvec *ret, const char *format, ...)
 {
 	va_list		ap;
 	int			size;
@@ -64,14 +66,14 @@ int	ft_jasprintf(t_strvec *ret, const char *format, ...)
 	return (size);
 }
 
-int				game_print(struct s_game *game, t_strvec *out)
+int			game_print(struct s_game *game, t_strvec *out)
 {
 	if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
 			&& (0 == g_flags.cycle_intervals_to_dump
 				|| 0 == game->current_cycles % g_flags.cycle_intervals_to_dump))
 	{
-		ft_bzero(out->str, out->size);
-		ft_jasprintf(out, "\033c");
+		out->len = 0;
+		ft_jasprintf(out, "\033[2J\033[1;1H\n");
 		if (g_flags.list & FLAG_P)
 			print_hex(out, game->arena, MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
@@ -80,7 +82,7 @@ int				game_print(struct s_game *game, t_strvec *out)
 			print_processes(out, game->arena, game->processes);
 		}
 		write(1, out->str, out->len);
-		usleep(500000);
+		usleep(100000);
 	}
 	return (0);
 }
