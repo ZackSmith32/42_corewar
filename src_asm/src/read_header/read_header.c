@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 19:32:48 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 19:36:29 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ char	*skip_whitespace(char *line)
 	return (line);
 }
 
-int	read_command(header_t *header, char *line)
-{
-	static int	name_checked = 0;
-	static int	comment_checked = 0;
-
-	if (ft_strncmp(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
-}
 
 int	read_header(char *file, t_asm *master)
 {

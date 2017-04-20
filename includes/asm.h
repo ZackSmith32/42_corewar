@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 17:58:44 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 19:52:11 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ typedef struct	s_asm
 	int			col;
 }				t_asm;
 
+
+/*
+** src
+*/
+
 int			asm_error(t_asm *master, int ern);
 
 /*
@@ -87,26 +92,18 @@ uint8_t		flip_uint8(uint8_t nbr);
 uint32_t	flip_uint32(uint32_t nbr);
 uint32_t	flip_uint64(uint64_t nbr);
 
+
 /*
-** skip_padding.c
+** line_parsing
 */
+
+char	*skip_whitespaces(char *line);
 char	*next_token(char *cp);
 
 /*
-** read_header.c
+** read_header
 */
-int	read_name(t_asm *master);
-int	read_header(t_asm *master);
+int	read_header(char *file, t_asm *master);
+int	read_commands(header_t *header, char *line);
 
-/*
-** File parsing operations
-**
-**	Need functions for parsing each command type.
-*/
-
-/*
-** Function parsing prototypes
-*/
-
-int	fork_parser(t_reading *input, 
 #endif
