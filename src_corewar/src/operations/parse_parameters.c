@@ -25,6 +25,7 @@ struct s_parameter	get_param_value(struct s_game *game,
 {
 	struct s_parameter		parameter;
 
+	parameter_type = parameter_type >> 6;
 	ft_bzero(&parameter, sizeof(struct s_parameter));
 	if (parameter_type == REG_CODE)
 	{
@@ -57,13 +58,13 @@ int			parse_parameters(struct s_game *game, struct s_process *process,
 	uint8_t		parameter_encoding;
 	uint8_t		parameter_index;
 
-	parameter_encoding = *(mask_ptr(game->arena, *pc_temp + 1));
+		parameter_encoding = *(mask_ptr(game->arena, *pc_temp + 1));
 	*pc_temp = mask_ptr(game->arena, *pc_temp + 2);
 	parameter_index = 0;
 	while (parameter_index < g_op_tab[process->op_code].argc)
 	{
 		params[parameter_index] = 
-			get_param_value(game, process, parameter_encoding, pc_temp);
+			get_param_value(game, process, (parameter_encoding & 0xc0), pc_temp);
 		parameter_encoding = parameter_encoding << 2;
 		parameter_index++;
 	}
