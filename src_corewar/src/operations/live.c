@@ -37,39 +37,48 @@ int		live(struct s_game *game, struct s_process *process)
 **	TODO : x store everything in big endian, convert when necessary
 **		 : x !! change what is being stored for indirect
 **		 : x registers are big endian : because it's more right
-**		 : test what happens when the register is over written with an incorrect
+**		 : x test what happens when the register is over written with an incorrect
 **		 	value
 **			> depending on this we may be able to get rid of byte count
+			> a: if the registers are out of bounds then continue the function as normal, 
+			but don't load anything.  Kinda like if the carry was 1
 **		 : x do we need the union? a: yes.  storing register, not what is in the register
 **		 : what about negative numbers?
+**		 : might need to call parse parameters in step fucntion because if they are not
+**		 	valid then do we still wait for the countdown
 */
+
+/*
+**	Note:
+**		> when parse_and_validate returns -1 that means operation encoding did not match 
+**			operations prototype.  PC += 1
+**		> if register number exceeds max registers, then wait till end of countdown, and 
+**			then move PC to next operation
+**
+*/
+
 
 int8_t		ld(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[2].argc]; // parse params doens't know how many params to get don't want to error out.
+	struct s_parameter	params[g_op_tab[2].argc];
 	uint8_t				*pc_temp;
-	uint8_t				reg;
+	union u_val			ind_offset;
 
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	if (params[1].param_val.val < REG_NUMBER) //  should it be '<=' ?
-		reg = params[1].param_val.val;
-	else
+	process->pc = pc_temp;
+	if (!(params[1].param_val.val < REG_NUMBER))
 		return (-1);
 	if (params[0].param_type == T_DIR)
-	{
-		// ft_memmove_corewar(params[0].param_val.arr,
-		// 	process->registors[reg], REG_SIZE);
-	} 
+		ft_memmove(params[0].param_val.arr, &process->registors[params[1].param_val.val], DIR_SIZE);
 	else if (params[0].param_type == T_IND)
 	{
-		// read_arena(params[0].param_val.val, IND_SIZE, &ind_offset);
-		// ft_memmove_corewar(mask_ptr(process->pc, ind_offset),
-		// 	process->registors[reg], REG_SIZE);
+		reverse_bytes(params[1].param_val.arr, IND_SIZE, ind_offset.arr);
+		ft_memmove(mask_ptr(game->arena, process->pc + ind_offset.val), &process->registors[params[1].param_val.val], REG_SIZE);
 	}
 	printf("in : ld : move pc forward %d\n", 4);
-	move_pc(game->arena, &process->pc, 5);
+	process->pc = pc_temp;
 	return (0);
 }
 

@@ -183,7 +183,7 @@ size_t					sizeof_param(enum e_param_type param_type);
 size_t					calc_offset(struct s_parameter *params, int argc);
 uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
 uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
-void		reverse_bytes(uint8_t *arena, uint8_t *ptr, size_t size);
+void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 
 
 /*

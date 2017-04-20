@@ -34,21 +34,18 @@ uint8_t		*mask_ptr(uint8_t *arena, uint8_t *ptr)
 	return(ptr);
 }
 
-void		reverse_bytes(uint8_t *arena, uint8_t *ptr, size_t size)
+void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest)
 {
-	uint8_t		temp[sizeof(op_arg_t)];
 	uint8_t		i;
 
 	i = 0;
 	while (size > 0)
 	{
 		size--;
-		temp[i] = *mask_ptr(arena, ptr);
+		dest[i] = ptr[size];
 		i++;
 	}
 }
-
-
 
 uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size)
 {
