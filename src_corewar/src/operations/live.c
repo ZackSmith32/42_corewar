@@ -75,7 +75,7 @@ int		ld(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	if (!(params[1].param_val.val < REG_NUMBER))
+	if (-1 == check_registors(process->op_code, params))
 		return (0);
 	if (params[0].param_type == T_DIR)
 		process->registors[params[1].param_val.val] = params[0].param_val.val;
@@ -93,19 +93,19 @@ int		ld(struct s_game *game, struct s_process *process)
 int8_t		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc];
-		uint8_t				*pc_temp;
-	uint8_t				byte_offset;
+	uint8_t				*pc_temp;
 	union u_val			ind_offset;
-	// uint64_t			number_to_store;
 
-	byte_offset = 0;
-
+	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
+	process->pc = pc_temp;
+	if (-1 == check_registors(process->op_code, params))
+		return (0);
 	if (params[1].param_type == T_REG)
 		process->registors[params[1].param_val.val] = 
 			process->registors[params[0].param_val.val];
-	if (params[1].param_type == T_IND)
+	else if (params[1].param_type == T_IND)
 	{
 		reverse_bytes(params[1].param_val.arr, IND_SIZE, ind_offset.arr);
 		write_arena(game->arena, process->pc + ind_offset.val, 
