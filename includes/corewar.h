@@ -44,9 +44,12 @@ struct					s_flag
 ** called_live: if the process called the live operation in the last cycle
 */
 
+// TODO: need to 
+typedef uint32_t		registor_t;
+
 struct					s_process
 {
-	unsigned short	registors[REG_NUMBER];
+	registor_t		registors[REG_NUMBER];
 	_Bool			carry;
 	uint8_t			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
