@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/18 15:51:04 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 17:40:09 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	next_token(char **cp)
 	int		nl;
 
 	tail = *cp;
-	nl = 0;
+	n = 0;
 	while (ft_iswhitespace(*tail) || *tail == '#')
 	{
 		if (*tail == '#')

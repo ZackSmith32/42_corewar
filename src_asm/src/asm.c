@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 15:08:41 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 17:39:44 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 ** 3. Have an array of function pointers for translating individual operations
 */
 
-static int	read_file(char *name, t_vec *file)
+/*static int	read_file(char *name, t_vec *file)
 {
 	char	buf[BUFF_SIZE];
 	ssize_t	ret;
@@ -48,7 +48,7 @@ static int	read_file(char *name, t_vec *file)
 		if (!(ft_grow_vec(file, file->len * file->size + 1)))
 			return (1);
 	return (0);
-}
+}*/
 
 static int	write_file(char *name, t_asm *master)
 {

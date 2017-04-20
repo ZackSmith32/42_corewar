@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 15:58:47 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 17:58:44 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@
 ** sti: 1st parameter may be indirect or direct, 2nd parameter must be indirect
 */
 
+/*
+** t_label holds the name and address of the labels found in the file
+**
+** name:	Name of the label
+** address: Byte address of the label (used for when the label is referenced)
+*/
 
 typedef struct	s_label
 {
 	char		*name;
-	union u_val	address;
+	uint32_t	address;
 }				t_label;
 
 /*
@@ -43,20 +49,20 @@ typedef struct	s_label
 ** labels:	vector containing pointers to the t_label struct
 ** cp:		char pointer to the current position in the file
 */
-
+/*
 typedef struct s_reading
 {
 	t_vec		file;
 	t_vec		labels;
 	char		*cp;
-}				t_reading;
+}				t_reading;*/
 
 /*
 ** t_asm is a master struct that holds information that we will need to use throughout
 ** 		the program
 **
 ** header:	header struct comtaining magic, name, prog_size, comment
-** input:	The input file and current reading thread
+** labels:	list of labels located in the input file
 ** output:	vector containing the byte code array
 ** name:	Name of the output file
 */
@@ -64,9 +70,12 @@ typedef struct s_reading
 typedef struct	s_asm
 {
 	header_t	header;
-	t_reading	input;
+	t_vec		labels;
 	t_vec		output;
 	char		*name;
+	int			fd;
+	int			row;
+	int			col;
 }				t_asm;
 
 int			asm_error(t_asm *master, int ern);
@@ -95,4 +104,9 @@ int	read_header(t_asm *master);
 **	Need functions for parsing each command type.
 */
 
+/*
+** Function parsing prototypes
+*/
+
+int	fork_parser(t_reading *input, 
 #endif

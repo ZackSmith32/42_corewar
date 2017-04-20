@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/17 14:43:49 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/19 19:27:23 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 
 #define LABEL_CHARS				"abcdefghijklmnopqrstuvwxyz_0123456789"
 
+#define COMMAND_CHAR			'.'
 #define NAME_CMD_STRING			".name"
 #define COMMENT_CMD_STRING		".comment"
 
