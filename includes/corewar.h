@@ -82,8 +82,8 @@ typedef struct			s_op
 	int			op_code;
 	int			cycles_required;
 	char		*name_long;
-	_Bool		i_dont_know4;
-	_Bool		i_dont_know5;
+	_Bool		encoding_byte;
+	_Bool		dir_as_ind;
 }				t_op;
 
 typedef uint64_t		op_arg_t;
@@ -104,8 +104,8 @@ typedef enum				e_param_type
 
 struct					s_parameter
 {
-	t_param_type		type;
-	union u_val			val;
+	uint8_t				param_type;
+	union u_val			param_val;
 };
 
 extern struct s_flag	g_flags;
@@ -182,6 +182,10 @@ int						move_one(struct s_game *game,
 uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
 size_t					sizeof_param(enum e_param_type param_type);
 size_t					calc_offset(struct s_parameter *params, int argc);
+uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
+uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
+void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
+
 
 /*
 ** /operations/live
@@ -191,16 +195,15 @@ int						live(struct s_game *game, struct s_process *process);
 /*
 ** /operations/parse_parameters
 */
-int						parse_parameters(uint8_t *arena,
-							struct s_process *process,
-							struct s_parameter *params);
+int			parse_parameters(struct s_game *game, struct s_process *process, 
+				struct s_parameter *params,
+				uint8_t **pc_temp);
 void					memmove_arg(uint8_t *arena, uint8_t *src,
 							uint8_t *dst, size_t size);
 
 /*
 ** /operations/validate_parameters
 */
-char					parse_and_validate_parameters(uint8_t *arena,
-							struct s_process *process,
-							struct s_parameter *params);
+char		parse_and_validate_parameters(struct s_game *game, struct s_process *process,
+				uint8_t **pc_temp, struct s_parameter *params);
 #endif

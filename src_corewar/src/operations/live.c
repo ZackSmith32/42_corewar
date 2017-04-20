@@ -20,12 +20,12 @@
 
 int		live(struct s_game *game, struct s_process *process)
 {
+	uint8_t			*pc;
 	unsigned int	player_name;
 
-	player_name = *mask_ptr(game->arena, process->pc + 1);
-	player_name <<= 16;
-	player_name &= *mask_ptr(game->arena, process->pc + 2);
-	player_name = ~player_name;
+	pc = process->pc;
+	player_name = ~(unsigned int)(pc + 1);
+
 	game->lives++;
 	process->called_live = true;
 	game->last_live_champ = &game->champs[player_name];
@@ -37,77 +37,78 @@ int		live(struct s_game *game, struct s_process *process)
 **	TODO : x store everything in big endian, convert when necessary
 **		 : x !! change what is being stored for indirect
 **		 : x registers are big endian : because it's more right
-**		 : test what happens when the register is over written with an incorrect
+**		 : x test what happens when the register is over written with an incorrect
 **		 	value
 **			> depending on this we may be able to get rid of byte count
+			> a: if the registers are out of bounds then continue the function as normal, 
+			but don't load anything.  Kinda like if the carry was 1
 **		 : x do we need the union? a: yes.  storing register, not what is in the register
 **		 : what about negative numbers?
+**		 : might need to call parse parameters in step fucntion because if they are not
+**		 	valid then do we still wait for the countdown
 */
 
 /*
-int8_t		ld(struct s_game *game, struct s_process *process)
-{
-	struct s_parameter	params[g_op_tab[2].argc]; // parse params doens't know how many params to get don't want to error out.
-	uint8_t				byte_offset;
-	uint16_t			ind_offset;
-	uint8_t				reg;
-
-	if (-1 == parse_and_validate_parameters(game, process, params, &byte_offset))
-		return (-1);
-	if (params[1].param_val.val < REG_NUMBER) //  should it be '<=' ?
-		reg = params[1].param_val.val;
-	else
-		return (-1);
-	if (params[0].param_type == T_DIR)
-	{
-		ft_memmove_core(game->arena, params[0].param_val.arr,
-			process->registors[reg], REG_SIZE);
-	} 
-	else if (params[0].param_type == T_IND)
-	{
-		read_vm(params[0].param_val.val, IND_SIZE, &ind_offset);
-		ft_memmove_core(game->arena, mask_ptr(process->pc, ind_offset), //why is the mask here? memmove already masks
-			process->registors[reg], REG_SIZE);
-	}
-	printf("in : ld : move pc forward %d\n", byte_index);
-	move_pc(game->arena, &process->pc, 5);
-	return (0);
-}
+**	Note:
+**		> when parse_and_validate returns -1 that means operation encoding did not match 
+**			operations prototype.  PC += 1
+**		> if register number exceeds max registers, then wait till end of countdown, and 
+**			then move PC to next operation
+**
 */
 
-/*
+
 int8_t		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[2].argc];
-	uint16_t			load_me;
-	uint8_t				*ind_ptr;
+	uint8_t				*pc_temp;
+	union u_val			ind_offset;
 
-	if (-1 == parse_and_validate_parameters(game->arena, process, params))
+	pc_temp = process->pc;
+	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	if (params[0].type == IND)
-		load_me = params[0].val.val % sizeof(load_me);
-	else if (params[0].type == IND)
+	process->pc = pc_temp;
+	if (!(params[1].param_val.val < REG_NUMBER))
+		return (-1);
+	if (params[0].param_type == T_DIR)
+		ft_memmove(params[0].param_val.arr, &process->registors[params[1].param_val.val], DIR_SIZE);
+	else if (params[0].param_type == T_IND)
 	{
-		ind_ptr = mask_ptr(game->arena, process->pc + params[0].val.val);
-
+		reverse_bytes(params[1].param_val.arr, IND_SIZE, ind_offset.arr);
+		ft_memmove(mask_ptr(game->arena, process->pc + ind_offset.val), &process->registors[params[1].param_val.val], REG_SIZE);
 	}
-	return (-1);
-	process->registors[params[1].val.val] = load_me;
-
-	move_pc(game->arena, &process->pc, calc_offset(params, g_op_tab[3].argc));
+	printf("in : ld : move pc forward %d\n", 4);
+	process->pc = pc_temp;
+	return (0);
 }
-*/
 
 int8_t		st(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[3].argc]; 
+	struct s_parameter	params[g_op_tab[3].argc];
+		uint8_t				*pc_temp;
+	uint8_t				byte_offset;
+	// uint64_t			number_to_store;
 
-	if (-1 == parse_and_validate_parameters(game->arena, process, params))
+	byte_offset = 0;
+
+	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	if (params[1].type == REG)
-		process->registors[params[1].val.val] = params[1].val.val;
-	if (params[1].type == IND)
-		(void)(NULL); //TODO
-	move_pc(game->arena, &process->pc, calc_offset(params, g_op_tab[3].argc));
+	if (params[1].param_type == T_REG)
+		process->registors[params[1].param_val.val] = params[1].param_val.val;
+	if (params[1].param_type == T_IND)
+		;
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
