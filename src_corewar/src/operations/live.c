@@ -69,7 +69,7 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 		return (-1);
 	process->pc = pc_temp;
 	if (!(params[1].param_val.val < REG_NUMBER))
-		return (-1);
+		return (0);
 	if (params[0].param_type == T_DIR)
 		ft_memmove(params[0].param_val.arr, &process->registors[params[1].param_val.val], DIR_SIZE);
 	else if (params[0].param_type == T_IND)
@@ -78,7 +78,6 @@ int8_t		ld(struct s_game *game, struct s_process *process)
 		ft_memmove(mask_ptr(game->arena, process->pc + ind_offset.val), &process->registors[params[1].param_val.val], REG_SIZE);
 	}
 	printf("in : ld : move pc forward %d\n", 4);
-	process->pc = pc_temp;
 	return (0);
 }
 
