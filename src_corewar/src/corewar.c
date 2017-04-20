@@ -70,7 +70,7 @@ int					main(int argc, char **argv)
 	}
 	if (-1 == game_print(&game, &output))
 		handle_error(&game);
-	ft_memdel((void *)output.str);
+	ft_memdel((void *)&output.str);
 	free_game(&game);
 	return (0);
 }

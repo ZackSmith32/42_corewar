@@ -20,10 +20,10 @@ SRC = \
 		corewar.c \
 		free.c \
 		init_game_struct.c \
-		$(addprefix flags/, \
+		$(addprefix args/, \
 			parse_args.c \
 			flags_tags.c \
-			flags_usage.c \
+			print_usage.c \
 		) \
 		op.c \
 		$(addprefix game_print/, \
