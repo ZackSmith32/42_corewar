@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 20:44:46 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 21:18:48 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 	return (0);
 }*/
 
-static int	write_file(char *name, t_asm *master)
+/*static int	write_file(char *name, t_asm *master)
 {
 	char	*end;
 	size_t	dist;
@@ -70,17 +70,18 @@ static int	write_file(char *name, t_asm *master)
 	if ((close(fd) == -1) ||  ern == -1)
 		return (ern == -1 ? 5 : 3);
 	return (0);
-}
+}*/
 
-static int	init_assembler(char *file, t_master *master)
+static int	init_assembler(char *file, t_asm *master)
 {
 	ft_bzero(master, sizeof(*master));
 	master->cmd_info.name_cmd_len = ft_strlen(NAME_CMD_STRING);
 	master->cmd_info.comment_cmd_len = ft_strlen(COMMENT_CMD_STRING);
 	master->row = 1;
 	master->col = 1;
-	if ((master->fd = open(name, O_RDONLY)) == -1)
+	if ((master->fd = open(file, O_RDONLY)) == -1)
 		return (print_error(2, NULL, 0, 0));
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -90,14 +91,14 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_printf("Usage:./asm champion.s\n"));
-	if (ern = init_assembler(&master))
+	if ((ern = init_assembler(argv[1], &master)))
 		return (asm_error(&master, ern));
-	if ((ern = read_file(argv[1], &master.input.file)))
+/*	if ((ern = read_file(argv[1], &master.input.file)))
 		return (asm_error(&master, ern));
-	master.cp = master.file.arr;
+	master.cp = master.file.arr;*/
 	if ((ern = read_header(&master)))
 		return (asm_error(&master, ern));
 	//ft_printf("%s", master.file.arr);///
-	ern = write_file(argv[1], &master);
+/*	ern = write_file(argv[1], &master);*/
 	return (asm_error(&master, ern));
 }

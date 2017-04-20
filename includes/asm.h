@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 20:39:29 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 21:30:16 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ typedef struct	s_label
 	uint32_t	address;
 }				t_label;
 
-typedef struct s_lookup
+typedef struct s_cmdinfo
 {
 	size_t		name_cmd_len;
 	size_t		comment_cmd_len;
 	int			commands_checked;
-}				t_lookup;
+}				t_cmdinfo;
 
 /*
 ** t_asm is a master struct that holds information that we will need to use throughout
@@ -61,7 +61,7 @@ typedef struct s_lookup
 typedef struct	s_asm
 {
 	header_t	header;
-	t_lookup	cmd_info;
+	t_cmdinfo	cmd_info;
 	t_vec		labels;
 	t_vec		output;
 	char		*name;
@@ -72,9 +72,10 @@ typedef struct	s_asm
 
 
 /*
-** src
+** error 
 */
 
+int			print_error(int ern, char *str, int row, int col);
 int			asm_error(t_asm *master, int ern);
 
 /*
@@ -90,12 +91,12 @@ uint32_t	flip_uint64(uint64_t nbr);
 */
 
 char	*skip_whitespaces(char *line);
-char	*next_token(char *cp);
+int		next_token(char **cp);
 
 /*
 ** read_header
 */
-int	read_header(char *file, t_asm *master);
-int	read_commands(header_t *header, char *line);
+int	read_header(t_asm *as);
+int	read_commands(header_t *header, char *line, int *col, t_cmdinfo *info);
 
 #endif

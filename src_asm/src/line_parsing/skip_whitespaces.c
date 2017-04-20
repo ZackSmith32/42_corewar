@@ -6,9 +6,11 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:48:08 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 19:52:58 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 21:14:30 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <asm.h>
 
 /*
 ** return the a pointer to the first non whitespace character

@@ -6,33 +6,35 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/19 20:49:53 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/19 21:24:23 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = asm
+NAME	= asm
 
-MAKE = make
+MAKE	= make
 
-FILES =	asm.c\
-		endian_switch.c\
-		$(addprefix read_header/,\
-			read_header.c\
-			read_commands.c)\
-		$(addprefix line_parsing/,\
-			next_token.c\
-			skip_whitespaces.c)\
-		$(addprefix error/,\
-			asm_error.c)\
-		op.c\
+SUBDIR	=	read_header line_parsing error
+FILES	=	asm.c\
+			endian_switch.c\
+			$(addprefix read_header/,\
+				read_header.c\
+				read_commands.c)\
+			$(addprefix line_parsing/,\
+				next_token.c\
+				skip_whitespaces.c)\
+			$(addprefix error/,\
+				asm_error.c)\
+			op.c\
 
-SRC	= $(addprefix src/, $(FILES))
-OBJ = $(addprefix build/, $(FILES:.c=.o))
-LIB = libft
+SRC		= $(addprefix src/, $(FILES))
+OBJ		= $(addprefix build/, $(FILES:.c=.o))
+OBJDIR	= $(addprefix build/, $(SUBDIR))
+LIB		= libft
 
-IFLAGS = -I libft/includes -I ../includes 
+IFLAGS	= -I libft/includes -I ../includes 
 LFLAGS	= -L $(LIB) -lft
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -fsanitize=address
 
 all: $(NAME)
 
@@ -50,13 +52,14 @@ force:
 
 build:
 	mkdir build/
+	mkdir -p $(OBJDIR)
 
 clean:
-	rm -f build
+	rm -rf build
 	$(MAKE) -C $(LIB) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

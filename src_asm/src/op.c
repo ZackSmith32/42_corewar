@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/19 13:47:57 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 21:31:55 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_op const	g_op_tab[] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
-int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
+/*int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&move_one,
 	&live,
 	&move_one,
@@ -71,4 +71,4 @@ int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&move_one,
 	&move_one,
 	&move_one
-};
+};*/

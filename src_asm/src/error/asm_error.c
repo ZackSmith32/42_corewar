@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 20:49:00 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 21:30:48 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	asm_error(t_asm *master, int ern)
 		ft_dprintf(2, g_error_message[ern], row, col, "token"); */
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 
-	ft_memdel(&master->file.arr);
 	if (ern != 2)
 		close(master->fd);
 	return(ern);

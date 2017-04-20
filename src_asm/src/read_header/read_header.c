@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 20:43:52 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 21:25:50 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	read_header(t_asm *master)
 
 
 
-int	read_header(int fd, t_asm *as)
+int	read_header(t_asm *as)
 {
 	char	*line;
 	char	*cp;
@@ -53,14 +53,14 @@ int	read_header(int fd, t_asm *as)
 
 	while ((ern = get_next_line(as->fd, &line)) > 0)
 	{
-		cp = skip_whitespace(line);
+		cp = skip_whitespaces(line);
 		if (*cp == COMMAND_CHAR)
-			ern = read_command(&as->header, line, &as->col);
+			ern = read_commands(&as->header, line, &as->col, &as->cmd_info);
 		else if (*cp != COMMENT_CHAR && *cp != '\0')
 			ern = -7;
 		ft_strdel(&line);
 		if (ern < 0)
-			return (print_error(-ern, "COMMAND_NAME", as->row, as->col));
+			return (print_error(-ern, "HEADER_ERROR", as->row, as->col));
 		as->row++;
 	}
 	if (ern == -1)
