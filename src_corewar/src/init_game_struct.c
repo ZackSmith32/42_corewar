@@ -76,6 +76,7 @@ static int				add_process(t_list **processes, void *pc,
 	p->registors[0] = live;
 	p->pc = pc;
 	p->countdown = 1;
+	p->op = *pc;
 	if (NULL == (link = lstnew((void*)p)))
 		return (-1);
 	lstadd(processes, link);
