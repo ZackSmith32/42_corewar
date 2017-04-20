@@ -35,6 +35,7 @@ SRC = \
 		) \
 		$(addprefix operations/, \
 			utilites.c \
+			utilities2.c \
 			live.c \
 			validate_parameters.c \
 			parse_parameters.c \

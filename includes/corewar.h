@@ -209,4 +209,9 @@ void					memmove_arg(uint8_t *arena, uint8_t *src,
 */
 char		parse_and_validate_parameters(struct s_game *game, struct s_process *process,
 				uint8_t **pc_temp, struct s_parameter *params);
+
+/*
+** /operations/utilities2
+*/
+int			check_registors(uint8_t op_code, struct s_parameter *params);
 #endif

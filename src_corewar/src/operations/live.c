@@ -35,12 +35,15 @@ int		live(struct s_game *game, struct s_process *process)
 }
 
 /*
-**	TODO : x store everything in big endian, convert when necessary
+**	TODO
+**		 : indirects are variable size... should do a type def for them too?
+**		 : x Need to not set pc in parameter parsing and set it after becaues we 
+		 	are going to need pc
+**		 : x store everything in big endian, convert when necessary
 **		 : x !! change what is being stored for indirect
 **		 : x registers are big endian : because it's more right
 **		 : x test what happens when the register is over written with an incorrect
 **		 	value
-**			> depending on this we may be able to get rid of byte count
 			> a: if the registers are out of bounds then continue the function as normal, 
 			but don't load anything.  Kinda like if the carry was 1
 **		 : x do we need the union? a: yes.  storing register, not what is in the register
@@ -57,6 +60,8 @@ int		live(struct s_game *game, struct s_process *process)
 **			then move PC to next operation
 **		> registers are zero based, so add a '- 1' when searching for a register index
 **			> this is confirmed by zord which calls r1 for its name.
+**		> the "val" in the params is big endian.
+**			> registers are big endian, but since they are 1 byte it don't matter
 */
 
 
@@ -70,7 +75,7 @@ int		ld(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	if (!(params[1].param_val.val < REG_NUMBER))
+	if (-1 == check_registors(process->op_code, params))
 		return (0);
 	if (params[0].param_type == T_DIR)
 		process->registors[params[1].param_val.val] = params[0].param_val.val;
@@ -88,18 +93,24 @@ int		ld(struct s_game *game, struct s_process *process)
 int8_t		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc];
-		uint8_t				*pc_temp;
-	uint8_t				byte_offset;
-	// uint64_t			number_to_store;
+	uint8_t				*pc_temp;
+	union u_val			ind_offset;
 
-	byte_offset = 0;
-
+	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
+	process->pc = pc_temp;
+	if (-1 == check_registors(process->op_code, params))
+		return (0);
 	if (params[1].param_type == T_REG)
-		process->registors[params[1].param_val.val] = params[1].param_val.val;
-	if (params[1].param_type == T_IND)
-		;
+		process->registors[params[1].param_val.val] = 
+			process->registors[params[0].param_val.val];
+	else if (params[1].param_type == T_IND)
+	{
+		reverse_bytes(params[1].param_val.arr, IND_SIZE, ind_offset.arr);
+		write_arena(game->arena, process->pc + ind_offset.val, 
+			(uint8_t *)&process->registors[params[0].param_val.val], REG_SIZE);
+	}
 	return (0);
 }
 
