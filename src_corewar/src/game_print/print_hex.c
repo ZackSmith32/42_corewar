@@ -18,7 +18,7 @@ static void		print_byte_in_hex(t_strvec *out, uint8_t byte, int pc_num)
 
 	c = 0x0F & byte;
 	byte = 0x0F & (byte >> 4);
-	byte = byte > 9 ? byte - 10 + 'A': byte + '0';
+	byte = byte > 9 ? byte - 10 + 'A' : byte + '0';
 	c = c > 9 ? c - 10 + 'A' : c + '0';
 	if (pc_num != -1)
 		ft_jasprintf(out, "\033[%um\033[7m", pc_num % 7 + 31);
@@ -29,11 +29,12 @@ static void		print_byte_in_hex(t_strvec *out, uint8_t byte, int pc_num)
 	ft_jasprintf(out, "\033[0m ");
 }
 
-void		print_hex(t_strvec *out, void *loc, size_t size, t_list *processes)
+void			print_hex(t_strvec *out, void *loc, size_t size,
+					t_list *processes)
 {
 	uint8_t	*loc_conv;
 	t_list	*node;
-	int	i;
+	int		i;
 
 	loc_conv = (uint8_t*)loc;
 	while (size && !(i = 0))
@@ -42,7 +43,7 @@ void		print_hex(t_strvec *out, void *loc, size_t size, t_list *processes)
 		while (node
 				&& ((struct s_process *)node->content)->pc != loc_conv && ++i)
 			node = node->next;
-		print_byte_in_hex(out, *loc_conv,(node) ? i : -1);
+		print_byte_in_hex(out, *loc_conv, (node) ? i : -1);
 		loc_conv++;
 		size--;
 	}
