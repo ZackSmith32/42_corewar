@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 21:30:48 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 22:21:59 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static const char	*g_error_message[] =
 	"error reading file\n",
 	"error writing to file\n",
 	"Syntax error at token [TOKEN][%03d:%03d] %s\n",
-	"Lexical error at [%d:%d]\n"
+	"Lexical error at [%d:%d]\n",
+	"Name is too long\n",
+	"Comment is too long\n",
 };
 /*
 static int	find_position(char *file, char *cursor, int *col)
@@ -65,6 +67,7 @@ int	asm_error(t_asm *master, int ern)
 	ft_printf("cursor at r:%d c:%d\n", row, col, ern);*/
 /*	if (ern > 0)
 		ft_dprintf(2, g_error_message[ern], row, col, "token"); */
+	ft_printf("name:%s\ncomment:%s\n", master->header.prog_name, master->header.comment);
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	if (ern != 2)

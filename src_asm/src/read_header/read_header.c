@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 21:25:50 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 21:59:20 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ int	read_header(t_asm *master)
 	return (0);
 }*/
 
+/*
+** Thought: Read in full file as string, then use strchr in place of get
+** next line for moving through the lines.
+**
+** Pros: It will make name reading much easier
+** Cons: It will probably make later portions tougher
+*/
+
 
 
 int	read_header(t_asm *as)
@@ -55,12 +63,13 @@ int	read_header(t_asm *as)
 	{
 		cp = skip_whitespaces(line);
 		if (*cp == COMMAND_CHAR)
-			ern = read_commands(&as->header, line, &as->col, &as->cmd_info);
+			ern = read_commands(&as->header, cp, &as->col, &as->cmd_info);
 		else if (*cp != COMMENT_CHAR && *cp != '\0')
 			ern = -7;
 		ft_strdel(&line);
 		if (ern < 0)
 			return (print_error(-ern, "HEADER_ERROR", as->row, as->col));
+		as->col = 1;
 		as->row++;
 	}
 	if (ern == -1)
