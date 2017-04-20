@@ -18,9 +18,9 @@ void		print_process(t_strvec *out, uint8_t *arena,
 	size_t	i;
 
 	ft_jasprintf(out, "  carry: %d", (int)process->carry);
-	ft_jasprintf(out, "  pc: %4zu", (size_t)(process->pc - arena));
+	ft_jasprintf(out, "  pc: %3hx", (size_t)(process->pc - arena));
 	ft_jasprintf(out, "  countdown: %04u", process->countdown);
-	ft_jasprintf(out, "  op_code: %02u", process->op_code);
+	ft_jasprintf(out, "  op: %-6s", g_op_tab[process->op_code].name_short);
 	ft_jasprintf(out, "  called_live: %u", process->called_live);
 	i = 0;
 	while (i < REG_NUMBER)
@@ -51,8 +51,12 @@ void		print_game_state(t_strvec *out, struct s_game *game)
 {
 	if (!(g_flags.verbosity_level & V_STATE))
 		return ;
-	ft_jasprintf(out, "\ncycles current/death:%4u/%4u  lives:%3u",
-			game->current_cycles, game->cycles_to_death, game->lives);
+	ft_jasprintf(out,
+			"\ncycles current/death:%4u/%4u  check count/max: %u/%u"
+			"  lives:%3u  last_live_champ: %s",
+			game->current_cycles, game->cycles_to_death,
+			game->check_count, MAX_CHECKS,
+			game->lives, game->last_live_champ->prog_name);
 }
 
 int			ft_jasprintf(t_strvec *ret, const char *format, ...)
@@ -82,7 +86,7 @@ int			game_print(struct s_game *game, t_strvec *out)
 			print_processes(out, game->arena, game->processes);
 		}
 		write(1, out->str, out->len);
-		usleep(100000);
+		usleep(1000000);
 	}
 	return (0);
 }

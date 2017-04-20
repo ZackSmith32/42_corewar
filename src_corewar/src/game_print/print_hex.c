@@ -24,7 +24,7 @@ static void		print_byte_in_hex(t_strvec *out, uint8_t byte, int pc_num)
 	if (pc_num != -1)
 		ft_jasprintf(out, "\033[%u;7m", pc_num % 7 + 31);
 	else if (byte != '0' || c != '0')
-		ft_jasprintf(out, "\033[36m");
+		ft_jasprintf(out, "\033[96m");
 	ft_jasprintf(out, "%c%c\033[0m ", byte, c);
 }
 
@@ -49,5 +49,5 @@ void			print_hex(t_strvec *out, void *loc, size_t size,
 		loc_conv++;
 		size--;
 	}
-	ft_jasprintf(out, "\033[100m  \n%198\033[0m\n");
+	ft_jasprintf(out, "\033[100m  \n%198\033[0m");
 }
