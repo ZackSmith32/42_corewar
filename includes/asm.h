@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 19:52:11 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 20:39:29 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,12 @@ typedef struct	s_label
 	uint32_t	address;
 }				t_label;
 
-/*
-** t_reading is a struct that holds the file we are reading as well as the current
-** position of our parsing in the file.
-**
-** file:	vector containing the input file as a string
-** labels:	vector containing pointers to the t_label struct
-** cp:		char pointer to the current position in the file
-*/
-/*
-typedef struct s_reading
+typedef struct s_lookup
 {
-	t_vec		file;
-	t_vec		labels;
-	char		*cp;
-}				t_reading;*/
+	size_t		name_cmd_len;
+	size_t		comment_cmd_len;
+	int			commands_checked;
+}				t_lookup;
 
 /*
 ** t_asm is a master struct that holds information that we will need to use throughout
@@ -70,6 +61,7 @@ typedef struct s_reading
 typedef struct	s_asm
 {
 	header_t	header;
+	t_lookup	cmd_info;
 	t_vec		labels;
 	t_vec		output;
 	char		*name;

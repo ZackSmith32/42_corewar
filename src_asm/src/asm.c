@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 17:39:44 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 20:44:46 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,17 @@ static int	write_file(char *name, t_asm *master)
 	return (0);
 }
 
+static int	init_assembler(char *file, t_master *master)
+{
+	ft_bzero(master, sizeof(*master));
+	master->cmd_info.name_cmd_len = ft_strlen(NAME_CMD_STRING);
+	master->cmd_info.comment_cmd_len = ft_strlen(COMMENT_CMD_STRING);
+	master->row = 1;
+	master->col = 1;
+	if ((master->fd = open(name, O_RDONLY)) == -1)
+		return (print_error(2, NULL, 0, 0));
+}
+
 int	main(int argc, char **argv)
 {
 	t_asm			master;
@@ -79,7 +90,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_printf("Usage:./asm champion.s\n"));
-	ft_bzero(&master, sizeof(master));
+	if (ern = init_assembler(&master))
+		return (asm_error(&master, ern));
 	if ((ern = read_file(argv[1], &master.input.file)))
 		return (asm_error(&master, ern));
 	master.cp = master.file.arr;

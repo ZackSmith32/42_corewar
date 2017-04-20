@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 19:36:29 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 20:43:52 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,28 @@ int	read_header(t_asm *master)
 	return (0);
 }*/
 
-char	*skip_whitespace(char *line)
-{
-	if (line)
-		while (ft_iswhitespace(*line))
-			line++;
-	return (line);
-}
 
 
-int	read_header(char *file, t_asm *master)
+int	read_header(int fd, t_asm *as)
 {
 	char	*line;
 	char	*cp;
 	int		ern;
 
-	if ((master->fd = open(name, O_RDONLY)) == -1)
-		return (print_error(2, NULL, 0, 0));
-	while ((ern = get_next_line(master->fd, &line)) > 0)
+	while ((ern = get_next_line(as->fd, &line)) > 0)
 	{
 		cp = skip_whitespace(line);
 		if (*cp == COMMAND_CHAR)
-			if ((ern = read_command(&master->header, line)))
-		if (*cp == COMMENT_CHAR && *cp == '\0')
-		//parse line
+			ern = read_command(&as->header, line, &as->col);
+		else if (*cp != COMMENT_CHAR && *cp != '\0')
+			ern = -7;
 		ft_strdel(&line);
+		if (ern < 0)
+			return (print_error(-ern, "COMMAND_NAME", as->row, as->col));
+		as->row++;
 	}
 	if (ern == -1)
 		return (print_error(1, NULL, 0, 0));
+	ft_strdel(&line);
+	return (0);
 }

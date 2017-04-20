@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/19 19:51:56 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/19 20:49:53 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME = asm
 MAKE = make
 
 FILES =	asm.c\
-		asm_error.c\
 		endian_switch.c\
 		$(addprefix read_header/,\
 			read_header.c\
@@ -23,7 +22,8 @@ FILES =	asm.c\
 		$(addprefix line_parsing/,\
 			next_token.c\
 			skip_whitespaces.c)\
-		skip_padding.c\
+		$(addprefix error/,\
+			asm_error.c)\
 		op.c\
 
 SRC	= $(addprefix src/, $(FILES))

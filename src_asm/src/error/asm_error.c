@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 17:55:12 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 20:49:00 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static const char	*g_error_message[] =
 	"Syntax error at token [TOKEN][%03d:%03d] %s\n",
 	"Lexical error at [%d:%d]\n"
 };
-
+/*
 static int	find_position(char *file, char *cursor, int *col)
 {
 	char	*next;
@@ -45,7 +45,7 @@ static int	find_position(char *file, char *cursor, int *col)
 		*col = (cursor - file) + 1;
 	return (row ? row : 1);
 }
-
+*/
 int	print_error(int ern, char *str, int row, int col)
 {
 	if (ern < 0)
@@ -68,5 +68,7 @@ int	asm_error(t_asm *master, int ern)
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	ft_memdel(&master->file.arr);
+	if (ern != 2)
+		close(master->fd);
 	return(ern);
 }
