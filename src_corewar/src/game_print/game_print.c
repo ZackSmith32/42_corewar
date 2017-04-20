@@ -73,7 +73,7 @@ int			game_print(struct s_game *game, t_strvec *out)
 				|| 0 == game->current_cycles % g_flags.cycle_intervals_to_dump))
 	{
 		out->len = 0;
-		ft_jasprintf(out, "\033[2J\033[1;1H");
+		ft_jasprintf(out, "\033[2J\033[1;1H\n");
 		if (g_flags.list & FLAG_P)
 			print_hex(out, game->arena, MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
