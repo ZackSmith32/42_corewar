@@ -14,9 +14,9 @@
 
 /*
 **	step_process:
-**	
+**
 **	p = link->content = ??, what does the linked list do?
-**	
+**
 **	for all processes
 **		decrement countdown
 **		if coutdown == 0
@@ -33,7 +33,6 @@ static void				step_processes(struct s_game *game)
 	link = game->processes;
 	while (link && (p = link->content))
 	{
-		// operations execute at the end of their last cycle
 		p->countdown--;
 		if (p->countdown == 0)
 		{
