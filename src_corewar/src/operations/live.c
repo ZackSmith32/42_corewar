@@ -36,6 +36,7 @@ int		live(struct s_game *game, struct s_process *process)
 
 /*
 **	TODO
+**		 : should we make pc a registor like it's supposed to be
 **		 : indirects are variable size... should do a type def for them too?
 **		 : x Need to not set pc in parameter parsing and set it after becaues we 
 		 	are going to need pc
@@ -90,7 +91,11 @@ int		ld(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
-int8_t		st(struct s_game *game, struct s_process *process)
+/*
+**	TEST:
+**		> test if registors exceed max registor
+*/
+int		st(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[3].argc];
 	uint8_t				*pc_temp;
@@ -114,7 +119,19 @@ int8_t		st(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
-
+int8_t		zjmp(struct s_game *game, struct s_process *process)
+{
+	union u_val		ind_offset;
+	
+	if (1 == process->carry)
+	{
+		read_arena(game->arena, process->pc + 1, ind_offset.arr, IND_SIZE);
+		process->pc = mask_ptr(game->arena, process->pc + ind_offset.val);
+	}
+	else	
+		process->pc = process->pc + 1 + IND_SIZE;
+	return (0);
+}
 
 
 
