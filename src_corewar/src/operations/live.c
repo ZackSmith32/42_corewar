@@ -119,7 +119,7 @@ int		st(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
-int8_t		zjmp(struct s_game *game, struct s_process *process)
+int		zjmp(struct s_game *game, struct s_process *process)
 {
 	union u_val		ind_offset;
 	
@@ -133,6 +133,7 @@ int8_t		zjmp(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
+// int		ldi(struct s_game *game, struct s_process *process)
 
 
 

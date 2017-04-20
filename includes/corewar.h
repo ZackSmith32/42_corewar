@@ -193,9 +193,9 @@ void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 ** /operations/live
 */
 int						live(struct s_game *game, struct s_process *process);
-int		ld(struct s_game *game, struct s_process *process);
-int		st(struct s_game *game, struct s_process *process);
-int		zjmp(struct s_game *game, struct s_process *process);
+int						ld(struct s_game *game, struct s_process *process);
+int						st(struct s_game *game, struct s_process *process);
+int						zjmp(struct s_game *game, struct s_process *process);
 
 
 
