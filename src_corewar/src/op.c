@@ -21,13 +21,13 @@
 **		> number code of operation
 **		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
 **		> long name
-**		> 0/1 : yes/no : carry?? (doesn't match up)
-**		> 0/1
+**		> includes parameter encoding byte
+**		> directs are treated as IND_SIZE
 */
 
 t_op const	g_op_tab[] =
 {
-	{0, 0, {0}, 0, 1, 0, 0, 0}, //MOVE FORWARD FUNCTION
+	{0, 0, {0}, 0, 1, 0, 0, 0},
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
@@ -56,7 +56,7 @@ t_op const	g_op_tab[] =
 int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&move_one,
 	&live,
-	&move_one,
+	&ld,
 	&move_one,
 	&move_one,
 	&move_one,

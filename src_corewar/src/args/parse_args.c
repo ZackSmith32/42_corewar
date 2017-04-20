@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburson <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/03/04 18:52:04 by mburson          ###   ########.fr       */
+/*   Created: 2017/03/28 23:57:01 by aphan             #+#    #+#             */
+/*   Updated: 2017/03/29 21:09:22 by aphan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ static void	fill_flag_set(int (*flag_set[NFLAGS])(char ***av, char **champ))
 	flag_set[5] = &flag_f;
 }
 
-int			flags_get(char ***av, char **champ)
+int			parse_args(int ac, char ***av, char **champ)
 {
 	char		*flags;
 	uintmax_t	func_code;
 	int			(*flag_set[NFLAGS])(char ***av, char **champ);
 
+	if (ac == 1)
+		print_usage(**av);
 	fill_flag_set(flag_set);
 	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS + 1);
 	ft_bzero(&g_flags, sizeof(g_flags));

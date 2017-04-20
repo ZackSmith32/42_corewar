@@ -8,5 +8,6 @@
 		"**/._*": true,
 		"**/*.o": true
 	},
-	"editor.rulers": [80]
+	"editor.rulers": [80],
+	"editor.insertSpaces": false
 }

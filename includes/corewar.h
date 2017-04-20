@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/19 13:52:01 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/19 22:57:38 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 # include <errno.h>
 # include <fcntl.h>
 
-struct				s_champ
+struct					s_champ
 {
   	char			prog_name[PROG_NAME_LENGTH + 1];
   	char			comment[COMMENT_LENGTH + 1];
 };
 
-struct				s_flag
+struct					s_flag
 {
 	int16_t				list; //bit list
 	unsigned int		cycle_intervals_to_dump; // -option s
@@ -44,9 +44,12 @@ struct				s_flag
 ** called_live: if the process called the live operation in the last cycle
 */
 
-struct				s_process
+// TODO: need to 
+typedef uint32_t		registor_t;
+
+struct					s_process
 {
-	unsigned short	registors[REG_NUMBER];
+	registor_t		registors[REG_NUMBER];
 	_Bool			carry;
 	uint8_t			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
@@ -60,7 +63,7 @@ struct				s_process
 ** check_count: number of checks sense decrementing cycles to die
 */
 
-struct				s_game
+struct					s_game
 {
 	uint8_t				arena[MEM_SIZE];
 	struct s_champ		champs[MAX_PLAYERS];
@@ -95,7 +98,7 @@ typedef struct		s_op
 	int			cycles_required;
 	char		*name_long;
 	_Bool		encoding_byte;
-	_Bool		index_flag;
+	_Bool		dir_as_ind;
 }				t_op;
 
 typedef uint64_t		op_arg_t;
@@ -106,21 +109,32 @@ union				u_val
 	op_arg_t	val;
 };
 
-struct				s_parameter
+typedef enum				e_param_type
 {
-	uint8_t			param_type;
-	union u_val		param_val; // TODO: discuss what size to make val
+	NO_PARAM = 0,
+	REG = REG_CODE,
+	DIR = DIR_CODE,
+	IND = IND_CODE,
+}							t_param_type;
+
+struct					s_parameter
+{
+	uint8_t				param_type;
+	union u_val			param_val;
 };
 
 extern struct s_flag	g_flags;
 extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
-extern uint8_t			g_first_mem_slot;
 
 
 /*
-** FLAG_V: debug output
+**	FLAG_V: debug output set
+**	FLAG_N: chamption position set
+**	FLAG_D: dump memory and exit after set cycles
+**	FLAG_S: dump memory after set cycles and repeat
+**	FLAG_P: pretty visual printing
 */
 
 # define	VALID_FLAGS	"dnpsvf"
@@ -130,71 +144,81 @@ extern uint8_t			g_first_mem_slot;
 # define	FLAG_D		0x4
 # define	FLAG_S		0x8
 # define	FLAG_P		0x10
+# define	V_STATE		0x1
+# define	V_PROCESS	0x2
 
 # define	NUMBER_OF_FUNCTIONS 17
 
 # define	MAGIC_NUMBER 0xF383EA00
 
 /*
-** flags_get.c
+** args/
 */
-int					flags_get(char ***av, char **champ);
-
-/*
-** flags_tags.c
-*/
-int					flag_d(char ***av, char **champ);
-int					flag_n(char ***av, char **champ);
-int					flag_p(char ***av, char **champ);
-int					flag_s(char ***av, char **champ);
-int					flag_v(char ***av, char **champ);
+int						parse_args(int ac, char ***av, char **champ);
+int						flag_d(char ***av, char **champ);
+int						flag_n(char ***av, char **champ);
+int						flag_p(char ***av, char **champ);
+int						flag_s(char ***av, char **champ);
+int						flag_v(char ***av, char **champ);
+void					print_usage(char *filename);
 
 /*
 ** game_init.c
 */
-int					game_init(char **champs, struct s_game *game);
+int						init_game_struct(char **champs, struct s_game *game);
 
 /*
 ** game_step/game_step.c
 */
-int					game_step(struct s_game *game);
+int						game_step(struct s_game *game);
 
 /*
 ** game_print/
 */
-int					game_print(struct s_game *game);
-void				print_hex(void *loc, size_t size);
+char					*ft_strnjoin(char const *s1, char const *s2,
+							size_t s2_len);
+int						ft_jasprintf(t_strvec *ret, const char *format, ...);
+int						game_print(struct s_game *game, t_strvec *out);
+void					print_hex(t_strvec *out, void *loc, size_t size,
+							t_list *processes);
 
 /*
 ** free.c
 */
-void				free_game(struct s_game *game);
-
+void					free_game(struct s_game *game);
 
 /*
 ** operations/utilities
 */
-//TODO: what's the max move size?
-void				move_pc(uint8_t *arena, uint8_t **pc, int move);
-int					move_one(struct s_game *game, struct s_process *process);
-uint8_t				*mask_pc(uint8_t *ptr, size_t offset);
-uint8_t				*ft_memmove_core(uint8_t arena, uint8_t *src,
-													uint8_t *dst, size_t size);
+void					move_pc(uint8_t *arena, uint8_t **pc, int move);
+int						move_one(struct s_game *game,
+							struct s_process *process);
+uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
+size_t					sizeof_param(enum e_param_type param_type);
+size_t					calc_offset(struct s_parameter *params, int argc);
+uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
+uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
+void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
+
 
 /*
 ** /operations/live
 */
-int					live(struct s_game *game, struct s_process *process);
+int						live(struct s_game *game, struct s_process *process);
+int		ld(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters
 */
-int			parse_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_offset);
+int			parse_parameters(struct s_game *game, struct s_process *process, 
+				struct s_parameter *params,
+				uint8_t **pc_temp);
+void					memmove_arg(uint8_t *arena, uint8_t *src,
+							uint8_t *dst, size_t size);
 
 /*
 ** /operations/validate_parameters
 */
-char		parse_and_validate_parameters(struct s_process *process,
-				struct s_parameter *params, uint8_t *byte_offset);
+char		parse_and_validate_parameters(struct s_game *game, struct s_process *process,
+				uint8_t **pc_temp, struct s_parameter *params);
 #endif
