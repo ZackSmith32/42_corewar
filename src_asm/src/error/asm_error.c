@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 19:25:05 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:01:31 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static const char	*g_error_message[] =
 {
-	"Writing output program to %s\n",
-	"error allocating memory\n",
-	"error opening file\n",
-	"error closing file\n",
-	"error reading file\n",
-	"error writing to file\n",
-	"Syntax error at token [TOKEN][%03d:%03d] %s\n",
-	"Lexical error at [%d:%d]\n",
-	"Name is too long\n",
-	"Comment is too long\n",
+	"Writing output program to %s\n",				///0
+	"error allocating memory\n",					///1
+	"error opening file\n",							///2
+	"error closing file\n",							///3
+	"error reading file\n",							///4
+	"error writing to file\n",						///5
+	"Syntax error at token [TOKEN][%03d:%03d] %s\n",///6
+	"Lexical error at [%d:%d]\n",					///7
+	"Name is too long\n",							///8
+	"Comment is too long\n",						///9
 };
 /*
 static int	find_position(char *file, char *cursor, int *col)
@@ -72,5 +72,7 @@ int	asm_error(t_asm *master, int ern)
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	if (ern != 2)
 		close(master->pi.fd);
+	while (1)
+		;
 	return(ern);
 }

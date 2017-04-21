@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 20:46:26 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:12:28 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 		if (!ft_strchr(line, '"'))
 			current_size = ft_strlcat(dst, line, max + 1);
 		else if (*tail != '"')
-			current_size = -6;
+			current_size = SYNTAX;
 		else if (current_size <= max && !(current_size = 0))
 			ft_strncat(dst, line, (tail - line));
 		ft_strdel(&line);
@@ -58,19 +58,19 @@ static int	read_quotes(char *dst, char *src, size_t max, t_parseinfo *pi)
 	pi->col += (head - src) + 1;
 	ft_printf("head:%c\n", *head);///
 	if (*head != '"')
-		return (-6);
+		return (SYNTAX);
 	src = ft_strchr(head + 1, '"');
 	if (src)
 	{
 		if ((size_t)(src - head) <= max)
 			ft_strncpy(dst, head + 1, (src - head - 1));
 		else
-			return (-8);
+			return (NAME_LONG);
 	}
 	else
 	{
 		if ((current_size = ft_strlcat(dst, head + 1, max + 1)) > max)
-			return (-8);
+			return (NAME_LONG);
 		return (complete_quotes(dst, max, pi, current_size));
 	}
 	return (0);
@@ -94,7 +94,7 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 		pi->col += info->comment_cmd_len;
 		if ((ern = read_quotes(header->comment, line, COMMENT_LENGTH, pi)) ||
 				info->commands_checked & 1)
-			return (ern == -8 ? -9 : -6);
+			return (ern == NAME_LONG ? COMM_LONG : SYNTAX);
 		info->commands_checked |= 1;
 	}
 	else if (!ft_strncmp(line, NAME_CMD_STRING, info->name_cmd_len))
@@ -104,7 +104,7 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 		pi->col += info->name_cmd_len;
 		if ((ern = read_quotes(header->prog_name, line, PROG_NAME_LENGTH, pi))
 				|| info->commands_checked & 2)
-			return (ern ? ern : -6);
+			return (ern ? ern : SYNTAX);
 		info->commands_checked |= 2;
 	}
 	return (0);

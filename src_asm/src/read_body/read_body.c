@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 18:13:43 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 20:46:53 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:09:29 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	read_body(t_asm *as)
 {
 	char	*line;
-	char	*label;
 	char	*cp;
 	int		ern;
 
@@ -26,20 +25,14 @@ int	read_body(t_asm *as)
 		cp = skip_whitespaces(line);
 		as->pi.col = 1 + (cp - line);
 		ft_printf("first char:%c\n", *cp);///
-		if (is_labelchar(*cp))
-		{
-			if (!(label = dup_label(cp, &as->pi)))
-				ern = -6;
-			ft_printf("label:%s\n", label);///
-			ft_strdel(&label);
-		}
+/*		if (is_labelchar(*cp))
+			ern = -parse_label(cp, as);
 		else if (*cp != COMMENT_CHAR && *cp != '\0')
-			ern = -7;
+			ern = LEXICAL;*/
 		ft_strdel(&line);
 		if (ern < 0)
 			return (print_error(-ern, "BODY_ERROR", as->pi.row, as->pi.col));
 	}
-	ft_printf("ern:%d\n", ern);///
 	if (ern == -1)
 		return (print_error(1, NULL, 0, 0));
 	ft_strdel(&line);

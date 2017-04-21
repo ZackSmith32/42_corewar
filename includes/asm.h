@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 19:49:35 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:11:14 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include <corewar.h>
 
-#define OUTPUT	master->output
-#define HEADER	master->header
+#define SYNTAX	-6
+#define LEXICAL	-7
+#define NAME_LONG -8
+#define COMM_LONG -9
 
 /*
 ** Command notes:
