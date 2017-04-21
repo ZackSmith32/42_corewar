@@ -24,7 +24,7 @@ int		live(struct s_game *game, struct s_process *process)
 	unsigned int	player_name;
 
 	pc = process->pc;
-	player_name = ~(unsigned int)(pc + 1);
+	player_name = ~(*(unsigned int *)(pc + 1));
 
 	game->lives++;
 	process->called_live = true;

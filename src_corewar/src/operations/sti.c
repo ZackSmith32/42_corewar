@@ -12,21 +12,42 @@
 
 #include <corewar.h>
 
+static void			change_end32(void *val, size_t size)
+{
+	uint8_t 		*start;
+	unsigned int	rval;
+	size_t			i;
+
+	rval = *((short int *)val);
+	start = (uint8_t*)val;
+	i = 0;
+	while (size-- > 0)
+	{
+		start[i] = ((uint8_t *)&rval)[size];
+		i++;
+	}
+}
+
 static void			change_end(void *val, size_t size)
 {
 	uint8_t swap;
 	uint8_t *start;
 	uint8_t	*end;
 
-	start = (uint8_t*)val;
-	end = start + size - 1;
-	while (end > start)
+	if (size == REG_SIZE)
+		change_end32(val, size);
+	else
 	{
-		swap = *start;
-		*start = *end;
-		*end = swap;
-		end--;
-		start++;
+		start = (uint8_t*)val;
+		end = start + size - 1;
+		while (end > start)
+		{
+			swap = *start;
+			*start = *end;
+			*end = swap;
+			end--;
+			start++;
+		}
 	}
 }
 
