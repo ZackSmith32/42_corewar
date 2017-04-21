@@ -93,5 +93,7 @@ int			parse_args(int ac, char ***av, char **champ)
 	}
 	if (**av && -1 == fill_champ(av, champ) && (g_error = 3))
 		return (-1);
+	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
+		ft_putstr("\033[2J");
 	return (0);
 }
