@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/19 21:24:23 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/20 12:47:26 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FILES	=	asm.c\
 				read_commands.c)\
 			$(addprefix line_parsing/,\
 				next_token.c\
+				skip_space_rev.c\
 				skip_whitespaces.c)\
 			$(addprefix error/,\
 				asm_error.c)\

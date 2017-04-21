@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 21:18:48 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 12:03:45 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,8 @@ static int	init_assembler(char *file, t_asm *master)
 	ft_bzero(master, sizeof(*master));
 	master->cmd_info.name_cmd_len = ft_strlen(NAME_CMD_STRING);
 	master->cmd_info.comment_cmd_len = ft_strlen(COMMENT_CMD_STRING);
-	master->row = 1;
-	master->col = 1;
-	if ((master->fd = open(file, O_RDONLY)) == -1)
+	master->pi.row = 1;
+	if ((master->pi.fd = open(file, O_RDONLY)) == -1)
 		return (print_error(2, NULL, 0, 0));
 	return (0);
 }

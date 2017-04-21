@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 21:30:16 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 12:47:38 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ typedef struct	s_label
 	uint32_t	address;
 }				t_label;
 
+/*
+** name_cmd_len:	string length of the name command
+** comment_cmd_len:	string length of the comment command
+** commands_checked:flag for checking if a command has been activated before
+**					bit: 1 == comment command
+**					bit: 2 == name command
+*/
+
 typedef struct s_cmdinfo
 {
 	size_t		name_cmd_len;
@@ -49,25 +57,37 @@ typedef struct s_cmdinfo
 }				t_cmdinfo;
 
 /*
+** fd:	File descriptor of the input file
+** row: Current row being parsed
+** col: Current column position of the parser
+*/
+
+typedef struct	s_parseinfo
+{
+	int			fd;
+	int			row;
+	int			col;
+}				t_parseinfo;
+/*
 ** t_asm is a master struct that holds information that we will need to use throughout
 ** 		the program
 **
-** header:	header struct comtaining magic, name, prog_size, comment
-** labels:	list of labels located in the input file
-** output:	vector containing the byte code array
-** name:	Name of the output file
+** header:		Header struct comtaining magic, name, prog_size, comment
+** cmd_info:	Holds information about the commands (such as string length)
+** pi (parse):	Holds information on the input, and the current location in parsing
+** labels:		List of labels located in the input file
+** output:		Vector containing the byte code array
+** name:		Name of the output file
 */
 
 typedef struct	s_asm
 {
 	header_t	header;
 	t_cmdinfo	cmd_info;
+	t_parseinfo	pi;
 	t_vec		labels;
 	t_vec		output;
 	char		*name;
-	int			fd;
-	int			row;
-	int			col;
 }				t_asm;
 
 
@@ -91,12 +111,13 @@ uint32_t	flip_uint64(uint64_t nbr);
 */
 
 char	*skip_whitespaces(char *line);
+char	*skip_space_rev(char *line, int len);
 int		next_token(char **cp);
 
 /*
 ** read_header
 */
 int	read_header(t_asm *as);
-int	read_commands(header_t *header, char *line, int *col, t_cmdinfo *info);
+int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info);
 
 #endif

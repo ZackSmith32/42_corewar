@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 21:59:20 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 12:01:51 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ int	read_header(t_asm *as)
 	char	*cp;
 	int		ern;
 
-	while ((ern = get_next_line(as->fd, &line)) > 0)
+	while ((ern = get_next_line(as->pi.fd, &line)) > 0)
 	{
+		as->pi.col = 1;
 		cp = skip_whitespaces(line);
 		if (*cp == COMMAND_CHAR)
-			ern = read_commands(&as->header, cp, &as->col, &as->cmd_info);
+			ern = read_command(&as->header, cp, &as->pi, &as->cmd_info);
 		else if (*cp != COMMENT_CHAR && *cp != '\0')
 			ern = -7;
 		ft_strdel(&line);
 		if (ern < 0)
-			return (print_error(-ern, "HEADER_ERROR", as->row, as->col));
-		as->col = 1;
-		as->row++;
+			return (print_error(-ern, "HEADER_ERROR", as->pi.row, as->pi.col));
+		as->pi.row++;
 	}
 	if (ern == -1)
 		return (print_error(1, NULL, 0, 0));
