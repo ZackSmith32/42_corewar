@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 17:55:44 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 19:03:43 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 
 	while ((len = get_next_line(pi->fd, &line)) > 0)
 	{
+		dst[current_size] = '\n';
 		tail = skip_space_rev(line, len);
 		pi->col = (tail - line) + 1;
 		ft_printf("current_size:%zd max:%zu tail:%c\n", current_size + (tail - line), max, *tail);
-		current_size += (tail - line);
+		current_size += (tail - line) + 1;
 		if (!ft_strchr(line, '"'))
 			current_size = ft_strlcat(dst, line, max + 1);
 		else if (*tail != '"')
