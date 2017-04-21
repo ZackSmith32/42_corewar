@@ -6,16 +6,11 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:35:19 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 19:48:16 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 20:31:38 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	is_labelchar(char c)
-{
-	if (ft_islower(c) || ft_isdigit(c) || c == '_')
-		return (1);
-	return (0);
-}
+#include <asm.h>
 
 /*
 ** Creates a duplicate of the label
@@ -23,5 +18,15 @@ static int	is_labelchar(char c)
 
 char	*dup_label(char	*src, t_parseinfo *pi)
 {
+	char *end;
 
+	end = src;
+	while (is_labelchar(*end))
+		end++;
+	pi->col += (end - src);
+	ft_printf("char:%c\n", *end);///
+	if (!ft_iswhitespace(*end) && *end != LABEL_CHAR && *end != SEPARATOR_CHAR
+			&& *end != COMMENT_CHAR)
+		return (NULL);
+	return (ft_strndup(src, (end - src)));
 }

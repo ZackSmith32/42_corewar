@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 19:03:43 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 20:46:26 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 
 	while ((len = get_next_line(pi->fd, &line)) > 0)
 	{
+		pi->row++;
+		ft_printf("row:%d\n", pi->row);///
 		dst[current_size] = '\n';
 		tail = skip_space_rev(line, len);
 		pi->col = (tail - line) + 1;
@@ -39,7 +41,6 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 		ft_strdel(&line);
 		if (current_size > max || current_size <= 0)
 			return (current_size > max ? -8 : current_size);
-		pi->row++;
 	}
 	return (-1);
 }

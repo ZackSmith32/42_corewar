@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/20 12:47:26 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/20 20:17:59 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,16 @@ NAME	= asm
 
 MAKE	= make
 
-SUBDIR	=	read_header line_parsing error
+SUBDIR	=	read_header line_parsing error read_body
 FILES	=	asm.c\
 			endian_switch.c\
 			$(addprefix read_header/,\
 				read_header.c\
 				read_commands.c)\
+			$(addprefix read_body/,\
+				dup_label.c\
+				is_labelchar.c\
+				read_body.c)\
 			$(addprefix line_parsing/,\
 				next_token.c\
 				skip_space_rev.c\

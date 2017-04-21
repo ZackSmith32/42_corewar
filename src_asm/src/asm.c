@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 19:24:29 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 20:46:14 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 	return (0);
 }*/
 
-static int	write_file(char *name, t_asm *master)
+int	write_file(char *name, t_asm *master)
 {
 	char	*end;
 	size_t	dist;
@@ -77,7 +77,6 @@ static int	init_assembler(char *file, t_asm *master)
 	ft_bzero(master, sizeof(*master));
 	master->cmd_info.name_cmd_len = ft_strlen(NAME_CMD_STRING);
 	master->cmd_info.comment_cmd_len = ft_strlen(COMMENT_CMD_STRING);
-	master->pi.row = 1;
 	if ((master->pi.fd = open(file, O_RDONLY)) == -1)
 		return (print_error(2, NULL, 0, 0));
 	return (0);
@@ -97,9 +96,9 @@ int	main(int argc, char **argv)
 	master.cp = master.file.arr;*/
 	if ((ern = read_header(&master)))
 		return (asm_error(&master, ern));
-/*	if ((ern = read_body(&master)))
-		return (asm_error(&master, ern));*/
+	if ((ern = read_body(&master)))
+		return (asm_error(&master, ern));
 	//ft_printf("%s", master.file.arr);///
-	ern = write_file(argv[1], &master);
+/*	ern = write_file(argv[1], &master);*/
 	return (asm_error(&master, ern));
 }
