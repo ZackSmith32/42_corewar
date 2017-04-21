@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:12:28 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:30:04 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 		dst[current_size] = '\n';
 		tail = skip_space_rev(line, len);
 		pi->col = (tail - line) + 1;
-		ft_printf("current_size:%zd max:%zu tail:%c\n", current_size + (tail - line), max, *tail);
+//		ft_printf("current_size:%zd max:%zu tail:%c\n", current_size + (tail - line), max, *tail);
 		current_size += (tail - line) + 1;
 		if (!ft_strchr(line, '"'))
 			current_size = ft_strlcat(dst, line, max + 1);
@@ -56,7 +56,7 @@ static int	read_quotes(char *dst, char *src, size_t max, t_parseinfo *pi)
 
 	head = skip_whitespaces(src);
 	pi->col += (head - src) + 1;
-	ft_printf("head:%c\n", *head);///
+//	ft_printf("head:%c\n", *head);///
 	if (*head != '"')
 		return (SYNTAX);
 	src = ft_strchr(head + 1, '"');
@@ -87,7 +87,7 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 {
 	int			ern;
 
-	ft_printf("Reading commands:%.6s\n", line);///
+//	ft_printf("Reading commands:%.6s\n", line);///
 	if (!ft_strncmp(line, COMMENT_CMD_STRING, info->comment_cmd_len))
 	{
 		line += info->comment_cmd_len;
@@ -99,7 +99,7 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 	}
 	else if (!ft_strncmp(line, NAME_CMD_STRING, info->name_cmd_len))
 	{
-		ft_printf("reading name\n");///
+//		ft_printf("reading name\n");///
 		line += info->name_cmd_len;
 		pi->col += info->name_cmd_len;
 		if ((ern = read_quotes(header->prog_name, line, PROG_NAME_LENGTH, pi))

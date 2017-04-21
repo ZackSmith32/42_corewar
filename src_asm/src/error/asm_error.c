@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:01:31 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:25:53 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	asm_error(t_asm *master, int ern)
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	if (ern != 2)
 		close(master->pi.fd);
-	while (1)
-		;
+/*	while (1)
+		;*/
 	return(ern);
 }

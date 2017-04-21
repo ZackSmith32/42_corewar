@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:11:14 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:27:21 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define ASM_H
 
 # include <corewar.h>
+
+#define HEADER master->header
+#define OUTPUT master->output
+
+
+/*
+** Error macros:
+*/
 
 #define SYNTAX	-6
 #define LEXICAL	-7
@@ -127,6 +135,7 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 */
 int	read_body(t_asm *as);
 int	is_labelchar(char c);
-char	*dup_label(char	*src, t_parseinfo *pi);
+int	parse_label(char *cp, t_asm *as);
+char	*dup_label(char	**src, int *col);
 
 #endif

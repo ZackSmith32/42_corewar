@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:35:19 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:03:02 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 22:23:08 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@
 ** Creates a duplicate of the label
 */
 
-char	*dup_label(char	*src, t_parseinfo *pi)
+char	*dup_label(char	**src, int *col)
 {
-	char *end;
+	char	*end;
+	char	*ret;
 
-	end = src;
+	end = *src;
 	while (is_labelchar(*end))
 		end++;
-	pi->col += (end - src);
+	col += (end - *src);
 	if (!ft_iswhitespace(*end) && *end != LABEL_CHAR && *end != SEPARATOR_CHAR
 			&& *end != COMMENT_CHAR)
 		return (NULL);
-	return (ft_strndup(src, (end - src)));
+	ret = ft_strndup(*src, (end - *src));
+	*src = end;
+	return (ret);
 }

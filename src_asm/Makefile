@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/20 20:17:59 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/20 22:24:01 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES	=	asm.c\
 			$(addprefix read_body/,\
 				dup_label.c\
 				is_labelchar.c\
+				parse_label.c\
 				read_body.c)\
 			$(addprefix line_parsing/,\
 				next_token.c\
