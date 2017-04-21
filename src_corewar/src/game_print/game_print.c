@@ -53,7 +53,7 @@ void		print_game_state(t_strvec *out, struct s_game *game)
 		return ;
 	ft_jasprintf(out,
 			"\ncycles current/death:%4u/%4u  check count/max: %u/%u"
-			"  lives:%3u  last_live_champ: %s",
+			"  lives:%3u  last_live_champ: %-32s",
 			game->current_cycles, game->cycles_to_death,
 			game->check_count, MAX_CHECKS,
 			game->lives, game->last_live_champ->prog_name);

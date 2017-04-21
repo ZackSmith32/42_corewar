@@ -66,6 +66,7 @@ struct					s_process
 struct					s_game
 {
 	uint8_t				arena[MEM_SIZE];
+	uint8_t				arena_writer[MEM_SIZE];
 	struct s_champ		champs[MAX_PLAYERS];
 	unsigned int		champ_count;
 	t_list				*processes;
