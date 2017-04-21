@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 18:48:47 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 19:49:35 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,7 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 ** read_body
 */
 int	read_body(t_asm *as);
+int	is_labelchar(char c);
+char	*dup_label(char	*src, t_parseinfo *pi);
 
 #endif
