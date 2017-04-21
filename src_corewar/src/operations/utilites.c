@@ -70,6 +70,7 @@ uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr,
 	while (i < size)
 	{
 		*mask_ptr(arena, &arena_ptr[i]) = norm_ptr[i];
+		i++;
 	}
 	return (arena_ptr);
 }
