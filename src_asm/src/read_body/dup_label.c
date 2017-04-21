@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:35:19 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:23:08 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/21 16:06:58 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*dup_label(char	**src, int *col)
 		end++;
 	col += (end - *src);
 	if (!ft_iswhitespace(*end) && *end != LABEL_CHAR && *end != SEPARATOR_CHAR
-			&& *end != COMMENT_CHAR)
+			&& *end != COMMENT_CHAR && *end != DIRECT_CHAR)
 		return (NULL);
 	ret = ft_strndup(*src, (end - *src));
 	*src = end;

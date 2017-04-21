@@ -6,11 +6,13 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 21:52:37 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 23:18:36 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/21 13:44:36 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+static char	*n
 
 /*
 ** Parse_labels
@@ -29,6 +31,7 @@ int	parse_label(char *cp, t_asm *as)
 	{
 		if ((ern = new_label(&as->labels, label, as->header.prog_size)))
 			ft_strdel(&label);
+		cp++;
 	}
 /*	ft_printf("label:%s\ncp:%c row:%d col:%d\n",
 			label, *cp, as->pi.row, as->pi.col);*/
