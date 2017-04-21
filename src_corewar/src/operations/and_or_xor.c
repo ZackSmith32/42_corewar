@@ -50,7 +50,7 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 
 int					and(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[4].argc];
+	struct s_parameter	params[g_op_tab[6].argc];
 	uint8_t				*pc_temp;
 
 	pc_temp = process->pc;
@@ -71,7 +71,7 @@ int					and(struct s_game *game, struct s_process *process)
 
 int					or(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[4].argc];
+	struct s_parameter	params[g_op_tab[7].argc];
 	uint8_t				*pc_temp;
 
 	pc_temp = process->pc;
@@ -92,7 +92,7 @@ int					or(struct s_game *game, struct s_process *process)
 
 int					xor(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[4].argc];
+	struct s_parameter	params[g_op_tab[8].argc];
 	uint8_t				*pc_temp;
 
 	pc_temp = process->pc;

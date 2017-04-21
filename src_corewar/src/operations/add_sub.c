@@ -57,7 +57,7 @@ int					add(struct s_game *game, struct s_process *process)
 
 int					sub(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[4].argc];
+	struct s_parameter	params[g_op_tab[5].argc];
 	uint8_t				*pc_temp;
 
 	pc_temp = process->pc;
