@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 21:52:37 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 23:13:40 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 23:18:36 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	parse_label(char *cp, t_asm *as)
 		return (LEXICAL);
 	if (*cp == LABEL_CHAR)
 	{
-		if ((ern = new_label(label, as)))
+		if ((ern = new_label(&as->labels, label, as->header.prog_size)))
 			ft_strdel(&label);
 	}
-	ft_printf("label:%s\ncp:%c row:%d col:%d\n",
-			label, *cp, as->pi.row, as->pi.col);
+/*	ft_printf("label:%s\ncp:%c row:%d col:%d\n",
+			label, *cp, as->pi.row, as->pi.col);*/
 	return (0);
 }

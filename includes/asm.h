@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:27:21 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 23:17:20 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ int	read_body(t_asm *as);
 int	is_labelchar(char c);
 int	parse_label(char *cp, t_asm *as);
 char	*dup_label(char	**src, int *col);
+int	new_label(t_vec *labels, char *name, int address);
 
 #endif

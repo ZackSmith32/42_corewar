@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 22:48:30 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 23:14:27 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 23:19:10 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int	new_label(t_vec *labels, char *name, int address)
 	while (i < labels->len)
 	{
 		current = ft_vecindex(labels, i);
+		ft_printf("current->name:%s\n", current->name);
 		if (ft_strcmp(name, current->name) == 0)
 			return (1);
+		i++;
 	}
 	new.name = name;
 	new.address = address;
