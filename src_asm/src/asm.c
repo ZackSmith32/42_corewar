@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 18:48:28 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 19:24:29 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 	return (0);
 }*/
 
-/*static int	write_file(char *name, t_asm *master)
+static int	write_file(char *name, t_asm *master)
 {
 	char	*end;
 	size_t	dist;
@@ -70,7 +70,7 @@
 	if ((close(fd) == -1) ||  ern == -1)
 		return (ern == -1 ? 5 : 3);
 	return (0);
-}*/
+}
 
 static int	init_assembler(char *file, t_asm *master)
 {
@@ -100,6 +100,6 @@ int	main(int argc, char **argv)
 /*	if ((ern = read_body(&master)))
 		return (asm_error(&master, ern));*/
 	//ft_printf("%s", master.file.arr);///
-/*	ern = write_file(argv[1], &master);*/
+	ern = write_file(argv[1], &master);
 	return (asm_error(&master, ern));
 }

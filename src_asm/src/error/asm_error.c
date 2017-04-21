@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 22:21:59 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/20 19:25:05 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	asm_error(t_asm *master, int ern)
 	ft_printf("cursor at r:%d c:%d\n", row, col, ern);*/
 /*	if (ern > 0)
 		ft_dprintf(2, g_error_message[ern], row, col, "token"); */
-	ft_printf("name:%s\ncomment:%s\n", master->header.prog_name, master->header.comment);
+/*	ft_printf("name:%s\ncomment:%s\n", master->header.prog_name, master->header.comment);*/
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	if (ern != 2)
-		close(master->fd);
+		close(master->pi.fd);
 	return(ern);
 }
