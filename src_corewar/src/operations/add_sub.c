@@ -39,9 +39,6 @@ int					add(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	//change_end(params[0].param_val.arr, 1); size 1 right???
-	//change_end(params[1].param_val.arr, REG_SIZE);
-	//change_end(params[2].param_val.arr, REG_SIZE);
 	if (params[0].param_val.val > REG_NUMBER
 		|| params[1].param_val.val > REG_NUMBER
 		|| params[2].param_val.val > REG_NUMBER)
@@ -58,25 +55,7 @@ int					add(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
-static int			flatten(uint8_t *arena, struct s_process *process,
-						struct s_parameter *param)
-{
-	if (param->param_type == T_REG)
-	{
-		if (param->param_val.val > REG_NUMBER)
-			return (-1);
-		param->param_val.val = process->registors[param->param_val.val];
-	}
-	else if (param->param_type == T_IND)
-	{
-		change_end(param->param_val.arr, IND_SIZE);
-		read_arena(arena, process->pc + param->param_val.val,
-			param->param_val.arr, DIR_SIZE);
-	}
-	return (0);
-}
-
-int					or(struct s_game *game, struct s_process *process)
+int					sub(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[4].argc];
 	uint8_t				*pc_temp;
@@ -85,13 +64,16 @@ int					or(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	if (params[2].param_val.val > REG_NUMBER
-		|| -1 == flatten(game->arena, process, &params[0])
-		|| -1 == flatten(game->arena, process, &params[1]))
+	if (params[0].param_val.val > REG_NUMBER
+		|| params[1].param_val.val > REG_NUMBER
+		|| params[2].param_val.val > REG_NUMBER)
 		return (0);
+	params[0].param_val.val = process->registors[params[0].param_val.val];
+	params[1].param_val.val = process->registors[params[1].param_val.val];
 	change_end(params[0].param_val.arr, REG_SIZE);
+	change_end(params[1].param_val.arr, REG_SIZE);
 	process->registors[params[2].param_val.val] = (
-		params[0].param_val.val | params[1].param_val.val);
+		params[0].param_val.val - params[1].param_val.val);
 	change_end(process->registors + params[2].param_val.val, REG_SIZE);
 	if (process->registors[params[2].param_val.val] == 0)
 		process->carry = 1;

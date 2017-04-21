@@ -189,11 +189,17 @@ int						st(struct s_game *game, struct s_process *process);
 int						zjmp(struct s_game *game, struct s_process *process);
 
 /*
-** /operations/add_sub
+** /operations/add_sub.c
 */
-
 int						add(struct s_game *game, struct s_process *process);
 int						sub(struct s_game *game, struct s_process *process);
+
+/*
+** /operations/and_or_xor.c
+*/
+int						and(struct s_game *game, struct s_process *process);
+int						or(struct s_game *game, struct s_process *process);
+int						xor(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters

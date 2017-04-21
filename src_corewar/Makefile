@@ -35,6 +35,7 @@ SRC = \
 		) \
 		$(addprefix operations/, \
 			add_sub.c \
+			and_or_xor.c \
 			utilites.c \
 			utilities2.c \
 			live.c \
