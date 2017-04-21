@@ -64,7 +64,7 @@ int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&xor,
 	&move_one,
 	&move_one,
-	&move_one,
+	&sti,
 	&move_one,
 	&move_one,
 	&move_one,

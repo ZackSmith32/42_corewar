@@ -189,6 +189,11 @@ int						st(struct s_game *game, struct s_process *process);
 int						zjmp(struct s_game *game, struct s_process *process);
 
 /*
+** /operations/sti.c
+*/
+int						sti(struct s_game *game, struct s_process *process);
+
+/*
 ** /operations/add_sub.c
 */
 int						add(struct s_game *game, struct s_process *process);
