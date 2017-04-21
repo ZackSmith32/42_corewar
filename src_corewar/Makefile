@@ -34,6 +34,7 @@ SRC = \
 			game_step.c \
 		) \
 		$(addprefix operations/, \
+			add_sub.c \
 			utilites.c \
 			utilities2.c \
 			live.c \

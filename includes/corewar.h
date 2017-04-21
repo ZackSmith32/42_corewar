@@ -44,7 +44,7 @@ struct					s_flag
 ** called_live: if the process called the live operation in the last cycle
 */
 
-// TODO: need to 
+// TODO: should this be singed?
 typedef uint32_t		registor_t;
 
 struct					s_process
@@ -96,14 +96,6 @@ union				u_val
 	uint8_t		arr[sizeof(op_arg_t)];
 	op_arg_t	val;
 };
-
-typedef enum				e_param_type
-{
-	NO_PARAM = 0,
-	REG = REG_CODE,
-	DIR = DIR_CODE,
-	IND = IND_CODE,
-}							t_param_type;
 
 struct					s_parameter
 {
@@ -182,7 +174,6 @@ void					move_pc(uint8_t *arena, uint8_t **pc, int move);
 int						move_one(struct s_game *game,
 							struct s_process *process);
 uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
-size_t					sizeof_param(enum e_param_type param_type);
 size_t					calc_offset(struct s_parameter *params, int argc);
 uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
 uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
@@ -197,7 +188,12 @@ int						ld(struct s_game *game, struct s_process *process);
 int						st(struct s_game *game, struct s_process *process);
 int						zjmp(struct s_game *game, struct s_process *process);
 
+/*
+** /operations/add_sub
+*/
 
+int						add(struct s_game *game, struct s_process *process);
+int						sub(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters
