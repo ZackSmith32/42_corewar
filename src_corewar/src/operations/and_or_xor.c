@@ -28,7 +28,7 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 	else if (param->param_type == T_IND)
 	{
 		change_end(param->param_val.arr, IND_SIZE);
-		read_arena(arena, process->pc + (int16_t)param->param_val.val,
+		read_arena(arena, process->pc + (t_ind)param->param_val.val,
 			param->param_val.arr, DIR_SIZE);
 	}
 	return (0);

@@ -25,10 +25,11 @@
 **			set countdown for new op_code
 */
 
-static void				step_processes(struct s_game *game)
+static int				step_processes(struct s_game *game)
 {
 	t_list				*link;
 	struct s_process	*p;
+	int					ret;
 
 	link = game->processes;
 	while (link && (p = link->content))
@@ -36,10 +37,11 @@ static void				step_processes(struct s_game *game)
 		p->countdown--;
 		if (p->countdown == 0)
 		{
-			if (-1 == g_op_pointers[p->op_code](game, p))
-			{
+			ret = g_op_pointers[p->op_code](game, p);
+			if (ret == -1)
 				move_pc(game->arena, &p->pc, 1);
-			}
+			else if (ret == -2)
+				return (-1);
 			p->op_code = *p->pc;
 			if (p->op_code > NUMBER_OF_FUNCTIONS)
 				p->op_code = 0;
@@ -47,6 +49,7 @@ static void				step_processes(struct s_game *game)
 		}
 		link = link->next;
 	}
+	return (0);
 }
 
 static void				kill_processes(t_list **processes)
@@ -66,7 +69,8 @@ static void				kill_processes(t_list **processes)
 
 int						game_step(struct s_game *game)
 {
-	step_processes(game);
+	if (-1 == step_processes(game))
+		return (-1);
 	game->current_cycles++;
 	if (game->current_cycles == game->cycles_to_death)
 	{

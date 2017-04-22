@@ -22,6 +22,7 @@
 ** NOTE: program breaks after first loop
 ** NOTE: bypassed parse_args with function below, parse_args isnt in the
 **        makefile for the moment as it does not compile
+** TODO: fork needs to be able to throw an error that ends the program
 */
 
 int32_t				g_error = 0;

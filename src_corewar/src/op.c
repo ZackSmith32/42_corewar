@@ -65,9 +65,9 @@ int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
 	&zjmp,
 	&move_one,
 	&sti,
+	&fork_op,
 	&move_one,
 	&move_one,
-	&move_one,
-	&move_one,
+	&lfork,
 	&move_one
 };

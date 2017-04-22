@@ -90,6 +90,7 @@ typedef struct			s_op
 }						t_op;
 
 typedef uint64_t		t_op_arg;
+typedef int16_t			t_ind;
 
 union					u_val
 {
@@ -209,6 +210,12 @@ int						sub(struct s_game *game, struct s_process *process);
 int						and(struct s_game *game, struct s_process *process);
 int						or(struct s_game *game, struct s_process *process);
 int						xor(struct s_game *game, struct s_process *process);
+
+/*
+** /operations/fork_lfork.c
+*/
+int						fork_op(struct s_game *game, struct s_process *process);
+int						lfork(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters
