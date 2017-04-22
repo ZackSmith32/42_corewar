@@ -18,8 +18,6 @@
 
 /*
 ** TODO: Set name as 4 bytes instead of two and remove andie's workaround in sti.c
-** TODO: what's the maximum champion size?
-** TODO: what's up with t_op? Figure out what is inside of t_op
 ** TODO: if no player ever calls live who wins
 ** NOTE: program breaks after first loop
 ** NOTE: bypassed parse_args with function below, parse_args isnt in the
