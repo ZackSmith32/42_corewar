@@ -28,7 +28,7 @@ static void			change_end32(void *val, size_t size)
 	}
 }
 
-static void			change_end(void *val, size_t size)
+static void			change_end_alt(void *val, size_t size)
 {
 	uint8_t swap;
 	uint8_t *start;
@@ -64,14 +64,14 @@ int		sti(struct s_game *game, struct s_process *process)
 			&& (process->pc = pc_temp))
 		return (0);
 	params[0].param_val.val = process->registors[params[0].param_val.val - 1];
-	change_end(params[0].param_val.arr, REG_SIZE);
+	change_end_alt(params[0].param_val.arr, REG_SIZE);
 	if (params[1].param_type == T_IND || params[1].param_type == T_DIR)
-		change_end(params[1].param_val.arr, IND_SIZE);
+		change_end_alt(params[1].param_val.arr, IND_SIZE);
 	else if (params[1].param_type == T_REG)
 		params[1].param_val.val =
 				process->registors[params[1].param_val.val - 1];
 	if (params[2].param_type == T_DIR)
-		change_end(params[2].param_val.arr, IND_SIZE);
+		change_end_alt(params[2].param_val.arr, IND_SIZE);
 	else if (params[2].param_type == T_REG)
 		params[2].param_val.val =
 				process->registors[params[2].param_val.val - 1];

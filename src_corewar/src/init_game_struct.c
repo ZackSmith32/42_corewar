@@ -65,7 +65,7 @@ static int				load_champion(char const *file,
 */
 
 static int				add_process(t_list **processes, uint8_t *pc,
-							unsigned short live)
+							int champ_index)
 {
 	struct s_process	*p;
 	t_list				*link;
@@ -73,7 +73,8 @@ static int				add_process(t_list **processes, uint8_t *pc,
 	if (NULL == (p = (struct s_process*)malloc(sizeof(*p))))
 		return (-1);
 	ft_bzero(p, sizeof(*p));
-	p->registors[0] = live;
+	p->registors[0] = ~(t_registor)champ_index;
+	change_end(&p->registors[0], sizeof(p->registors[0]));
 	p->pc = pc;
 	p->countdown = 1;
 	p->op_code = *pc;
@@ -101,7 +102,7 @@ static int				add_champs_processes(char **champs, struct s_game *game)
 			if (-1 == load_champion(champs[i], start_loc,
 					game->champs + champ_index)
 				|| -1 == add_process(&game->processes, start_loc,
-					~(unsigned short)champ_index))
+					champ_index))
 				return (-1);
 			champ_index++;
 		}

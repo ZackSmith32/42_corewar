@@ -26,8 +26,8 @@
 
 struct					s_champ
 {
-  	char			prog_name[PROG_NAME_LENGTH + 1];
-  	char			comment[COMMENT_LENGTH + 1];
+	char	prog_name[PROG_NAME_LENGTH + 1];
+	char	comment[COMMENT_LENGTH + 1];
 };
 
 struct					s_flag
@@ -44,12 +44,11 @@ struct					s_flag
 ** called_live: if the process called the live operation in the last cycle
 */
 
-// TODO: should this be singed?
-typedef uint32_t		registor_t;
+typedef uint32_t		t_registor;
 
 struct					s_process
 {
-	registor_t		registors[REG_NUMBER];
+	t_registor		registors[REG_NUMBER];
 	_Bool			carry;
 	uint8_t			*pc;
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
@@ -88,14 +87,14 @@ typedef struct			s_op
 	char		*name_long;
 	_Bool		encoding_byte;
 	_Bool		dir_as_ind;
-}				t_op;
+}						t_op;
 
-typedef uint64_t		op_arg_t;
+typedef uint64_t		t_op_arg;
 
-union				u_val
+union					u_val
 {
-	uint8_t		arr[sizeof(op_arg_t)];
-	op_arg_t	val;
+	uint8_t		arr[sizeof(t_op_arg)];
+	t_op_arg	val;
 };
 
 struct					s_parameter
@@ -109,28 +108,27 @@ extern t_op	const		g_op_tab[];
 extern int				(*g_op_pointers[17])(struct s_game*, struct s_process*);
 extern int32_t			g_error;
 
-
 /*
-**	FLAG_V: debug output set
-**	FLAG_N: chamption position set
-**	FLAG_D: dump memory and exit after set cycles
-**	FLAG_S: dump memory after set cycles and repeat
-**	FLAG_P: pretty visual printing
+** FLAG_V: debug output set
+** FLAG_N: chamption position set
+** FLAG_D: dump memory and exit after set cycles
+** FLAG_S: dump memory after set cycles and repeat
+** FLAG_P: pretty visual printing
 */
 
-# define	VALID_FLAGS	"dnpsvf"
-# define	NFLAGS		6
-# define	FLAG_V		0x1
-# define	FLAG_N		0x2
-# define	FLAG_D		0x4
-# define	FLAG_S		0x8
-# define	FLAG_P		0x10
-# define	V_STATE		0x1
-# define	V_PROCESS	0x2
+# define VALID_FLAGS	"dnpsvf"
+# define NFLAGS			6
+# define FLAG_V			0x1
+# define FLAG_N			0x2
+# define FLAG_D			0x4
+# define FLAG_S			0x8
+# define FLAG_P			0x10
+# define V_STATE		0x1
+# define V_PROCESS		0x2
 
-# define	NUMBER_OF_FUNCTIONS 17
+# define NUMBER_OF_FUNCTIONS 17
 
-# define	MAGIC_NUMBER 0xF383EA00
+# define MAGIC_NUMBER 0xF383EA00
 
 /*
 ** args/
@@ -162,11 +160,15 @@ int						ft_jasprintf(t_strvec *ret, const char *format, ...);
 int						game_print(struct s_game *game, t_strvec *out);
 void					print_hex(t_strvec *out, void *loc, size_t size,
 							t_list *processes);
-
 /*
 ** free.c
 */
 void					free_game(struct s_game *game);
+
+/*
+** utilities.c
+*/
+void					change_end(void *val, size_t size);
 
 /*
 ** operations/utilities
@@ -176,10 +178,11 @@ int						move_one(struct s_game *game,
 							struct s_process *process);
 uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
 size_t					calc_offset(struct s_parameter *params, int argc);
-uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
-uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr, uint8_t *norm_ptr, size_t size);
-void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
-
+uint8_t					*read_arena(uint8_t *arena, uint8_t *arena_ptr,
+							uint8_t *norm_ptr, size_t size);
+uint8_t					*write_arena(uint8_t *arena, uint8_t *arena_ptr,
+							uint8_t *norm_ptr, size_t size);
+void					reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 
 /*
 ** /operations/live
@@ -210,20 +213,22 @@ int						xor(struct s_game *game, struct s_process *process);
 /*
 ** /operations/parse_parameters
 */
-int			parse_parameters(struct s_game *game, struct s_process *process, 
-				struct s_parameter *params,
-				uint8_t **pc_temp);
+int						parse_parameters(struct s_game *game,
+							struct s_process *process,
+							struct s_parameter *params, uint8_t **pc_temp);
 void					memmove_arg(uint8_t *arena, uint8_t *src,
 							uint8_t *dst, size_t size);
 
 /*
 ** /operations/validate_parameters
 */
-char		parse_and_validate_parameters(struct s_game *game, struct s_process *process,
-				uint8_t **pc_temp, struct s_parameter *params);
+char					parse_and_validate_parameters(struct s_game *game,
+							struct s_process *process,
+							uint8_t **pc_temp, struct s_parameter *params);
 
 /*
 ** /operations/utilities2
 */
-int			check_registors(uint8_t op_code, struct s_parameter *params);
+int						check_registors(uint8_t op_code,
+							struct s_parameter *params);
 #endif

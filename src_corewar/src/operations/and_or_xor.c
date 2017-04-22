@@ -12,24 +12,6 @@
 
 #include <corewar.h>
 
-static void			change_end(void *val, size_t size)
-{
-	uint8_t swap;
-	uint8_t *start;
-	uint8_t	*end;
-
-	start = (uint8_t*)val;
-	end = start + size - 1;
-	while (end > start)
-	{
-		swap = *start;
-		*start = *end;
-		*end = *start;
-		end--;
-		start++;
-	}
-}
-
 static int			flatten(uint8_t *arena, struct s_process *process,
 						struct s_parameter *param)
 {
