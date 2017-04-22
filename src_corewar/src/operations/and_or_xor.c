@@ -12,6 +12,10 @@
 
 #include <corewar.h>
 
+/*
+** todo: make int16_t a typedef that changes on IND_SIZE
+*/
+
 static int			flatten(uint8_t *arena, struct s_process *process,
 						struct s_parameter *param)
 {
@@ -24,7 +28,7 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 	else if (param->param_type == T_IND)
 	{
 		change_end(param->param_val.arr, IND_SIZE);
-		read_arena(arena, process->pc + param->param_val.val,
+		read_arena(arena, process->pc + (int16_t)param->param_val.val,
 			param->param_val.arr, DIR_SIZE);
 	}
 	return (0);
