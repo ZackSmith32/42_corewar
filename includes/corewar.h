@@ -212,10 +212,11 @@ int						or(struct s_game *game, struct s_process *process);
 int						xor(struct s_game *game, struct s_process *process);
 
 /*
-** /operations/fork_lfork.c
+** /operations/fork_lfork_aff.c
 */
 int						fork_op(struct s_game *game, struct s_process *process);
 int						lfork(struct s_game *game, struct s_process *process);
+int						aff(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters
