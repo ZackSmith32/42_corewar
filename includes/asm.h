@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 23:17:20 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/22 14:42:47 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 typedef struct	s_label
 {
 	char		*name;
-	uint32_t	address;
+	int			address;
 }				t_label;
 
 /*
@@ -96,6 +96,7 @@ typedef struct	s_asm
 	t_cmdinfo	cmd_info;
 	t_parseinfo	pi;
 	t_vec		labels;
+	t_vec		label_calls;
 	t_vec		output;
 	char		*name;
 }				t_asm;
@@ -135,8 +136,11 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 */
 int	read_body(t_asm *as);
 int	is_labelchar(char c);
-int	parse_label(char *cp, t_asm *as);
+int	parse_label(char *cp, t_asm *as, int depth);
+int	parse_line(char	*head, t_asm *as, int depth);
+
 char	*dup_label(char	**src, int *col);
-int	new_label(t_vec *labels, char *name, int address);
+int		new_label(t_vec *labels, char *name, int address);
+t_label	*search_label(char *key, t_vec *labels);
 
 #endif

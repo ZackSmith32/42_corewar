@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_label.c                                        :+:      :+:    :+:   */
+/*   search_label.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/20 19:35:19 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/21 16:06:58 by kdavis           ###   ########.fr       */
+/*   Created: 2017/04/22 14:13:32 by kdavis            #+#    #+#             */
+/*   Updated: 2017/04/22 14:20:06 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
 /*
-** Creates a duplicate of the label
+** Searches a the vector for the corresponding label and returns a pointer
+** if one is found.
 */
 
-char	*dup_label(char	**src, int *col)
+t_label	*search_label(char *key, t_vec *labels)
 {
-	char	*end;
-	char	*ret;
+	t_label *current;
+	size_t	i;
 
-	end = *src;
-	while (is_labelchar(*end))
-		end++;
-	col += (end - *src);
-	if (!ft_iswhitespace(*end) && *end != LABEL_CHAR && *end != SEPARATOR_CHAR
-			&& *end != COMMENT_CHAR && *end != DIRECT_CHAR)
-		return (NULL);
-	ret = ft_strndup(*src, (end - *src));
-	*src = end;
-	return (ret);
+	i = 0;
+	while (i < labels->len)
+	{
+		current = ft_vecindex(labels, i);
+		ft_printf("current->name:%s\n", current->name);///
+		if (ft_strcmp(key, current->name) == 0)
+			return (current);
+		i++;
+	}
+	return (NULL);
 }
