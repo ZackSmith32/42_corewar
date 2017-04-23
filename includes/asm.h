@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/22 18:16:09 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/23 16:17:21 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ t_label	*search_label(char *key, t_vec *labels);
 */
 int			parse_op(char *label, char *line, t_asm *as);
 const t_op	*search_op(char *name);
-int			write_op(t_op *op, char *line, t_vec *output, t_vec *label_calls);
+int			write_op(const t_op *op, char *line, t_vec *output,
+				t_vec *label_calls);
 
 /*
 ** read_header
