@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_label.c                                        :+:      :+:    :+:   */
+/*   new.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 22:48:30 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/22 14:43:44 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/22 18:39:04 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** new_label takes a label and adds it to a list of labels if it is not there
 ** already. Sets the labels name and address.
+** Requires that the label vector was already initialized.
 */
 
 int	new_label(t_vec *labels, char *name, int address)
@@ -23,10 +24,7 @@ int	new_label(t_vec *labels, char *name, int address)
 	t_label	new;
 
 	if (!(labels->arr))
-	{
-		if (!(ft_initialize_vec(labels, sizeof(t_label), 10, 0)))
-			return (-1);
-	}
+		return (-1);
 	if ((current = search_label(name, labels)))
 	{
 		if (current->address == -1)
