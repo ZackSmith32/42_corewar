@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/22 14:42:47 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/22 18:16:09 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,24 @@ uint32_t	flip_uint64(uint64_t nbr);
 */
 
 char	*skip_whitespaces(char *line);
-char	*skip_space_rev(char *line, int len);
-int		next_token(char **cp);
+int		is_labelchar(char c);
+char	*skip_space_rev(char *line, int len);///
+int		next_token(char **cp);///
+
+/*
+** label
+*/
+char	*dup_label(char	**src, int *col);
+int		parse_label(char *cp, t_asm *as, int depth);
+int		new_label(t_vec *labels, char *name, int address);
+t_label	*search_label(char *key, t_vec *labels);
+
+/*
+** op
+*/
+int			parse_op(char *label, char *line, t_asm *as);
+const t_op	*search_op(char *name);
+int			write_op(t_op *op, char *line, t_vec *output, t_vec *label_calls);
 
 /*
 ** read_header
@@ -135,12 +151,7 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 ** read_body
 */
 int	read_body(t_asm *as);
-int	is_labelchar(char c);
-int	parse_label(char *cp, t_asm *as, int depth);
 int	parse_line(char	*head, t_asm *as, int depth);
 
-char	*dup_label(char	**src, int *col);
-int		new_label(t_vec *labels, char *name, int address);
-t_label	*search_label(char *key, t_vec *labels);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:25:53 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/22 18:18:42 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,29 @@ int	print_error(int ern, char *str, int row, int col)
 	return (ern);
 }
 
+void	clear_labels(t_vec *label)
+{
+	t_label *current;
+	size_t	i;
+
+	i = 0;
+	while (i < label->len)
+	{
+		current = ft_vecindex(label, i);
+		ft_memdel((void*)&current->name);
+		i++;
+	}
+	ft_memdel(&label->arr);
+}
+
 int	asm_error(t_asm *master, int ern)
 {
-/*	int	row;
-	int	col;
-
-	col = 1;
-	row = find_position((char*)master->file.arr, master->cp, &col);
-	ft_printf("cursor at r:%d c:%d\n", row, col, ern);*/
-/*	if (ern > 0)
-		ft_dprintf(2, g_error_message[ern], row, col, "token"); */
-/*	ft_printf("name:%s\ncomment:%s\n", master->header.prog_name, master->header.comment);*/
+	clear_labels(&master->labels);
+	clear_labels(&master->label_calls);
+	ft_memdel(&master->output.arr);
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	if (ern != 2)
 		close(master->pi.fd);
-/*	while (1)
-		;*/
 	return(ern);
 }

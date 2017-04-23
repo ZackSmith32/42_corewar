@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/22 17:42:44 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/22 18:17:57 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME	= asm
 
 MAKE	= make
 
-SUBDIR	=	read_header line_parsing error read_body
+SUBDIR	=	read_header line_parsing error read_body op label
+
 FILES	=	asm.c\
 			endian_switch.c\
 			$(addprefix op/,\
@@ -33,11 +34,7 @@ FILES	=	asm.c\
 				read_commands.c\
 			)\
 			$(addprefix read_body/,\
-				dup_label.c\
-				parse_label.c\
 				parse_line.c\
-				new_label.c\
-				search_label.c\
 				read_body.c\
 			)\
 			$(addprefix line_parsing/,\
