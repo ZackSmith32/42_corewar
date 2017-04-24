@@ -20,7 +20,7 @@ int					add(struct s_game *game, struct s_process *process)
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	process->pc = pc_temp;  //TODO: do we need to make pc_temp?
+	process->pc = pc_temp;
 	if (params[0].param_val.val >= REG_NUMBER
 		|| params[1].param_val.val >= REG_NUMBER
 		|| params[2].param_val.val >= REG_NUMBER)

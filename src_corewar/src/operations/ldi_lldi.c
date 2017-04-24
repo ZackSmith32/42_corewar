@@ -14,17 +14,13 @@ static t_op_arg	calc_ldi_offset(struct s_process *process,
 		reverse_bytes(params[0].param_val.arr, IND_SIZE, first.arr);
 	if (params[1].param_type == T_REG)
 		reverse_bytes((void *)&process->registors[params[1].param_val.val], 
-		REG_SIZE, second.arr);
+			REG_SIZE, second.arr);
 	else
 		reverse_bytes(params[1].param_val.arr, IND_SIZE, second.arr);
-	return ((first.val + second.val) % IDX_MOD);
+	return (first.val + second.val);
 }
 
 /*
-**	> Make sure to validate that parse params is shortening directs
-**		to indirect size when op.c indicates to do so.
-**	> Should I add the second param, then modulo, or do as the instructions say
-**		and add the second param after the mod?
 **	> Is the carry only modified if the function runs?
 */
 int		ldi(struct s_game *game, struct s_process *process)
@@ -60,7 +56,7 @@ int		lldi(struct s_game *game, struct s_process *process)
 	if (-1 == check_registors(process->op_code, params))
 		return (0);
 	offset = calc_ldi_offset(process, params);
-	read_arena(game->arena, process->pc + (offset % IDX_MOD),
+	read_arena(game->arena, process->pc + offset,
 		(void *)&process->registors[params[2].param_val.val], REG_SIZE);
 	return (0);
 }

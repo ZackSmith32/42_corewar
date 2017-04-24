@@ -178,7 +178,6 @@ void					move_pc(uint8_t *arena, uint8_t **pc, int move);
 int						move_one(struct s_game *game,
 							struct s_process *process);
 uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
-size_t					calc_offset(struct s_parameter *params, int argc);
 uint8_t					*read_arena(uint8_t *arena, uint8_t *arena_ptr,
 							uint8_t *norm_ptr, size_t size);
 uint8_t					*write_arena(uint8_t *arena, uint8_t *arena_ptr,

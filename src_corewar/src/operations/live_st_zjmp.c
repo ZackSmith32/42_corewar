@@ -95,7 +95,7 @@ int		st(struct s_game *game, struct s_process *process)
 	else if (params[1].param_type == T_IND)
 	{
 		reverse_bytes(params[1].param_val.arr, IND_SIZE, ind_offset.arr);
-		write_arena(game->arena, process->pc + ind_offset.val, 
+		write_arena(game->arena, process->pc + (ind_offset.val, 
 			(uint8_t *)&process->registors[params[0].param_val.val], REG_SIZE);
 	}
 	return (0);
@@ -103,16 +103,17 @@ int		st(struct s_game *game, struct s_process *process)
 
 int		zjmp(struct s_game *game, struct s_process *process)
 {
-	union u_val		ind_offset;
+	t_ind			ind_offset;
 	
 	if (1 == process->carry)
 	{
-		read_arena(game->arena, process->pc + 1, ind_offset.arr, IND_SIZE);
-		ind_offset.val = ind_offset.val % IDX_MOD;
-		process->pc = mask_ptr(game->arena, process->pc + ind_offset.val);
+		read_arena(game->arena, process->pc + 1, (uint8_t *)&ind_offset,
+			IND_SIZE);
+		ind_offset = ind_offset % IDX_MOD;
+		process->pc = mask_ptr(game->arena, process->pc + ind_offset);
 	}
 	else	
-		process->pc = process->pc + 1 + IND_SIZE;
+		process->pc = mask_ptr(game->arena, process->pc + 1 + IND_SIZE);
 	return (0);
 }
 
