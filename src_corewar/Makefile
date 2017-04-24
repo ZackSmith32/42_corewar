@@ -42,6 +42,8 @@ SRC = \
 			utilites.c \
 			utilities2.c \
 			live.c \
+			ld_lld.c \
+			ldi_lldi.c \
 			validate_parameters.c \
 			parse_parameters.c \
 		) \

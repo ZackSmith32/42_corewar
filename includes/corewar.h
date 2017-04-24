@@ -189,9 +189,9 @@ void					reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 ** /operations/live
 */
 int						live(struct s_game *game, struct s_process *process);
-int						ld(struct s_game *game, struct s_process *process);
 int						st(struct s_game *game, struct s_process *process);
 int						zjmp(struct s_game *game, struct s_process *process);
+void					modify_carry(struct s_process *process);
 
 /*
 ** /operations/sti.c
@@ -217,6 +217,18 @@ int						xor(struct s_game *game, struct s_process *process);
 int						fork_op(struct s_game *game, struct s_process *process);
 int						lfork(struct s_game *game, struct s_process *process);
 int						aff(struct s_game *game, struct s_process *process);
+
+/*
+** /operations/ld_lld.c
+*/
+int						ld(struct s_game *game, struct s_process *process);
+int						lld(struct s_game *game, struct s_process *process);
+
+/*
+** /operations/ldi_lldi.c
+*/
+int						ldi(struct s_game *game, struct s_process *process);
+int						lldi(struct s_game *game, struct s_process *process);
 
 /*
 ** /operations/parse_parameters
