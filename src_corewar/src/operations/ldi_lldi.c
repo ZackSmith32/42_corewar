@@ -25,9 +25,9 @@ static t_op_arg	calc_ldi_offset(struct s_process *process,
 */
 int		ldi(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[9].argc];
+	struct s_parameter	params[g_op_tab[0x0a].argc];
 	uint8_t				*pc_temp;
-	t_op_arg		offset;
+	t_op_arg			offset;
 
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
@@ -44,7 +44,7 @@ int		ldi(struct s_game *game, struct s_process *process)
 
 int		lldi(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[9].argc];
+	struct s_parameter	params[g_op_tab[0x0e].argc];
 	uint8_t				*pc_temp;
 	t_op_arg		offset;
 
