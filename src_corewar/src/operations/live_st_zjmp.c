@@ -79,16 +79,18 @@ void	modify_carry(struct s_process *process)
 */
 int		st(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[3].argc];
+	struct s_parameter	params[g_op_tab[0x03].argc];
 	uint8_t				*pc_temp;
 	union u_val			ind_offset;
 
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	process->pc = pc_temp;
 	if (-1 == check_registors(process->op_code, params))
+	{
+		process->pc = pc_temp;
 		return (0);
+	}
 	if (params[1].param_type == T_REG)
 		process->registors[params[1].param_val.val] = 
 			process->registors[params[0].param_val.val];
@@ -98,6 +100,7 @@ int		st(struct s_game *game, struct s_process *process)
 		write_arena(game->arena, process->pc + ind_offset.val, 
 			(uint8_t *)&process->registors[params[0].param_val.val], REG_SIZE);
 	}
+	process->pc = pc_temp;
 	return (0);
 }
 

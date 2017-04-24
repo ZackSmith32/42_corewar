@@ -37,7 +37,6 @@ int		ld(struct s_game *game, struct s_process *process)
 			REG_SIZE);
 	}
 	process->pc = pc_temp;
-	printf("in : ld : move pc forward %d\n", 4);
 	return (0);
 }
 
@@ -52,7 +51,10 @@ int		lld(struct s_game *game, struct s_process *process)
 		return (-1);
 	modify_carry(process);
 	if (-1 == check_registors(process->op_code, params))
+	{
+		process->pc = pc_temp;
 		return (0);
+	}
 	if (params[0].param_type == T_DIR)
 		process->registors[params[1].param_val.val] = params[0].param_val.val;
 	else if (params[0].param_type == T_IND)

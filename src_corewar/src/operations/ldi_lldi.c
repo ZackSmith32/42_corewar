@@ -32,13 +32,16 @@ int		ldi(struct s_game *game, struct s_process *process)
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	process->pc = pc_temp;
 	modify_carry(process);
 	if (-1 == check_registors(process->op_code, params))
+	{
+		process->pc = pc_temp;
 		return (0);
+	}
 	offset = calc_ldi_offset(process, params);
 	read_arena(game->arena, process->pc + (offset % IDX_MOD),
 		(void *)&process->registors[params[2].param_val.val], REG_SIZE);
+	process->pc = pc_temp;
 	return (0);
 }
 
@@ -51,12 +54,17 @@ int		lldi(struct s_game *game, struct s_process *process)
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	process->pc = pc_temp;
+	if (-1 == check_registors(process->op_code, params))
+	{
+		process->pc = pc_temp;
+		return (0);
+	}
 	modify_carry(process);
 	if (-1 == check_registors(process->op_code, params))
 		return (0);
 	offset = calc_ldi_offset(process, params);
 	read_arena(game->arena, process->pc + offset,
 		(void *)&process->registors[params[2].param_val.val], REG_SIZE);
+	process->pc = pc_temp;
 	return (0);
 }
