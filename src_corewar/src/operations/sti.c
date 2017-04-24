@@ -24,7 +24,6 @@ int		sti(struct s_game *game, struct s_process *process)
 			&& (process->pc = pc_temp))
 		return (0);
 	params[0].param_val.val = process->registors[params[0].param_val.val - 1];
-	change_end(params[0].param_val.arr, REG_SIZE);
 	if (params[1].param_type == T_IND || params[1].param_type == T_DIR)
 		change_end(params[1].param_val.arr, IND_SIZE);
 	else if (params[1].param_type == T_REG)
@@ -36,7 +35,7 @@ int		sti(struct s_game *game, struct s_process *process)
 		params[2].param_val.val =
 				process->registors[params[2].param_val.val - 1];
 	write_arena(game->arena,
-			process->pc + params[1].param_val.val + params[2].param_val.val, 
+			process->pc + params[1].param_val.val + params[2].param_val.val,
 			(uint8_t *)&params[0].param_val.val, REG_SIZE);
 	process->pc = pc_temp;
 	return (0);
