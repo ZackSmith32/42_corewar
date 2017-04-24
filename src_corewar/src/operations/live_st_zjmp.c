@@ -95,7 +95,7 @@ int		st(struct s_game *game, struct s_process *process)
 	else if (params[1].param_type == T_IND)
 	{
 		reverse_bytes(params[1].param_val.arr, IND_SIZE, ind_offset.arr);
-		write_arena(game->arena, process->pc + (ind_offset.val, 
+		write_arena(game->arena, process->pc + ind_offset.val, 
 			(uint8_t *)&process->registors[params[0].param_val.val], REG_SIZE);
 	}
 	return (0);
