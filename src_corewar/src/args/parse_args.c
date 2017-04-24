@@ -68,6 +68,7 @@ static void	fill_flag_set(int (*flag_set[NFLAGS])(char ***av, char **champ))
 	flag_set[3] = &flag_s;
 	flag_set[4] = &flag_v;
 	flag_set[5] = &flag_f;
+	flag_set[6] = &flag_w;
 }
 
 int			parse_args(int ac, char ***av, char **champ)
@@ -81,6 +82,7 @@ int			parse_args(int ac, char ***av, char **champ)
 	fill_flag_set(flag_set);
 	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS + 1);
 	ft_bzero(&g_flags, sizeof(g_flags));
+	g_flags.wait_time = 250000;
 	flags = VALID_FLAGS;
 	while (++(*av) && **av && ***av == '-' && ++(**av))
 	{

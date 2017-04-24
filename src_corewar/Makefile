@@ -25,6 +25,7 @@ SRC = \
 		$(addprefix args/, \
 			parse_args.c \
 			flags_tags.c \
+			flags_tags2.c \
 			print_usage.c \
 		) \
 		$(addprefix game_print/, \

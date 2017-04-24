@@ -18,7 +18,7 @@ void		print_process(t_strvec *out, uint8_t *arena,
 	size_t	i;
 
 	ft_jasprintf(out, "  carry: %d", (int)process->carry);
-	ft_jasprintf(out, "  pc: %3hx", (size_t)(process->pc - arena));
+	ft_jasprintf(out, "  pc: %4zu", (size_t)(process->pc - arena));
 	ft_jasprintf(out, "  countdown: %04u", process->countdown);
 	ft_jasprintf(out, "  op: %-6s", g_op_tab[process->op_code].name_short);
 	ft_jasprintf(out, "  called_live: %u", process->called_live);
@@ -86,7 +86,7 @@ int			game_print(struct s_game *game, t_strvec *out)
 			print_processes(out, game->arena, game->processes);
 		}
 		write(1, out->str, out->len);
-		usleep(200000);
+		usleep(g_flags.wait_time);
 	}
 	return (0);
 }

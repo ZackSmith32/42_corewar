@@ -9,8 +9,10 @@
 			"args":	[
 						"-p",
 						"-v",
-						 "resources/ld_test.cor",
-						 "resources/garg.cor"
+						"-w", "500",
+						"-s", "1",
+						"resources/ld_test.cor",
+						"resources/garg.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",

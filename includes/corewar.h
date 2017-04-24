@@ -36,6 +36,7 @@ struct					s_flag
 	unsigned int		cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
+	useconds_t			wait_time;
 	_Bool				flag_test;
 };
 
@@ -118,8 +119,8 @@ extern int32_t			g_error;
 ** FLAG_P: pretty visual printing
 */
 
-# define VALID_FLAGS	"dnpsvf"
-# define NFLAGS			6
+# define VALID_FLAGS	"dnpsvfw"
+# define NFLAGS			7
 # define FLAG_V			0x1
 # define FLAG_N			0x2
 # define FLAG_D			0x4
@@ -141,6 +142,7 @@ int						flag_n(char ***av, char **champ);
 int						flag_p(char ***av, char **champ);
 int						flag_s(char ***av, char **champ);
 int						flag_v(char ***av, char **champ);
+int						flag_w(char ***av, char **champ);
 void					print_usage(char *filename);
 
 /*
