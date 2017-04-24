@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/22 18:17:57 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/24 11:47:44 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FILES	=	asm.c\
 				search.c\
 				parse.c\
 				write.c\
+				validate_parameters.c\
 			)\
 			$(addprefix label/,\
 				search.c\
