@@ -109,7 +109,7 @@ int		zjmp(struct s_game *game, struct s_process *process)
 	{
 		read_arena(game->arena, process->pc + 1, (uint8_t *)&ind_offset,
 			IND_SIZE);
-		change_end(ind_offset, IND_SIZE);
+		change_end(&ind_offset, IND_SIZE);
 		ind_offset = ind_offset % IDX_MOD;
 		process->pc = mask_ptr(game->arena, process->pc + ind_offset);
 	}
