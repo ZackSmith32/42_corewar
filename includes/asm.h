@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/24 15:05:35 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/24 16:21:42 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,12 +155,12 @@ t_label	*search_label(char *key, t_vec *labels);
 /*
 ** op
 */
+char		**delete_grid(char **grid);
 int			parse_op(char *label, char *line, t_asm *as);
 int			search_op(char *name);
 int			write_op(int op_code, char *line, t_vec *output,
 				t_vec *label_calls);
-char		**validate_parameters(int op_code, char *line, t_vec *label_calls,
-				char *encode);
+char		**validate_parameters(int op_code, char *line, char *encode);
 
 /*
 ** read_header

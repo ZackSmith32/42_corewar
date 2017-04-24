@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/24 11:47:44 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/24 16:21:58 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SUBDIR	=	read_header line_parsing error read_body op label
 FILES	=	asm.c\
 			endian_switch.c\
 			$(addprefix op/,\
+				delete_grid.c\
 				search.c\
 				parse.c\
 				write.c\
