@@ -69,7 +69,7 @@ int				aff(struct s_game *game, struct s_process *process)
 	params[0].param_val.val = process->registors[params[0].param_val.val];
 	change_end(&params[0].param_val.val, REG_SIZE);
 	params[0].param_val.val = params[0].param_val.val % 256;
-	ft_putchar(params[0].param_val.val);
+	ft_jasprintf(&game->aff_out, "%c", (char)params[0].param_val.val);
 	process->carry = (params[0].param_val.val == 0) ? 1 : 0;
 	return (0);
 }

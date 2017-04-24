@@ -75,6 +75,7 @@ struct					s_game
 	struct s_champ		*last_live_champ;
 	_Bool				game_over;
 	unsigned int		lives;
+	t_strvec			aff_out;
 };
 
 typedef struct			s_op
