@@ -65,31 +65,16 @@ int		live(struct s_game *game, struct s_process *process)
 **			> registers are big endian, but since they are 1 byte it don't matter
 */
 
-
-int		ld(struct s_game *game, struct s_process *process)
+void	modify_carry(struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[2].argc];
-	uint8_t				*pc_temp;
-	union u_val			ind_offset;
-
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-		return (-1);
-	process->pc = pc_temp;
-	if (-1 == check_registors(process->op_code, params))
-		return (0);
-	if (params[0].param_type == T_DIR)
-		process->registors[params[1].param_val.val] = params[0].param_val.val;
-	else if (params[0].param_type == T_IND)
-	{
-		reverse_bytes(params[0].param_val.arr, IND_SIZE, ind_offset.arr);
-		read_arena(game->arena, process->pc + ind_offset.val, 
-			(uint8_t *)&process->registors[params[1].param_val.val - 1],
-			REG_SIZE);
-	}
-	printf("in : ld : move pc forward %d\n", 4);
-	return (0);
+	if (process->carry)
+		process->carry = FALSE;
+	else
+		process->carry = TRUE;
 }
+
+
+
 
 /*
 **	TEST:
@@ -126,6 +111,7 @@ int		zjmp(struct s_game *game, struct s_process *process)
 	if (1 == process->carry)
 	{
 		read_arena(game->arena, process->pc + 1, ind_offset.arr, IND_SIZE);
+		ind_offset.val = ind_offset.val % IDX_MOD;
 		process->pc = mask_ptr(game->arena, process->pc + ind_offset.val);
 	}
 	else	
@@ -133,7 +119,50 @@ int		zjmp(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
-// int		ldi(struct s_game *game, struct s_process *process)
+static t_op_arg	calc_ldi_offset(struct s_process *process,
+				struct s_parameter *params)
+{
+	union u_val	first;
+	union u_val	second;
+
+	if (params[0].param_type == T_REG)
+		reverse_bytes((void *)&process->registors[params[0].param_val.val], 
+			REG_SIZE, first.arr);
+	else
+		reverse_bytes(params[0].param_val.arr, IND_SIZE, first.arr);
+	if (params[1].param_type == T_REG)
+		reverse_bytes((void *)&process->registors[params[1].param_val.val], 
+		REG_SIZE, second.arr);
+	else
+		reverse_bytes(params[1].param_val.arr, IND_SIZE, second.arr);
+	return ((first.val + second.val) % IDX_MOD);
+}
+
+/*
+**	> Make sure to validate that parse params is shortening directs
+**		to indirect size when op.c indicates to do so.
+**	> Should I add the second param, then modulo, or do as the instructions say
+**		and add the second param after the mod?
+**	> Is the carry only modified if the function runs?
+*/
+int		ldi(struct s_game *game, struct s_process *process)
+{
+	struct s_parameter	params[g_op_tab[9].argc];
+	uint8_t				*pc_temp;
+	t_op_arg		offset;
+
+	pc_temp = process->pc;
+	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
+		return (-1);
+	process->pc = pc_temp;
+	modify_carry(process);
+	if (-1 == check_registors(process->op_code, params))
+		return (0);
+	offset = calc_ldi_offset(process, params);
+	read_arena(game->arena, process->pc + offset,
+		(void *)&process->registors[params[2].param_val.val], REG_SIZE);
+	return (0);
+}
 
 
 
