@@ -186,7 +186,7 @@ uint8_t					*write_arena(uint8_t *arena, uint8_t *arena_ptr,
 void					reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 
 /*
-** /operations/live
+** /operations/live_st_zjmp.c
 */
 int						live(struct s_game *game, struct s_process *process);
 int						st(struct s_game *game, struct s_process *process);

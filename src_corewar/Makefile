@@ -41,7 +41,7 @@ SRC = \
 			fork_lfork_aff.c \
 			utilites.c \
 			utilities2.c \
-			live.c \
+			live_st_zjmp.c \
 			ld_lld.c \
 			ldi_lldi.c \
 			validate_parameters.c \
