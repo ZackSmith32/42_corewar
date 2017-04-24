@@ -20,6 +20,8 @@ static int		add_process(uint8_t *arena, struct s_process *base_process,
 
 	if (NULL == (p = ft_memdup(base_process, sizeof(*base_process))))
 		return (-1);
+	p->op_code = *p->pc;
+	p->countdown = g_op_tab[p->op_code].cycles_required;
 	p->pc = mask_ptr(arena, p->pc + offset);
 	if (NULL == (link = lstnew(p)))
 		return (-1);

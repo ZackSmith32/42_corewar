@@ -76,7 +76,7 @@ static int				add_process(t_list **processes, uint8_t *pc,
 	p->registors[0] = ~(t_registor)champ_index;
 	change_end(&p->registors[0], sizeof(p->registors[0]));
 	p->pc = pc;
-	p->countdown = 1;
+	p->countdown = g_op_tab[p->op_code].cycles_required;
 	p->op_code = *pc;
 	if (NULL == (link = lstnew((void*)p)))
 		return (-1);
