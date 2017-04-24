@@ -10,7 +10,7 @@
 						"-p",
 						"-v",
 						 "resources/ld_test.cor",
-						 "resources/zork.cor"
+						 "resources/garg.cor"
 					],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
