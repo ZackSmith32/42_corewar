@@ -27,7 +27,7 @@ SRC = \
 			parse_args.c \
 			flags_tags.c \
 			flags_tags2.c \
-			print_usage.c \
+			print_utility.c \
 		) \
 		$(addprefix game_print/, \
 			game_print.c \
@@ -70,7 +70,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	gcc $(CFLAGS) -o $@ $^
+	gcc $(CFLAGS) -o $@ $^ -lncurses
 
 %.o: %.c
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<

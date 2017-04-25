@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <ncurses.h>
 
 struct					s_champ
 {

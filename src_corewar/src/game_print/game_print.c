@@ -33,6 +33,16 @@ static void		print_game_over(t_strvec *out, struct s_game *game)
 			game->last_live_champ->comment);
 }
 
+int			print_init (struct s_game *game, t_strvec *out)
+{
+	(void)game;
+	usleep(g_flags.wait_time);
+	out->len = 0;
+	//ft_jasprintf(out, "\033[1;1H");
+	return (0);
+
+}
+
 int			ft_jasprintf(t_strvec *ret, const char *format, ...)
 {
 	va_list		ap;
@@ -52,8 +62,7 @@ int			game_print(struct s_game *game, t_strvec *out)
 			&& (0 == g_flags.cycle_intervals_to_dump
 				|| 0 == game->current_cycles % g_flags.cycle_intervals_to_dump))
 	{
-		out->len = 0;
-		ft_jasprintf(out, "\033[1;1H");
+		print_init(game, out);
 		if (g_flags.list & FLAG_P)
 			print_hex(out, game->arena, MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
@@ -61,8 +70,11 @@ int			game_print(struct s_game *game, t_strvec *out)
 			print_game_state(out, game);
 			print_processes(out, game->arena, game->processes);
 		}
-		write(1, out->str, out->len);
-		usleep(g_flags.wait_time);
+		out->str[out->len] = 0;
+		mvprintw(0, 0,"hello\nworld\n!meow!");
+//		mvprintw(0, 0, out->str);
+		//write(1, out->str, out->len);
+		 refresh();
 	}
 	return (0);
 }
