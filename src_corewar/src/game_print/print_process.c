@@ -15,7 +15,8 @@
 void		print_process(t_strvec *out, uint8_t *arena,
 				struct s_process *process)
 {
-	size_t	i;
+	size_t		i;
+	union u_val	reg;
 
 	ft_jasprintf(out, "  carry: %d", (int)process->carry);
 	ft_jasprintf(out, "  pc: %4zu", (size_t)(process->pc - arena));
@@ -25,7 +26,10 @@ void		print_process(t_strvec *out, uint8_t *arena,
 	i = 0;
 	while (i < REG_NUMBER)
 	{
-		ft_jasprintf(out, "  r%zu: %x", i + 1, process->registors[i]);
+		if (i == 7)
+			ft_jasprintf(out, "\n                         ");
+		reverse_bytes((uint8_t *)&process->registors[i], REG_SIZE, reg.arr);
+		ft_jasprintf(out, "  r%02zu: %010u", i + 1, reg.val);
 		i++;
 	}
 }
