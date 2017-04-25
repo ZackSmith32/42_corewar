@@ -18,7 +18,7 @@
 **		> number of args it takes
 **		> array: the args it takes
 **		> number code of operation
-**		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
+**		> number of cycles to execute command
 **		> long name
 **		> includes parameter encoding byte
 **		> directs are treated as IND_SIZE

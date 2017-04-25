@@ -12,6 +12,7 @@
 
 #include <corewar.h>
 
+// TODO: Modify carry
 int		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[0x02].argc];
@@ -21,7 +22,6 @@ int		ld(struct s_game *game, struct s_process *process)
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	modify_carry(process);
 	if (-1 == check_registors(process->op_code, params))
 	{
 		process->pc = pc_temp;
@@ -33,7 +33,7 @@ int		ld(struct s_game *game, struct s_process *process)
 	{
 		reverse_bytes(params[0].param_val.arr, IND_SIZE, ind_offset.arr);
 		read_arena(game->arena, process->pc + (ind_offset.val % IDX_MOD),
-			(uint8_t *)&process->registors[params[1].param_val.val - 1],
+			(uint8_t *)&process->registors[params[1].param_val.val],
 			REG_SIZE);
 	}
 	process->pc = pc_temp;
@@ -49,7 +49,6 @@ int		lld(struct s_game *game, struct s_process *process)
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
-	modify_carry(process);
 	if (-1 == check_registors(process->op_code, params))
 	{
 		process->pc = pc_temp;
@@ -64,6 +63,7 @@ int		lld(struct s_game *game, struct s_process *process)
 			(uint8_t *)&process->registors[params[1].param_val.val - 1],
 			REG_SIZE);
 	}
+	modify_carry(process, process->registors[params[1].param_val.val]);	
 	process->pc = pc_temp;
 	return (0);
 }

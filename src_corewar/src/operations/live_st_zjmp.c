@@ -65,13 +65,7 @@ int		live(struct s_game *game, struct s_process *process)
 **			> registers are big endian, but since they are 1 byte it don't matter
 */
 
-void	modify_carry(struct s_process *process)
-{
-	if (process->carry)
-		process->carry = 0;
-	else
-		process->carry = 1;
-}
+
 
 /*
 **	TEST:

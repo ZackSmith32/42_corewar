@@ -193,7 +193,6 @@ void					reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 int						live(struct s_game *game, struct s_process *process);
 int						st(struct s_game *game, struct s_process *process);
 int						zjmp(struct s_game *game, struct s_process *process);
-void					modify_carry(struct s_process *process);
 
 /*
 ** /operations/sti.c
@@ -253,4 +252,7 @@ char					parse_and_validate_parameters(struct s_game *game,
 */
 int						check_registors(uint8_t op_code,
 							struct s_parameter *params);
+void					modify_carry(struct s_process *process, t_op_arg ret);
+
+							
 #endif
