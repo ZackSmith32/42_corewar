@@ -50,7 +50,7 @@ SRC = \
 			parse_parameters.c \
 		) \
 	) \
-	$(addprefix maxlib/list/, \
+	$(addprefix linked_list/, \
 		lstadd.c \
 		lstdel.c \
 		lstdelone.c \

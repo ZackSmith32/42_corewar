@@ -1,3 +1,0 @@
-[submodule "src_corewar/maxlib"]
-	path = src_corewar/maxlib
-	url = https://github.com/maxwellburson/42_libft.git
