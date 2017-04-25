@@ -9,7 +9,7 @@
 			"args":	[
 						"-p",
 						"-v",
-						"-w", "500",
+						"-w", "000",
 						"-s", "1",
 						"resources/ld_test.cor",
 						"resources/garg.cor"
