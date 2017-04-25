@@ -25,7 +25,7 @@ void		print_process(t_strvec *out, uint8_t *arena,
 	i = 0;
 	while (i < REG_NUMBER)
 	{
-		ft_jasprintf(out, "  r%zu: %hx", i + 1, process->registors[i]);
+		ft_jasprintf(out, "  r%zu: %x", i + 1, process->registors[i]);
 		i++;
 	}
 }
