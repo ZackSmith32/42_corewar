@@ -19,6 +19,7 @@ SRC = \
 	$(addprefix src/, \
 		corewar.c \
 		free.c \
+		game_step.c \
 		init_game_struct.c \
 		op.c \
 		utilites.c \
@@ -32,9 +33,6 @@ SRC = \
 			game_print.c \
 			print_hex.c \
 			print_process.c \
-		) \
-		$(addprefix game_step/, \
-			game_step.c \
 		) \
 		$(addprefix linked_list/, \
 			lstadd.c \
