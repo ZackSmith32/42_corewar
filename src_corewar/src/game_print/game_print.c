@@ -12,44 +12,6 @@
 
 #include <corewar.h>
 
-<<<<<<< HEAD
-=======
-void		print_process(t_strvec *out, uint8_t *arena,
-				struct s_process *process)
-{
-	size_t	i;
-
-	ft_jasprintf(out, "  carry: %d", (int)process->carry);
-	ft_jasprintf(out, "  pc: %4zu", (size_t)(process->pc - arena));
-	ft_jasprintf(out, "  countdown: %04u", process->countdown);
-	ft_jasprintf(out, "  op: %-6s", g_op_tab[process->op_code].name_short);
-	ft_jasprintf(out, "  called_live: %u", process->called_live);
-	i = 0;
-	while (i < REG_NUMBER)
-	{
-		ft_jasprintf(out, "  r%zu: %x", i + 1, process->registors[i]);
-		i++;
-	}
-}
-
-void		print_processes(t_strvec *out, uint8_t *arena, t_list *processes)
-{
-	size_t	i;
-
-	if (!(g_flags.verbosity_level & V_PROCESS))
-		return ;
-	i = 0;
-	while (processes)
-	{
-		ft_jasprintf(out, "\n\033[%um\033[1mprocess %03zu\033[0m",
-			i % 7 + 31, i);
-		print_process(out, arena, processes->content);
-		processes = processes->next;
-		i++;
-	}
-}
-
->>>>>>> f03fca04bddbcdb992913d642f7134677583f0ff
 void		print_game_state(t_strvec *out, struct s_game *game)
 {
 	if (!(g_flags.verbosity_level & V_STATE))
@@ -66,7 +28,7 @@ static void		print_game_over(t_strvec *out, struct s_game *game)
 {
 	(void)out;
 		ft_printf("\033[2J\033[1;1HPlayer %zu (%s) won\n %s\n",
-			game->last_live_champ - game->champs,
+			game->last_live_champ - game->champs + 1,
 			game->last_live_champ->prog_name,
 			game->last_live_champ->comment);
 }
@@ -84,7 +46,9 @@ int			ft_jasprintf(t_strvec *ret, const char *format, ...)
 
 int			game_print(struct s_game *game, t_strvec *out)
 {
-	if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
+	if (game->game_over)
+		print_game_over(out, game);
+	else if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
 			&& (0 == g_flags.cycle_intervals_to_dump
 				|| 0 == game->current_cycles % g_flags.cycle_intervals_to_dump))
 	{
@@ -100,7 +64,5 @@ int			game_print(struct s_game *game, t_strvec *out)
 		write(1, out->str, out->len);
 		usleep(g_flags.wait_time);
 	}
-	if (game->game_over)
-		print_game_over(out, game);
 	return (0);
 }
