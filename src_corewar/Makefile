@@ -31,6 +31,7 @@ SRC = \
 		$(addprefix game_print/, \
 			game_print.c \
 			print_hex.c \
+			print_process.c \
 		) \
 		$(addprefix game_step/, \
 			game_step.c \
