@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/24 16:21:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 16:24:37 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <corewar.h>
 
 #define HEADER master->header
-#define OUTPUT master->output
+#define OUTPUT master->opp.output
 
 
 /*
@@ -96,12 +96,23 @@ typedef struct	s_parseinfo
 }				t_parseinfo;
 
 /*
+** op_parsing holds the vectors used during operation parsing
+*/
+
+typedef struct	s_op_parse
+{
+	t_vec		label_calls;
+	t_vec		output;
+}				t_op_parse;
+
+/*
 ** t_asm is a master struct that holds information that we will need to use throughout
 ** 		the program
 **
 ** header:		Header struct comtaining magic, name, prog_size, comment
 ** cmd_info:	Holds information about the commands (such as string length)
 ** pi (parse):	Holds information on the input, and the current location in parsing
+** opp:			Holds information used for operation parsing (label_calls and output)
 ** labels:		List of labels located in the input file
 ** label_calls:	List of label called inside of the operations
 ** output:		Vector containing the byte code array
@@ -113,9 +124,10 @@ typedef struct	s_asm
 	header_t	header;
 	t_cmdinfo	cmd_info;
 	t_parseinfo	pi;
+	t_op_parse	opp;
 	t_vec		labels;
-	t_vec		label_calls;
-	t_vec		output;
+/*	t_vec		label_calls;
+	t_vec		output;*/
 	char		*name;
 }				t_asm;
 
@@ -158,9 +170,9 @@ t_label	*search_label(char *key, t_vec *labels);
 char		**delete_grid(char **grid);
 int			parse_op(char *label, char *line, t_asm *as);
 int			search_op(char *name);
-int			write_op(int op_code, char *line, t_vec *output,
-				t_vec *label_calls);
-char		**validate_parameters(int op_code, char *line, char *encode);
+int			write_op(int op_code, char *line, t_op_parse *opp);
+char		**validate_parameters(const t_op *op, char *line, char *encode);
+int			add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr, char *param);
 
 /*
 ** read_header

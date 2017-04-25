@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/22 18:18:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 16:26:40 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	clear_labels(t_vec *label)
 int	asm_error(t_asm *master, int ern)
 {
 	clear_labels(&master->labels);
-	clear_labels(&master->label_calls);
-	ft_memdel(&master->output.arr);
+	clear_labels(&master->opp.label_calls);
+	ft_memdel(&master->opp.output.arr);
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 
 	if (ern != 2)

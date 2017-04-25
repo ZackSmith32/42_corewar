@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 11:47:01 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/24 16:50:06 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 14:21:47 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,14 @@ static int	build_encoding(const t_op *op, char *encode, int i, char pre)
 ** validated parameters or NULL if the paramters are invalid.
 */
 
-char	**validate_parameters(int op_code, char *line, char *encode)
+char	**validate_parameters(const t_op *op, char *line, char *encode)
 {
-	const t_op	*op;
 	char		**ret;
 	char		*tmp;
 	int			i;
 
 	if (!(ret = ft_strsplit(line, SEPARATOR_CHAR)))
 		return (NULL);
-	op = &g_op_tab[op_code];
 	i = 0;
 	while (ret[i])
 	{
