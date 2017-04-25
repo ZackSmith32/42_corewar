@@ -92,7 +92,19 @@ typedef struct			s_op
 }						t_op;
 
 typedef uint64_t		t_op_arg;
+
+# if IND_SIZE == 1
+typedef int8_t			t_ind;
+# endif
+# if IND_SIZE == 2
 typedef int16_t			t_ind;
+# endif
+# if IND_SIZE == 4
+typedef int32_t			t_ind;
+# endif
+# if IND_SIZE == 8
+typedef int64_t			t_ind;
+# endif
 
 union					u_val
 {

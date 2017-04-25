@@ -29,7 +29,7 @@ void		print_process(t_strvec *out, uint8_t *arena,
 		if (i == 7)
 			ft_jasprintf(out, "\n                         ");
 		reverse_bytes((uint8_t *)&process->registors[i], REG_SIZE, reg.arr);
-		ft_jasprintf(out, "  r%02zu: %010u", i + 1, reg.val);
+		ft_jasprintf(out, "  r%02zu: %010u", i + 1, (uint32_t)reg.val);
 		i++;
 	}
 }
