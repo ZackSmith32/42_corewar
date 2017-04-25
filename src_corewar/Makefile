@@ -36,6 +36,18 @@ SRC = \
 		$(addprefix game_step/, \
 			game_step.c \
 		) \
+		$(addprefix linked_list/, \
+			lstadd.c \
+			lstdel.c \
+			lstdelone.c \
+			lstiter.c \
+			lstmap.c \
+			lstnew.c \
+			lstprint.c \
+			lstpush.c \
+			lstreverse.c \
+			lstsort.c \
+		) \
 		$(addprefix operations/, \
 			sti.c \
 			add_sub.c \
@@ -50,18 +62,6 @@ SRC = \
 			parse_parameters.c \
 		) \
 	) \
-	$(addprefix linked_list/, \
-		lstadd.c \
-		lstdel.c \
-		lstdelone.c \
-		lstiter.c \
-		lstmap.c \
-		lstnew.c \
-		lstprint.c \
-		lstpush.c \
-		lstreverse.c \
-		lstsort.c \
-	)
 
 OBJ = $(SRC:.c=.o)
 
