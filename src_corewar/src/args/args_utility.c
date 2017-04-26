@@ -27,7 +27,6 @@ void	print_usage(char *filename)
 		"-w N       : Wait time in microseconds, default 250000\n",
 		"Game Settings:\n",
 		"-Max Players    : ", MAX_PLAYERS, "\n",
-		"-Max Champ Size : ", CHAMP_MAX_SIZE, " bytes\n"
-		);
+		"-Max Champ Size : ", CHAMP_MAX_SIZE, " bytes\n");
 	exit(0);
 }

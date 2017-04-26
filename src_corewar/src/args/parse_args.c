@@ -12,14 +12,6 @@
 
 #include <corewar.h>
 
-static int	flag_f(char ***av, char **champ)
-{
-	(void)av;
-	(void)champ;
-	g_flags.flag_test = 1;
-	return (0);
-}
-
 static void	print_flag_status(void)
 {
 	static int	count;
@@ -76,7 +68,16 @@ static void	parse_init(int (*flag_set[NFLAGS])(char ***av, char **champ),
 	*flags = VALID_FLAGS;
 }
 
-static void parse_exit(void)
+/*
+**	COLOR_PAIR(n)
+**	n       :  Description
+**	1       :  border
+**	2       :  default output
+**  3       :  non-zero output
+**	10 - 16 :  champion colors
+*/
+
+static void	parse_exit(void)
 {
 	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
 	{
@@ -86,9 +87,9 @@ static void parse_exit(void)
 		clear();
 		start_color();
 		COLORS = 17;
-		init_pair(1, COLOR_BLACK, COLOR_WHITE); //border
-		init_pair(2, COLOR_WHITE, COLOR_BLACK); //basic out
-		init_pair(3, COLOR_CYAN, COLOR_BLACK); //non-zero out
+		init_pair(1, COLOR_BLACK, COLOR_WHITE);
+		init_pair(2, COLOR_WHITE, COLOR_BLACK);
+		init_pair(3, COLOR_CYAN, COLOR_BLACK);
 		init_pair(10, COLOR_BLACK, COLOR_RED);
 		init_pair(11, COLOR_BLACK, COLOR_GREEN);
 		init_pair(12, COLOR_BLACK, COLOR_YELLOW);
