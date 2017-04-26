@@ -37,9 +37,9 @@ int		ldi(struct s_game *game, struct s_process *process)
 		process->pc = pc_temp;
 		return (0);
 	}
-	offset = calc_ldi_offset(process, params);
+	offset = calc_ldi_offset(process, params); //this offset is getting set to the wrong value (maybe make sure the endianess is right?)
 	read_arena(game->arena, process->pc + (offset % IDX_MOD),
-		(void *)&process->registors[params[2].param_val.val], REG_SIZE);
+		(void *)&process->registors[params[2].param_val.val], REG_SIZE); //registors are not referenced starting at zero so we need to subtract 1 from the registor access val (what happens if that value is zero?)
 	modify_carry(process, process->registors[params[2].param_val.val]);
 	process->pc = pc_temp;
 	return (0);

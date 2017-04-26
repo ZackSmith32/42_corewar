@@ -54,9 +54,6 @@ static int				step_processes(struct s_game *game)
 
 static void				kill_processes(t_list **processes)
 {
-	t_list *tail;
-
-	tail = *processes;
 	while (*processes)
 	{
 		while (((struct s_process*)(*processes)->content)->called_live == false)
