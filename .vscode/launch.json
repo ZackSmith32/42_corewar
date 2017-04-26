@@ -14,7 +14,7 @@
 						"resources/ld_test.cor",
 						"resources/garg.cor"
 					],
-			"stopAtEntry": false,
+			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",
 			"environment": [],
 			"externalConsole": true,
