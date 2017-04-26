@@ -21,7 +21,7 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 {
 	if (param->param_type == T_REG)
 	{
-		if (param->param_val.val >= REG_NUMBER)
+		if (--param->param_val.val >= REG_NUMBER) //TODO: clean me up
 			return (-1);
 		param->param_val.val = process->registors[param->param_val.val];
 	}
@@ -43,7 +43,7 @@ int					and(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	if (params[2].param_val.val >= REG_NUMBER
+	if (--params[2].param_val.val >= REG_NUMBER //clean me up
 		|| -1 == flatten(game->arena, process, &params[0])
 		|| -1 == flatten(game->arena, process, &params[1]))
 		return (0);
@@ -64,7 +64,7 @@ int					or(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	if (params[2].param_val.val >= REG_NUMBER
+	if (--params[2].param_val.val >= REG_NUMBER
 		|| -1 == flatten(game->arena, process, &params[0])
 		|| -1 == flatten(game->arena, process, &params[1]))
 		return (0);
@@ -85,7 +85,7 @@ int					xor(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	if (params[2].param_val.val >= REG_NUMBER
+	if (--params[2].param_val.val >= REG_NUMBER
 		|| -1 == flatten(game->arena, process, &params[0])
 		|| -1 == flatten(game->arena, process, &params[1]))
 		return (0);

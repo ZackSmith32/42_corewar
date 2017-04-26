@@ -66,7 +66,7 @@ int				aff(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	process->pc = pc_temp;
-	if (params[0].param_val.val >= REG_NUMBER)
+	if (--params[0].param_val.val >= REG_NUMBER) //TODO: fix me
 		return (0);
 	params[0].param_val.val = process->registors[params[0].param_val.val];
 	change_end(&params[0].param_val.val, REG_SIZE);
