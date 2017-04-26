@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/17 18:35:57 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/19 22:57:38 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,19 @@ struct					s_game
 	t_strvec			aff_out;
 };
 
-typedef struct			s_op
+/*
+**	t_op contents:
+**		> short name
+**		> number of args it takes
+**		> array: the args it takes
+**		> number code of operation
+**		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
+**		> long name
+**		> 0: no encoding byte 1: encoding byte
+**		> index flag: (direct and indirect are same size) 0/1
+*/
+
+typedef struct		s_op
 {
 	char		*name_short;
 	int			argc;

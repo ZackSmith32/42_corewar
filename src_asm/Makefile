@@ -6,24 +6,60 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/15 20:05:09 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/26 13:28:01 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = asm
+NAME	= asm
 
-MAKE = make
+MAKE	= make
 
-FILES = asm.c\
-		asm_error.c
+SUBDIR	=	read_header line_parsing error read_body op label param
 
-SRC	= $(addprefix src/, $(FILES))
-OBJ = $(addprefix build/, $(FILES:.c=.o))
-LIB = libft
+FILES	=	asm.c\
+			endian_switch.c\
+			$(addprefix op/,\
+				delete_grid.c\
+				search.c\
+				parse.c\
+				write.c\
+				validate_parameters.c\
+				validate_numbers.c\
+				load_byte_code.c\
+				add_label_call.c\
+				add_param.c\
+			)\
+			$(addprefix label/,\
+				fill_labels.c\
+				search.c\
+				parse.c\
+				new.c\
+				dup.c\
+			)\
+			$(addprefix read_header/,\
+				read_header.c\
+				read_commands.c\
+			)\
+			$(addprefix read_body/,\
+				parse_line.c\
+				read_body.c\
+			)\
+			$(addprefix line_parsing/,\
+				is_labelchar.c\
+				skip_whitespaces.c)\
+			$(addprefix error/,\
+				asm_error.c)\
+			op.c\
+#			test_mallocwrap.c
 
-IFLAGS = -I libft/includes -I ../includes 
+SRC		= $(addprefix src/, $(FILES))
+OBJ		= $(addprefix build/, $(FILES:.c=.o))
+OBJDIR	= $(addprefix build/, $(SUBDIR))
+LIB		= libft
+
+IFLAGS	= -I libft/includes -I ../includes 
 LFLAGS	= -L $(LIB) -lft
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address
 
 all: $(NAME)
 
@@ -41,13 +77,14 @@ force:
 
 build:
 	mkdir build/
+	mkdir -p $(OBJDIR)
 
 clean:
-	rm -f build
+	rm -rf build
 	$(MAKE) -C $(LIB) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 
