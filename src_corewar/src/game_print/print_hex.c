@@ -22,12 +22,14 @@ void 			*memxor(void *p, int val, size_t size)
 	return p;
 }
 
-int				color_code(t_list *process)
+uint32_t				color_code(t_list *process)
 {
 	uint32_t	cnum;
 
 	cnum = ((struct s_process *)process->content)->registors[0];
 	memxor(&cnum, ~0, sizeof(cnum));
+	if (cnum > MAX_PLAYERS)
+		return (1);
 	cnum = cnum % (COLORS - 10) + 10;
 	return (cnum);
 }
