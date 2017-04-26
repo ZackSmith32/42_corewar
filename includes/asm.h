@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:29:23 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 21:40:42 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,17 @@
 
 # include <corewar.h>
 
-#define HEADER master->header
-#define OUTPUT master->opp.output
-
+# define HEADER master->header
+# define OUTPUT master->opp.output
 
 /*
 ** Error macros:
 */
 
-#define SYNTAX	-6
-#define LEXICAL	-7
-#define NAME_LONG -8
-#define COMM_LONG -9
-
-/*
-** Command notes:
-** 
-**		Label_chars are the only valid characters for function names
-*/
-
-/*
-** sti: 1st parameter may be indirect or direct, 2nd parameter must be indirect
-*/
+# define SYNTAX	-6
+# define LEXICAL	-7
+# define NAME_LONG -8
+# define COMM_LONG -9
 
 /*
 ** t_label holds the name and address of the labels found in the file
@@ -76,7 +65,7 @@ typedef struct	s_label_calls
 **					bit: 2 == name command
 */
 
-typedef struct s_cmdinfo
+typedef struct	s_cmdinfo
 {
 	size_t		name_cmd_len;
 	size_t		comment_cmd_len;
@@ -130,64 +119,60 @@ typedef struct	s_asm
 	char		*name;
 }				t_asm;
 
-
 /*
 ** error 
 */
 
-int			print_error(int ern, char *str, int row, int col);
-int			asm_error(t_asm *master, int ern);
+int				print_error(int ern, char *str, int row, int col);
+int				asm_error(t_asm *master, int ern);
 
 /*
 ** endian_switch.c
 */
-uint8_t		flip_uint8(uint8_t nbr);
-uint32_t	flip_uint32(uint32_t nbr);
-uint32_t	flip_uint64(uint64_t nbr);
-
+uint8_t			flip_uint8(uint8_t nbr);
+uint32_t		flip_uint32(uint32_t nbr);
+uint32_t		flip_uint64(uint64_t nbr);
 
 /*
 ** line_parsing
 */
 
-char	*skip_whitespaces(char *line);
-int		is_labelchar(char c);
-char	*skip_space_rev(char *line, int len);///
-int		next_token(char **cp);///
+char			*skip_whitespaces(char *line);
+int				is_labelchar(char c);
+char			*skip_space_rev(char *line, int len);///
 
 /*
 ** label
 */
-char	*dup_label(char	**src, int *col);
-int		parse_label(char *cp, t_asm *as, int depth);
-int		new_label(t_vec *labels, char *name, int address);
-t_label	*search_label(char *key, t_vec *labels);
-int		fill_labels(t_vec *labels, t_vec *label_calls, t_vec *output);
+char			*dup_label(char	**src, int *col);
+int				parse_label(char *cp, t_asm *as, int depth);
+int				new_label(t_vec *labels, char *name, int address);
+t_label			*search_label(char *key, t_vec *labels);
+int				fill_labels(t_vec *labels, t_vec *label_calls, t_vec *output);
 
 /*
 ** op
 */
-char		**delete_grid(char **grid);
-int			parse_op(char *label, char *line, t_asm *as);
-int			search_op(char *name);
-int			write_op(int op_code, char *line, t_op_parse *opp);
-char		**validate_parameters(const t_op *op, char *line, char *encode);
-int			validate_atointmax(intmax_t *ret, char *str);
-int			add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr, char *param);
-int			add_param(const t_op *op, t_vec *output, char *param);
-char		*load_byte_code(intmax_t value, int size);
-
+char			**delete_grid(char **grid);
+int				parse_op(char *label, char *line, t_asm *as);
+int				search_op(char *name);
+int				write_op(int op_code, char *line, t_op_parse *opp);
+char			**validate_parameters(const t_op *op, char *line, char *encode);
+int				validate_atointmax(intmax_t *ret, char *str);
+char			*load_byte_code(intmax_t value, int size);
+int				add_param(const t_op *op, t_vec *output, char *param);
+int				add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr,
+					char *param);
 /*
 ** read_header
 */
-int	read_header(t_asm *as);
-int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info);
-
+int				read_header(t_asm *as);
+int				read_command(header_t *header, char *line, t_parseinfo *pi,
+					t_cmdinfo *info);
 /*
 ** read_body
 */
-int	read_body(t_asm *as);
-int	parse_line(char	*head, t_asm *as, int depth);
-
+int				read_body(t_asm *as);
+int				parse_line(char	*head, t_asm *as, int depth);
 
 #endif
