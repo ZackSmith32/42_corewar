@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 21:52:37 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:19:56 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 22:29:12 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	parse_label(char *cp, t_asm *as, int depth)
 			return (1);
 	}
 	else if (parse_op(label, cp, as))
+	{
+		ft_strdel(&label);
 		return (1);
+	}
+	ft_strdel(&label);
 	return (0);
 }

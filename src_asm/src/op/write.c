@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 18:01:59 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 20:02:44 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 09:46:21 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	write_op(int op_code, char *line, t_op_parse *opp)
 	const t_op	*op;
 	char		**params;
 	int			op_addr;
+	int			ern;
 	char		encode;
 
 	encode = 0;
@@ -80,9 +81,8 @@ int	write_op(int op_code, char *line, t_op_parse *opp)
 	ft_printf("op:%s line:%s\n", op->name_short, line);
 	if (!(params = validate_parameters(op, line, &encode)))
 		return (1);
-	if (initialize_output(op_code, encode, &opp->output))
-		return (1);
-	if (transform_parameters(op, op_addr, params, opp))
-		return (1);
-	return (0);
+	if ((ern = initialize_output(op_code, encode, &opp->output)) == 0)
+		ern = transform_parameters(op, op_addr, params, opp);
+	delete_grid(params);
+	return (ern);
 }

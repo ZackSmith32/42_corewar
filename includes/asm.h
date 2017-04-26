@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:40:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 21:44:28 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ typedef struct	s_op_parse
 }				t_op_parse;
 
 /*
-** t_asm is a master struct that holds information that we will need to use throughout
-** 		the program
+** t_asm is a master struct that holds information that we will need to use
+**		throughout the program
 **
 ** header:		Header struct comtaining magic, name, prog_size, comment
 ** cmd_info:	Holds information about the commands (such as string length)
-** pi (parse):	Holds information on the input, and the current location in parsing
-** opp:			Holds information used for operation parsing (label_calls and output)
+** pi (parse):	Holds information on the input, and the current parsing location
+** opp:			Holds label_calls and output which are used for op parsing
 ** labels:		List of labels located in the input file
 ** label_calls:	List of label called inside of the operations
 ** output:		Vector containing the byte code array
@@ -120,7 +120,7 @@ typedef struct	s_asm
 }				t_asm;
 
 /*
-** error 
+** error
 */
 
 int				print_error(int ern, char *str, int row, int col);

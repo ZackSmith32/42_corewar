@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/20 22:30:04 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 22:00:12 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 /*
 ** Scans multiple lines in order to complete the quote for the command string
+*/
+
+/*
+** Idea for completing quotes (run strchr on '"' and "#" if the latter is greater
+** then null terminate and use the resulting string).
 */
 
 static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,

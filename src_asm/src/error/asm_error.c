@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 20:40:50 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 22:27:22 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,25 @@ int	print_error(int ern, char *str, int row, int col)
 	return (ern);
 }
 
-void	clear_labels(t_vec *label)
+static void	clear_labels(t_vec *label, int label_flag)
 {
-	t_label *current;
+	t_label			*lbl;
+	t_label_calls	*call;
 	size_t	i;
 
 	i = 0;
 	while (i < label->len)
 	{
-		current = ft_vecindex(label, i);
-		ft_memdel((void*)&current->name);
+		if (label_flag)
+		{
+			lbl = (t_label*)ft_vecindex(label, i);
+			ft_strdel(&lbl->name);
+		}
+		else
+		{
+			call = (t_label_calls*)ft_vecindex(label, i);
+			ft_strdel(&call->name);
+		}
 		i++;
 	}
 	ft_memdel(&label->arr);
@@ -54,11 +63,12 @@ void	clear_labels(t_vec *label)
 
 int	asm_error(t_asm *master, int ern)
 {
-	clear_labels(&master->labels);
-	clear_labels(&master->opp.label_calls);
+	clear_labels(&master->labels, 1);
+	clear_labels(&master->opp.label_calls, 0);
 	ft_memdel(&master->opp.output.arr);
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 
+	ft_strdel(&master->name);
 	if (ern != 2)
 		close(master->pi.fd);
 	return(ern);
