@@ -85,7 +85,7 @@ static void parse_exit(void)
 		curs_set(FALSE);
 		clear();
 		start_color();
-		COLORS = 10;
+		COLORS = 17;
 		init_pair(1, COLOR_BLACK, COLOR_WHITE); //border
 		init_pair(2, COLOR_WHITE, COLOR_BLACK); //basic out
 		init_pair(3, COLOR_CYAN, COLOR_BLACK); //non-zero out

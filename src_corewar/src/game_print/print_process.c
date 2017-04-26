@@ -50,14 +50,10 @@ void		print_processes(t_strvec *out, uint8_t *arena, t_list *processes)
 	i = 0;
 	while (processes)
 	{
-		// ft_jasprintf(out, "\n");
-		// ft_jasprintf(out, "\033[%um\033[1m", i % 7 + 31);
-		// ft_jasprintf(out, "process %03zu", i);
-		// ft_jasprintf(out, "\033[0m");
 		printw("\n");
-		//attron();
+		attron(COLOR_PAIR(color_code(processes)) | A_REVERSE);
 		printw("process %03zu", i);
-		//attron();
+		attrset(A_NORMAL);
 		print_process(out, arena, processes->content);
 		processes = processes->next;
 		i++;

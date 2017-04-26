@@ -179,6 +179,9 @@ void					print_processes(t_strvec *out, uint8_t *arena,
 							t_list *processes);
 void					print_hex(t_strvec *out, void *loc, size_t size,
 							t_list *processes);
+int						color_code(t_list *processes);
+void 					*memxor(void *p, int val, size_t size);
+
 /*
 ** free.c
 */

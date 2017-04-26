@@ -17,13 +17,18 @@ void		print_game_state(t_strvec *out, struct s_game *game)
 	(void)out;
 	if (!(g_flags.verbosity_level & V_STATE))
 		return ;
-	//ft_jasprintf(out,
 	printw(
 			"\ncycles current/death:%4u/%4u  check count/max: %u/%u"
-			"  lives:%3u  last_live_champ: %-32s",
+			"  lives:%3u  last_live_champ: ",
 			game->current_cycles, game->cycles_to_death,
 			game->check_count, MAX_CHECKS,
-			game->lives, game->last_live_champ->prog_name);
+			game->lives);
+	if (game->last_live_champ)
+		attron(COLOR_PAIR(game->last_live_champ - game->champs + 10)
+			| A_REVERSE);
+	printw("%-100s", game->last_live_champ->prog_name);
+	if (game->last_live_champ)
+		attrset(A_NORMAL);
 }
 
 static void		print_game_over(t_strvec *out, struct s_game *game)
@@ -38,7 +43,19 @@ static void		print_game_over(t_strvec *out, struct s_game *game)
 
 int			print_init (struct s_game *game, t_strvec *out)
 {
+	static int	h_prev;
+	static int	w_prev;
+	int			h;
+	int			w;
+
 	(void)game;
+	getmaxyx(stdscr, h, w);
+	if (h != h_prev || w != w_prev)
+	{
+		clear();
+		h_prev = h;
+		w_prev = w;
+	}
 	usleep(g_flags.wait_time);
 	out->len = 0;
 	move(0, 0);
@@ -73,8 +90,6 @@ int			game_print(struct s_game *game, t_strvec *out)
 			print_game_state(out, game);
 			print_processes(out, game->arena, game->processes);
 		}
-		//out->str[out->len] = 0;
-		//write(1, out->str, out->len);
 		 refresh();
 	}
 	return (0);
