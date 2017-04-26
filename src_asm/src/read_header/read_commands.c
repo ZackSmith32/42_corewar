@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:18:11 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:20:35 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 /*
 ** Scans multiple lines in order to complete the quote for the command string
-*/
-
-/*
-** have the end be strchr '"' then skip_whitespaces after the quote.
 */
 
 static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
@@ -89,11 +85,11 @@ static int	read_quotes(char *dst, char *src, size_t max, t_parseinfo *pi)
 **		.comment: Prefaces the comment for the champion
 */
 
-int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
+int			read_command(header_t *header, char *line, t_parseinfo *pi,
+		t_cmdinfo *info)
 {
 	int			ern;
 
-//	ft_printf("Reading commands:%.6s\n", line);///
 	if (!ft_strncmp(line, COMMENT_CMD_STRING, info->comment_cmd_len))
 	{
 		line += info->comment_cmd_len;
@@ -105,7 +101,6 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 	}
 	else if (!ft_strncmp(line, NAME_CMD_STRING, info->name_cmd_len))
 	{
-//		ft_printf("reading name\n");///
 		line += info->name_cmd_len;
 		pi->col += info->name_cmd_len;
 		if ((ern = read_quotes(header->prog_name, line, PROG_NAME_LENGTH, pi))
@@ -115,4 +110,3 @@ int	read_command(header_t *header, char *line, t_parseinfo *pi, t_cmdinfo *info)
 	}
 	return (0);
 }
-
