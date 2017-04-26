@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 20:18:03 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 22:27:00 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:31:49 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ static t_label	*find_label(t_vec *labels, char *key)
 	size_t	i;
 
 	i = 0;
-	ft_printf("labels->len:%zu labels->size:%zu\n", labels->len, labels->size);///
 	while (i < labels->len)
 	{
 		ret = ft_vecindex(labels, i);
-		ft_printf("\e[93mkey:%s ret->name:%s\e[0m\n", key, ret->name);///
 		if (ft_strcmp(key, ret->name) == 0)
 			return (ret);
 		i++;
@@ -39,7 +37,7 @@ static t_label	*find_label(t_vec *labels, char *key)
 ** and fill in the appropriate values into the output string.
 */
 
-int	fill_labels(t_vec *labels, t_vec *label_calls, t_vec *output)
+int				fill_labels(t_vec *labels, t_vec *label_calls, t_vec *output)
 {
 	t_label			*label;
 	t_label_calls	*call;

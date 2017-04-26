@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_label.c                                     :+:      :+:    :+:   */
+/*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 14:13:32 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/22 14:20:06 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:30:53 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_label	*search_label(char *key, t_vec *labels)
 	while (i < labels->len)
 	{
 		current = ft_vecindex(labels, i);
-		ft_printf("current->name:%s\n", current->name);///
 		if (ft_strcmp(key, current->name) == 0)
 			return (current);
 		i++;

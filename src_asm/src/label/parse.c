@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 21:52:37 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 10:11:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:30:25 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	parse_label(char *cp, t_asm *as, int depth)
 {
-	char 	*label;
+	char	*label;
 	int		ern;
 
 	if (!(label = dup_label(&cp, &as->pi.col)))
