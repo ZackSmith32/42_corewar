@@ -41,7 +41,7 @@ static void		print_game_over(t_strvec *out, struct s_game *game)
 		game->last_live_champ->comment);
 }
 
-int				print_init(struct s_game *game, t_strvec *out)
+static int		print_init(struct s_game *game, t_strvec *out)
 {
 	static int	h_prev;
 	static int	w_prev;

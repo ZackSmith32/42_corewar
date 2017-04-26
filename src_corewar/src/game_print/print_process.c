@@ -25,19 +25,18 @@ void		print_process(t_strvec *out, uint8_t *arena,
 	printw("  op: %-6s", g_op_tab[process->op_code].name_short);
 	printw("  called_live: %u", process->called_live);
 	i = 0;
-	while (i < REG_NUMBER)
-	{
-		ft_bzero(&reg, sizeof(reg));
-		if (i == 7)
-			printw("\n                         ");
-		reverse_bytes((uint8_t *)&process->registors[i], REG_SIZE, reg.arr);
-		if (reg.val)
-			attron(COLOR_PAIR(3));
-		printw("  r%02zu: %010u", i + 1, reg.val);
-		if (reg.val)
-			attrset(A_NORMAL);
-		i++;
-	}
+	if (g_flags.verbosity_level & V_REGISTORS)
+		while (i < REG_NUMBER)
+		{
+			ft_bzero(&reg, sizeof(reg));
+			reverse_bytes((uint8_t *)&process->registors[i], REG_SIZE, reg.arr);
+			if (reg.val)
+				attron(COLOR_PAIR(3));
+			printw("  r%02zu: %010u", i + 1, reg.val);
+			if (reg.val)
+				attrset(A_NORMAL);
+			i++;
+		}
 }
 
 void		print_processes(t_strvec *out, uint8_t *arena, t_list *processes)

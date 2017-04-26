@@ -153,6 +153,7 @@ extern int32_t			g_error;
 # define FLAG_P			0x10
 # define V_STATE		0x1
 # define V_PROCESS		0x2
+# define V_REGISTORS	0x4
 
 # define NUMBER_OF_FUNCTIONS 17
 
