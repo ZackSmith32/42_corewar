@@ -60,7 +60,8 @@ static int	fill_champ(char ***av, char **champ)
 	return (0);
 }
 
-static void	fill_flag_set(int (*flag_set[NFLAGS])(char ***av, char **champ))
+static void	parse_init(int (*flag_set[NFLAGS])(char ***av, char **champ),
+				char **champ, char **flags)
 {
 	flag_set[0] = &flag_d;
 	flag_set[1] = &flag_n;
@@ -69,6 +70,33 @@ static void	fill_flag_set(int (*flag_set[NFLAGS])(char ***av, char **champ))
 	flag_set[4] = &flag_v;
 	flag_set[5] = &flag_f;
 	flag_set[6] = &flag_w;
+	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS);
+	ft_bzero(&g_flags, sizeof(g_flags));
+	g_flags.wait_time = 250000;
+	*flags = VALID_FLAGS;
+}
+
+static void parse_exit(void)
+{
+	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
+	{
+		initscr();
+		noecho();
+		curs_set(FALSE);
+		clear();
+		start_color();
+		COLORS = 17;
+		init_pair(1, COLOR_BLACK, COLOR_WHITE); //border
+		init_pair(2, COLOR_WHITE, COLOR_BLACK); //basic out
+		init_pair(3, COLOR_CYAN, COLOR_BLACK); //non-zero out
+		init_pair(10, COLOR_BLACK, COLOR_RED);
+		init_pair(11, COLOR_BLACK, COLOR_GREEN);
+		init_pair(12, COLOR_BLACK, COLOR_YELLOW);
+		init_pair(13, COLOR_BLACK, COLOR_BLUE);
+		init_pair(14, COLOR_BLACK, COLOR_MAGENTA);
+		init_pair(15, COLOR_BLACK, COLOR_CYAN);
+		init_pair(16, COLOR_BLACK, COLOR_WHITE);
+	}
 }
 
 int			parse_args(int ac, char ***av, char **champ)
@@ -77,13 +105,7 @@ int			parse_args(int ac, char ***av, char **champ)
 	uintmax_t	func_code;
 	int			(*flag_set[NFLAGS])(char ***av, char **champ);
 
-	if (ac == 1)
-		print_usage(**av);
-	fill_flag_set(flag_set);
-	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS + 1);
-	ft_bzero(&g_flags, sizeof(g_flags));
-	g_flags.wait_time = 250000;
-	flags = VALID_FLAGS;
+	(ac == 1) ? print_usage(**av) : parse_init(flag_set, champ, &flags);
 	while (++(*av) && **av && ***av == '-' && ++(**av))
 	{
 		if ((func_code = ft_strchr(flags, ***av) - flags) < NFLAGS
@@ -95,7 +117,6 @@ int			parse_args(int ac, char ***av, char **champ)
 	}
 	if (**av && -1 == fill_champ(av, champ) && (g_error = 3))
 		return (-1);
-	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
-		ft_putstr("\033[2J");
+	parse_exit();
 	return (0);
 }

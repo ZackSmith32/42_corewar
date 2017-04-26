@@ -18,23 +18,24 @@ void		print_process(t_strvec *out, uint8_t *arena,
 	size_t		i;
 	union u_val	reg;
 
-	ft_jasprintf(out, "  carry: %d", (int)process->carry);
-	ft_jasprintf(out, "  pc: %4zu", (size_t)(process->pc - arena));
-	ft_jasprintf(out, "  countdown: %04u", process->countdown);
-	ft_jasprintf(out, "  op: %-6s", g_op_tab[process->op_code].name_short);
-	ft_jasprintf(out, "  called_live: %u", process->called_live);
+	(void)out;
+	printw("  carry: %d", (int)process->carry);
+	printw("  pc: %4zu", (size_t)(process->pc - arena));
+	printw("  countdown: %04u", process->countdown);
+	printw("  op: %-6s", g_op_tab[process->op_code].name_short);
+	printw("  called_live: %u", process->called_live);
 	i = 0;
 	while (i < REG_NUMBER)
 	{
 		ft_bzero(&reg, sizeof(reg));
 		if (i == 7)
-			ft_jasprintf(out, "\n                         ");
+			printw("\n                         ");
 		reverse_bytes((uint8_t *)&process->registors[i], REG_SIZE, reg.arr);
 		if (reg.val)
-			ft_jasprintf(out, "\033[96m");
-		ft_jasprintf(out, "  r%02zu: %010u", i + 1, reg.val);
+			attron(COLOR_PAIR(3));
+		printw("  r%02zu: %010u", i + 1, reg.val);
 		if (reg.val)
-			ft_jasprintf(out, "\033[0m");
+			attrset(A_NORMAL);
 		i++;
 	}
 }
@@ -43,13 +44,16 @@ void		print_processes(t_strvec *out, uint8_t *arena, t_list *processes)
 {
 	size_t	i;
 
+	(void)out;
 	if (!(g_flags.verbosity_level & V_PROCESS))
 		return ;
 	i = 0;
 	while (processes)
 	{
-		ft_jasprintf(out, "\n\033[%um\033[1mprocess %03zu\033[0m",
-			i % 7 + 31, i);
+		printw("\n");
+		attron(COLOR_PAIR(color_code(processes)) | A_REVERSE);
+		printw("process %03zu", i);
+		attrset(A_NORMAL);
 		print_process(out, arena, processes->content);
 		processes = processes->next;
 		i++;
