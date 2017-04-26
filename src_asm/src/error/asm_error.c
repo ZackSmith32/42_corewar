@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 16:26:40 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 20:26:14 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,9 @@ static const char	*g_error_message[] =
 	"Lexical error at [%d:%d]\n",					///7
 	"Name is too long\n",							///8
 	"Comment is too long\n",						///9
+	"Program size too big\n",						///10
 };
-/*
-static int	find_position(char *file, char *cursor, int *col)
-{
-	char	*next;
-	int		row;
 
-	if(!(file))
-		return (0);
-	next = ft_strchr(file, '\n');
-	row = 0;
-	while (next && next < cursor)
-	{
-		file = next;
-		next = ft_strchr(file, '\n');
-		if (next)
-			next++;
-		row++;
-	}
-	if (cursor && file)
-		*col = (cursor - file) + 1;
-	return (row ? row : 1);
-}
-*/
 int	print_error(int ern, char *str, int row, int col)
 {
 	if (ern < 0)
