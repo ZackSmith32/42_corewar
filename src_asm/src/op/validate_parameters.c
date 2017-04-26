@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 11:47:01 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:38:07 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:48:18 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	build_encoding(const t_op *op, char *encode, int i, char pre)
 		(*encode) |= (DIR_CODE << (2 * (MAX_ARGS_NUMBER - i - 1)));
 	else if (pre == 'r' && (op->arg_type[i] & T_REG))
 		(*encode) |= (REG_CODE << (2 * (MAX_ARGS_NUMBER - i - 1)));
-	else if ((ft_isdigit(pre) || pre == LABEL_CHAR) && op->arg_type[i] & T_IND)
+	else if ((ft_isdigit(pre) || pre == LABEL_CHAR || pre == '-')
+			&& op->arg_type[i] & T_IND)
 		(*encode) |= (IND_CODE << (2 * (MAX_ARGS_NUMBER - i - 1)));
 	else
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 16:28:15 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:46:09 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	read_header(t_asm *as)
 	int		ern;
 
 	as->header.magic = flip_uint32(COREWAR_EXEC_MAGIC);
-	while ((ern = get_next_line(as->pi.fd, &line)) > 0)
+	while ((ern = get_next_line(as->pi.fd, &line)) >= 0)
 	{
 		as->pi.row++;
 		cp = skip_whitespaces(line);
