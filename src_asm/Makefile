@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/26 11:13:59 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/26 13:28:01 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ FILES	=	asm.c\
 			)\
 			$(addprefix line_parsing/,\
 				is_labelchar.c\
-				skip_space_rev.c\
 				skip_whitespaces.c)\
 			$(addprefix error/,\
 				asm_error.c)\
