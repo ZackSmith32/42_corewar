@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 22:00:12 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 11:35:45 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,40 @@
 */
 
 /*
-** Idea for completing quotes (run strchr on '"' and "#" if the latter is greater
-** then null terminate and use the resulting string).
+** have the end be strchr '"' then skip_whitespaces after the quote.
 */
 
 static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
+		size_t current_size)
+{
+	char	*line;
+	char	*end;
+	char	*tail;
+	ssize_t	len;
+
+	while ((len = get_next_line(pi->fd, &line)) > 0)
+	{
+		pi->row++;
+		dst[current_size] = '\n';
+		tail = ft_strchr(line, '"');
+		pi->col = (tail - line) + 1;
+//		ft_printf("current_size:%zd max:%zu tail:%c\n", current_size + (tail - line), max, *tail);
+		current_size += (tail - line) + 1;
+		if (!tail)
+			current_size = ft_strlcat(dst, line, max + 1);
+		else if (*(end = skip_whitespaces(tail + 1)) != COMMENT_CHAR &&
+				*end != '\0')
+			current_size = SYNTAX;
+		else if (current_size <= max && !(current_size = 0))
+			ft_strncat(dst, line, (tail - line));
+		ft_strdel(&line);
+		if (current_size > max || current_size <= 0)
+			return (current_size > max ? NAME_LONG : current_size);
+	}
+	return (-1);
+}
+
+/*static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 		size_t current_size)
 {
 	char	*line;
@@ -31,7 +60,6 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 	while ((len = get_next_line(pi->fd, &line)) > 0)
 	{
 		pi->row++;
-		ft_printf("row:%d\n", pi->row);///
 		dst[current_size] = '\n';
 		tail = skip_space_rev(line, len);
 		pi->col = (tail - line) + 1;
@@ -45,10 +73,10 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 			ft_strncat(dst, line, (tail - line));
 		ft_strdel(&line);
 		if (current_size > max || current_size <= 0)
-			return (current_size > max ? -8 : current_size);
+			return (current_size > max ? NAME_LONG : current_size);
 	}
 	return (-1);
-}
+}*/
 
 /*
 ** Finds the corresponding string for the command and copies it into the header.

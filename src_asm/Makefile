@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/25 22:08:11 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/26 11:13:59 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ FILES	=	asm.c\
 			$(addprefix error/,\
 				asm_error.c)\
 			op.c\
-			test_mallocwrap.c
+#			test_mallocwrap.c
 
 SRC		= $(addprefix src/, $(FILES))
 OBJ		= $(addprefix build/, $(FILES:.c=.o))
@@ -60,7 +60,7 @@ LIB		= libft
 
 IFLAGS	= -I libft/includes -I ../includes 
 LFLAGS	= -L $(LIB) -lft
-CFLAGS	= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address
 
 all: $(NAME)
 
