@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 22:00:55 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 18:14:57 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:36:11 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** add_label_call creates a struct
-** 
+**
 ** op:		Holds information on the op being parsed
 ** op_prs:	Holds a vector for label calls as well as the output vector
 ** op_addr:	Location of the operation currently being parsed
@@ -41,6 +41,5 @@ int	add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr, char *param)
 	}
 	if (!(ft_vecapp(&op_prs->output, blank, call.size)))
 		return (1);
-	ft_printf("name:%s\nsize:%d\nop_addr:%d\naddr:%d\n\n", name, call.size, call.op_addr, call.addr);///
 	return (0);
 }

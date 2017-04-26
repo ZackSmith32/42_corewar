@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 17:42:41 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:30:26 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:37:04 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	get_size(const t_op *op, char c)
 ** param:	Parameter being parsed
 */
 
-int	add_param(const t_op *op, t_vec *output, char *param)
+int			add_param(const t_op *op, t_vec *output, char *param)
 {
 	intmax_t	value;
 	char		tag;
@@ -54,7 +54,6 @@ int	add_param(const t_op *op, t_vec *output, char *param)
 	if (!(byte_code = load_byte_code(value, size)))
 		return (1);
 	ret = ft_vecapp(output, byte_code, size);
-	ft_printf("\n\e[94mValue:%ju prog_size:%d param_size:%d\e[0m\n", value, output->len, size);///
 	free(byte_code);
 	return (ret ? 0 : 1);
 }

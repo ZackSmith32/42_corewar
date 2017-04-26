@@ -6,14 +6,14 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 11:47:01 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 11:49:20 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:38:07 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
 /*
-** build_encoding build the encoding byte 
+** build_encoding build the encoding byte
 ** returns 1 if error found with parameters
 **
 ** encode:	encoding byte being built based on arg types
@@ -39,7 +39,7 @@ static int	build_encoding(const t_op *op, char *encode, int i, char pre)
 ** validated parameters or NULL if the paramters are invalid.
 */
 
-char	**validate_parameters(const t_op *op, char *line, char *encode)
+char		**validate_parameters(const t_op *op, char *line, char *encode)
 {
 	char		**ret;
 	char		*tmp;

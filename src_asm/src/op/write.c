@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 18:01:59 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 11:46:26 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:36:40 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,9 @@ static int	transform_parameters(const t_op *op, int op_addr, char **params,
 	i = 0;
 	while (i < op->argc)
 	{
-		ft_printf("parsing:%s\n", params[i]);///
 		if ((params[i][0] == LABEL_CHAR) ||
 				(params[i][0] == DIRECT_CHAR && (params[i][1] == LABEL_CHAR)))
 		{
-			ft_printf("\n\e[91madding label call\e[0m\n");///
 			if (add_label_call(op, opp, op_addr, params[i]))
 				return (1);
 		}
@@ -61,13 +59,12 @@ static int	initialize_output(int op_code, char encode, t_vec *output)
 	return (0);
 }
 
-
 /*
 ** write_op will write the byte code to the output vector, and keep track of
 ** label_calls.
 */
 
-int	write_op(int op_code, char *line, t_op_parse *opp)
+int			write_op(int op_code, char *line, t_op_parse *opp)
 {
 	const t_op	*op;
 	char		**params;

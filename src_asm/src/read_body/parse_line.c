@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 19:31:09 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:33:33 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:41:59 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Parses the label and operation lines in the body of the input file
 */
 
-int	arse_line(char *head, t_asm *as, int depth)
+int	parse_line(char *head, t_asm *as, int depth)
 {
 	char	*tail;
 	char	*truncate;

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 15:05:52 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/24 12:03:41 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:34:57 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	search_op(char *name)
 	op_code = 1;
 	while (g_op_tab[op_code].name_short)
 	{
-		if (ft_strcmp(name, g_op_tab[op_code].name_short) == 0) 
+		if (ft_strcmp(name, g_op_tab[op_code].name_short) == 0)
 			return (op_code);
 		op_code++;
 	}

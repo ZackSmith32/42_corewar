@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 14:26:58 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:31:04 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:38:44 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	validate_atouintmax(uintmax_t *ret, char *str)
 ** 0: success
 */
 
-int	validate_atointmax(intmax_t *ret, char *str)
+int			validate_atointmax(intmax_t *ret, char *str)
 {
 	uintmax_t	temp;
 	int			sign;
