@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/25 18:21:33 by kdavis           ###   ########.fr        #
+#    Updated: 2017/04/25 21:24:01 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,13 @@ FILES	=	asm.c\
 				parse.c\
 				write.c\
 				validate_parameters.c\
+				validate_numbers.c\
+				load_byte_code.c\
 				add_label_call.c\
 				add_param.c\
 			)\
 			$(addprefix label/,\
+				fill_labels.c\
 				search.c\
 				parse.c\
 				new.c\

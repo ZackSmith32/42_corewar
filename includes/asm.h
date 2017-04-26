@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 18:22:08 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 21:29:23 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct	s_label_calls
 	int			addr;
 	int			size;
 }				t_label_calls;
+
 /*
 ** name_cmd_len:	string length of the name command
 ** comment_cmd_len:	string length of the comment command
@@ -126,8 +127,6 @@ typedef struct	s_asm
 	t_parseinfo	pi;
 	t_op_parse	opp;
 	t_vec		labels;
-/*	t_vec		label_calls;
-	t_vec		output;*/
 	char		*name;
 }				t_asm;
 
@@ -163,6 +162,7 @@ char	*dup_label(char	**src, int *col);
 int		parse_label(char *cp, t_asm *as, int depth);
 int		new_label(t_vec *labels, char *name, int address);
 t_label	*search_label(char *key, t_vec *labels);
+int		fill_labels(t_vec *labels, t_vec *label_calls, t_vec *output);
 
 /*
 ** op
@@ -172,8 +172,10 @@ int			parse_op(char *label, char *line, t_asm *as);
 int			search_op(char *name);
 int			write_op(int op_code, char *line, t_op_parse *opp);
 char		**validate_parameters(const t_op *op, char *line, char *encode);
+int			validate_atointmax(intmax_t *ret, char *str);
 int			add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr, char *param);
 int			add_param(const t_op *op, t_vec *output, char *param);
+char		*load_byte_code(intmax_t value, int size);
 
 /*
 ** read_header

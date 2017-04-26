@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 18:13:43 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 20:25:37 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 21:18:54 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	read_body(t_asm *as)
 	{
 		as->pi.row++;
 		as->pi.col = 1;
-		ft_printf("row:%d\n", as->pi.row);///
 		ern = parse_line(line, as, 0);
 		ft_strdel(&line);
 		if (ern)
@@ -30,8 +29,10 @@ int	read_body(t_asm *as)
 	if (ern == -1)
 		return (print_error(1, NULL, 0, 0));
 	ft_strdel(&line);
+	if (fill_labels(&as->labels, &as->opp.label_calls, &as->opp.output))
+		return (1);
 	as->header.prog_size = flip_uint32(as->opp.output.len);
-	if (as->header.prog_size > CHAMP_MAX_SIZE)
+	if (as->opp.output.len > CHAMP_MAX_SIZE)
 		return (print_error(10, NULL, 0, 0));
 	return (0);
 }

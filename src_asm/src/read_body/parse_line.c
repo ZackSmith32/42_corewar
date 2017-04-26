@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 19:31:09 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/23 16:38:18 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 21:19:12 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	parse_line(char	*head, t_asm *as, int depth)
 	if (truncate)
 		*truncate = '\0';
 	as->pi.col += (tail - head);
-/*	ft_printf("char:%c row:%d col:%d\n",*tail, as->pi.row,  as->pi.col);*/
 	if (is_labelchar(*tail))
 		ern = parse_label(tail, as, depth);
 	else if (*tail != '\0')

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 11:47:01 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 18:02:30 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 21:20:38 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ char	**validate_parameters(const t_op *op, char *line, char *encode)
 	}
 	if (i != op->argc)
 		return (delete_grid(ret));
-	ft_printf("encoding byte:%hhx %hhu\n", *encode, *encode);///
 	return (ret);
 }

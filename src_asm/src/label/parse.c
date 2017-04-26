@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 21:52:37 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/24 12:06:06 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 21:19:56 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ int	parse_label(char *cp, t_asm *as, int depth)
 			ft_strdel(&label);
 			return (SYNTAX);
 		}
-		if ((ern = new_label(&as->labels, label, as->output.len)))
+		if ((ern = new_label(&as->labels, label, as->opp.output.len)))
 			ft_strdel(&label);
 		if (parse_line(cp + 1, as, depth + 1))
 			return (1);
 	}
-	else
-		if (parse_op(label, cp, as))
-			return (1);
-/*	ft_printf("label:%s\ncp:%c row:%d col:%d\n",
-			label, *cp, as->pi.row, as->pi.col);*/
+	else if (parse_op(label, cp, as))
+		return (1);
 	return (0);
 }

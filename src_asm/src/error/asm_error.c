@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 20:26:14 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 20:40:50 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static const char	*g_error_message[] =
 	"Name is too long\n",							///8
 	"Comment is too long\n",						///9
 	"Program size too big\n",						///10
+	"op addr:%d label addr:%d label %s not found\n",
 };
 
 int	print_error(int ern, char *str, int row, int col)
