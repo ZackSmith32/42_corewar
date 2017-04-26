@@ -7,6 +7,8 @@ static t_op_arg	calc_ldi_offset(struct s_process *process,
 	union u_val	first;
 	union u_val	second;
 
+	first.val = 0;
+	second.val = 0;
 	if (params[0].param_type == T_REG)
 		reverse_bytes((void *)&process->registors[params[0].param_val.val - 1], 
 			REG_SIZE, first.arr);
