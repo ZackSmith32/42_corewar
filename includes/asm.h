@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 16:24:37 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 18:22:08 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ int			search_op(char *name);
 int			write_op(int op_code, char *line, t_op_parse *opp);
 char		**validate_parameters(const t_op *op, char *line, char *encode);
 int			add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr, char *param);
+int			add_param(const t_op *op, t_vec *output, char *param);
 
 /*
 ** read_header

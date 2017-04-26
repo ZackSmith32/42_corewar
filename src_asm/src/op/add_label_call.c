@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 22:00:55 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 16:17:05 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 18:14:57 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr, char *param)
 {
 	t_label_calls	call;
 	char			*name;
+	char			blank[DIR_SIZE];
 
+	ft_bzero(blank, sizeof(blank));
 	name = param + (*param == DIRECT_CHAR ? 2 : 1);
 	call.size = *param == DIRECT_CHAR && !op->dir_as_ind ? DIR_SIZE : IND_SIZE;
 	call.op_addr = op_addr;
@@ -37,6 +39,8 @@ int	add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr, char *param)
 		free(call.name);
 		return (1);
 	}
-	ft_printf("\n\nname:%s\nsize:%d\nop_addr:%d\naddr:%d\n", name, call.size, call.op_addr, call.addr);
+	if (!(ft_vecapp(&op_prs->output, blank, call.size)))
+		return (1);
+	ft_printf("name:%s\nsize:%d\nop_addr:%d\naddr:%d\n\n", name, call.size, call.op_addr, call.addr);///
 	return (0);
 }

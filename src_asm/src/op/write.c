@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 18:01:59 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 16:22:19 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 18:27:05 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 ** op:			holds information regarding the operation being parsed
 ** op_addr:		address of the op coding byte in the output vector
 ** params:		parameters for the op
-** vector[0]:	output vector
-** vector[1]:	label_call vector
+** opp:			Holds vectors for output and label_calls
 */
 
 static int	transform_parameters(const t_op *op, int op_addr, char **params,
@@ -32,12 +31,14 @@ static int	transform_parameters(const t_op *op, int op_addr, char **params,
 	{
 		ft_printf("parsing:%s\n", params[i]);///
 		if ((params[i][0] == LABEL_CHAR) ||
-				(params[i][1] == DIRECT_CHAR && (params[i][1] == LABEL_CHAR)))
+				(params[i][0] == DIRECT_CHAR && (params[i][1] == LABEL_CHAR)))
 		{
-			add_label_call(op, opp, op_addr, params[i]);
+			ft_printf("\n\e[91madding label call\e[0m\n");
+			if (add_label_call(op, opp, op_addr, params[i]))
+				return (1);
 		}
-		else
-			;
+		else if (add_param(op, &opp->output, params[i]))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -52,7 +53,6 @@ static int	initialize_output(int op_code, char encode, t_vec *output)
 	char	code;
 
 	code = (char)op_code;
-	ft_printf("Append code byte\n");///
 	if (!(ft_vecapp(output, &code, 1)))
 		return (1);
 	if (g_op_tab[op_code].encoding_byte)

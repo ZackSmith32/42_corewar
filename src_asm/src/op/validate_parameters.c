@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 11:47:01 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 14:21:47 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 18:02:30 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char	**validate_parameters(const t_op *op, char *line, char *encode)
 	while (ret[i])
 	{
 		if (!(tmp = ft_strtrim(ret[i])) || build_encoding(op, encode, i, *tmp))
+		{
+			free(tmp);
 			return (delete_grid(ret));
+		}
 		free(ret[i]);
 		ret[i] = tmp;
 		i++;
