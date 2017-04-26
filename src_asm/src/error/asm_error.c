@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 22:27:22 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 10:37:54 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static const char	*g_error_message[] =
 {
-	"Writing output program to %s\n",				///0
-	"error allocating memory\n",					///1
-	"error opening file\n",							///2
-	"error closing file\n",							///3
-	"error reading file\n",							///4
-	"error writing to file\n",						///5
-	"Syntax error at token [TOKEN][%03d:%03d] %s\n",///6
-	"Lexical error at [%d:%d]\n",					///7
-	"Name is too long\n",							///8
-	"Comment is too long\n",						///9
-	"Program size too big\n",						///10
+	"Writing output program to %s\n",
+	"error allocating memory\n",
+	"error opening file\n",
+	"error closing file\n",
+	"error reading file\n",
+	"error writing to file\n",
+	"Syntax error at token [TOKEN][%03d:%03d] %s\n",
+	"Lexical error at [%d:%d]\n",
+	"Name is too long\n",
+	"Comment is too long\n",
+	"Program size too big\n",
 	"op addr:%d label addr:%d label %s not found\n",
 };
 
@@ -36,6 +36,10 @@ int	print_error(int ern, char *str, int row, int col)
 		ft_dprintf(2, g_error_message[ern], row, col, str); 
 	return (ern);
 }
+
+/*
+** Flushes the label and label_call vector allocations
+*/
 
 static void	clear_labels(t_vec *label, int label_flag)
 {
@@ -61,10 +65,30 @@ static void	clear_labels(t_vec *label, int label_flag)
 	ft_memdel(&label->arr);
 }
 
+/*
+** reads through the rest of the file in order to delete any allocations
+** leftover in gnl static variables.
+*/
+
+static void	flush_gnl(int fd)
+{
+	char	*flush;
+
+	while (get_next_line(fd, &flush) >= 0)
+		ft_strdel(&flush);
+	ft_strdel(&flush);
+}
+
+/*
+** Clean up function responsible for final output printing and cleaning
+**	up all leftover allocations.
+*/
+
 int	asm_error(t_asm *master, int ern)
 {
 	clear_labels(&master->labels, 1);
 	clear_labels(&master->opp.label_calls, 0);
+	flush_gnl(master->pi.fd);
 	ft_memdel(&master->opp.output.arr);
 	if (ern == 0)
 		ft_dprintf(1, g_error_message[ern], master->name); 

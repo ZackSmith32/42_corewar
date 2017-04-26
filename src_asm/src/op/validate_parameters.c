@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 11:47:01 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:20:38 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 10:09:32 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	**validate_parameters(const t_op *op, char *line, char *encode)
 		ret[i] = tmp;
 		i++;
 	}
+	ft_printf("\e[96maddress:%p\e[0m\n", tmp);
 	if (i != op->argc)
 		return (delete_grid(ret));
 	return (ret);

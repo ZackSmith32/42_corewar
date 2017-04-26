@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 22:48:30 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/22 18:39:04 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 10:06:54 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	new_label(t_vec *labels, char *name, int address)
 	}
 	if (!(new.name = ft_strdup(name)))
 		return (-1);
+	ft_printf("\e[96maddress:%p\e[0m\n", new.name);
 	new.address = address;
 	if (!(ft_vecapp(labels, &new, sizeof(new))))
 		return (-1);
