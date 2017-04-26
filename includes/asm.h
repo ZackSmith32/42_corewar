@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:22:40 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:43:42 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ uint32_t		flip_uint32(uint32_t nbr);
 
 char			*skip_whitespaces(char *line);
 int				is_labelchar(char c);
-char			*skip_space_rev(char *line, int len);///
 
 /*
 ** label
