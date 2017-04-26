@@ -19,6 +19,7 @@ SRC = \
 	$(addprefix src/, \
 		corewar.c \
 		free.c \
+		game_step.c \
 		init_game_struct.c \
 		op.c \
 		utilites.c \
@@ -33,8 +34,17 @@ SRC = \
 			print_hex.c \
 			print_process.c \
 		) \
-		$(addprefix game_step/, \
-			game_step.c \
+		$(addprefix linked_list/, \
+			lstadd.c \
+			lstdel.c \
+			lstdelone.c \
+			lstiter.c \
+			lstmap.c \
+			lstnew.c \
+			lstprint.c \
+			lstpush.c \
+			lstreverse.c \
+			lstsort.c \
 		) \
 		$(addprefix operations/, \
 			sti.c \
@@ -50,18 +60,6 @@ SRC = \
 			parse_parameters.c \
 		) \
 	) \
-	$(addprefix maxlib/list/, \
-		lstadd.c \
-		lstdel.c \
-		lstdelone.c \
-		lstiter.c \
-		lstmap.c \
-		lstnew.c \
-		lstprint.c \
-		lstpush.c \
-		lstreverse.c \
-		lstsort.c \
-	)
 
 OBJ = $(SRC:.c=.o)
 

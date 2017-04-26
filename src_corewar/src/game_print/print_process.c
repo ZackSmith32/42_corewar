@@ -26,11 +26,15 @@ void		print_process(t_strvec *out, uint8_t *arena,
 	i = 0;
 	while (i < REG_NUMBER)
 	{
+		ft_bzero(&reg, sizeof(reg));
 		if (i == 7)
 			ft_jasprintf(out, "\n                         ");
-		ft_bzero(reg.arr, 8);
-		reverse_bytes((uint8_t *)&(process->registors[i]), REG_SIZE, reg.arr);
-		ft_jasprintf(out, "  r%02zu: %010u", i + 1, (unsigned int)reg.val);
+		reverse_bytes((uint8_t *)&process->registors[i], REG_SIZE, reg.arr);
+		if (reg.val)
+			ft_jasprintf(out, "\033[96m");
+		ft_jasprintf(out, "  r%02zu: %010u", i + 1, reg.val);
+		if (reg.val)
+			ft_jasprintf(out, "\033[0m");
 		i++;
 	}
 }
