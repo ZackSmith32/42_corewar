@@ -15,4 +15,6 @@
 void			free_game(struct s_game *game)
 {
 	lstdel(&game->processes, &free);
+	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
+		endwin();
 }
