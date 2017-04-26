@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 12:37:30 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:22:40 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,7 @@ int				asm_error(t_asm *master, int ern);
 /*
 ** endian_switch.c
 */
-uint8_t			flip_uint8(uint8_t nbr);
 uint32_t		flip_uint32(uint32_t nbr);
-uint32_t		flip_uint64(uint64_t nbr);
 
 /*
 ** line_parsing

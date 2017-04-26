@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/19 21:31:55 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:25:27 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 t_op const	g_op_tab[] =
 {
-	{0, 0, {0}, 0, 1, 0, 0, 0}, //MOVE FORWARD FUNCTION
+	{0, 0, {0}, 0, 1, 0, 0, 0},
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
@@ -52,23 +52,3 @@ t_op const	g_op_tab[] =
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
-
-/*int			(*g_op_pointers[17])(struct s_game*, struct s_process*) = {
-	&move_one,
-	&live,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one,
-	&move_one
-};*/

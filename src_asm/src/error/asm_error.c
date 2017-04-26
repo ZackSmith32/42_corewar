@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 10:37:54 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:26:56 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static const char	*g_error_message[] =
 	"op addr:%d label addr:%d label %s not found\n",
 };
 
-int	print_error(int ern, char *str, int row, int col)
+int			print_error(int ern, char *str, int row, int col)
 {
 	if (ern < 0)
-		ft_putendl_fd(str, 2); 
+		ft_putendl_fd(str, 2);
 	else
-		ft_dprintf(2, g_error_message[ern], row, col, str); 
+		ft_dprintf(2, g_error_message[ern], row, col, str);
 	return (ern);
 }
 
@@ -45,7 +45,7 @@ static void	clear_labels(t_vec *label, int label_flag)
 {
 	t_label			*lbl;
 	t_label_calls	*call;
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	while (i < label->len)
@@ -84,16 +84,16 @@ static void	flush_gnl(int fd)
 **	up all leftover allocations.
 */
 
-int	asm_error(t_asm *master, int ern)
+int			asm_error(t_asm *master, int ern)
 {
 	clear_labels(&master->labels, 1);
 	clear_labels(&master->opp.label_calls, 0);
 	flush_gnl(master->pi.fd);
 	ft_memdel(&master->opp.output.arr);
 	if (ern == 0)
-		ft_dprintf(1, g_error_message[ern], master->name); 
+		ft_dprintf(1, g_error_message[ern], master->name);
 	ft_strdel(&master->name);
 	if (ern != 2)
 		close(master->pi.fd);
-	return(ern);
+	return (ern);
 }

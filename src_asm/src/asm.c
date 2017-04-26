@@ -6,13 +6,17 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 22:46:37 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:24:47 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int	write_file(char *name, t_asm *master)
+/*
+** Creates and writes the output file and writes the output into it
+*/
+
+static int	write_file(char *name, t_asm *master)
 {
 	char	*end;
 	size_t	dist;
@@ -29,10 +33,14 @@ int	write_file(char *name, t_asm *master)
 		return (2);
 	if ((ern = write(fd, &HEADER, sizeof(HEADER))) != -1)
 		ern = write(fd, OUTPUT.arr, OUTPUT.len * OUTPUT.size);
-	if ((close(fd) == -1) ||  ern == -1)
+	if ((close(fd) == -1) || ern == -1)
 		return (ern == -1 ? 5 : 3);
 	return (0);
 }
+
+/*
+** Initialize the vectors and parsing information in the master struct
+*/
 
 static int	init_assembler(char *file, t_asm *master)
 {
@@ -49,7 +57,7 @@ static int	init_assembler(char *file, t_asm *master)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_asm			master;
 	int				ern;
