@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:43:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:28:00 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct	s_parseinfo
 {
 	int			fd;
 	int			row;
-	int			col;
 }				t_parseinfo;
 
 /*
@@ -123,7 +122,7 @@ typedef struct	s_asm
 ** error
 */
 
-int				print_error(int ern, char *str, int row, int col);
+int				print_error(int ern, char *str, int row);
 int				asm_error(t_asm *master, int ern);
 
 /*
@@ -141,7 +140,7 @@ int				is_labelchar(char c);
 /*
 ** label
 */
-char			*dup_label(char	**src, int *col);
+char			*dup_label(char **src);
 int				parse_label(char *cp, t_asm *as, int depth);
 int				new_label(t_vec *labels, char *name, int address);
 t_label			*search_label(char *key, t_vec *labels);

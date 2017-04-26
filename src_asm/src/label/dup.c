@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 19:35:19 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:30:02 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:25:08 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Creates a duplicate of the label
 */
 
-char	*dup_label(char **src, int *col)
+char	*dup_label(char **src)
 {
 	char	*end;
 	char	*ret;
@@ -24,7 +24,6 @@ char	*dup_label(char **src, int *col)
 	end = *src;
 	while (is_labelchar(*end))
 		end++;
-	*col += (end - *src);
 	if (!ft_iswhitespace(*end) && *end != LABEL_CHAR && *end != SEPARATOR_CHAR
 			&& *end != COMMENT_CHAR && *end != DIRECT_CHAR)
 		return (NULL);

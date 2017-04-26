@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:24:47 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:32:07 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static int	init_assembler(char *file, t_asm *master)
 		!(ft_initialize_vec(&master->opp.label_calls,
 				sizeof(t_label_calls), 9, 0)) ||
 		!(ft_initialize_vec(&master->opp.output, sizeof(char), 10, 0)))
-		return (print_error(1, NULL, 0, 0));
+		return (print_error(1, NULL, 0));
 	if ((master->pi.fd = open(file, O_RDONLY)) == -1)
-		return (print_error(2, NULL, 0, 0));
+		return (print_error(2, NULL, 0));
 	return (0);
 }
 
