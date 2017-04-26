@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 16:31:49 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:44:28 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 12:37:30 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 ** Error macros:
 */
 
-# define SYNTAX	-6
+# define SYNTAX		-6
 # define LEXICAL	-7
-# define NAME_LONG -8
-# define COMM_LONG -9
+# define NAME_LONG	-8
+# define COMM_LONG	-9
 
 /*
 ** t_label holds the name and address of the labels found in the file

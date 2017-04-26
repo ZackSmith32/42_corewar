@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:48:08 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/19 21:14:30 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 12:43:33 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 char	*skip_whitespaces(char *line)
 {
+	ft_printf("char:%c\n", *line);///
 	if (line)
 		while (ft_iswhitespace(*line))
 			line++;
