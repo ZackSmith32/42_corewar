@@ -12,17 +12,17 @@
 
 #include <corewar.h>
 
-void 			*memxor(void *p, int val, size_t size)
+void			*memxor(void *p, int val, size_t size)
 {
 	unsigned char *pb;
 
 	pb = p;
 	while (size-- > 0)
 		*pb++ ^= (unsigned char)val;
-	return p;
+	return (p);
 }
 
-uint32_t				color_code(t_list *process)
+uint32_t		color_code(t_list *process)
 {
 	uint32_t	cnum;
 
@@ -38,7 +38,6 @@ static int		hex_color(t_list *processes, uint8_t *loc_conv)
 {
 	t_list		*node;
 	uint32_t	cnum;
-
 
 	node = processes;
 	while (node && ((struct s_process *)node->content)->pc != loc_conv)

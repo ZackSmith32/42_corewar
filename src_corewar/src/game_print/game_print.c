@@ -12,7 +12,7 @@
 
 #include <corewar.h>
 
-void		print_game_state(t_strvec *out, struct s_game *game)
+void			print_game_state(t_strvec *out, struct s_game *game)
 {
 	(void)out;
 	if (!(g_flags.verbosity_level & V_STATE))
@@ -41,7 +41,7 @@ static void		print_game_over(t_strvec *out, struct s_game *game)
 		game->last_live_champ->comment);
 }
 
-int			print_init (struct s_game *game, t_strvec *out)
+int				print_init(struct s_game *game, t_strvec *out)
 {
 	static int	h_prev;
 	static int	w_prev;
@@ -60,10 +60,9 @@ int			print_init (struct s_game *game, t_strvec *out)
 	out->len = 0;
 	move(0, 0);
 	return (0);
-
 }
 
-int			ft_jasprintf(t_strvec *ret, const char *format, ...)
+int				ft_jasprintf(t_strvec *ret, const char *format, ...)
 {
 	va_list		ap;
 	int			size;
@@ -74,7 +73,7 @@ int			ft_jasprintf(t_strvec *ret, const char *format, ...)
 	return (size);
 }
 
-int			game_print(struct s_game *game, t_strvec *out)
+int				game_print(struct s_game *game, t_strvec *out)
 {
 	if (game->game_over)
 		print_game_over(out, game);
@@ -90,7 +89,7 @@ int			game_print(struct s_game *game, t_strvec *out)
 			print_game_state(out, game);
 			print_processes(out, game->arena, game->processes);
 		}
-		 refresh();
+		refresh();
 	}
 	return (0);
 }

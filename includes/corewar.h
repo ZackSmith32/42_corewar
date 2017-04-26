@@ -167,6 +167,7 @@ int						flag_n(char ***av, char **champ);
 int						flag_p(char ***av, char **champ);
 int						flag_s(char ***av, char **champ);
 int						flag_v(char ***av, char **champ);
+int						flag_f(char ***av, char **champ);
 int						flag_w(char ***av, char **champ);
 void					print_usage(char *filename);
 
