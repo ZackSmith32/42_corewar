@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 19:31:09 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 21:19:12 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 13:33:33 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Parses the label and operation lines in the body of the input file
 */
 
-int	parse_line(char	*head, t_asm *as, int depth)
+int	arse_line(char *head, t_asm *as, int depth)
 {
 	char	*tail;
 	char	*truncate;
@@ -31,10 +31,7 @@ int	parse_line(char	*head, t_asm *as, int depth)
 	if (is_labelchar(*tail))
 		ern = parse_label(tail, as, depth);
 	else if (*tail != '\0')
-	{
-		ft_printf("illegal char:%c\n", *tail);
 		ern = LEXICAL;
-	}
 	if (ern == 1)
 		return (1);
 	else if (ern)
