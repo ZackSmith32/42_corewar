@@ -6,49 +6,11 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:15:14 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 16:35:33 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 20:08:06 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
-
-/*
-** Steps to assembling:
-**
-** 1. Open and read file.
-**
-** 2. fill out header struct.
-**		(Assign magic, Read program name and comment)
-**			Calculate prog_size as you go.
-**
-** 3. Have an array of function pointers for translating individual operations
-*/
-
-/*static int	read_file(char *name, t_vec *file)
-{
-	char	buf[BUFF_SIZE];
-	ssize_t	ret;
-	int		fd;
-
-	if (!(ft_initialize_vec(file, sizeof(char), BUFF_SIZE, 0)))
-		return (1);
-	if ((fd = open(name, O_RDONLY)) == -1)
-		return (2);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
-	{
-		if (!(ft_vecapp(file, buf, ret)))
-		{
-			close(fd);
-			return (1);
-		}
-	}
-	if (close(fd) == -1 || ret == -1)
-		return (ret == -1 ? 4 : 3);
-	if (file->len == file->total)
-		if (!(ft_grow_vec(file, file->len * file->size + 1)))
-			return (1);
-	return (0);
-}*/
 
 int	write_file(char *name, t_asm *master)
 {
@@ -96,14 +58,11 @@ int	main(int argc, char **argv)
 		return (ft_printf("Usage:./asm champion.s\n"));
 	if ((ern = init_assembler(argv[1], &master)))
 		return (asm_error(&master, ern));
-/*	if ((ern = read_file(argv[1], &master.input.file)))
-		return (asm_error(&master, ern));
-	master.cp = master.file.arr;*/
 	if ((ern = read_header(&master)))
 		return (asm_error(&master, ern));
 	if ((ern = read_body(&master)))
 		return (asm_error(&master, ern));
-	//ft_printf("%s", master.file.arr);///
-/*	ern = write_file(argv[1], &master);*/
+	master.header.prog_size = flip_uint32(master.opp.output.len);
+	ern = write_file(argv[1], &master);
 	return (asm_error(&master, ern));
 }

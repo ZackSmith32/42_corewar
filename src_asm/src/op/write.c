@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 18:01:59 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 18:27:05 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 20:02:44 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	transform_parameters(const t_op *op, int op_addr, char **params,
 		if ((params[i][0] == LABEL_CHAR) ||
 				(params[i][0] == DIRECT_CHAR && (params[i][1] == LABEL_CHAR)))
 		{
-			ft_printf("\n\e[91madding label call\e[0m\n");
+			ft_printf("\n\e[91madding label call\e[0m\n");///
 			if (add_label_call(op, opp, op_addr, params[i]))
 				return (1);
 		}
@@ -84,7 +84,5 @@ int	write_op(int op_code, char *line, t_op_parse *opp)
 		return (1);
 	if (transform_parameters(op, op_addr, params, opp))
 		return (1);
-/*	if (transform_parameters(op_addr, params, output, label_calls))
-		return (1);*/
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 23:02:56 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 15:37:34 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 20:02:02 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	parse_op(char *label, char *line, t_asm *as)
 	if (!(op_code = search_op(label)))
 		return (print_error(6, "ILLEGAL_OP", as->pi.row, as->pi.col));
 	if ((write_op(op_code, line, &as->opp)))
-		return (print_error(6, "OP_ERROR", as->pi.row, as->pi.col));
+		return (print_error(6, "PARAM_ERROR", as->pi.row, as->pi.col));
 	return (0);
 }

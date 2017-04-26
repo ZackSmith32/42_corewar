@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 17:42:41 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/25 18:26:09 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/25 20:02:58 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** 0: ok
 */
 
-int	validate_atouintmax(uintmax_t *ret, char *str)
+static int	validate_atouintmax(uintmax_t *ret, char *str)
 {
 	uintmax_t	temp;
 
@@ -48,8 +48,32 @@ static int	get_size(const t_op *op, char c)
 	if (c == DIRECT_CHAR && !op->dir_as_ind)
 		size = DIR_SIZE;
 	else if (c == 'r')
-		size = REG_SIZE;
+		size = 1;
 	return (size);
+}
+
+/*
+** load_byte_code will load size bytes of value into the byte_code string
+** in big endian order.
+*/
+
+static char	*load_byte_code(uintmax_t value, int size)
+{
+	char		*byte_code;
+	char		*val;
+	int			i;
+
+	if (!(byte_code = (char*)ft_memalloc(size * sizeof(char))) || size > 8)
+		return (NULL);
+	val = (char*)&value;
+	i = 0;
+	while (size > 0)
+	{
+		size--;
+		byte_code[i] = val[size];
+		i++;
+	}
+	return (byte_code);
 }
 
 /*
@@ -64,7 +88,9 @@ int	add_param(const t_op *op, t_vec *output, char *param)
 {
 	uintmax_t	value;
 	char		tag;
+	char		*byte_code;
 	int			size;
+	int			ret;
 
 	tag = *param;
 	size = get_size(op, tag);
@@ -72,7 +98,10 @@ int	add_param(const t_op *op, t_vec *output, char *param)
 		param++;
 	if (validate_atouintmax(&value, param) || (tag == 'r' && value > 99))
 		return (1);
-	ft_printf("\n\e[94mValue:%ju\e[0m\n", value);
-	return (0);
-	(void)output;
+	if (!(byte_code = load_byte_code(value, size)))
+		return (1);
+	ret = ft_vecapp(output, byte_code, size);
+	ft_printf("\n\e[94mValue:%ju prog_size:%d param_size:%d\e[0m\n", value, output->len, size);///
+	free(byte_code);
+	return (ret ? 0 : 1);
 }
