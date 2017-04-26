@@ -38,7 +38,7 @@ int			print_init (struct s_game *game, t_strvec *out)
 	(void)game;
 	usleep(g_flags.wait_time);
 	out->len = 0;
-	//ft_jasprintf(out, "\033[1;1H");
+	wmove(stdscr, 0, 0);
 	return (0);
 
 }
@@ -71,6 +71,7 @@ int			game_print(struct s_game *game, t_strvec *out)
 			print_processes(out, game->arena, game->processes);
 		}
 		out->str[out->len] = 0;
+		attron(COLOR_PAIR(8));
 		mvprintw(0, 0,"hello\nworld\n!meow!");
 //		mvprintw(0, 0, out->str);
 		//write(1, out->str, out->len);

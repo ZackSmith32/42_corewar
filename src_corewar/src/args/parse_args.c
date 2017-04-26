@@ -84,6 +84,9 @@ static void parse_exit(void)
 		noecho();
 		curs_set(FALSE);
 		clear();
+		start_color();
+		COLORS = 9;
+		init_pair(8, 7, 7);
 	}
 }
 
