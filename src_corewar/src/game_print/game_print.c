@@ -14,9 +14,11 @@
 
 void		print_game_state(t_strvec *out, struct s_game *game)
 {
+	(void)out;
 	if (!(g_flags.verbosity_level & V_STATE))
 		return ;
-	ft_jasprintf(out,
+	//ft_jasprintf(out,
+	printw(
 			"\ncycles current/death:%4u/%4u  check count/max: %u/%u"
 			"  lives:%3u  last_live_champ: %-32s",
 			game->current_cycles, game->cycles_to_death,
@@ -27,10 +29,11 @@ void		print_game_state(t_strvec *out, struct s_game *game)
 static void		print_game_over(t_strvec *out, struct s_game *game)
 {
 	(void)out;
-		ft_printf("\033[2J\033[1;1HPlayer %zu (%s) won\n %s\n",
-			game->last_live_champ - game->champs + 1,
-			game->last_live_champ->prog_name,
-			game->last_live_champ->comment);
+	ft_printf("\033[2J\033[1;1H");
+	ft_printf("Player %zu (%s) won\n %s\n",
+		game->last_live_champ - game->champs + 1,
+		game->last_live_champ->prog_name,
+		game->last_live_champ->comment);
 }
 
 int			print_init (struct s_game *game, t_strvec *out)
@@ -38,7 +41,7 @@ int			print_init (struct s_game *game, t_strvec *out)
 	(void)game;
 	usleep(g_flags.wait_time);
 	out->len = 0;
-	wmove(stdscr, 0, 0);
+	move(0, 0);
 	return (0);
 
 }
@@ -70,10 +73,7 @@ int			game_print(struct s_game *game, t_strvec *out)
 			print_game_state(out, game);
 			print_processes(out, game->arena, game->processes);
 		}
-		out->str[out->len] = 0;
-		attron(COLOR_PAIR(8));
-		mvprintw(0, 0,"hello\nworld\n!meow!");
-//		mvprintw(0, 0, out->str);
+		//out->str[out->len] = 0;
 		//write(1, out->str, out->len);
 		 refresh();
 	}
