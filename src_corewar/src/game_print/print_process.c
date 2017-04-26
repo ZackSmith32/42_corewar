@@ -12,13 +12,11 @@
 
 #include <corewar.h>
 
-void		print_process(t_strvec *out, uint8_t *arena,
-				struct s_process *process)
+void		print_process(uint8_t *arena, struct s_process *process)
 {
 	size_t		i;
 	union u_val	reg;
 
-	(void)out;
 	printw("  carry: %d", (int)process->carry);
 	printw("  pc: %4zu", (size_t)(process->pc - arena));
 	printw("  countdown: %04u", process->countdown);
@@ -39,11 +37,10 @@ void		print_process(t_strvec *out, uint8_t *arena,
 		}
 }
 
-void		print_processes(t_strvec *out, uint8_t *arena, t_list *processes)
+void		print_processes(uint8_t *arena, t_list *processes)
 {
 	size_t	i;
 
-	(void)out;
 	if (!(g_flags.verbosity_level & V_PROCESS))
 		return ;
 	i = 0;
@@ -53,7 +50,7 @@ void		print_processes(t_strvec *out, uint8_t *arena, t_list *processes)
 		attron(COLOR_PAIR(color_code(processes)) | A_REVERSE);
 		printw("process %03zu", i);
 		attrset(A_NORMAL);
-		print_process(out, arena, processes->content);
+		print_process(arena, processes->content);
 		processes = processes->next;
 		i++;
 	}
