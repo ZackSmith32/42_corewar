@@ -85,6 +85,7 @@ static void	parse_exit(void)
 		noecho();
 		curs_set(FALSE);
 		clear();
+		nodelay(stdscr, TRUE);
 		start_color();
 		COLORS = 17;
 		init_pair(1, COLOR_BLACK, COLOR_WHITE);

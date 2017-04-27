@@ -33,6 +33,7 @@ SRC = \
 			game_print.c \
 			print_hex.c \
 			print_process.c \
+			keyhook.c \
 		) \
 		$(addprefix linked_list/, \
 			lstadd.c \

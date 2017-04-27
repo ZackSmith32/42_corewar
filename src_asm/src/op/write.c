@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 18:01:59 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:36:40 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 15:21:06 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int			write_op(int op_code, char *line, t_op_parse *opp)
 	encode = 0;
 	op_addr = opp->output.len;
 	op = &g_op_tab[op_code];
-	ft_printf("op:%s line:%s\n", op->name_short, line);
 	if (!(params = validate_parameters(op, line, &encode)))
 		return (1);
 	if ((ern = initialize_output(op_code, encode, &opp->output)) == 0)

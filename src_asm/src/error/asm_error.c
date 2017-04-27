@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:26:56 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:31:06 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ static const char	*g_error_message[] =
 	"error closing file\n",
 	"error reading file\n",
 	"error writing to file\n",
-	"Syntax error at token [TOKEN][%03d:%03d] %s\n",
-	"Lexical error at [%d:%d]\n",
+	"Syntax error at token [TOKEN][ROW:%03d] %s\n",
+	"Lexical error at [ROW:%d]\n",
 	"Name is too long\n",
 	"Comment is too long\n",
 	"Program size too big\n",
-	"op addr:%d label addr:%d label %s not found\n",
+	"addr:%d label %s not found\n",
 };
 
-int			print_error(int ern, char *str, int row, int col)
+int			print_error(int ern, char *str, int row)
 {
 	if (ern < 0)
 		ft_putendl_fd(str, 2);
 	else
-		ft_dprintf(2, g_error_message[ern], row, col, str);
+		ft_dprintf(2, g_error_message[ern], row, str);
 	return (ern);
 }
 

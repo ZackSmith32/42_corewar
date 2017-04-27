@@ -39,34 +39,22 @@ static void		print_game_over(struct s_game *game)
 		game->last_live_champ->comment);
 }
 
+static void		keyhooks()
+{
+	char	key;
+
+	key = getch();
+	win_resize();
+	key_pause(key);
+	key_wait(key);
+}
+
 static int		print_init(void)
 {
-	static int	h_prev;
-	static int	w_prev;
-	int			h;
-	int			w;
-
-	getmaxyx(stdscr, h, w);
-	if (h != h_prev || w != w_prev)
-	{
-		clear();
-		h_prev = h;
-		w_prev = w;
-	}
+	keyhooks();
 	usleep(g_flags.wait_time);
 	move(0, 0);
 	return (0);
-}
-
-int				ft_jasprintf(t_strvec *ret, const char *format, ...)
-{
-	va_list		ap;
-	int			size;
-
-	va_start(ap, format);
-	size = ft_vasprintf(ret, format, ap);
-	va_end(ap);
-	return (size);
 }
 
 int				game_print(struct s_game *game)
@@ -85,7 +73,7 @@ int				game_print(struct s_game *game)
 			print_game_state(game);
 			print_processes(game->arena, game->processes);
 		}
-		refresh();
+		refresh();	
 	}
 	return (0);
 }

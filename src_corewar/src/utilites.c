@@ -29,3 +29,14 @@ void				change_end(void *val, size_t size)
 		start++;
 	}
 }
+
+int				ft_jasprintf(t_strvec *ret, const char *format, ...)
+{
+	va_list		ap;
+	int			size;
+
+	va_start(ap, format);
+	size = ft_vasprintf(ret, format, ap);
+	va_end(ap);
+	return (size);
+}

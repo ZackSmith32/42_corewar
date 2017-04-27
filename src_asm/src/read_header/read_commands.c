@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:20:35 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:22:50 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 		pi->row++;
 		dst[current_size] = '\n';
 		tail = ft_strchr(line, '"');
-		pi->col = (tail - line) + 1;
 		current_size += (tail - line) + 1;
 		if (!tail)
 			current_size = ft_strlcat(dst, line, max + 1);
@@ -55,13 +54,11 @@ static int	read_quotes(char *dst, char *src, size_t max, t_parseinfo *pi)
 	size_t	current_size;
 
 	hd = skip_whitespaces(src);
-	pi->col += (hd - src) + 1;
 	if (*hd != '"')
 		return (SYNTAX);
 	src = ft_strchr(hd + 1, '"');
 	if (src)
 	{
-		pi->col += (src - hd);
 		if ((size_t)(src - hd) <= max)
 			ft_strncpy(dst, hd + 1, (src - hd - 1));
 		else
@@ -93,7 +90,6 @@ int			read_command(header_t *header, char *line, t_parseinfo *pi,
 	if (!ft_strncmp(line, COMMENT_CMD_STRING, info->comment_cmd_len))
 	{
 		line += info->comment_cmd_len;
-		pi->col += info->comment_cmd_len;
 		if ((ern = read_quotes(header->comment, line, COMMENT_LENGTH, pi)) ||
 				info->commands_checked & 1)
 			return (ern == NAME_LONG ? COMM_LONG : LEXICAL);
@@ -102,7 +98,6 @@ int			read_command(header_t *header, char *line, t_parseinfo *pi,
 	else if (!ft_strncmp(line, NAME_CMD_STRING, info->name_cmd_len))
 	{
 		line += info->name_cmd_len;
-		pi->col += info->name_cmd_len;
 		if ((ern = read_quotes(header->prog_name, line, PROG_NAME_LENGTH, pi))
 				|| info->commands_checked & 2)
 			return (ern ? ern : LEXICAL);
