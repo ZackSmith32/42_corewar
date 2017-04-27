@@ -18,6 +18,8 @@ int	flag_w(char ***av, char **champ)
 	if (++(*av) && **av && ***av >= '0' && ***av <= '9')
 	{
 		g_flags.wait_time = (useconds_t)ft_atoui(**av);
+		if (g_flags.wait_time < 1000)
+			g_flags.wait_time = 1000;
 		return (0);
 	}
 	return (-1);

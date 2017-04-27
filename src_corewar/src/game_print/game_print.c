@@ -41,18 +41,29 @@ static void		print_game_over(struct s_game *game)
 
 static void		keyhooks()
 {
-	char	key;
+	char		key;
+	clock_t		start;
 
-	key = getch();
-	win_resize();
-	key_pause(key);
-	key_wait(key);
+	start = clock();
+	attron(COLOR_PAIR(1));
+	while (g_flags.wait_time > clock() - start)
+	{
+		key = getch();
+		win_resize();
+		if (key_pause(key))
+			start = clock();
+		key_wait(key);
+		key_skip(key);
+		move(0, 0);
+		printw("   %s%-10d%20s%-143d", "speed[qwer]: ", 1000000 - g_flags.wait_time,
+			"skip[asdf]: ", g_flags.cycle_intervals_to_dump);
+		refresh();
+	}
 }
 
 static int		print_init(void)
 {
 	keyhooks();
-	usleep(g_flags.wait_time);
 	move(0, 0);
 	return (0);
 }
