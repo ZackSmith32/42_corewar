@@ -43,19 +43,14 @@ static void		keyhooks()
 {
 	char		key;
 	clock_t		start;
-	clock_t		end;
-	useconds_t	wait_time;
 
 	start = clock();
-	wait_time = g_flags.wait_time;
-	while (wait_time)
+	while (g_flags.wait_time > clock() - start)
 	{
 		key = getch();
 		win_resize();
 		key_pause(key);
 		key_wait(key);
-		(wait_time > 100000) ? usleep(100000) : usleep(wait_time);
-		wait_time -= (wait_time > 100000) ? 100000 : wait_time; 
 	}
 }
 

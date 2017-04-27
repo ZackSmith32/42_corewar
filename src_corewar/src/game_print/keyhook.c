@@ -42,10 +42,10 @@ void	key_wait(char key)
 {
 	if (key == 'q')
 		g_flags.wait_time = (g_flags.wait_time > 10000)
-			? g_flags.wait_time - 10000 : 0;
+			? g_flags.wait_time - 10000 : 1000;
 	else if (key == 'w')
 		g_flags.wait_time = (g_flags.wait_time > 1000)
-			? g_flags.wait_time - 1000 : 0;
+			? g_flags.wait_time - 1000 : 1000;
 	else if (key == 'e')
 		g_flags.wait_time = (g_flags.wait_time < 999000)
 			? g_flags.wait_time + 1000 : 1000000;

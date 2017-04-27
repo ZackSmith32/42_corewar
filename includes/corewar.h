@@ -38,7 +38,7 @@ struct					s_flag
 	unsigned int		cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
-	useconds_t			wait_time;
+	clock_t				wait_time;
 	_Bool				flag_test;
 };
 
