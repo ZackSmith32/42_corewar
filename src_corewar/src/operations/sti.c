@@ -30,7 +30,7 @@ static t_ind	calc_sti_offset(struct s_process *process,
 			REG_SIZE, second.arr);
 	else
 		reverse_bytes(params[2].param_val.arr, IND_SIZE, second.arr);
-	return aond.val);
+	return (first.val + second.val);
 }
 
 int		sti(struct s_game *game, struct s_process *process)
