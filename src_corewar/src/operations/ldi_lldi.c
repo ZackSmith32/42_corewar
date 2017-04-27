@@ -1,7 +1,7 @@
 
 #include <corewar.h>
 
-static t_op_arg	calc_ldi_offset(struct s_process *process,
+static int16_t	calc_ldi_offset(struct s_process *process,
 				struct s_parameter *params)
 {
 	union u_val	first;
@@ -29,7 +29,7 @@ int		ldi(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[0x0a].argc];
 	uint8_t				*pc_temp;
-	t_op_arg			offset;
+	t_ind				offset;
 
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
@@ -51,7 +51,7 @@ int		lldi(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[0x0e].argc];
 	uint8_t				*pc_temp;
-	t_op_arg			offset;
+	t_ind				offset;
 
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
