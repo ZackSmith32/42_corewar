@@ -52,15 +52,16 @@ static int				step_processes(struct s_game *game)
 	return (0);
 }
 
-static void				kill_processes(t_list **processes)
+static void				kill_processes(t_list **list)
 {
-	while (*processes)
+	while (*list)
 	{
-		while (((struct s_process*)(*processes)->content)->called_live == false)
+		if (((struct s_process*)(*list)->content)->called_live == false)
 		{
-			lstdelone(processes, &free);
+			lstdelone(list, &free);
 		}
-		processes = &(*processes)->next;
+		else
+			list = &(*list)->next;
 	}
 }
 

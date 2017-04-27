@@ -16,7 +16,10 @@
 
 void	lstdelone(t_list **alst, void (*del)(void*))
 {
+	t_list	*swap;
+
+	swap = (*alst)->next;
 	del((*alst)->content);
 	free(*alst);
-	*alst = NULL;
+	*alst = swap;
 }
