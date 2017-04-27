@@ -1,7 +1,7 @@
 
 #include <corewar.h>
 
-static int16_t	calc_ldi_offset(struct s_process *process,
+static t_ind	calc_ldi_offset(struct s_process *process,
 				struct s_parameter *params)
 {
 	union u_val	first;
