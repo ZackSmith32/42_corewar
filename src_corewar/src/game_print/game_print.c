@@ -12,9 +12,8 @@
 
 #include <corewar.h>
 
-void		print_game_state(t_strvec *out, struct s_game *game)
+void			print_game_state(struct s_game *game)
 {
-	(void)out;
 	if (!(g_flags.verbosity_level & V_STATE))
 		return ;
 	printw(
@@ -31,9 +30,8 @@ void		print_game_state(t_strvec *out, struct s_game *game)
 		attrset(A_NORMAL);
 }
 
-static void		print_game_over(t_strvec *out, struct s_game *game)
+static void		print_game_over(struct s_game *game)
 {
-	(void)out;
 	ft_printf("\033[2J\033[1;1H");
 	ft_printf("Player %zu (%s) won\n %s\n",
 		game->last_live_champ - game->champs + 1,
@@ -41,56 +39,41 @@ static void		print_game_over(t_strvec *out, struct s_game *game)
 		game->last_live_champ->comment);
 }
 
-int			print_init (struct s_game *game, t_strvec *out)
+static void		keyhooks()
 {
-	static int	h_prev;
-	static int	w_prev;
-	int			h;
-	int			w;
+	char	key;
 
-	(void)game;
-	getmaxyx(stdscr, h, w);
-	if (h != h_prev || w != w_prev)
-	{
-		clear();
-		h_prev = h;
-		w_prev = w;
-	}
+	key = getch();
+	win_resize();
+	key_pause(key);
+	key_wait(key);
+}
+
+static int		print_init(void)
+{
+	keyhooks();
 	usleep(g_flags.wait_time);
-	out->len = 0;
 	move(0, 0);
 	return (0);
-
 }
 
-int			ft_jasprintf(t_strvec *ret, const char *format, ...)
-{
-	va_list		ap;
-	int			size;
-
-	va_start(ap, format);
-	size = ft_vasprintf(ret, format, ap);
-	va_end(ap);
-	return (size);
-}
-
-int			game_print(struct s_game *game, t_strvec *out)
+int				game_print(struct s_game *game)
 {
 	if (game->game_over)
-		print_game_over(out, game);
+		print_game_over(game);
 	else if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
 			&& (0 == g_flags.cycle_intervals_to_dump
 				|| 0 == game->current_cycles % g_flags.cycle_intervals_to_dump))
 	{
-		print_init(game, out);
+		print_init();
 		if (g_flags.list & FLAG_P)
-			print_hex(out, game->arena, MEM_SIZE, game->processes);
+			print_hex(game->arena, MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
 		{
-			print_game_state(out, game);
-			print_processes(out, game->arena, game->processes);
+			print_game_state(game);
+			print_processes(game->arena, game->processes);
 		}
-		 refresh();
+		refresh();	
 	}
 	return (0);
 }

@@ -6,33 +6,36 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 21:03:07 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/18 14:33:04 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/26 16:46:09 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int	read_name(t_asm *master)
-{
-	if (!(master->cp = next_token(master->file.arr)) ||
-			ft_strncmp(master->cp, ".name", 5))
-		return (7);
-	ft_printf("%.5s\n", master->cp);
-	return (0);
-}
+/*
+** Reads the file until both the name and comment commands have been parsed
+*/
 
-int	read_header(t_asm *master)
+int	read_header(t_asm *as)
 {
-	int	ern;
-/*	size_t	len;*/
+	char	*line;
+	char	*cp;
+	int		ern;
 
-	master->header.magic = flip_uint32(COREWAR_EXEC_MAGIC);
-	if ((ern = read_name(master)))
-		return (ern);
-/*	end = ft_memccpy(m->header.prog_name, m->file.arr, '"', PROG_NAME_LENGTH);
-	if (end)
-		*(((char*)end) - 1) = 0;*/
-/*	read_name(header->prog_name, fd);
-	read_comment(header->comment, fd);*/
-	return (0);
+	as->header.magic = flip_uint32(COREWAR_EXEC_MAGIC);
+	while ((ern = get_next_line(as->pi.fd, &line)) >= 0)
+	{
+		as->pi.row++;
+		cp = skip_whitespaces(line);
+		if (*cp == COMMAND_CHAR)
+			ern = read_command(&as->header, cp, &as->pi, &as->cmd_info);
+		else if (*cp != COMMENT_CHAR && *cp != '\0')
+			ern = LEXICAL;
+		ft_strdel(&line);
+		if (ern < 0)
+			return (print_error(-ern, "HEADER_ERROR", as->pi.row));
+		else if (!(as->cmd_info.commands_checked ^ 0x3))
+			return (0);
+	}
+	return (print_error(1, NULL, 0));
 }

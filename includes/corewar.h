@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/17 18:35:57 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/19 22:57:38 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,19 @@ struct					s_game
 	t_strvec			aff_out;
 };
 
-typedef struct			s_op
+/*
+**	t_op contents:
+**		> short name
+**		> number of args it takes
+**		> array: the args it takes
+**		> number code of operation
+**		> 5/10/6/20/25/50/1000/2 (number of cycles to execute command)
+**		> long name
+**		> 0: no encoding byte 1: encoding byte
+**		> index flag: (direct and indirect are same size) 0/1
+*/
+
+typedef struct		s_op
 {
 	char		*name_short;
 	int			argc;
@@ -141,6 +153,7 @@ extern int32_t			g_error;
 # define FLAG_P			0x10
 # define V_STATE		0x1
 # define V_PROCESS		0x2
+# define V_REGISTORS	0x4
 
 # define NUMBER_OF_FUNCTIONS 17
 
@@ -155,6 +168,7 @@ int						flag_n(char ***av, char **champ);
 int						flag_p(char ***av, char **champ);
 int						flag_s(char ***av, char **champ);
 int						flag_v(char ***av, char **champ);
+int						flag_f(char ***av, char **champ);
 int						flag_w(char ***av, char **champ);
 void					print_usage(char *filename);
 
@@ -174,13 +188,14 @@ int						game_step(struct s_game *game);
 char					*ft_strnjoin(char const *s1, char const *s2,
 							size_t s2_len);
 int						ft_jasprintf(t_strvec *ret, const char *format, ...);
-int						game_print(struct s_game *game, t_strvec *out);
-void					print_processes(t_strvec *out, uint8_t *arena,
-							t_list *processes);
-void					print_hex(t_strvec *out, void *loc, size_t size,
-							t_list *processes);
+int						game_print(struct s_game *game);
+void					print_processes(uint8_t *arena, t_list *processes);
+void					print_hex(void *loc, size_t size, t_list *processes);
 uint32_t				color_code(t_list *processes);
 void 					*memxor(void *p, int val, size_t size);
+void					win_resize(void);
+void					key_pause(char key);
+void					key_wait(char key);
 
 /*
 ** free.c
