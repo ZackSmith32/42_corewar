@@ -195,7 +195,7 @@ void					print_hex(void *loc, size_t size, t_list *processes);
 uint32_t				color_code(t_list *processes);
 void 					*memxor(void *p, int val, size_t size);
 void					win_resize(void);
-void					key_pause(char key);
+_Bool					key_pause(char key);
 void					key_wait(char key);
 void					key_skip(char key);
 

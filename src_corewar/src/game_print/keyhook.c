@@ -28,14 +28,13 @@ void	win_resize(void)
 	}
 }
 
-void	key_pause(char key)
+_Bool	key_pause(char key)
 {
-	_Bool	pause;
+	static _Bool	pause;
 
-	pause = (key == ' ') ? 1 : 0;
-	while (pause)
-		if (getch() == ' ')
-			pause = 0;
+	if (key == ' ')
+		memxor(&pause, ~0, sizeof(pause));
+	return(pause);
 }
 
 void	key_wait(char key)

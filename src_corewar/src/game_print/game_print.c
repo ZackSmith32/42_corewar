@@ -50,7 +50,8 @@ static void		keyhooks()
 	{
 		key = getch();
 		win_resize();
-		key_pause(key);
+		if (key_pause(key))
+			start = clock();
 		key_wait(key);
 		key_skip(key);
 		move(0, 0);
