@@ -24,6 +24,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <ncurses.h>
+# include <time.h>
 
 struct					s_champ
 {
@@ -37,7 +38,7 @@ struct					s_flag
 	unsigned int		cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
-	useconds_t			wait_time;
+	clock_t				wait_time;
 	_Bool				flag_test;
 };
 
@@ -194,8 +195,9 @@ void					print_hex(void *loc, size_t size, t_list *processes);
 uint32_t				color_code(t_list *processes);
 void 					*memxor(void *p, int val, size_t size);
 void					win_resize(void);
-void					key_pause(char key);
+_Bool					key_pause(char key);
 void					key_wait(char key);
+void					key_skip(char key);
 
 /*
 ** free.c

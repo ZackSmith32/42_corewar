@@ -11,8 +11,7 @@
 						"-v",
 						"-w", "000",
 						"-s", "1",
-						"resources/ld_test.cor",
-						"resources/garg.cor"
+						"resources/hercules/ressources/helltrain.cor"
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",
