@@ -197,6 +197,7 @@ void 					*memxor(void *p, int val, size_t size);
 void					win_resize(void);
 void					key_pause(char key);
 void					key_wait(char key);
+void					key_skip(char key);
 
 /*
 ** free.c

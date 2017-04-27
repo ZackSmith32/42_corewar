@@ -53,3 +53,21 @@ void	key_wait(char key)
 		g_flags.wait_time = (g_flags.wait_time < 990000)
 			? g_flags.wait_time + 10000 : 1000000;
 }
+
+void	key_skip(char key)
+{
+	if (key == 'f')
+		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 25)
+			? g_flags.cycle_intervals_to_dump - 25 : 0;
+	else if (key == 'd')
+		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 1)
+			? g_flags.cycle_intervals_to_dump - 1 : 0;
+	else if (key == 's')
+		g_flags.cycle_intervals_to_dump =
+		(g_flags.cycle_intervals_to_dump < 1599)
+			? g_flags.cycle_intervals_to_dump + 1 : 1600;
+	else if (key == 'a')
+		g_flags.cycle_intervals_to_dump =
+			(g_flags.cycle_intervals_to_dump < 1575)
+			? g_flags.cycle_intervals_to_dump + 25 : 1600;
+}

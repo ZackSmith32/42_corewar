@@ -72,7 +72,8 @@ void			print_hex(void *loc, size_t size,
 	uint8_t		*loc_conv;
 
 	attron(COLOR_PAIR(1));
-	printw("%195c", ' ');
+	printw("   %s%-10d%20s%-155d", "speed: ", 1000000 - g_flags.wait_time,
+		"skip: ", g_flags.cycle_intervals_to_dump);
 	loc_conv = (uint8_t*)loc;
 	while (size)
 	{
