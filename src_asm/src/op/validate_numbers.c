@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 14:26:58 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 13:38:44 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/27 14:19:06 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	validate_atouintmax(uintmax_t *ret, char *str)
 
 	*ret = 0;
 	temp = 0;
+	if (!(*str))
+		return (1);
 	while (ft_isdigit(*str))
 	{
 		temp = *ret;

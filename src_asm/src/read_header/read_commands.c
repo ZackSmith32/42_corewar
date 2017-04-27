@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 17:07:25 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/27 14:20:01 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ static int	read_quotes(char *dst, char *src, size_t max, t_parseinfo *pi)
 		if ((size_t)(src - hd - 1) <= max)
 			ft_strncpy(dst, hd + 1, (src - hd - 1));
 		else
-		{
-			ft_printf("comment:%s, current_size:%zu\n", dst, (src - hd));///
 			return (NAME_LONG);
-		}
 		if (*(hd = skip_whitespaces(src + 1)) != COMMENT_CHAR && *hd != '\0')
 			return (LEXICAL);
 	}
