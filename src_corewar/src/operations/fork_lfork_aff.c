@@ -20,9 +20,9 @@ static int		add_process(uint8_t *arena, struct s_process *base_process,
 
 	if (NULL == (p = ft_memdup(base_process, sizeof(*base_process))))
 		return (-1);
+	p->pc = mask_ptr(arena, p->pc + offset);
 	p->op_code = *p->pc;
 	p->countdown = g_op_tab[p->op_code].cycles_required;
-	p->pc = mask_ptr(arena, p->pc + offset);
 	if (NULL == (link = lstnew(p)))
 		return (-1);
 	lstadd(processes, link);
@@ -39,7 +39,7 @@ int				fork_op(struct s_game *game, struct s_process *process)
 	offset %= IDX_MOD;
 	if (-1 == add_process(game->arena, process, offset, &game->processes))
 		return (-2);
-	process->pc = mask_ptr(game->arena, process->pc + IND_SIZE);
+	process->pc = mask_ptr(game->arena, process->pc + IND_SIZE + 1);
 	return (0);
 }
 
@@ -52,7 +52,7 @@ int				lfork(struct s_game *game, struct s_process *process)
 	change_end(&offset, sizeof(offset));
 	if (-1 == add_process(game->arena, process, offset, &game->processes))
 		return (-2);
-	process->pc = mask_ptr(game->arena, process->pc + IND_SIZE);
+	process->pc = mask_ptr(game->arena, process->pc + IND_SIZE + 1);
 	process->carry = (offset == 0) ? 1 : 0; //TODO: is this right?
 	return (0);
 }

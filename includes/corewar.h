@@ -105,7 +105,7 @@ typedef struct		s_op
 	_Bool		dir_as_ind;
 }						t_op;
 
-typedef uint64_t		t_op_arg;
+typedef uint32_t		t_op_arg;
 
 # if IND_SIZE == 1
 typedef int8_t			t_ind;

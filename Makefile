@@ -18,7 +18,7 @@ ASM = asm
 ASM_DIR = ./src_asm/
 ASM_SRC = ./src_asm/asm
 
-all: $(COREWAR)
+all: $(COREWAR) $(ASM)
 
 $(ASM): $(ASM_SRC)
 	cp $< .
