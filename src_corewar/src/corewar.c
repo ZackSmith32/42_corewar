@@ -50,26 +50,23 @@ int					main(int argc, char **argv)
 {
 	struct s_game	game;
 	char			*champ_files[MAX_PLAYERS];
-	t_strvec		output;
-	size_t			i;
+	size_t			end_cd;
 
 	if (-1 == parse_args(argc, &argv, champ_files)
 		|| -1 == init_game_struct(champ_files, &game))
 	{
 		handle_error(&game);
 	}
-	ft_bzero((void *)&output, sizeof(output));
-	i = (g_flags.list & FLAG_D) ? g_flags.cycle_to_dump_exit : 1;
-	while (game.game_over == false && i > 0)
+	end_cd = (g_flags.list & FLAG_D) ? g_flags.cycle_to_dump_exit : 1;
+	while (game.game_over == false && end_cd > 0)
 	{
-		if (-1 == game_print(&game, &output) || -1 == game_step(&game))
+		if (-1 == game_print(&game) || -1 == game_step(&game))
 			handle_error(&game);
 		if (g_flags.list & FLAG_D)
-			i--;
+			end_cd--;
 	}
-	if (-1 == game_print(&game, &output))
+	if (-1 == game_print(&game))
 		handle_error(&game);
-	ft_memdel((void *)&output.str);
 	free_game(&game);
 	return (0);
 }

@@ -153,6 +153,7 @@ extern int32_t			g_error;
 # define FLAG_P			0x10
 # define V_STATE		0x1
 # define V_PROCESS		0x2
+# define V_REGISTORS	0x4
 
 # define NUMBER_OF_FUNCTIONS 17
 
@@ -187,13 +188,14 @@ int						game_step(struct s_game *game);
 char					*ft_strnjoin(char const *s1, char const *s2,
 							size_t s2_len);
 int						ft_jasprintf(t_strvec *ret, const char *format, ...);
-int						game_print(struct s_game *game, t_strvec *out);
-void					print_processes(t_strvec *out, uint8_t *arena,
-							t_list *processes);
-void					print_hex(t_strvec *out, void *loc, size_t size,
-							t_list *processes);
+int						game_print(struct s_game *game);
+void					print_processes(uint8_t *arena, t_list *processes);
+void					print_hex(void *loc, size_t size, t_list *processes);
 uint32_t				color_code(t_list *processes);
 void 					*memxor(void *p, int val, size_t size);
+void					win_resize(void);
+void					key_pause(char key);
+void					key_wait(char key);
 
 /*
 ** free.c

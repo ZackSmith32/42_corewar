@@ -47,11 +47,10 @@ static int		hex_color(t_list *processes, uint8_t *loc_conv)
 	return ((node) ? cnum : -1);
 }
 
-static void		print_byte_in_hex(t_strvec *out, uint8_t byte, int color_code)
+static void		print_byte_in_hex(uint8_t byte, int color_code)
 {
 	uint8_t	c;
 
-	(void)out;
 	c = 0x0F & byte;
 	byte = 0x0F & (byte >> 4);
 	byte = byte > 9 ? byte - 10 + 'A' : byte + '0';
@@ -67,12 +66,11 @@ static void		print_byte_in_hex(t_strvec *out, uint8_t byte, int color_code)
 	printw(" ");
 }
 
-void			print_hex(t_strvec *out, void *loc, size_t size,
+void			print_hex(void *loc, size_t size,
 					t_list *processes)
 {
 	uint8_t		*loc_conv;
 
-	(void)out;
 	attron(COLOR_PAIR(1));
 	printw("%195c", ' ');
 	loc_conv = (uint8_t*)loc;
@@ -85,7 +83,7 @@ void			print_hex(t_strvec *out, void *loc, size_t size,
 			attron(COLOR_PAIR(2));
 			printw(" ");
 		}
-		print_byte_in_hex(out, *loc_conv, hex_color(processes, loc_conv));
+		print_byte_in_hex(*loc_conv, hex_color(processes, loc_conv));
 		loc_conv++;
 		size--;
 	}

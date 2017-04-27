@@ -14,7 +14,7 @@
 
 void	print_usage(char *filename)
 {
-	ft_printf("Usage: %s %s%s%s%s%s%s%d%s%s%d%s%s%s%s%s%s%d%s%s%d%s",
+	ft_printf("Usage: %s %s%s%s%s%s%s%d%s%s%d%s%s%d%s%s%s%s%s%s%d%s%s%d%s",
 		filename, "[-d N -s N -v [N] | -p] [-n N <champion1.cor>] <...>\n",
 		"-d N       : Dumps memory after N cycles then exits\n",
 		"-s N       : Runs N cycles, dumps memory, pauses, then repeats\n",
@@ -22,6 +22,7 @@ void	print_usage(char *filename)
 		" several, N is optional, default is all\n",
 		"             - ", V_STATE, " : Show game state\n",
 		"             - ", V_PROCESS, " : Show process list\n",
+		"             - ", V_REGISTORS, " : Show registors in process list\n",
 		"-p         : Display memory byte map\n",
 		"-n N <...> : Explicitly choose champion position\n",
 		"-w N       : Wait time in microseconds, default 250000\n",
