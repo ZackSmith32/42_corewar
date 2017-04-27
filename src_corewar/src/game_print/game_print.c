@@ -25,18 +25,38 @@ void			print_game_state(struct s_game *game)
 	if (game->last_live_champ)
 		attron(COLOR_PAIR(game->last_live_champ - game->champs + 10)
 			| A_REVERSE);
-	printw("%-100s", game->last_live_champ->prog_name);
+	printw("%-30s", game->last_live_champ->prog_name);
 	if (game->last_live_champ)
 		attrset(A_NORMAL);
+	printw("     aff: %-60s", game->aff_out.str);
 }
 
 static void		print_game_over(struct s_game *game)
 {
-	ft_printf("\033[2J\033[1;1H");
-	ft_printf("Player %zu (%s) won\n %s\n",
-		game->last_live_champ - game->champs + 1,
-		game->last_live_champ->prog_name,
-		game->last_live_champ->comment);
+	_Bool	pause;
+
+	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
+	{
+		pause = 1;
+		attron(COLOR_PAIR(1));
+		move(0, 0);
+		printw("   Player %zu (%s) won :  %-20s",
+			game->last_live_champ - game->champs + 1,
+			game->last_live_champ->prog_name,
+			game->last_live_champ->comment);
+			refresh();
+		while (pause)
+			if (getch() == ' ')
+				pause = 0;
+	}
+	else
+	{
+		ft_printf("\033[2J\033[1;1H");
+		ft_printf("Player %zu (%s) won\n %s\n",
+			game->last_live_champ - game->champs + 1,
+			game->last_live_champ->prog_name,
+			game->last_live_champ->comment);
+	}
 }
 
 static void		keyhooks()
