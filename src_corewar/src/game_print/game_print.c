@@ -41,18 +41,27 @@ static void		print_game_over(struct s_game *game)
 
 static void		keyhooks()
 {
-	char	key;
+	char		key;
+	clock_t		start;
+	clock_t		end;
+	useconds_t	wait_time;
 
-	key = getch();
-	win_resize();
-	key_pause(key);
-	key_wait(key);
+	start = clock();
+	wait_time = g_flags.wait_time;
+	while (wait_time)
+	{
+		key = getch();
+		win_resize();
+		key_pause(key);
+		key_wait(key);
+		(wait_time > 100000) ? usleep(100000) : usleep(wait_time);
+		wait_time -= (wait_time > 100000) ? 100000 : wait_time; 
+	}
 }
 
 static int		print_init(void)
 {
 	keyhooks();
-	usleep(g_flags.wait_time);
 	move(0, 0);
 	return (0);
 }

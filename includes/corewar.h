@@ -24,6 +24,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <ncurses.h>
+# include <time.h>
 
 struct					s_champ
 {
