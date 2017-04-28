@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 20:18:03 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 16:31:46 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/28 12:56:57 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				fill_labels(t_vec *labels, t_vec *label_calls, t_vec *output)
 	{
 		call = ft_vecindex(label_calls, i);
 		if (!(label = find_label(labels, call->name)))
-			return (print_error(11, call->name, call->addr));
+			return (print_error(10, call->name, call->addr));
 		value = label->address - call->op_addr;
 		if (!(byte_code = load_byte_code(value, call->size)))
 			return (print_error(1, NULL, 0));

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 16:31:06 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/28 12:56:25 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static const char	*g_error_message[] =
 	"Lexical error at [ROW:%d]\n",
 	"Name is too long\n",
 	"Comment is too long\n",
-	"Program size too big\n",
 	"addr:%d label %s not found\n",
 };
 

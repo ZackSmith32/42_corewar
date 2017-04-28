@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 18:13:43 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 16:42:42 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/28 12:56:11 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ int	read_body(t_asm *as)
 	if (fill_labels(&as->labels, &as->opp.label_calls, &as->opp.output))
 		return (1);
 	as->header.prog_size = flip_uint32(as->opp.output.len);
-	if (as->opp.output.len > CHAMP_MAX_SIZE)
-		return (print_error(10, NULL, 0));
 	return (0);
 }
