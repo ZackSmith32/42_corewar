@@ -39,7 +39,6 @@ struct					s_flag
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
 	clock_t				wait_time;
-	unsigned int		cycle_count;
 	_Bool				flag_test;
 };
 
@@ -79,6 +78,7 @@ struct					s_game
 	struct s_champ		*last_live_champ;
 	_Bool				game_over;
 	unsigned int		lives;
+	unsigned int		cycle_count;
 	t_strvec			aff_out;
 };
 

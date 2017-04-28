@@ -63,11 +63,11 @@ int					main(int argc, char **argv)
 			if (-1 == game_rewind(champ_files, &game))
 				handle_error(&game);
 		}
-		else if (++g_flags.cycle_count &&
+		else if (++game.cycle_count &&
 				(-1 == game_print(&game) || -1 == game_step(&game)))
 			handle_error(&game);
 		if (g_flags.list & FLAG_D
-				&& g_flags.cycle_to_dump_exit <= g_flags.cycle_count)
+				&& g_flags.cycle_to_dump_exit <= game.cycle_count)
 			game.game_over = TRUE;
 	}
 	if (-1 == game_print(&game))
