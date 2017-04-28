@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 19:31:09 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/28 13:51:46 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/28 13:58:58 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	truncate_at(char *str, char c)
 ** Parses the label and operation lines in the body of the input file
 */
 
-int	parse_line(char *head, t_asm *as, int depth)
+int			parse_line(char *head, t_asm *as, int depth)
 {
 	char	*tail;
 	int		ern;
