@@ -6,11 +6,24 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 19:31:09 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/26 16:24:06 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/28 13:51:46 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+/*
+** Sets the first instance of 'c' in the line to be a null terminating 0
+*/
+
+static void	truncate_at(char *str, char c)
+{
+	char *truncate;
+
+	truncate = ft_strchr(str, c);
+	if (truncate)
+		*truncate = '\0';
+}
 
 /*
 ** Parses the label and operation lines in the body of the input file
@@ -19,14 +32,12 @@
 int	parse_line(char *head, t_asm *as, int depth)
 {
 	char	*tail;
-	char	*truncate;
 	int		ern;
 
 	ern = 0;
 	tail = skip_whitespaces(head);
-	truncate = ft_strchr(tail, COMMENT_CHAR);
-	if (truncate)
-		*truncate = '\0';
+	truncate_at(tail, COMMENT_CHAR);
+	truncate_at(tail, ';');
 	if (is_labelchar(*tail))
 		ern = parse_label(tail, as, depth);
 	else if (*tail != '\0')

@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/27 14:20:01 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/28 13:44:05 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 		if (!tail)
 			current_size = ft_strlcat(dst, line, max + 1);
 		else if (*(end = skip_whitespaces(tail + 1)) != COMMENT_CHAR &&
-				*end != '\0')
+				*end != '\0' && *end != ';')
 			ern = LEXICAL;
 		else if (current_size <= max && !(ern = 0))
 			ft_strncat(dst, line, (tail - line));
@@ -63,7 +63,8 @@ static int	read_quotes(char *dst, char *src, size_t max, t_parseinfo *pi)
 			ft_strncpy(dst, hd + 1, (src - hd - 1));
 		else
 			return (NAME_LONG);
-		if (*(hd = skip_whitespaces(src + 1)) != COMMENT_CHAR && *hd != '\0')
+		if (*(hd = skip_whitespaces(src + 1)) != COMMENT_CHAR && *hd != '\0'
+				&& *hd != ';')
 			return (LEXICAL);
 	}
 	else
