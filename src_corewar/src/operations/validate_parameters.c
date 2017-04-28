@@ -45,6 +45,8 @@ int				check_param_type(t_op op, char parameter_encoding)
 			flag = T_DIR;
 		else if (((parameter_encoding & 0xc0) >> 6) == IND_CODE)
 			flag = T_IND;
+		else
+			return (-1);
 		if ((flag & op.arg_type[i]) == 0)
 			return (-1);
 		parameter_encoding = parameter_encoding << 2;

@@ -12,6 +12,10 @@
 
 #include <corewar.h>
 
+/*
+** overflows likely broken because of bad parameter size
+*/
+
 int					add(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[4].argc];

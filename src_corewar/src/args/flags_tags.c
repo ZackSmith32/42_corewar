@@ -54,6 +54,8 @@ int	flag_s(char ***av, char **champ)
 	if (++(*av) && **av && ***av >= '0' && ***av <= '9')
 	{
 		g_flags.cycle_intervals_to_dump = ft_atoui(**av);
+		if (g_flags.cycle_intervals_to_dump > 1600)
+			return (-1);
 		g_flags.list |= FLAG_S;
 		return (0);
 	}

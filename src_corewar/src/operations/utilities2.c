@@ -28,7 +28,7 @@ int		check_registors(uint8_t op_code, struct s_parameter *params)
 	while (i < g_op_tab[op_code].argc)
 	{
 		if ((params[i].param_type == T_REG)
-			&& (params[i].param_val.val >= REG_NUMBER
+			&& (params[i].param_val.val > REG_NUMBER
 			|| params[i].param_val.val <= 0))
 			return (-1);
 		i++;

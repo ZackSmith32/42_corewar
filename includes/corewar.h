@@ -35,10 +35,11 @@ struct					s_champ
 struct					s_flag
 {
 	int16_t				list; //bit list
-	unsigned int		cycle_intervals_to_dump; // -option s
+	int					cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
 	clock_t				wait_time;
+	unsigned int		cycle_count;
 	_Bool				flag_test;
 };
 
@@ -105,7 +106,7 @@ typedef struct		s_op
 	_Bool		dir_as_ind;
 }						t_op;
 
-typedef uint64_t		t_op_arg;
+typedef uint32_t		t_op_arg;
 
 # if IND_SIZE == 1
 typedef int8_t			t_ind;
@@ -198,6 +199,8 @@ void					win_resize(void);
 _Bool					key_pause(char key);
 void					key_wait(char key);
 void					key_skip(char key);
+void					key_rewind(char key);
+int					game_rewind(char **champ_files, struct s_game *game);
 
 /*
 ** free.c

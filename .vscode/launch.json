@@ -9,9 +9,9 @@
 			"args":	[
 						"-p",
 						"-v",
-						"-w", "000",
+						"-w", "0",
 						"-s", "1",
-						"resources/hercules/ressources/helltrain.cor"
+						"tiny_helltrain.cor"
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",
