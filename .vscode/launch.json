@@ -11,7 +11,7 @@
 						"-v",
 						"-w", "0",
 						"-s", "1",
-						"tiny_helltrain.cor"
+						"resources/hercules/ressources/knut.cor"
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",

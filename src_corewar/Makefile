@@ -15,6 +15,8 @@ NAME = corewar
 LIBFT = ./libft/libft.a
 LIBFT_DIR = ./libft
 
+INCLUDES = ../includes
+
 SRC = \
 	$(addprefix src/, \
 		corewar.c \
@@ -64,7 +66,7 @@ SRC = \
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = -I ../includes -I ./libft/includes
+HEADERS = -I $(INCLUDES) -I ./libft/includes
 
 CFLAGS = -Wall -Wextra -Werror -g
 
@@ -75,6 +77,8 @@ $(NAME): $(OBJ) $(LIBFT)
 
 %.o: %.c
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
+
+$(OBJ): $(INCLUDES)/op.h $(INCLUDES)/corewar.h
 
 $(LIBFT): force
 	$(MAKE) -C $(LIBFT_DIR)
