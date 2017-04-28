@@ -21,7 +21,7 @@ static t_ind	calc_sti_offset(struct s_process *process,
 	first.val = 0;
 	second.val = 0;
 	if (params[1].param_type == T_REG)
-		reverse_bytes(&process->registors[params[0].param_val.val - 1], 
+		reverse_bytes((uint8_t*)&process->registors[params[0].param_val.val - 1], 
 			REG_SIZE, first.arr);
 	else
 		reverse_bytes(params[1].param_val.arr, IND_SIZE, first.arr);
