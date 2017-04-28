@@ -104,6 +104,7 @@ static int				add_champs_processes(char **champs, struct s_game *game)
 				|| -1 == add_process(&game->processes, start_loc,
 					champ_index))
 				return (-1);
+			game->last_live_champ = game->champs + champ_index;
 			champ_index++;
 		}
 		i++;
