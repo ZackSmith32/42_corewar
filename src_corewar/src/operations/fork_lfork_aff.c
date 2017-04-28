@@ -56,7 +56,7 @@ int				lfork(struct s_game *game, struct s_process *process)
 	if (-1 == add_process(game->arena, process, offset, &game->processes))
 		return (-2);
 	process->pc = mask_ptr(game->arena, process->pc + IND_SIZE + 1);
-	process->carry = (offset == 0) ? 1 : 0; //TODO: is this right?
+	//process->carry = (offset == 0) ? 1 : 0; TODO: this doesn't set carry right?
 	return (0);
 }
 
@@ -75,6 +75,6 @@ int				aff(struct s_game *game, struct s_process *process)
 	change_end(&params[0].param_val.val, REG_SIZE);
 	params[0].param_val.val = params[0].param_val.val % 256;
 	ft_jasprintf(&game->aff_out, "%c", (char)params[0].param_val.val);
-	process->carry = (params[0].param_val.val == 0) ? 1 : 0;
+	//process->carry = (params[0].param_val.val == 0) ? 1 : 0; TODO: this doesn't set carry right?
 	return (0);
 }
