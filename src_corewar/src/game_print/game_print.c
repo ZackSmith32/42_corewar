@@ -18,7 +18,7 @@ void			print_game_state(struct s_game *game)
 		return ;
 	printw(
 			"\ncycles: %-6u current/death:%4u/%4u  check count/max: %u/%u"
-			"  lives:%3u  last_live_champ: ", g_flags.cycle_count,
+			"  lives:%3u  last_live_champ: ", game->cycle_count,
 			game->current_cycles, game->cycles_to_death,
 			game->check_count, MAX_CHECKS,
 			game->lives);
@@ -95,12 +95,12 @@ int				game_rewind(char **champ_files, struct s_game *game)
 	int				w;
 
 	target =
-		(g_flags.cycle_count > (unsigned int)(-g_flags.cycle_intervals_to_dump))
-		? g_flags.cycle_count + g_flags.cycle_intervals_to_dump : 0;
+		(game->cycle_count > (unsigned int)(-g_flags.cycle_intervals_to_dump))
+		? game->cycle_count + g_flags.cycle_intervals_to_dump : 0;
 	free_game(game);
 	if (-1 == init_game_struct(champ_files, game))
 		return (-1);
-	g_flags.cycle_count = target;
+	game->cycle_count = target;
 	while (target)
 	{
 		if (-1 == game_step(game))
@@ -119,7 +119,7 @@ int				game_print(struct s_game *game)
 {
 	if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
 			&& (game->game_over || 0 >= g_flags.cycle_intervals_to_dump
-				|| 0 == g_flags.cycle_count % g_flags.cycle_intervals_to_dump))
+				|| 0 == game->cycle_count % g_flags.cycle_intervals_to_dump))
 	{
 		keyhooks();
 		if (g_flags.list & FLAG_P)
