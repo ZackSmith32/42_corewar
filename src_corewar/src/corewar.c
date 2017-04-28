@@ -58,12 +58,12 @@ int					main(int argc, char **argv)
 		handle_error(&game);
 	}
 	end_cd = (g_flags.list & FLAG_D) ? g_flags.cycle_to_dump_exit : 1;
-	while (game.game_over == false && end_cd > 0)
+	while (game.game_over == false)
 	{
 		if (-1 == game_print(&game) || -1 == game_step(&game))
 			handle_error(&game);
-		if (g_flags.list & FLAG_D)
-			end_cd--;
+		if (g_flags.list & FLAG_D && !(end_cd--))
+			game.game_over = TRUE;
 	}
 	if (-1 == game_print(&game))
 		handle_error(&game);

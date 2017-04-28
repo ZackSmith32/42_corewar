@@ -56,7 +56,7 @@ static void		print_byte_in_hex(uint8_t byte, int color_code)
 	byte = byte > 9 ? byte - 10 + 'A' : byte + '0';
 	c = c > 9 ? c - 10 + 'A' : c + '0';
 	if (color_code != -1)
-		attron(COLOR_PAIR(color_code) | A_DIM);
+		attron(COLOR_PAIR(color_code) | A_DIM | A_BLINK);
 	else if (byte != '0' || c != '0')
 		attron(COLOR_PAIR(3));
 	else
@@ -71,9 +71,6 @@ void			print_hex(void *loc, size_t size,
 {
 	uint8_t		*loc_conv;
 
-	attron(COLOR_PAIR(1));
-	printw("   %s%-10d%20s%-155d", "speed: ", 1000000 - g_flags.wait_time,
-		"skip: ", g_flags.cycle_intervals_to_dump);
 	loc_conv = (uint8_t*)loc;
 	while (size)
 	{

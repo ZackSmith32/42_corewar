@@ -57,10 +57,10 @@ void	key_skip(char key)
 {
 	if (key == 'f')
 		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 25)
-			? g_flags.cycle_intervals_to_dump - 25 : 0;
+			? g_flags.cycle_intervals_to_dump - 25 : 1;
 	else if (key == 'd')
 		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 1)
-			? g_flags.cycle_intervals_to_dump - 1 : 0;
+			? g_flags.cycle_intervals_to_dump - 1 : 1;
 	else if (key == 's')
 		g_flags.cycle_intervals_to_dump =
 		(g_flags.cycle_intervals_to_dump < 1599)

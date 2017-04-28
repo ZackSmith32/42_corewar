@@ -65,18 +65,25 @@ static void		keyhooks()
 	clock_t		start;
 
 	start = clock();
-	attron(COLOR_PAIR(1));
+	if (g_flags.list & FLAG_P)
+		attron(COLOR_PAIR(1));
 	while (g_flags.wait_time > clock() - start)
 	{
+		move(0, 0);
+		printw("   %s%-10d%10s%-14d", "speed[qwer]: ",
+			(1000000 - g_flags.wait_time) / 1000 + 1,
+			"skip[asdf]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
 		win_resize();
 		if (key_pause(key))
+		{
 			start = clock();
+			printw("%-143s", "-paused-");
+		}
+		else
+			printw("%143s", " ");
 		key_wait(key);
 		key_skip(key);
-		move(0, 0);
-		printw("   %s%-10d%20s%-143d", "speed[qwer]: ", 1000000 - g_flags.wait_time,
-			"skip[asdf]: ", g_flags.cycle_intervals_to_dump);
 		refresh();
 	}
 }
@@ -84,7 +91,6 @@ static void		keyhooks()
 static int		print_init(void)
 {
 	keyhooks();
-	move(0, 0);
 	return (0);
 }
 
