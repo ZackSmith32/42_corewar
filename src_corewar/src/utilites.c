@@ -30,7 +30,7 @@ void				change_end(void *val, size_t size)
 	}
 }
 
-int				ft_jasprintf(t_strvec *ret, const char *format, ...)
+int					ft_jasprintf(t_strvec *ret, const char *format, ...)
 {
 	va_list		ap;
 	int			size;

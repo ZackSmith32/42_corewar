@@ -17,8 +17,8 @@ void			print_game_state(struct s_game *game)
 	if (!(g_flags.verbosity_level & V_STATE))
 		return ;
 	printw(
-			"\ncycles current/death:%4u/%4u  check count/max: %u/%u"
-			"  lives:%3u  last_live_champ: ",
+			"\ncycles: %-6u current/death:%4u/%4u  check count/max: %u/%u"
+			"  lives:%3u  last_live_champ: ", g_flags.cycle_count,
 			game->current_cycles, game->cycles_to_death,
 			game->check_count, MAX_CHECKS,
 			game->lives);
@@ -28,7 +28,8 @@ void			print_game_state(struct s_game *game)
 	printw("%-30s", game->last_live_champ->prog_name);
 	if (game->last_live_champ)
 		attrset(A_NORMAL);
-	printw("     aff: %-60s", game->aff_out.str);
+	printw("     aff: %-55s", game->aff_out.str);
+	game->aff_out.len = 0;
 }
 
 static void		print_game_over(struct s_game *game)
@@ -44,14 +45,15 @@ static void		print_game_over(struct s_game *game)
 			game->last_live_champ - game->champs + 1,
 			game->last_live_champ->prog_name,
 			game->last_live_champ->comment);
-			refresh();
+		refresh();
 		while (pause)
 			if (getch() == ' ')
 				pause = 0;
+		attrset(A_NORMAL);
+		endwin();
 	}
 	else
 	{
-		ft_printf("\033[2J\033[1;1H");
 		ft_printf("Player %zu (%s) won\n %s\n",
 			game->last_live_champ - game->champs + 1,
 			game->last_live_champ->prog_name,
@@ -59,7 +61,7 @@ static void		print_game_over(struct s_game *game)
 	}
 }
 
-static void		keyhooks()
+static void		keyhooks(void)
 {
 	char		key;
 	clock_t		start;
@@ -70,39 +72,56 @@ static void		keyhooks()
 	while (g_flags.wait_time > clock() - start)
 	{
 		move(0, 0);
-		printw("   %s%-10d%10s%-14d", "speed[qwer]: ",
+		printw("   %s%-4d%20s%-14d", "speed[qwer]: ",
 			(1000000 - g_flags.wait_time) / 1000 + 1,
-			"skip[asdf]: ", g_flags.cycle_intervals_to_dump);
+			"skip[asdf/zxcv]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
 		win_resize();
-		if (key_pause(key))
-		{
-			start = clock();
-			printw("%-143s", "-paused-");
-		}
+		if (key_pause(key) && (start = clock()))
+			printw("%-141s", "-paused-");
 		else
-			printw("%143s", " ");
+			printw("%141s", " ");
 		key_wait(key);
 		key_skip(key);
+		key_rewind(key);
 		refresh();
 	}
 }
 
-static int		print_init(void)
+int				game_rewind(char **champ_files, struct s_game *game)
 {
-	keyhooks();
+	unsigned int	target;
+	int				h;
+	int				w;
+
+	target =
+		(g_flags.cycle_count > (unsigned int)(-g_flags.cycle_intervals_to_dump))
+		? g_flags.cycle_count + g_flags.cycle_intervals_to_dump : 0;
+	free_game(game);
+	if (-1 == init_game_struct(champ_files, game))
+		return (-1);
+	g_flags.cycle_count = target;
+	while (target)
+	{
+		if (-1 == game_step(game))
+			return (-1);
+		target--;
+	}
+	if (-1 == game_print(game))
+		return (-1);
+	getmaxyx(stdscr, h, w);
+	printw("%*s", h * w, " ");
+	refresh();
 	return (0);
 }
 
 int				game_print(struct s_game *game)
 {
-	if (game->game_over)
-		print_game_over(game);
-	else if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
-			&& (0 == g_flags.cycle_intervals_to_dump
-				|| 0 == game->current_cycles % g_flags.cycle_intervals_to_dump))
+	if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
+			&& (game->game_over || 0 >= g_flags.cycle_intervals_to_dump
+				|| 0 == g_flags.cycle_count % g_flags.cycle_intervals_to_dump))
 	{
-		print_init();
+		keyhooks();
 		if (g_flags.list & FLAG_P)
 			print_hex(game->arena, MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
@@ -110,7 +129,9 @@ int				game_print(struct s_game *game)
 			print_game_state(game);
 			print_processes(game->arena, game->processes);
 		}
-		refresh();	
+		refresh();
 	}
+	if (game->game_over)
+		print_game_over(game);
 	return (0);
 }

@@ -34,7 +34,7 @@ _Bool	key_pause(char key)
 
 	if (key == ' ')
 		memxor(&pause, ~0, sizeof(pause));
-	return(pause);
+	return (pause);
 }
 
 void	key_wait(char key)
@@ -62,11 +62,50 @@ void	key_skip(char key)
 		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 1)
 			? g_flags.cycle_intervals_to_dump - 1 : 1;
 	else if (key == 's')
-		g_flags.cycle_intervals_to_dump =
-		(g_flags.cycle_intervals_to_dump < 1599)
-			? g_flags.cycle_intervals_to_dump + 1 : 1600;
+	{
+		if (g_flags.cycle_intervals_to_dump < 1)
+			g_flags.cycle_intervals_to_dump = 1;
+		else if (g_flags.cycle_intervals_to_dump < 1599)
+			g_flags.cycle_intervals_to_dump += 1;
+		else
+			g_flags.cycle_intervals_to_dump = 1600;
+	}
 	else if (key == 'a')
+	{
+		if (g_flags.cycle_intervals_to_dump < 1)
+			g_flags.cycle_intervals_to_dump = 25;
+		else if (g_flags.cycle_intervals_to_dump < 1575)
+			g_flags.cycle_intervals_to_dump += 25;
+		else
+			g_flags.cycle_intervals_to_dump = 1600;
+	}
+}
+
+void	key_rewind(char key)
+{
+	if (key == 'v')
 		g_flags.cycle_intervals_to_dump =
-			(g_flags.cycle_intervals_to_dump < 1575)
-			? g_flags.cycle_intervals_to_dump + 25 : 1600;
+			(g_flags.cycle_intervals_to_dump < -25)
+			? g_flags.cycle_intervals_to_dump + 25 : -1;
+	else if (key == 'c')
+		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump < -1)
+			? g_flags.cycle_intervals_to_dump + 1 : -1;
+	else if (key == 'x')
+	{
+		if (g_flags.cycle_intervals_to_dump > -1)
+			g_flags.cycle_intervals_to_dump = -1;
+		else if (g_flags.cycle_intervals_to_dump > -1599)
+			g_flags.cycle_intervals_to_dump -= 1;
+		else
+			g_flags.cycle_intervals_to_dump = -1600;
+	}
+	else if (key == 'z')
+	{
+		if (g_flags.cycle_intervals_to_dump > -1)
+			g_flags.cycle_intervals_to_dump = -25;
+		else if (g_flags.cycle_intervals_to_dump > -1575)
+			g_flags.cycle_intervals_to_dump -= 25;
+		else
+			g_flags.cycle_intervals_to_dump = -1600;
+	}
 }

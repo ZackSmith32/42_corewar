@@ -35,10 +35,11 @@ struct					s_champ
 struct					s_flag
 {
 	int16_t				list; //bit list
-	unsigned int		cycle_intervals_to_dump; // -option s
+	int					cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
 	clock_t				wait_time;
+	unsigned int		cycle_count;
 	_Bool				flag_test;
 };
 
@@ -198,6 +199,8 @@ void					win_resize(void);
 _Bool					key_pause(char key);
 void					key_wait(char key);
 void					key_skip(char key);
+void					key_rewind(char key);
+int					game_rewind(char **champ_files, struct s_game *game);
 
 /*
 ** free.c

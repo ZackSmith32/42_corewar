@@ -36,7 +36,8 @@ static char const	*g_error_msg[] = {
 
 static void			handle_error(struct s_game *game)
 {
-	free_game(game);
+	if (game)
+		free_game(game);
 	if (errno)
 		perror("corewar: ERROR");
 	else
@@ -50,19 +51,23 @@ int					main(int argc, char **argv)
 {
 	struct s_game	game;
 	char			*champ_files[MAX_PLAYERS];
-	size_t			end_cd;
 
-	if (-1 == parse_args(argc, &argv, champ_files)
-		|| -1 == init_game_struct(champ_files, &game))
-	{
+	if (-1 == parse_args(argc, &argv, champ_files))
+		handle_error(NULL);
+	if (-1 == init_game_struct(champ_files, &game))
 		handle_error(&game);
-	}
-	end_cd = (g_flags.list & FLAG_D) ? g_flags.cycle_to_dump_exit : 1;
 	while (game.game_over == false)
 	{
-		if (-1 == game_print(&game) || -1 == game_step(&game))
+		if (0 > g_flags.cycle_intervals_to_dump)
+		{
+			if (-1 == game_rewind(champ_files, &game))
+				handle_error(&game);
+		}
+		else if (++g_flags.cycle_count &&
+				(-1 == game_print(&game) || -1 == game_step(&game)))
 			handle_error(&game);
-		if (g_flags.list & FLAG_D && !(end_cd--))
+		if (g_flags.list & FLAG_D
+				&& g_flags.cycle_to_dump_exit <= g_flags.cycle_count)
 			game.game_over = TRUE;
 	}
 	if (-1 == game_print(&game))
