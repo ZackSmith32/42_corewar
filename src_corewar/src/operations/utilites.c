@@ -18,7 +18,6 @@ int			move_one(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
-
 void		move_pc(uint8_t *arena, uint8_t **pc, int move)
 {
 	*pc = mask_ptr(arena, *pc + move);
@@ -31,20 +30,7 @@ uint8_t		*mask_ptr(uint8_t *arena, uint8_t *ptr)
 		ptr -= MEM_SIZE;
 	else if (ptr < arena)
 		ptr += MEM_SIZE;
-	return(ptr);
-}
-
-void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest)
-{
-	uint8_t		i;
-
-	i = 0;
-	while (size > 0)
-	{
-		size--;
-		dest[i] = ptr[size];
-		i++;
-	}
+	return (ptr);
 }
 
 uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr,
@@ -74,30 +60,3 @@ uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr,
 	}
 	return (arena_ptr);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,7 +12,7 @@
 
 #include <corewar.h>
 
-void	modify_carry(struct s_process *process, t_op_arg ret)
+void		modify_carry(struct s_process *process, t_op_arg ret)
 {
 	if (ret == 0)
 		process->carry = 1;
@@ -20,8 +20,8 @@ void	modify_carry(struct s_process *process, t_op_arg ret)
 		process->carry = 0;
 }
 
-int		check_registors(uint8_t op_code, struct s_parameter *params)
-{	
+int			check_registors(uint8_t op_code, struct s_parameter *params)
+{
 	uint8_t		i;
 
 	i = 0;
@@ -34,4 +34,17 @@ int		check_registors(uint8_t op_code, struct s_parameter *params)
 		i++;
 	}
 	return (0);
+}
+
+void		reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest)
+{
+	uint8_t		i;
+
+	i = 0;
+	while (size > 0)
+	{
+		size--;
+		dest[i] = ptr[size];
+		i++;
+	}
 }

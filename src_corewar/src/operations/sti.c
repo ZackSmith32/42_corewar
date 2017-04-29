@@ -40,7 +40,7 @@ int				sti(struct s_game *game, struct s_process *process)
 	uint8_t				*pc_temp;
 	t_ind				offset;
 
- 	pc_temp = process->pc;
+	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
 		return (-1);
 	if (-1 == check_registors(process->op_code, params)

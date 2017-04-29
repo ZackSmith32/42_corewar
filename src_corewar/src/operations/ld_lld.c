@@ -12,6 +12,10 @@
 
 #include <corewar.h>
 
+/*
+**	TODO: what is up with this expection zack! D: D:
+*/
+
 int		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[0x02].argc];
@@ -27,17 +31,16 @@ int		ld(struct s_game *game, struct s_process *process)
 		return (0);
 	}
 	if (params[0].param_type == T_DIR)
-		process->registors[params[1].param_val.val - 1] = params[0].param_val.val;
+		process->registors[params[1].param_val.val - 1] =
+			params[0].param_val.val;
 	else if (params[0].param_type == T_IND)
 	{
 		reverse_bytes(params[0].param_val.arr, IND_SIZE, ind_offset.arr);
-		read_arena(game->arena, process->pc +
-			(((t_ind)ind_offset.val) % IDX_MOD), //added t_ind cast here (and in lld)
-			(uint8_t *)&process->registors[params[1].param_val.val - 1],
-			REG_SIZE);
+		read_arena(game->arena, process->pc + (((t_ind)ind_offset.val) %
+			IDX_MOD), (uint8_t *)&process->
+			registors[params[1].param_val.val - 1], REG_SIZE);
 	}
 	modify_carry(process, process->registors[params[1].param_val.val - 1]);
-	//TODO: what is up with this expection zack! D: D:
 	process->pc = pc_temp;
 	return (0);
 }
@@ -57,7 +60,8 @@ int		lld(struct s_game *game, struct s_process *process)
 		return (0);
 	}
 	if (params[0].param_type == T_DIR)
-		process->registors[params[1].param_val.val - 1] = params[0].param_val.val;
+		process->registors[params[1].param_val.val - 1] =
+			params[0].param_val.val;
 	else if (params[0].param_type == T_IND)
 	{
 		reverse_bytes(params[0].param_val.arr, IND_SIZE, ind_offset.arr);
@@ -65,7 +69,7 @@ int		lld(struct s_game *game, struct s_process *process)
 			(uint8_t *)&process->registors[params[1].param_val.val - 1],
 			REG_SIZE);
 	}
-	modify_carry(process, process->registors[params[1].param_val.val - 1]);	
+	modify_carry(process, process->registors[params[1].param_val.val - 1]);
 	process->pc = pc_temp;
 	return (0);
 }

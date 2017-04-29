@@ -12,14 +12,14 @@
 
 #include <corewar.h>
 
-void				set_parameter(uint8_t *arena, uint8_t **pc_temp, 
+void				set_parameter(uint8_t *arena, uint8_t **pc_temp,
 						struct s_parameter *parameter, uint8_t size)
 {
 	read_arena(arena, *pc_temp, (*parameter).param_val.arr, size);
 	*pc_temp = mask_ptr(arena, *pc_temp += size);
 }
 
-struct s_parameter	get_param_value(struct s_game *game, 
+struct s_parameter	get_param_value(struct s_game *game,
 						struct s_process *process, uint8_t parameter_type,
 						uint8_t **pc_temp)
 {
@@ -52,34 +52,24 @@ struct s_parameter	get_param_value(struct s_game *game,
 **	Itterate through parameter encoding byte, collect corresponding data into
 **		parameters array
 */
-int			parse_parameters(struct s_game *game, struct s_process *process, 
-				struct s_parameter *params, uint8_t **pc_temp)
+
+int					parse_parameters(struct s_game *game,
+						struct s_process *process, struct s_parameter *params,
+						uint8_t **pc_temp)
 {
 	uint8_t		parameter_encoding;
 	uint8_t		parameter_index;
 
-		parameter_encoding = *(mask_ptr(game->arena, *pc_temp + 1));
+	parameter_encoding = *(mask_ptr(game->arena, *pc_temp + 1));
 	*pc_temp = mask_ptr(game->arena, *pc_temp + 2);
 	parameter_index = 0;
 	while (parameter_index < g_op_tab[process->op_code].argc)
 	{
-		params[parameter_index] = 
-			get_param_value(game, process, (parameter_encoding & 0xc0), pc_temp);
+		params[parameter_index] =
+			get_param_value(game, process, (parameter_encoding & 0xc0),
+			pc_temp);
 		parameter_encoding = parameter_encoding << 2;
 		parameter_index++;
 	}
 	return (1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
