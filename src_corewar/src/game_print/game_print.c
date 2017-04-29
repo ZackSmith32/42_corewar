@@ -12,52 +12,59 @@
 
 #include <corewar.h>
 
-void			print_game_state(struct s_game *game)
+static void		simple_dump(uint8_t *arena, size_t size)
 {
-	if (!(g_flags.verbosity_level & V_STATE))
-		return ;
-	printw(
-			"\ncycles: %-6u current/death:%4u/%4u  check count/max: %u/%u"
-			"  lives:%3u  last_live_champ: ", game->cycle_count,
-			game->current_cycles, game->cycles_to_death,
-			game->check_count, MAX_CHECKS,
-			game->lives);
-	if (game->last_live_champ)
-		attron(COLOR_PAIR(game->last_live_champ - game->champs + 10)
-			| A_REVERSE);
-	printw("%-30s", game->last_live_champ->prog_name);
-	if (game->last_live_champ)
-		attrset(A_NORMAL);
-	printw("     aff: %-55s", game->aff_out.str);
-	game->aff_out.len = 0;
+	uint8_t		*loc_conv;
+	uint8_t		one;
+	uint8_t		two;
+
+	loc_conv = arena;
+	while (size)
+	{
+		if (0 == size % OCTET_PER_LINE)
+		{
+			if (size != MEM_SIZE)
+				ft_printf("\n");
+			if (HEX_HEADER)
+				ft_printf("0x%04x : ", MEM_SIZE - size);
+		}
+		two = 0x0F & *loc_conv;
+		one = 0x0F & (*loc_conv >> 4);
+		one = one > 9 ? one - 10 + 'A' : one + '0';
+		two = two > 9 ? two - 10 + 'A' : two + '0';
+		ft_printf("%c%c ", one, two);
+		loc_conv++;
+		size--;
+	}
+	ft_printf("\n");
 }
 
 static void		print_game_over(struct s_game *game)
 {
 	_Bool	pause;
 
-	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
+	if ((g_flags.list & FLAG_P && attron(COLOR_PAIR(1)))
+		|| g_flags.list & FLAG_V)
 	{
-		pause = 1;
-		attron(COLOR_PAIR(1));
-		move(0, 0);
-		printw("   Player %zu (%s) won :  %-20s",
-			game->last_live_champ - game->champs + 1,
-			game->last_live_champ->prog_name,
-			game->last_live_champ->comment);
+		if ((pause = 1) && game->end_state == WINNER_CHOSEN)
+			mvprintw(0, 0, "   Player %zu (%s) won :  %-20s",
+				game->last_live_champ - game->champs + 1,
+				game->last_live_champ->prog_name,
+				game->last_live_champ->comment);
 		refresh();
 		while (pause)
-			if (getch() == ' ')
-				pause = 0;
-		attrset(A_NORMAL);
+			pause = (getch() == ' ') ? 0 : 1;
 		endwin();
 	}
 	else
 	{
-		ft_printf("Player %zu (%s) won\n %s\n",
-			game->last_live_champ - game->champs + 1,
-			game->last_live_champ->prog_name,
-			game->last_live_champ->comment);
+		if (g_flags.list & FLAG_D)
+			simple_dump(game->arena, MEM_SIZE);
+		if (game->end_state == WINNER_CHOSEN)
+			ft_printf("Player %zu (%s) won\n %s\n",
+				game->last_live_champ - game->champs + 1,
+				game->last_live_champ->prog_name,
+				game->last_live_champ->comment);
 	}
 }
 
@@ -67,25 +74,22 @@ static void		keyhooks(void)
 	clock_t		start;
 
 	start = clock();
-	if (g_flags.list & FLAG_P)
-		attron(COLOR_PAIR(1));
+	mvprintw(0, 0, "%197s", " ");
 	while (g_flags.wait_time > clock() - start)
 	{
-		move(0, 0);
-		printw("   %s%-4d%20s%-14d", "speed[qwer]: ",
+		mvprintw(0, 0, "   %s%-4d%20s%-14d", "speed[qwer]: ",
 			(1000000 - g_flags.wait_time) / 1000 + 1,
 			"skip[asdf/zxcv]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
 		win_resize();
 		if (key_pause(key) && (start = clock()))
-			printw("%-141s", "-paused-");
-		else
-			printw("%141s", " ");
+			printw("%s", "-paused-");
 		key_wait(key);
 		key_skip(key);
 		key_rewind(key);
 		refresh();
 	}
+	move(0, 195);
 }
 
 int				game_rewind(char **champ_files, struct s_game *game)
@@ -118,12 +122,15 @@ int				game_rewind(char **champ_files, struct s_game *game)
 int				game_print(struct s_game *game)
 {
 	if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
-			&& (game->game_over || 0 >= g_flags.cycle_intervals_to_dump
-				|| 0 == game->cycle_count % g_flags.cycle_intervals_to_dump))
+		&& (game->end_state != NOT_OVER || 0 >= g_flags.cycle_intervals_to_dump
+			|| 0 == game->cycle_count % g_flags.cycle_intervals_to_dump))
 	{
+		if (g_flags.list & FLAG_P || game->end_state == GAME_DUMP)
+			attrset(COLOR_PAIR(1));
 		keyhooks();
-		if (g_flags.list & FLAG_P)
-			print_hex(game->arena, MEM_SIZE, game->processes);
+		if (g_flags.list & FLAG_P || game->end_state == GAME_DUMP)
+			print_hex(game->arena, game->arena_writer,
+				MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
 		{
 			print_game_state(game);
@@ -131,7 +138,7 @@ int				game_print(struct s_game *game)
 		}
 		refresh();
 	}
-	if (game->game_over)
+	if (game->end_state != NOT_OVER)
 		print_game_over(game);
 	return (0);
 }

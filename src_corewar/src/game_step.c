@@ -77,7 +77,7 @@ int						game_step(struct s_game *game)
 		{
 			game->check_count = 0;
 			if (game->processes == NULL || game->cycles_to_death <= CYCLE_DELTA)
-				game->game_over = true;
+				game->end_state = WINNER_CHOSEN;
 			else
 				game->cycles_to_death -= CYCLE_DELTA;
 		}

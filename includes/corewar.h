@@ -57,6 +57,7 @@ struct					s_process
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
 	uint8_t			op_code;
 	_Bool			called_live;
+	unsigned int    champ_index;
 };
 
 /*
@@ -64,6 +65,13 @@ struct					s_process
 ** and they are incremented through front to back
 ** check_count: number of checks sense decrementing cycles to die
 */
+
+enum					e_end_state
+{
+	NOT_OVER,
+	WINNER_CHOSEN,
+	GAME_DUMP
+};
 
 struct					s_game
 {
@@ -76,7 +84,7 @@ struct					s_game
 	unsigned int		current_cycles;
 	unsigned int		check_count;
 	struct s_champ		*last_live_champ;
-	_Bool				game_over;
+	enum e_end_state	end_state;
 	unsigned int		lives;
 	unsigned int		cycle_count;
 	t_strvec			aff_out;
@@ -157,6 +165,9 @@ extern int32_t			g_error;
 # define V_PROCESS		0x2
 # define V_REGISTORS	0x4
 
+# define OCTET_PER_LINE	64
+# define HEX_HEADER		1
+
 # define NUMBER_OF_FUNCTIONS 17
 
 # define MAGIC_NUMBER 0xF383EA00
@@ -189,18 +200,18 @@ int						game_step(struct s_game *game);
 */
 char					*ft_strnjoin(char const *s1, char const *s2,
 							size_t s2_len);
-int						ft_jasprintf(t_strvec *ret, const char *format, ...);
 int						game_print(struct s_game *game);
+void					print_game_state(struct s_game *game);
 void					print_processes(uint8_t *arena, t_list *processes);
-void					print_hex(void *loc, size_t size, t_list *processes);
+void					print_hex(void *loc, void *writer_loc, size_t size,
+							t_list *processes);
 uint32_t				color_code(t_list *processes);
-void 					*memxor(void *p, int val, size_t size);
 void					win_resize(void);
 _Bool					key_pause(char key);
 void					key_wait(char key);
 void					key_skip(char key);
 void					key_rewind(char key);
-int					game_rewind(char **champ_files, struct s_game *game);
+int						game_rewind(char **champ_files, struct s_game *game);
 
 /*
 ** free.c
@@ -211,6 +222,9 @@ void					free_game(struct s_game *game);
 ** utilities.c
 */
 void					change_end(void *val, size_t size);
+int						ft_jasprintf(t_strvec *ret, const char *format, ...);
+void					arena_writer(struct s_game *game, uint8_t *loc,
+							size_t offset, uint8_t champ_index);
 
 /*
 ** operations/utilities
