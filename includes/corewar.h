@@ -65,6 +65,13 @@ struct					s_process
 ** check_count: number of checks sense decrementing cycles to die
 */
 
+enum					e_end_state
+{
+	NOT_OVER,
+	WINNER_CHOSEN,
+	GAME_DUMP
+};
+
 struct					s_game
 {
 	uint8_t				arena[MEM_SIZE];
@@ -76,7 +83,7 @@ struct					s_game
 	unsigned int		current_cycles;
 	unsigned int		check_count;
 	struct s_champ		*last_live_champ;
-	_Bool				game_over;
+	enum e_end_state	end_state;
 	unsigned int		lives;
 	unsigned int		cycle_count;
 	t_strvec			aff_out;
@@ -156,6 +163,9 @@ extern int32_t			g_error;
 # define V_STATE		0x1
 # define V_PROCESS		0x2
 # define V_REGISTORS	0x4
+
+# define OCTET_PER_LINE	64
+# define HEX_HEADER		1
 
 # define NUMBER_OF_FUNCTIONS 17
 

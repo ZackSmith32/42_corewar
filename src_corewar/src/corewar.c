@@ -56,7 +56,7 @@ int					main(int argc, char **argv)
 		handle_error(NULL);
 	if (-1 == init_game_struct(champ_files, &game))
 		handle_error(&game);
-	while (game.game_over == false)
+	while (game.end_state == NOT_OVER)
 	{
 		if (0 > g_flags.cycle_intervals_to_dump)
 		{
@@ -68,7 +68,7 @@ int					main(int argc, char **argv)
 			handle_error(&game);
 		if (g_flags.list & FLAG_D
 				&& g_flags.cycle_to_dump_exit <= game.cycle_count)
-			game.game_over = TRUE;
+			game.end_state = GAME_DUMP;
 	}
 	if (-1 == game_print(&game))
 		handle_error(&game);

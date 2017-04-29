@@ -32,6 +32,32 @@ void			print_game_state(struct s_game *game)
 	game->aff_out.len = 0;
 }
 
+void			simple_dump(uint8_t *arena, size_t size)
+{
+	uint8_t		*loc_conv;
+	uint8_t		one;
+	uint8_t		two;
+
+	loc_conv = arena;
+	while (size)
+	{
+		if (0 == size % OCTET_PER_LINE)
+		{
+			ft_printf("\n");
+			if (HEX_HEADER)
+				ft_printf("0x%04x : ", MEM_SIZE - size);
+		}
+		two = 0x0F & *loc_conv;
+		one = 0x0F & (*loc_conv >> 4);
+		one = one > 9 ? one - 10 + 'A' : one + '0';
+		two = two > 9 ? two - 10 + 'A' : two + '0';
+		ft_printf("%c%c ", one, two);
+		loc_conv++;
+		size--;
+	}
+	ft_printf("\n");
+}
+
 static void		print_game_over(struct s_game *game)
 {
 	_Bool	pause;
@@ -39,12 +65,15 @@ static void		print_game_over(struct s_game *game)
 	if (g_flags.list & FLAG_P || g_flags.list & FLAG_V)
 	{
 		pause = 1;
-		attron(COLOR_PAIR(1));
-		move(0, 0);
-		printw("   Player %zu (%s) won :  %-20s",
-			game->last_live_champ - game->champs + 1,
-			game->last_live_champ->prog_name,
-			game->last_live_champ->comment);
+		if (game->end_state != WINNER_CHOSEN)
+		{
+			attron(COLOR_PAIR(1));
+			move(0, 0);
+			printw("   Player %zu (%s) won :  %-20s",
+				game->last_live_champ - game->champs + 1,
+				game->last_live_champ->prog_name,
+				game->last_live_champ->comment);
+		}
 		refresh();
 		while (pause)
 			if (getch() == ' ')
@@ -52,13 +81,17 @@ static void		print_game_over(struct s_game *game)
 		attrset(A_NORMAL);
 		endwin();
 	}
-	else
+	else if (game->end_state == WINNER_CHOSEN)
 	{
+		if (g_flags.list & FLAG_D)
+			simple_dump(game->arena, MEM_SIZE);		
 		ft_printf("Player %zu (%s) won\n %s\n",
 			game->last_live_champ - game->champs + 1,
 			game->last_live_champ->prog_name,
 			game->last_live_champ->comment);
 	}
+	else if (game->end_state == GAME_DUMP)
+		simple_dump(game->arena, MEM_SIZE);
 }
 
 static void		keyhooks(void)
@@ -69,23 +102,22 @@ static void		keyhooks(void)
 	start = clock();
 	if (g_flags.list & FLAG_P)
 		attron(COLOR_PAIR(1));
+	mvprintw(0,0,"%197s", " ");
 	while (g_flags.wait_time > clock() - start)
 	{
-		move(0, 0);
-		printw("   %s%-4d%20s%-14d", "speed[qwer]: ",
+		mvprintw(0, 0, "   %s%-4d%20s%-14d", "speed[qwer]: ",
 			(1000000 - g_flags.wait_time) / 1000 + 1,
 			"skip[asdf/zxcv]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
 		win_resize();
 		if (key_pause(key) && (start = clock()))
-			printw("%-141s", "-paused-");
-		else
-			printw("%141s", " ");
+			printw("%s", "-paused-");
 		key_wait(key);
 		key_skip(key);
 		key_rewind(key);
 		refresh();
 	}
+	move(0, 195);
 }
 
 int				game_rewind(char **champ_files, struct s_game *game)
@@ -118,8 +150,8 @@ int				game_rewind(char **champ_files, struct s_game *game)
 int				game_print(struct s_game *game)
 {
 	if ((g_flags.list & FLAG_P || g_flags.list & FLAG_V)
-			&& (game->game_over || 0 >= g_flags.cycle_intervals_to_dump
-				|| 0 == game->cycle_count % g_flags.cycle_intervals_to_dump))
+		&& (game->end_state != NOT_OVER || 0 >= g_flags.cycle_intervals_to_dump
+		|| 0 == game->cycle_count % g_flags.cycle_intervals_to_dump))
 	{
 		keyhooks();
 		if (g_flags.list & FLAG_P)
@@ -131,7 +163,7 @@ int				game_print(struct s_game *game)
 		}
 		refresh();
 	}
-	if (game->game_over)
+	if (game->end_state != NOT_OVER)
 		print_game_over(game);
 	return (0);
 }

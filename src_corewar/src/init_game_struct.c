@@ -139,6 +139,7 @@ int						init_game_struct(char **champs, struct s_game *game)
 	ft_bzero(game, sizeof(*game));
 	game->champ_count = champ_count;
 	game->cycles_to_death = CYCLE_TO_DIE;
+	game->end_state = NOT_OVER;
 	if (-1 == add_champs_processes(champs, game))
 		return (-1);
 	return (0);
