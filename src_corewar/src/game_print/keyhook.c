@@ -33,7 +33,7 @@ _Bool	key_pause(char key)
 	static _Bool	pause;
 
 	if (key == ' ')
-		memxor(&pause, ~0, sizeof(pause));
+		pause--;
 	return (pause);
 }
 

@@ -21,19 +21,20 @@ static t_ind	calc_sti_offset(struct s_process *process,
 	first.val = 0;
 	second.val = 0;
 	if (params[1].param_type == T_REG)
-		reverse_bytes((uint8_t*)&process->registors[(uint8_t)params[1].param_val.val - 1], 
+		reverse_bytes(
+			(uint8_t*)&process->registors[(uint8_t)params[1].param_val.val - 1],
 			REG_SIZE, first.arr);
 	else
 		reverse_bytes(params[1].param_val.arr, IND_SIZE, first.arr);
 	if (params[2].param_type == T_REG)
-		reverse_bytes((void *)&process->registors[params[2].param_val.val - 1], 
+		reverse_bytes((void *)&process->registors[params[2].param_val.val - 1],
 			REG_SIZE, second.arr);
 	else
 		reverse_bytes(params[2].param_val.arr, IND_SIZE, second.arr);
 	return (first.val + second.val);
 }
 
-int		sti(struct s_game *game, struct s_process *process)
+int				sti(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[11].argc];
 	uint8_t				*pc_temp;
