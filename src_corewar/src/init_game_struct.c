@@ -53,7 +53,7 @@ static int				load_champion(char const *file,
 		return (-1);
 	ft_memmove(champ->prog_name, header.prog_name, sizeof(header.prog_name));
 	ft_memmove(champ->comment, header.comment, sizeof(header.comment));
-	return (0);
+	return (size);
 }
 
 /*
@@ -78,6 +78,7 @@ static int				add_process(t_list **processes, uint8_t *pc,
 	p->pc = pc;
 	p->op_code = *pc;
 	p->countdown = g_op_tab[p->op_code].cycles_required;
+	p->champ_index = champ_index;
 	if (NULL == (link = lstnew((void*)p)))
 		return (-1);
 	lstadd(processes, link);
@@ -89,6 +90,7 @@ static int				add_champs_processes(char **champs, struct s_game *game)
 	size_t		offset;
 	uint8_t		*start_loc;
 	int			champ_index;
+	int			champ_size;
 	int			i;
 
 	offset = MEM_SIZE / game->champ_count;
@@ -99,13 +101,12 @@ static int				add_champs_processes(char **champs, struct s_game *game)
 	{
 		if (champs[i])
 		{
-			if (-1 == load_champion(champs[i], start_loc,
-					game->champs + champ_index)
-				|| -1 == add_process(&game->processes, start_loc,
-					champ_index))
+			if (-1 == (champ_size = load_champion(champs[i], start_loc,
+					game->champs + champ_index))
+				|| -1 == add_process(&game->processes, start_loc, champ_index))
 				return (-1);
 			game->last_live_champ = game->champs + champ_index;
-			champ_index++;
+			arena_writer(game, start_loc, champ_size, ++champ_index);
 		}
 		i++;
 		start_loc += offset;

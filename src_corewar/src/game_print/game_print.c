@@ -12,27 +12,7 @@
 
 #include <corewar.h>
 
-void			print_game_state(struct s_game *game)
-{
-	if (!(g_flags.verbosity_level & V_STATE))
-		return ;
-	printw(
-			"\ncycles: %-6u current/death:%4u/%4u  check count/max: %u/%u"
-			"  lives:%3u  last_live_champ: ", game->cycle_count,
-			game->current_cycles, game->cycles_to_death,
-			game->check_count, MAX_CHECKS,
-			game->lives);
-	if (game->last_live_champ)
-		attron(COLOR_PAIR(game->last_live_champ - game->champs + 10)
-			| A_REVERSE);
-	printw("%-30s", game->last_live_champ->prog_name);
-	if (game->last_live_champ)
-		attrset(A_NORMAL);
-	printw("     aff: %-55s", game->aff_out.str);
-	game->aff_out.len = 0;
-}
-
-void			simple_dump(uint8_t *arena, size_t size)
+static void		simple_dump(uint8_t *arena, size_t size)
 {
 	uint8_t		*loc_conv;
 	uint8_t		one;
@@ -149,7 +129,8 @@ int				game_print(struct s_game *game)
 			attrset(COLOR_PAIR(1));
 		keyhooks();
 		if (g_flags.list & FLAG_P || game->end_state == GAME_DUMP)
-			print_hex(game->arena, MEM_SIZE, game->processes);
+			print_hex(game->arena, game->arena_writer,
+				MEM_SIZE, game->processes);
 		if (g_flags.list & FLAG_V)
 		{
 			print_game_state(game);

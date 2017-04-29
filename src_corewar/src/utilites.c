@@ -40,3 +40,10 @@ int					ft_jasprintf(t_strvec *ret, const char *format, ...)
 	va_end(ap);
 	return (size);
 }
+
+void				arena_writer(struct s_game *game, uint8_t *loc,
+						size_t offset, uint8_t champ_index)
+{
+	while (offset--)
+		(loc - game->arena + game->arena_writer)[offset] = champ_index;
+}

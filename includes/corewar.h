@@ -57,6 +57,7 @@ struct					s_process
 	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
 	uint8_t			op_code;
 	_Bool			called_live;
+	unsigned int    champ_index;
 };
 
 /*
@@ -199,18 +200,18 @@ int						game_step(struct s_game *game);
 */
 char					*ft_strnjoin(char const *s1, char const *s2,
 							size_t s2_len);
-int						ft_jasprintf(t_strvec *ret, const char *format, ...);
 int						game_print(struct s_game *game);
+void					print_game_state(struct s_game *game);
 void					print_processes(uint8_t *arena, t_list *processes);
-void					print_hex(void *loc, size_t size, t_list *processes);
+void					print_hex(void *loc, void *writer_loc, size_t size,
+							t_list *processes);
 uint32_t				color_code(t_list *processes);
-void 					*memxor(void *p, int val, size_t size);
 void					win_resize(void);
 _Bool					key_pause(char key);
 void					key_wait(char key);
 void					key_skip(char key);
 void					key_rewind(char key);
-int					game_rewind(char **champ_files, struct s_game *game);
+int						game_rewind(char **champ_files, struct s_game *game);
 
 /*
 ** free.c
@@ -221,6 +222,9 @@ void					free_game(struct s_game *game);
 ** utilities.c
 */
 void					change_end(void *val, size_t size);
+int						ft_jasprintf(t_strvec *ret, const char *format, ...);
+void					arena_writer(struct s_game *game, uint8_t *loc,
+							size_t offset, uint8_t champ_index);
 
 /*
 ** operations/utilities
