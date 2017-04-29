@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:36:04 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/28 13:44:05 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/29 11:22:42 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 	char	*tail;
 	int		ern;
 
-	while (get_next_line(pi->fd, &line) > 0)
+	while (get_next_line(pi->fd, &line) >= 0)
 	{
 		pi->row++;
 		dst[current_size] = '\n';
@@ -41,7 +41,7 @@ static int	complete_quotes(char *dst, size_t max, t_parseinfo *pi,
 		if (current_size > max || ern == LEXICAL || ern == 0)
 			return (current_size > max ? NAME_LONG : ern);
 	}
-	return (-1);
+	return (-4);
 }
 
 /*
@@ -93,7 +93,7 @@ int			read_command(header_t *header, char *line, t_parseinfo *pi,
 		line += info->comment_cmd_len;
 		if ((ern = read_quotes(header->comment, line, COMMENT_LENGTH, pi)) ||
 				info->commands_checked & 1)
-			return (ern == NAME_LONG ? COMM_LONG : LEXICAL);
+			return (ern == NAME_LONG ? COMM_LONG : ern);
 		info->commands_checked |= 1;
 	}
 	else if (!ft_strncmp(line, NAME_CMD_STRING, info->name_cmd_len))

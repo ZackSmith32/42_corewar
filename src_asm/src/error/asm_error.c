@@ -6,7 +6,7 @@
 /*   By: kdavis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:21:16 by kdavis            #+#    #+#             */
-/*   Updated: 2017/04/28 12:56:25 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/04/29 11:10:59 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static const char	*g_error_message[] =
 	"error closing file\n",
 	"error reading file\n",
 	"error writing to file\n",
-	"Syntax error at token [TOKEN][ROW:%03d] %s\n",
-	"Lexical error at [ROW:%d]\n",
+	"Syntax error in row: %03d error type: %s\n",
+	"Lexical error in row:%d\n",
 	"Name is too long\n",
 	"Comment is too long\n",
 	"addr:%d label %s not found\n",
