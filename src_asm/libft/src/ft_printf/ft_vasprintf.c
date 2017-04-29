@@ -79,6 +79,6 @@ int					ft_vasprintf(t_strvec *ret, const char *format, va_list ap)
 		ret->len += tail.len;
 		free(tail.str);
 	}
-	result = ((tail.str) ? ret->len + tail.len : -1);
+	result = ((tail.str) ? (int)(ret->len + tail.len) : -1);
 	return (pf_cleanup(result, ap, &tail, ret));
 }
