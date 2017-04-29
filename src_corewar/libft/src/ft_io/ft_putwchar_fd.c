@@ -21,7 +21,7 @@
 ** appropriate file descriptor.
 */
 
-wint_t	ft_putwchar_fd(wchar_t wc, int fd)
+wint_t	ft_putwchar_fd(wint_t wc, int fd)
 {
 	char	bytes[4];
 	int		n_bytes;

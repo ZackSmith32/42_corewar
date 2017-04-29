@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include <op.h>
-#include <errno.h>
-#include <libft.h>
-#include <unistd.h>
 
 /*
 ** TODO: validate with valgrind

@@ -31,7 +31,7 @@ static int		hex_color(t_list *processes, uint8_t *loc_conv,
 		cnum = color_code(node);
 	else
 		cnum = -(*writer_loc_conv % (COLORS - 9) + 9);
-	return ((node || *writer_loc_conv) ? cnum : -1);
+	return ((node || *writer_loc_conv) ? (int)cnum : -1);
 }
 
 static void		print_byte_in_hex(uint8_t byte, int color_code)

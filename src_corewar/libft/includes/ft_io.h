@@ -64,7 +64,7 @@ int					ft_wctomb(char *s, wchar_t wc);
 */
 
 size_t				ft_putnwstr_fd(wchar_t *wstr, size_t n, int fd);
-wint_t				ft_putwchar_fd(wchar_t wc, int fd);
+wint_t				ft_putwchar_fd(wint_t wc, int fd);
 
 /*
 ** Functions for printing non wide variable.

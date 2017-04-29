@@ -19,11 +19,9 @@
 char	*ft_strctrim(char *str, char c)
 {
 	int		i;
-	int		len;
 	char	*res;
 
 	i = 0;
-	len = 0;
 	while (*str == c)
 		str++;
 	while (str[i])
