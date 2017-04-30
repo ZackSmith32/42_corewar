@@ -1,4 +1,4 @@
-#!/bin/env python
+#! /usr/bin/env python
 
 import fnmatch
 import filecmp
@@ -6,6 +6,13 @@ import random
 import sys
 import os
 
+Usage ="""\033[1mUsage:
+./{} \033[0m\033[91mcorewarv1 \033[92mcorewarv2 \033[94mchampion_directory \033[95mnbr_tests \033[96mdiv_flag
+\t\033[91mcorewarv1:\t\texperimental corewar program
+\t\033[92mcorewarv2:\t\tcontrol corewar program
+\t\033[94mchampion_directory:\tdirectory containing champions to be tested
+\t\033[95mnbr_tests:\t\tnumber of test you want to run
+\t\033[96mdiv_flag:\t\tif there is any input here then find the cycle where the programs diverge""".format(os.path.basename(__file__))
 
 def main(argc, argv):
 	error = 0
@@ -31,8 +38,9 @@ def main(argc, argv):
 			grade = 93
 		print("Times ran:{} Number of fails:\033[91m{}\033[0m Percentage passed:\033[{}m{}\033[0m".format(total, error, grade, percentage))
 	else:
-		print("\033[1mUsage\033[0m: python test_corewar.py \033[92mcorewar_v1 \033[91mcorewar_v2 \033[94mchampion_directory \033[95mnbr_tests\033[0m div_flag")
+		print(Usage)
 
+#creates a list of all the champions in the current directory
 def	create_champlist(direct):
 	ret = []
 	for root, dirnames, filenames in os.walk(direct):
@@ -40,6 +48,7 @@ def	create_champlist(direct):
 			ret.append(os.path.join(root, filenames))
 	return (ret)
 
+#Randomly generates tests for the corewar champions
 def test_corewar(v1, v2, champ_list, iteration, find_div):
 	nbr_player = random.randint(1, 4)
 	cycles = random.randint(1, 10000)
@@ -78,7 +87,7 @@ def	is_diff(v1, v2, i, player_list):
 	if (out1 == out2):
 		return 0
 	with open("diff.log", "a") as diff:
-		diff.write("\nPlayers: {}\nCycles: {}\n".format(player_list, i))
+		diff.write("< {}\n> {}\nplayers: {}\nFail at cycle: {}\n\n".format(v1, v2, player_list, i))
 		os.system("diff -i {} {} >> diff.log".format(v1 + ".log", v2 + ".log"))
 	return 1
 
