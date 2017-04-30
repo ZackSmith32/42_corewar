@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/02/23 19:31:28 by mburson          ###   ########.fr        #
+#    Updated: 2017/04/29 17:56:34 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,9 @@ force:
 
 clean:
 	$(MAKE) fclean -C $(COREWAR_DIR)
-	#$(MAKE) fclean -C $(ASM_DIR)
+	$(MAKE) fclean -C $(ASM_DIR)
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(COREWAR) $(ASM)
 re: fclean all
 
 .PHONY: all clean fclean re
