@@ -31,7 +31,7 @@ def main(argc, argv):
 			grade = 93
 		print("Times ran:{} Number of fails:\033[91m{}\033[0m Percentage passed:\033[{}m{}\033[0m".format(total, error, grade, percentage))
 	else:
-		print("\033[1mUsage\033[0m: python test_corewar.py \033[92mcorewar_v1 \033[91mcorewar_v2 \033[94mchampion_directory \033[95mnbr_tests\033[0m")
+		print("\033[1mUsage\033[0m: python test_corewar.py \033[92mcorewar_v1 \033[91mcorewar_v2 \033[94mchampion_directory \033[95mnbr_tests\033[0m div_flag")
 
 def	create_champlist(direct):
 	ret = []
