@@ -46,12 +46,20 @@ void		print_processes(uint8_t *arena, t_list *processes)
 	i = 0;
 	while (processes)
 	{
-		printw("\n");
-		attron(COLOR_PAIR(color_code(processes)) | A_REVERSE);
-		printw("process %03zu", i);
-		attrset(A_NORMAL);
-		print_process(arena, processes->content);
+		if (i < MAX_PROCESS)
+		{
+			(!(g_flags.verbosity_level & V_REGISTORS) && i % 4)
+				? printw("    ") : printw("\n");
+			attron(COLOR_PAIR(color_code(processes)) | A_REVERSE);
+			printw("process %03zu", i + 1);
+			attrset(A_NORMAL);
+			print_process(arena, processes->content);
+		}
 		processes = processes->next;
 		i++;
 	}
+	if (g_flags.list & FLAG_P)
+		mvprintw(MEM_SIZE / 64 + 2, 76, "process_count: %-10u", i);
+	else
+		mvprintw(1, 76, "process_count: %-10u", i);
 }

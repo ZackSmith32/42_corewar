@@ -15,6 +15,6 @@
 
 void			lstdel(t_list **alst, void (*del)(void *))
 {
-	while (*alist)
-		lstdelone(alist, del);
+	while (*alst)
+		lstdelone(alst, del);
 }

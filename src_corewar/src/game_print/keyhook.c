@@ -39,18 +39,18 @@ _Bool	key_pause(char key)
 
 void	key_wait(char key)
 {
-	if (key == 'q')
-		g_flags.wait_time = (g_flags.wait_time > 10000)
-			? g_flags.wait_time - 10000 : 1000;
-	else if (key == 'w')
-		g_flags.wait_time = (g_flags.wait_time > 1000)
-			? g_flags.wait_time - 1000 : 1000;
+	if (key == 'r')
+		g_flags.dump_per_second = (g_flags.dump_per_second > 10)
+			? g_flags.dump_per_second - 10 : 1;
 	else if (key == 'e')
-		g_flags.wait_time = (g_flags.wait_time < 999000)
-			? g_flags.wait_time + 1000 : 1000000;
-	else if (key == 'r')
-		g_flags.wait_time = (g_flags.wait_time < 990000)
-			? g_flags.wait_time + 10000 : 1000000;
+		g_flags.dump_per_second = (g_flags.dump_per_second > 1)
+			? g_flags.dump_per_second - 1 : 1;
+	else if (key == 'w')
+		g_flags.dump_per_second = (g_flags.dump_per_second < 999)
+			? g_flags.dump_per_second + 1 : 1000;
+	else if (key == 'q')
+		g_flags.dump_per_second = (g_flags.dump_per_second < 990)
+			? g_flags.dump_per_second + 10 : 1000;
 }
 
 void	key_skip(char key)

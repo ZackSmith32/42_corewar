@@ -25,7 +25,7 @@ void	print_usage(char *filename)
 		"             - ", V_REGISTORS, " : Show registors in process list\n",
 		"-p         : Display memory byte map\n",
 		"-n N <...> : Explicitly choose champion position\n",
-		"-w N       : Wait time in microseconds, default 250000\n",
+		"-w N       : Dumps per second, default 1\n",
 		"Game Settings:\n",
 		"-Max Players    : ", MAX_PLAYERS, "\n",
 		"-Max Champ Size : ", CHAMP_MAX_SIZE, " bytes\n");

@@ -64,7 +64,7 @@ static void	parse_init(int (*flag_set[NFLAGS])(char ***av, char **champ),
 	flag_set[6] = &flag_w;
 	ft_bzero(champ, sizeof(*champ) * MAX_PLAYERS);
 	ft_bzero(&g_flags, sizeof(g_flags));
-	g_flags.wait_time = 250000;
+	g_flags.dump_per_second = 1;
 	*flags = VALID_FLAGS;
 }
 

@@ -75,10 +75,10 @@ static void		keyhooks(void)
 
 	start = clock();
 	mvprintw(0, 0, "%197s", " ");
-	while (g_flags.wait_time > clock() - start)
+	while (1000000 / g_flags.dump_per_second > clock() - start)
 	{
-		mvprintw(0, 0, "   %s%-4d%20s%-14d", "speed[qwer]: ",
-			(1000000 - g_flags.wait_time) / 1000 + 1,
+		mvprintw(0, 0, "   %s%-4d%20s%-14d", "dump/sec[qwer]: ",
+			(g_flags.dump_per_second),
 			"skip[asdf/zxcv]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
 		win_resize();

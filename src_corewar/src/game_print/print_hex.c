@@ -89,10 +89,10 @@ void			print_game_state(struct s_game *game)
 		return ;
 	printw(
 			"\ncycles: %-6u current/death:%4u/%4u  check count/max: %u/%u"
-			"  lives:%3u  last_live_champ: ", game->cycle_count,
+			"  lives:%-6u  %25slast_live_champ: ", game->cycle_count,
 			game->current_cycles, game->cycles_to_death,
 			game->check_count, MAX_CHECKS,
-			game->lives);
+			game->lives, " ");
 	if (game->last_live_champ)
 		attron(COLOR_PAIR(game->last_live_champ - game->champs + 10)
 			| A_REVERSE);

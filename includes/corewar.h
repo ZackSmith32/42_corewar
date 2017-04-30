@@ -38,7 +38,7 @@ struct					s_flag
 	int					cycle_intervals_to_dump; // -option s
 	unsigned int		cycle_to_dump_exit; // -option d
 	int16_t				verbosity_level; // -option v bit list
-	clock_t				wait_time;
+	unsigned int		dump_per_second;
 	_Bool				flag_test;
 };
 
@@ -167,6 +167,7 @@ extern int32_t			g_error;
 
 # define OCTET_PER_LINE	64
 # define HEX_HEADER		1
+# define MAX_PROCESS	300
 
 # define NUMBER_OF_FUNCTIONS 17
 
