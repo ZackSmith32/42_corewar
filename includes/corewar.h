@@ -45,6 +45,7 @@ struct					s_flag
 	unsigned int		cycle_to_dump_exit;
 	int16_t				verbosity_level;
 	unsigned int		dump_per_second;
+	unsigned int		top_process;
 	_Bool				flag_test;
 };
 
@@ -218,10 +219,11 @@ void					print_hex(void *loc, void *writer_loc, size_t size,
 							t_list *processes);
 uint32_t				color_code(t_list *processes);
 void					win_resize(void);
-_Bool					key_pause(char key);
-void					key_wait(char key);
-void					key_skip(char key);
-void					key_rewind(char key);
+_Bool					key_pause(int key);
+void					key_wait(int key);
+void					key_skip(int key);
+void					key_rewind(int key);
+void					key_scroll(int key);
 int						game_rewind(char **champ_files, struct s_game *game);
 
 /*

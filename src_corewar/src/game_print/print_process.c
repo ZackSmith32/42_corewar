@@ -46,7 +46,7 @@ void		print_processes(uint8_t *arena, t_list *processes)
 	i = 0;
 	while (processes)
 	{
-		if (i < MAX_PROCESS)
+		if (i >= g_flags.top_process && i < MAX_PROCESS)
 		{
 			(!(g_flags.verbosity_level & V_REGISTORS) && i % 4)
 				? printw("    ") : printw("\n");

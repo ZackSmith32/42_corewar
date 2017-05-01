@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_print.c                                       :+:      :+:    :+:   */
+/*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 23:57:01 by aphan             #+#    #+#             */
-/*   Updated: 2017/03/29 21:09:22 by aphan            ###   ########.fr       */
+/*   Created: 2017/05/01 15:44:34 by aphan             #+#    #+#             */
+/*   Updated: 2017/05/01 15:44:42 by aphan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	win_resize(void)
 	}
 }
 
-_Bool	key_pause(char key)
+_Bool	key_pause(int key)
 {
 	static _Bool	pause;
 
@@ -37,7 +37,7 @@ _Bool	key_pause(char key)
 	return (pause);
 }
 
-void	key_wait(char key)
+void	key_wait(int key)
 {
 	if (key == 'q')
 		g_flags.dump_per_second = (g_flags.dump_per_second > 10)
@@ -53,7 +53,7 @@ void	key_wait(char key)
 			? g_flags.dump_per_second + 10 : 1000;
 }
 
-void	key_skip(char key)
+void	key_skip(int key)
 {
 	if (key == 'a')
 		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 25)
@@ -81,7 +81,7 @@ void	key_skip(char key)
 	}
 }
 
-void	key_rewind(char key)
+void	key_rewind(int key)
 {
 	if (key == 'z')
 		g_flags.cycle_intervals_to_dump =

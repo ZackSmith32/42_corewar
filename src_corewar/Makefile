@@ -36,6 +36,7 @@ SRC = \
 			print_hex.c \
 			print_process.c \
 			keyhook.c \
+			keyhook2.c \
 		) \
 		$(addprefix linked_list/, \
 			lstadd.c \
