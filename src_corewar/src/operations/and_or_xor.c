@@ -47,7 +47,6 @@ int					and(struct s_game *game, struct s_process *process)
 		|| -1 == flatten(game->arena, process, &params[0])
 		|| -1 == flatten(game->arena, process, &params[1]))
 		return (0);
-	change_end(params[0].param_val.arr, REG_SIZE);
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val & params[1].param_val.val);
 	process->carry = process->registors[params[2].param_val.val] == 0;
@@ -67,7 +66,6 @@ int					or(struct s_game *game, struct s_process *process)
 		|| -1 == flatten(game->arena, process, &params[0])
 		|| -1 == flatten(game->arena, process, &params[1]))
 		return (0);
-	change_end(params[0].param_val.arr, REG_SIZE);
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val | params[1].param_val.val);
 	process->carry = process->registors[params[2].param_val.val] == 0;
@@ -87,7 +85,6 @@ int					xor(struct s_game *game, struct s_process *process)
 		|| -1 == flatten(game->arena, process, &params[0])
 		|| -1 == flatten(game->arena, process, &params[1]))
 		return (0);
-	change_end(params[0].param_val.arr, REG_SIZE);
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val ^ params[1].param_val.val);
 	process->carry = process->registors[params[2].param_val.val] == 0;
