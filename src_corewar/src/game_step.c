@@ -70,6 +70,7 @@ int						game_step(struct s_game *game)
 	if (-1 == step_processes(game))
 		return (-1);
 	game->current_cycles++;
+	game->cycle_count++;
 	if (game->current_cycles == game->cycles_to_death)
 	{
 		kill_processes(&game->processes);

@@ -30,8 +30,8 @@ static void		simple_dump(uint8_t *arena, size_t size)
 		}
 		two = 0x0F & *loc_conv;
 		one = 0x0F & (*loc_conv >> 4);
-		one = one > 9 ? one - 10 + 'A' : one + '0';
-		two = two > 9 ? two - 10 + 'A' : two + '0';
+		one = one > 9 ? one - 10 + 'a' : one + '0';
+		two = two > 9 ? two - 10 + 'a' : two + '0';
 		ft_printf("%c%c ", one, two);
 		loc_conv++;
 		size--;
@@ -95,8 +95,6 @@ static void		keyhooks(void)
 int				game_rewind(char **champ_files, struct s_game *game)
 {
 	unsigned int	target;
-	int				h;
-	int				w;
 
 	target =
 		(game->cycle_count > (unsigned int)(-g_flags.cycle_intervals_to_dump))
@@ -104,7 +102,6 @@ int				game_rewind(char **champ_files, struct s_game *game)
 	free_game(game);
 	if (-1 == init_game_struct(champ_files, game))
 		return (-1);
-	game->cycle_count = target;
 	while (target)
 	{
 		if (-1 == game_step(game))
@@ -113,9 +110,6 @@ int				game_rewind(char **champ_files, struct s_game *game)
 	}
 	if (-1 == game_print(game))
 		return (-1);
-	getmaxyx(stdscr, h, w);
-	printw("%*s", h * w, " ");
-	refresh();
 	return (0);
 }
 
