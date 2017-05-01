@@ -58,8 +58,7 @@ int					main(int argc, char **argv)
 			if (-1 == game_rewind(champ_files, &game))
 				handle_error(&game);
 		}
-		else if (++game.cycle_count &&
-				(-1 == game_print(&game) || -1 == game_step(&game)))
+		else if ((-1 == game_print(&game) || -1 == game_step(&game)))
 			handle_error(&game);
 		if (g_flags.list & FLAG_D
 				&& g_flags.cycle_to_dump_exit <= game.cycle_count)

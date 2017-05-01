@@ -58,6 +58,7 @@ void		print_processes(uint8_t *arena, t_list *processes)
 		processes = processes->next;
 		i++;
 	}
+	printw("%*s", 20000, " ");
 	if (g_flags.list & FLAG_P)
 		mvprintw(MEM_SIZE / 64 + 2, 76, "process_count: %-10u", i);
 	else
