@@ -39,29 +39,29 @@ _Bool	key_pause(char key)
 
 void	key_wait(char key)
 {
-	if (key == 'r')
+	if (key == 'q')
 		g_flags.dump_per_second = (g_flags.dump_per_second > 10)
 			? g_flags.dump_per_second - 10 : 1;
-	else if (key == 'e')
+	else if (key == 'w')
 		g_flags.dump_per_second = (g_flags.dump_per_second > 1)
 			? g_flags.dump_per_second - 1 : 1;
-	else if (key == 'w')
+	else if (key == 'e')
 		g_flags.dump_per_second = (g_flags.dump_per_second < 999)
 			? g_flags.dump_per_second + 1 : 1000;
-	else if (key == 'q')
+	else if (key == 'r')
 		g_flags.dump_per_second = (g_flags.dump_per_second < 990)
 			? g_flags.dump_per_second + 10 : 1000;
 }
 
 void	key_skip(char key)
 {
-	if (key == 'f')
+	if (key == 'a')
 		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 25)
 			? g_flags.cycle_intervals_to_dump - 25 : 1;
-	else if (key == 'd')
+	else if (key == 's')
 		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump > 1)
 			? g_flags.cycle_intervals_to_dump - 1 : 1;
-	else if (key == 's')
+	else if (key == 'd')
 	{
 		if (g_flags.cycle_intervals_to_dump < 1)
 			g_flags.cycle_intervals_to_dump = 1;
@@ -70,7 +70,7 @@ void	key_skip(char key)
 		else
 			g_flags.cycle_intervals_to_dump = 1600;
 	}
-	else if (key == 'a')
+	else if (key == 'f')
 	{
 		if (g_flags.cycle_intervals_to_dump < 1)
 			g_flags.cycle_intervals_to_dump = 25;
@@ -83,14 +83,14 @@ void	key_skip(char key)
 
 void	key_rewind(char key)
 {
-	if (key == 'v')
+	if (key == 'z')
 		g_flags.cycle_intervals_to_dump =
 			(g_flags.cycle_intervals_to_dump < -25)
 			? g_flags.cycle_intervals_to_dump + 25 : -1;
-	else if (key == 'c')
+	else if (key == 'x')
 		g_flags.cycle_intervals_to_dump = (g_flags.cycle_intervals_to_dump < -1)
 			? g_flags.cycle_intervals_to_dump + 1 : -1;
-	else if (key == 'x')
+	else if (key == 'c')
 	{
 		if (g_flags.cycle_intervals_to_dump > -1)
 			g_flags.cycle_intervals_to_dump = -1;
@@ -99,7 +99,7 @@ void	key_rewind(char key)
 		else
 			g_flags.cycle_intervals_to_dump = -1600;
 	}
-	else if (key == 'z')
+	else if (key == 'v')
 	{
 		if (g_flags.cycle_intervals_to_dump > -1)
 			g_flags.cycle_intervals_to_dump = -25;
