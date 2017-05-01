@@ -70,7 +70,7 @@ static void		print_game_over(struct s_game *game)
 
 static void		keyhooks(void)
 {
-	int		key;
+	int			key;
 	clock_t		start;
 
 	start = clock();
@@ -82,12 +82,12 @@ static void		keyhooks(void)
 			"skip[asdf/zxcv]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
 		win_resize();
+		key_scroll(key);
 		(key_pause(key) && (start = clock()))
 			? printw("%s", "-paused-") : printw("%s", "*running*");
 		key_wait(key);
 		key_skip(key);
 		key_rewind(key);
-		key_scroll(key);
 		refresh();
 	}
 	move(0, 195);
