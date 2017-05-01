@@ -32,12 +32,18 @@ struct					s_champ
 	char	comment[COMMENT_LENGTH + 1];
 };
 
+/*
+** list: bit list
+** cycle_intervals_to_dump: -option s
+** verbosity_level: -option v bit list
+** dump_per_second: -option v bit list
+*/
 struct					s_flag
 {
-	int16_t				list; //bit list
-	int					cycle_intervals_to_dump; // -option s
-	unsigned int		cycle_to_dump_exit; // -option d
-	int16_t				verbosity_level; // -option v bit list
+	int16_t				list;
+	int					cycle_intervals_to_dump;
+	unsigned int		cycle_to_dump_exit;
+	int16_t				verbosity_level;
 	unsigned int		dump_per_second;
 	_Bool				flag_test;
 };
@@ -54,10 +60,10 @@ struct					s_process
 	t_registor		registors[REG_NUMBER];
 	_Bool			carry;
 	uint8_t			*pc;
-	unsigned int	countdown; //TODO: whats the maximum instruction execution time?
+	unsigned int	countdown;
 	uint8_t			op_code;
 	_Bool			called_live;
-	unsigned int    champ_index;
+	unsigned int	champ_index;
 };
 
 /*
@@ -102,7 +108,7 @@ struct					s_game
 **		> index flag: (direct and indirect are same size) 0/1
 */
 
-typedef struct		s_op
+typedef struct			s_op
 {
 	char		*name_short;
 	int			argc;
@@ -117,15 +123,19 @@ typedef struct		s_op
 typedef uint32_t		t_op_arg;
 
 # if IND_SIZE == 1
+
 typedef int8_t			t_ind;
 # endif
 # if IND_SIZE == 2
+
 typedef int16_t			t_ind;
 # endif
 # if IND_SIZE == 4
+
 typedef int32_t			t_ind;
 # endif
 # if IND_SIZE == 8
+
 typedef int64_t			t_ind;
 # endif
 
@@ -307,5 +317,4 @@ int						check_registors(uint8_t op_code,
 							struct s_parameter *params);
 void					modify_carry(struct s_process *process, t_op_arg ret);
 
-							
 #endif

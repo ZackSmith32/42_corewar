@@ -83,7 +83,7 @@ static int	read_quotes(char *dst, char *src, size_t max, t_parseinfo *pi)
 **		.comment: Prefaces the comment for the champion
 */
 
-int			read_command(header_t *header, char *line, t_parseinfo *pi,
+int			read_command(t_header *header, char *line, t_parseinfo *pi,
 		t_cmdinfo *info)
 {
 	int			ern;

@@ -29,7 +29,7 @@ static unsigned int		fix_end(unsigned int n)
 static int				load_champion(char const *file,
 							void *loc, struct s_champ *champ)
 {
-	header_t	header;
+	t_header	header;
 	int			fd;
 	ssize_t		size;
 

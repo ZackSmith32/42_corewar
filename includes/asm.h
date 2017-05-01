@@ -110,7 +110,7 @@ typedef struct	s_op_parse
 
 typedef struct	s_asm
 {
-	header_t	header;
+	t_header	header;
 	t_cmdinfo	cmd_info;
 	t_parseinfo	pi;
 	t_op_parse	opp;
@@ -163,7 +163,7 @@ int				add_label_call(const t_op *op, t_op_parse *op_prs, int op_addr,
 ** read_header
 */
 int				read_header(t_asm *as);
-int				read_command(header_t *header, char *line, t_parseinfo *pi,
+int				read_command(t_header *header, char *line, t_parseinfo *pi,
 					t_cmdinfo *info);
 /*
 ** read_body
