@@ -14,3 +14,8 @@ test_params.c
 *.pdf
 TEST*
 notes
+testing_suite
+diff.log
+Failure.log
+corewar.log
+resources/corewar/champs/cor_examples/
