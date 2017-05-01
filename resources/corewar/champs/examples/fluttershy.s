@@ -15,7 +15,7 @@ entry:
 
 ardeftgt:
 
-ardefgeni:
+ardefgeni: 
 	st 		r1, 6
 
 ardefgen:

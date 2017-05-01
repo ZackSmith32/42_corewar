@@ -36,8 +36,7 @@ int					add(struct s_game *game, struct s_process *process)
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val + params[1].param_val.val);
 	change_end(process->registors + params[2].param_val.val, REG_SIZE);
-	if (process->registors[params[2].param_val.val] == 0)
-		process->carry = 1;
+	process->carry = process->registors[params[2].param_val.val] == 0;
 	return (0);
 }
 
@@ -61,7 +60,6 @@ int					sub(struct s_game *game, struct s_process *process)
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val - params[1].param_val.val);
 	change_end(process->registors + params[2].param_val.val, REG_SIZE);
-	if (process->registors[params[2].param_val.val] == 0)
-		process->carry = 1;
+	process->carry = process->registors[params[2].param_val.val] == 0;
 	return (0);
 }

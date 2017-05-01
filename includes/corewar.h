@@ -136,7 +136,7 @@ typedef int32_t			t_ind;
 # endif
 # if IND_SIZE == 8
 
-typedef int64_t			t_ind;
+typedef int64_;
 # endif
 
 union					u_val

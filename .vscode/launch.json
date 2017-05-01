@@ -11,9 +11,7 @@
 						"-v",
 						"-w", "0",
 						"-s", "1",
-						"resources/hercules/ressources/helltrain.cor",
-						"resources/zork.cor",
-						"resources/hercules/ressources/knut.cor"
+						"resources/corewar/champs/examples/fluttershy.cor"
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",
