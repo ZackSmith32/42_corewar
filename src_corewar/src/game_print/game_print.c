@@ -77,7 +77,7 @@ static void		keyhooks(void)
 	mvprintw(0, 0, "%197s", " ");
 	while (1000000 / g_flags.dump_per_second > clock() - start)
 	{
-		mvprintw(0, 0, "   %s%-4d%20s%-14d", "dump/sec[qwer]: ",
+		mvprintw(0, 0, "   %s%-4d%20s%-14d", "max dump/sec[qwer]: ",
 			(g_flags.dump_per_second),
 			"skip[asdf/zxcv]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
