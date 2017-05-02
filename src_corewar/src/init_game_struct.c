@@ -79,6 +79,7 @@ static int				add_process(t_list **processes, uint8_t *pc,
 	p->op_code = *pc;
 	p->countdown = g_op_tab[p->op_code].cycles_required;
 	p->champ_index = champ_index;
+	p->pid = g_flags.pid++;
 	if (NULL == (link = lstnew((void*)p)))
 		return (-1);
 	lstadd(processes, link);

@@ -46,6 +46,7 @@ struct					s_flag
 	int16_t				verbosity_level;
 	unsigned int		dump_per_second;
 	unsigned int		top_process;
+	unsigned int		pid;
 	_Bool				flag_test;
 };
 
@@ -65,6 +66,7 @@ struct					s_process
 	uint8_t			op_code;
 	_Bool			called_live;
 	unsigned int	champ_index;
+	unsigned int	pid;
 };
 
 /*

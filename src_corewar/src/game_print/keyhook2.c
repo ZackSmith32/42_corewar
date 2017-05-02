@@ -23,6 +23,5 @@ void	key_scroll(int key)
 	else if (key == 'i')
 		g_flags.top_process = (g_flags.top_process > 0)
 			? g_flags.top_process - 1 : 0;
-	printw("top_process[uiop]: %-4d  ", g_flags.top_process + 1);
+	printw("top_process[uiop]: %-4d  ", g_flags.top_process);
 }
-

@@ -17,6 +17,8 @@ void		print_process(uint8_t *arena, struct s_process *process)
 	size_t		i;
 	union u_val	reg;
 
+	printw("process %03zu", process->pid);
+	attrset(A_NORMAL);
 	printw("  carry: %d", (int)process->carry);
 	printw("  pc: %4zu", (size_t)(process->pc - arena));
 	printw("  countdown: %04u", process->countdown);
@@ -39,20 +41,21 @@ void		print_process(uint8_t *arena, struct s_process *process)
 
 void		print_processes(uint8_t *arena, t_list *processes)
 {
-	size_t	i;
+	unsigned int	i;
+	unsigned int	pid;
+	unsigned int	print;
 
-	if (!(g_flags.verbosity_level & V_PROCESS))
+	if (!(print = 0) && !(g_flags.verbosity_level & V_PROCESS))
 		return ;
 	i = 0;
-	while (processes)
+	while (processes && (pid = ((struct s_process *)processes->content)->pid))
 	{
-		if (i >= g_flags.top_process && i < MAX_PROCESS)
+		if ((!g_flags.top_process || pid <= g_flags.top_process)
+			&& print++ < MAX_PROCESS)
 		{
 			(!(g_flags.verbosity_level & V_REGISTORS) && i % 4)
 				? printw("    ") : printw("\n");
 			attron(COLOR_PAIR(color_code(processes)) | A_REVERSE);
-			printw("process %03zu", i + 1);
-			attrset(A_NORMAL);
 			print_process(arena, processes->content);
 		}
 		processes = processes->next;
