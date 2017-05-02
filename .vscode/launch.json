@@ -9,10 +9,9 @@
 			"args":	[
 						"-p",
 						"-v",
-						"-w", "0",
-						"-s", "1",
-						"resources/corewar/champs/examples/turtle.cor",
-						"resources/corewar/champs/championships/2014/lsirigna/live.cor"
+						"resources/hercules/ressources/helltrain.cor", 
+						"resources/hercules/ressources/knut.cor",
+						"resources/hercules/ressources/zork.cor"
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",

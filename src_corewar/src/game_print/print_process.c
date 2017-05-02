@@ -48,8 +48,9 @@ void		print_processes(uint8_t *arena, t_list *processes)
 	if (!(print = 0) && !(g_flags.verbosity_level & V_PROCESS))
 		return ;
 	i = 0;
-	while (processes && (pid = ((struct s_process *)processes->content)->pid))
+	while (processes)
 	{
+		pid = ((struct s_process *)processes->content)->pid;
 		if ((!g_flags.top_process || pid <= g_flags.top_process)
 			&& print++ < MAX_PROCESS)
 		{
@@ -61,8 +62,7 @@ void		print_processes(uint8_t *arena, t_list *processes)
 		processes = processes->next;
 		i++;
 	}
-	printw("%*s", 20000, " ");
-	if (g_flags.list & FLAG_P)
+	if (printw("%*s", 20000, " ") && g_flags.list & FLAG_P)
 		mvprintw(MEM_SIZE / 64 + 2, 76, "process_count: %-10u", i);
 	else
 		mvprintw(1, 76, "process_count: %-10u", i);
