@@ -58,9 +58,9 @@ static void		print_game_over(struct s_game *game)
 	}
 	else
 	{
-		if (g_flags.list & FLAG_D)
+		if (game->end_state == GAME_DUMP && g_flags.list & FLAG_D)
 			simple_dump(game->arena, MEM_SIZE);
-		if (game->end_state == WINNER_CHOSEN)
+		else if (game->end_state == WINNER_CHOSEN)
 			ft_printf("Player %zu (%s) won\n %s\n",
 				game->last_live_champ - game->champs + 1,
 				game->last_live_champ->prog_name,
@@ -70,20 +70,21 @@ static void		print_game_over(struct s_game *game)
 
 static void		keyhooks(void)
 {
-	char		key;
+	int			key;
 	clock_t		start;
 
 	start = clock();
 	mvprintw(0, 0, "%197s", " ");
 	while (1000000 / g_flags.dump_per_second > clock() - start)
 	{
-		mvprintw(0, 0, "   %s%-4d%20s%-14d", "dump/sec[qwer]: ",
+		mvprintw(0, 0, "   %s%-4d%20s%-14d", "max dump/sec[qwer]: ",
 			(g_flags.dump_per_second),
 			"skip[asdf/zxcv]: ", g_flags.cycle_intervals_to_dump);
 		key = getch();
 		win_resize();
-		if (key_pause(key) && (start = clock()))
-			printw("%s", "-paused-");
+		key_scroll(key);
+		(key_pause(key) && (start = clock()))
+			? printw("%s", "-paused-") : printw("%s", "*running*");
 		key_wait(key);
 		key_skip(key);
 		key_rewind(key);

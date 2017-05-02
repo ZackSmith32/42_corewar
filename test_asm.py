@@ -1,27 +1,24 @@
-#!/bin/env python
+#!/usr/bin/env python
 
-import glob
+import fnmatch
 import sys
 import os
 
 def	main(argv):
-	asm = argv[1]
-	direct = argv[2]
-	champ_list = create_champlist(argv[2])
-	for champ in champ_list:
-		os.system("./{} {}".format(asm, champ))
+	if (argv[1] and argv[2]):
+		asm = argv[1]
+		direct = argv[2]
+		champ_list = create_champlist(argv[2])
+		for champ in champ_list:
+			os.system("./{} {}".format(asm, champ))
+	else:
+		print("Usage: python test_asm.py asm directory")
 
 def	create_champlist(direct):
-	ret = glob.glob(direct + "/*/**/*.s")
-	print(direct + "/*/**/*.s")
-	print(ret)
+	ret = []
+	for root, dirnames, filenames in os.walk(direct):
+		for filenames in fnmatch.filter(filenames, "*.s"):
+			ret.append(os.path.join(root, filenames))
 	return (ret)
-#	layer3 = glob.glob("{}/*/*/*/*.s".format(direct))
-#	layer2 = glob.glob("{}/*/*.s".format(direct)) 
-#	layer1 = glob.glob("{}/*.s".format(direct)) 
-#	ret = layer3 + layer1 + layer2
-	#return (os.listdir(direct))
-	#champ_str = os.system("find {} | grep '\.s'".format(direct))
-	#return (champ_str.split())
 
 main(sys.argv)
