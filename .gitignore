@@ -19,3 +19,4 @@ diff.log
 Failure.log
 corewar.log
 resources/corewar/champs/cor_examples/
+*.cor

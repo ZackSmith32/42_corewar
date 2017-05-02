@@ -11,7 +11,8 @@
 						"-v",
 						"-w", "0",
 						"-s", "1",
-						"resources/corewar/champs/examples/fluttershy.cor"
+						"resources/corewar/champs/examples/turtle.cor",
+						"resources/corewar/champs/championships/2014/lsirigna/live.cor"
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",
