@@ -16,9 +16,9 @@ def	main(argc, argv):
 			direct1 = create_champions(argv[1], argv[3])
 			direct2 = create_champions(argv[2], argv[3])
 			diff_champions(direct1, direct2)
-	elif (argc == 3):
+	elif (argc == 3)
 		if (argv[2] != '~' and argv[2] != '/'):
-			direct1 = create_champions(argv[1], argv[2])
+			direct1 = assemble_champions(argv[1], argv[3])
 	else:
 		print(Usage)
 
@@ -31,14 +31,16 @@ def	diff_champions(direct1, direct2):
 	else:
 		for i in range(0, list_len):
 			os.system("diff {} {} >> asm_diff.log".format(direct1_list[i], direct2_list[i]))
-	
+
+def assemble_champions(asm, direct):
+	champ_list = create_ext_list(direct, ".s")
+	for champ in champ_list:
+		os.system("./{} {}".format(asm, champ))
 
 def create_champions(asm, direct):
 	champ_dir = asm + "_champions"
 	os.system("cp -rf {} {}".format(direct, champ_dir))
-	champ_list = create_ext_list(champ_dir, ".s")
-	for champ in champ_list:
-		os.system("./{} {}".format(asm, champ))
+	assemble_champions(asm, champ_dir)
 	return (champ_dir)
 	
 def	create_ext_list(direct, extension):
