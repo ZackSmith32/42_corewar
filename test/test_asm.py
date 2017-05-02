@@ -18,7 +18,7 @@ def	main(argc, argv):
 			diff_champions(direct1, direct2)
 	elif (argc == 3):
 		if (argv[2] != '~' and argv[2] != '/'):
-			direct1 = create_champions(argv[1], argv[3])
+			direct1 = create_champions(argv[1], argv[2])
 	else:
 		print(Usage)
 
