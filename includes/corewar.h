@@ -123,7 +123,11 @@ typedef struct			s_op
 	_Bool		dir_as_ind;
 }						t_op;
 
-typedef uint32_t		t_op_arg;
+typedef uint32_t		t_op_arg; //can anyone this of a case when this needs to be unsigned??
+typedef int32_t			t_s_op_arg;
+typedef int32_t			t_dir;
+typedef uint32_t		t_reg;
+typedef int32_t			t_s_reg;
 
 # if IND_SIZE == 1
 
