@@ -14,6 +14,12 @@ Usage ="""\033[1mUsage:
 \t\033[95mnbr_tests:\t\tnumber of test you want to run
 \t\033[96mdiv_flag:\t\tif there is any input here then find the cycle where the programs diverge""".format(os.path.basename(__file__))
 
+def init_files(corev1, corev2):
+	open(corev1 + ".log","w").close()
+	open(corev2 + ".log","w").close()
+	open("Failure.log","w").close()
+	open("cor_diff.log","w").close()
+
 def main(argc, argv):
 	error = 0
 	if (argc >= 5):
@@ -23,11 +29,9 @@ def main(argc, argv):
 		corev1 = argv[1]
 		corev2 = argv[2] 
 		total = int(argv[4])
-		open(corev1 + ".log","w").close()
-		open(corev2 + ".log","w").close()
-		open("Failure.log","w").close()
-		open("diff.log","w").close()
+#		nbr_player = argv[5] looking into adding player number support
 		champ_list = create_champlist(argv[3])
+		init_files(corev1, corev2)
 		for i in range(0, total):
 			error = error + test_corewar(corev1, corev2, champ_list, i, find_div)
 		percentage = ((total - error) * 100 / total)
@@ -86,9 +90,9 @@ def	is_diff(v1, v2, i, player_list):
 	out2 = run_corewar(v2, command)
 	if (out1 == out2):
 		return 0
-	with open("diff.log", "a") as diff:
+	with open("cor_diff.log", "a") as diff:
 		diff.write("< {}\n> {}\nplayers: {}\nFail at cycle: {}\n\n".format(v1, v2, player_list, i))
-		os.system("diff -i {} {} >> diff.log".format(v1 + ".log", v2 + ".log"))
+		os.system("diff -i {} {} >> cor_diff.log".format(v1 + ".log", v2 + ".log"))
 	return 1
 
 
