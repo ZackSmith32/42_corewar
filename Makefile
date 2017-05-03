@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/29 17:56:34 by kdavis           ###   ########.fr        #
+#    Updated: 2017/05/02 18:39:27 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,4 +42,6 @@ fclean: clean
 	rm -f $(COREWAR) $(ASM)
 re: fclean all
 
+test: all
+	./test/corewar_unit.py corewar test/cor_corewar test/champs
 .PHONY: all clean fclean re
