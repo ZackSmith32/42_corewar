@@ -43,23 +43,19 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 int				sti(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[11].argc];
-	uint8_t				*pc_temp;
+	uint8_t				*pc_og;
 	t_ind				offset;
 
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-	{
-		process->pc = pc_temp;
-		return (-1);
-	}
+	pc_og = process->pc;
+	if (-1 == parse_and_validate_parameters(game, process, params))
+		return (0);
 	if (--params[0].param_val.val >= REG_NUMBER
 		|| -1 == flatten(game->arena, process, &params[1])
 		|| -1 == flatten(game->arena, process, &params[2]))
 		return (0);
 	offset = (t_s_op_arg)(params[1].param_val.val + params[2].param_val.val)
 				% IDX_MOD;
-	write_arena(game->arena, process->pc + offset,
+	write_arena(game->arena, pc_og + offset,
 		(uint8_t*)&process->registors[params[0].param_val.val], REG_SIZE);
-	process->pc = pc_temp;
 	return (0);
 }
