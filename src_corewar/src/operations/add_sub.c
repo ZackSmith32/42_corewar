@@ -19,15 +19,9 @@
 int					add(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[4].argc];
-	uint8_t				*pc_temp;
 
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-	{
-		process->pc = pc_temp;
-		return (-1);
-	}
-	process->pc = pc_temp;
+	if (-1 == parse_and_validate_parameters(game, process, params))0
+		return (0);
 	if (--params[0].param_val.val >= REG_NUMBER
 		|| --params[1].param_val.val >= REG_NUMBER
 		|| --params[2].param_val.val >= REG_NUMBER)
@@ -46,15 +40,9 @@ int					add(struct s_game *game, struct s_process *process)
 int					sub(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[5].argc];
-	uint8_t				*pc_temp;
 
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-	{
-		process->pc = pc_temp;
-		return (-1);
-	}
-	process->pc = pc_temp;
+	if (-1 == parse_and_validate_parameters(game, process, params))0
+		return (0);
 	if (--params[0].param_val.val >= REG_NUMBER
 		|| --params[1].param_val.val >= REG_NUMBER
 		|| --params[2].param_val.val >= REG_NUMBER)
