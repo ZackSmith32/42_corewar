@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   validate_parameters.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/17 20:13:15 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/05/02 20:27:14 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,18 @@ char	parse_and_validate_parameters(struct s_game *game,
 					struct s_process *process, uint8_t **pc_temp,
 					struct s_parameter *params)
 {
-	if (-1 == check_param_count(g_op_tab[process->op_code],
+	int	ern;
+
+	ern = check_param_count(g_op_tab[process->op_code],
+			*mask_ptr(game->arena, (*pc_temp + 1)));
+/*	if (-1 == check_param_count(g_op_tab[process->op_code],
 		*mask_ptr(game->arena, (*pc_temp + 1))))
-		return (-1);
+		return (-1);*/
 	if (-1 == check_param_type(g_op_tab[process->op_code],
 		*mask_ptr(game->arena, (*pc_temp + 1))))
-		return (-1);
+		ern = -1;
+/*		return (-1);*/
 	parse_parameters(game, process, params, pc_temp);
-	return (0);
+	return (ern);
+/*	return (0);*/
 }

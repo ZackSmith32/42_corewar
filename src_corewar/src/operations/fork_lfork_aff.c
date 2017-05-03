@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op.c                                               :+:      :+:    :+:   */
+/*   fork_lfork_aff.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2017/04/13 14:56:21 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/05/02 20:26:04 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int				aff(struct s_game *game, struct s_process *process)
 
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
+	{
+		process->pc = pc_temp;
 		return (-1);
+	}
 	process->pc = pc_temp;
 	if (--params[0].param_val.val >= REG_NUMBER)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by aphan             #+#    #+#             */
-/*   Updated: 2017/04/17 23:11:04 by aphan            ###   ########.fr       */
+/*   Updated: 2017/05/02 20:26:51 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int				sti(struct s_game *game, struct s_process *process)
 
 	pc_temp = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
+	{
+		process->pc = pc_temp;
 		return (-1);
+	}
 	if (--params[0].param_val.val >= REG_NUMBER
 		|| -1 == flatten(game->arena, process, &params[1])
 		|| -1 == flatten(game->arena, process, &params[2]))
