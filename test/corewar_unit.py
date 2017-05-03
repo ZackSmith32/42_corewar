@@ -116,5 +116,7 @@ def print_grade(error, total):
 	elif (percent > 75):
 		grade = 93
 	print("\033[1mFailed {} out of {} tests. Grade:\033[{}m{}\033[0m".format(error, total, grade, percent))
+	with open("unit_diff.log", "a") as out:
+		out.write("Failed {} out of {} tests. Grade:{}".format(error, total, percent))
 
 main(len(sys.argv), sys.argv)
