@@ -58,19 +58,19 @@ int		check_param_type(t_op op, char parameter_encoding)
 }
 
 char	parse_and_validate_parameters(struct s_game *game,
-					struct s_process *process, uint8_t **pc_temp,
-					struct s_parameter *params)
+					struct s_process *process, struct s_parameter *params)
 {
-	int	ern;
+	int		ern;
+	uint8_t **pc_temp;
 
+	pc_temp = &process->pc;
 	ern = check_param_count(g_op_tab[process->op_code],
 			*mask_ptr(game->arena, (*pc_temp + 1)));
 /*	if (-1 == check_param_count(g_op_tab[process->op_code],
 		*mask_ptr(game->arena, (*pc_temp + 1))))
 		return (-1);*/
-	if (-1 == check_param_type(g_op_tab[process->op_code],
-		*mask_ptr(game->arena, (*pc_temp + 1))))
-		ern = -1;
+	ern = check_param_type(g_op_tab[process->op_code],
+		*mask_ptr(game->arena, (*pc_temp + 1))) || ern;
 /*		return (-1);*/
 	parse_parameters(game, process, params, pc_temp);
 	return (ern);
