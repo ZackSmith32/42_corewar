@@ -61,7 +61,10 @@ static void				kill_processes(t_list **list)
 			lstdelone(list, &free);
 		}
 		else
+		{
+			((struct s_process*)(*list)->content)->called_live = false;
 			list = &(*list)->next;
+		}
 	}
 }
 
