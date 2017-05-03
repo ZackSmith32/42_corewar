@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/05/02 18:39:27 by kdavis           ###   ########.fr        #
+#    Updated: 2017/05/02 20:28:10 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,5 +43,5 @@ fclean: clean
 re: fclean all
 
 test: all
-	./test/corewar_unit.py corewar test/cor_corewar test/champs
+	./test/corewar_unit.py corewar test/cor_corewar test/champs 15000
 .PHONY: all clean fclean re
