@@ -17,7 +17,7 @@
 */
 
 static int			flatten(uint8_t *arena, struct s_process *process,
-						struct s_parameter *param)
+						struct s_parameter *param, uint8_t *pc_og)
 {
 	if (param->param_type == T_REG)
 	{
@@ -37,18 +37,14 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 int					and(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[6].argc];
-	uint8_t				*pc_temp;
+	uint8_t				*pc_og;
 
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-	{
-		process->pc = pc_temp;
-		return (-1);
-	}
-	process->pc = pc_temp;
+	pc_og = process->pc;
+	if (-1 == parse_and_validate_parameters(game, process, params))
+		return (0);
 	if (--params[2].param_val.val >= REG_NUMBER
-		|| -1 == flatten(game->arena, process, &params[0])
-		|| -1 == flatten(game->arena, process, &params[1]))
+		|| -1 == flatten(game->arena, process, &params[0], pc_og)
+		|| -1 == flatten(game->arena, process, &params[1], pc_og))
 		return (0);
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val & params[1].param_val.val);
@@ -58,19 +54,15 @@ int					and(struct s_game *game, struct s_process *process)
 
 int					or(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[7].argc];
-	uint8_t				*pc_temp;
+	struct s_parameter	params[g_op_tab[6].argc];
+	uint8_t				*pc_og;
 
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-	{
-		process->pc = pc_temp;
-		return (-1);
-	}
-	process->pc = pc_temp;
+	pc_og = process->pc;
+	if (-1 == parse_and_validate_parameters(game, process, params))
+		return (0);
 	if (--params[2].param_val.val >= REG_NUMBER
-		|| -1 == flatten(game->arena, process, &params[0])
-		|| -1 == flatten(game->arena, process, &params[1]))
+		|| -1 == flatten(game->arena, process, &params[0], pc_og)
+		|| -1 == flatten(game->arena, process, &params[1], pc_og))
 		return (0);
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val | params[1].param_val.val);
@@ -80,19 +72,15 @@ int					or(struct s_game *game, struct s_process *process)
 
 int					xor(struct s_game *game, struct s_process *process)
 {
-	struct s_parameter	params[g_op_tab[8].argc];
-	uint8_t				*pc_temp;
+	struct s_parameter	params[g_op_tab[6].argc];
+	uint8_t				*pc_og;
 
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-	{
-		process->pc = pc_temp;
-		return (-1);
-	}
-	process->pc = pc_temp;
+	pc_og = process->pc;
+	if (-1 == parse_and_validate_parameters(game, process, params))
+		return (0);
 	if (--params[2].param_val.val >= REG_NUMBER
-		|| -1 == flatten(game->arena, process, &params[0])
-		|| -1 == flatten(game->arena, process, &params[1]))
+		|| -1 == flatten(game->arena, process, &params[0], pc_og)
+		|| -1 == flatten(game->arena, process, &params[1], pc_og))
 		return (0);
 	process->registors[params[2].param_val.val] = (
 		params[0].param_val.val ^ params[1].param_val.val);

@@ -36,42 +36,36 @@ static int		add_process(uint8_t *arena, struct s_process *base_process,
 int				fork_op(struct s_game *game, struct s_process *process)
 {
 	t_ind		offset;
+	int			ret;
 
 	read_arena(game->arena, process->pc + 1, (uint8_t*)&offset,
 		sizeof(offset));
 	change_end(&offset, sizeof(offset));
 	offset %= IDX_MOD;
-	if (-1 == add_process(game->arena, process, offset, &game->processes))
-		return (-2);
+	ret = add_process(game->arena, process, offset, &game->processes);
 	process->pc = mask_ptr(game->arena, process->pc + IND_SIZE + 1);
-	return (0);
+	return (ret);
 }
 
 int				lfork(struct s_game *game, struct s_process *process)
 {
 	t_ind		offset;
+	int			ret;
 
 	read_arena(game->arena, process->pc + 1, (uint8_t*)&offset,
 		sizeof(offset));
 	change_end(&offset, sizeof(offset));
-	if (-1 == add_process(game->arena, process, offset, &game->processes))
-		return (-2);
+	ret = add_process(game->arena, process, offset, &game->processes);
 	process->pc = mask_ptr(game->arena, process->pc + IND_SIZE + 1);
-	return (0);
+	return (ret);
 }
 
 int				aff(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[16].argc];
-	uint8_t				*pc_temp;
 
-	pc_temp = process->pc;
-	if (-1 == parse_and_validate_parameters(game, process, &pc_temp, params))
-	{
-		process->pc = pc_temp;
-		return (-1);
-	}
-	process->pc = pc_temp;
+	if (-1 == parse_and_validate_parameters(game, process, params))
+		return (0);
 	if (--params[0].param_val.val >= REG_NUMBER)
 		return (0);
 	params[0].param_val.val = process->registors[params[0].param_val.val];
