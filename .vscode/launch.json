@@ -1,6 +1,7 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+		
 		{
 			"name": "C++ Launch",
 			"type": "cppdbg",
@@ -9,8 +10,7 @@
 			"args":	[
 						"-p",
 						"-v",
-						"resources/corewar/champs/examples/turtle.cor",
-						"resources/corewar/champs/championships/2014/lsirigna/live.cor"
+						"test/champs/Gagnant.cor",
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",
