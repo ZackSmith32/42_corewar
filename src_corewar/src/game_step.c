@@ -29,7 +29,6 @@ static int				step_processes(struct s_game *game)
 {
 	t_list				*link;
 	struct s_process	*p;
-	int					ret;
 
 	link = game->processes;
 	while (link && (p = link->content))
@@ -37,10 +36,7 @@ static int				step_processes(struct s_game *game)
 		p->countdown--;
 		if (p->countdown == 0)
 		{
-			ret = g_op_pointers[p->op_code](game, p);
-			if (ret == -1)
-				move_pc(game->arena, &p->pc, 1);
-			else if (ret == -2)
+			if (-1 == g_op_pointers[p->op_code](game, p))
 				return (-1);
 			p->op_code = *p->pc;
 			if (p->op_code > NUMBER_OF_FUNCTIONS)
