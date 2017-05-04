@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/13 10:26:24 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/05/04 16:46:08 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ static int				load_ops(struct s_game *game)
 	link = game->processes;
 	while (link && (p = link->content))
 	{
-		if (p->op_code == 0xFF)
+		if (p->needs_op_update == true)
 		{
 			p->op_code = *p->pc;
 			if (p->op_code > NUMBER_OF_FUNCTIONS)
 				p->op_code = 0;
 			p->countdown = g_op_tab[p->op_code].cycles_required;
+			p->needs_op_update = false;
 		}
 		link = link->next;
 	}
@@ -56,9 +57,9 @@ static int				step_processes(struct s_game *game)
 		p->countdown--;
 		if (p->countdown == 0)
 		{
+			p->needs_op_update = true;
 			if (-1 == g_op_pointers[p->op_code](game, p))
 				return (-1);
-			p->op_code = 0xFF;
 	//		p->op_code = *p->pc;
 	//		if (p->op_code > NUMBER_OF_FUNCTIONS)
 	//			p->op_code = 0;

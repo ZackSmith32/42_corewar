@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/19 22:57:38 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/05/04 16:43:16 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ struct					s_process
 	unsigned int	countdown;
 	uint8_t			op_code;
 	_Bool			called_live;
+	_Bool			needs_op_update;
 	unsigned int	champ_index;
 	unsigned int	pid;
 };

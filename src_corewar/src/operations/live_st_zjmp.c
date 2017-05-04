@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/05/03 16:28:38 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/05/04 16:47:40 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		st(struct s_game *game, struct s_process *process)
 
 	pc_og = process->pc;
 	if (-1 == parse_and_validate_parameters(game, process, params))
-		return (-1);
+		return (0);
 	if (-1 == check_registors(process->op_code, params))
 		return (0);
 	if (params[1].param_type == T_REG)
