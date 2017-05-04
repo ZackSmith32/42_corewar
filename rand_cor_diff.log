@@ -1,0 +1,28 @@
+31c31
+< 0x0780 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 09 ff df 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 70 02 ff ee 03 70 03 
+---
+> 0x0780 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 70 02 ff ee 03 70 03 
+< corewar
+> test/cor_corewar
+players: test/champs/championships/2014/vrey/darksasuke.cor test/champs/championships/2014/gudepard/Kappa.cor
+Fail at cycle: 6645
+
+32c32
+< 0x07c0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 70 02 ff ee 03 70 03 ff ff 01 00 00 00 01 09 ff df 
+---
+> 0x07c0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 05 02 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 70 02 ff ee 03 70 03 ff ff 01 00 00 00 01 09 ff df 
+< corewar
+> test/cor_corewar
+players: test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/championships/2014/gjestin/salamahenagalabadoun.cor test/champs/championships/2014/gudepard/Kappa.cor test/champs/championships/2014/lseguin/skynet.cor
+Fail at cycle: 1106
+
+1c1
+< 0x0000 : ff 01 ff ff ff fd 03 70 02 00 13 03 70 03 ff ff 01 ff ff ff fd 00 00 00 00 0f 03 70 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+---
+> 0x0000 : ff 01 ff ff ff fd 03 70 02 00 13 03 70 03 ff ff 01 ff ff ff fd 00 00 00 00 0f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< corewar
+> test/cor_corewar
+players: test/champs/examples/zork.cor test/champs/examples/bigzork.cor test/champs/championships/2014/gudepard/Kappa.cor
+Fail at cycle: 5872
+
+Failed 3 out of 100 tests. Grade:97
