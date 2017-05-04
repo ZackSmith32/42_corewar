@@ -25,6 +25,26 @@
 **			set countdown for new op_code
 */
 
+//load all the op codes at the very end of the cycle
+static int				load_ops(struct s_game *game)
+{
+	t_list				*link;
+	struct s_process 	*p;
+
+	link = game->processes;
+	while (link && (p = link->content))
+	{
+		if (p->op_code == 0xFF)
+		{
+			p->op_code = *p->pc;
+			if (p->op_code > NUMBER_OF_FUNCTIONS)
+				p->op_code = 0;
+			p->countdown = g_op_tab[p->op_code].cycles_required;
+		}
+		link = link->next;
+	}
+	return (0);
+}
 static int				step_processes(struct s_game *game)
 {
 	t_list				*link;
@@ -38,13 +58,15 @@ static int				step_processes(struct s_game *game)
 		{
 			if (-1 == g_op_pointers[p->op_code](game, p))
 				return (-1);
-			p->op_code = *p->pc;
-			if (p->op_code > NUMBER_OF_FUNCTIONS)
-				p->op_code = 0;
-			p->countdown = g_op_tab[p->op_code].cycles_required;
+			p->op_code = 0xFF;
+	//		p->op_code = *p->pc;
+	//		if (p->op_code > NUMBER_OF_FUNCTIONS)
+	//			p->op_code = 0;
+	//		p->countdown = g_op_tab[p->op_code].cycles_required;
 		}
 		link = link->next;
 	}
+	load_ops(game);
 	return (0);
 }
 
