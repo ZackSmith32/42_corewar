@@ -7,7 +7,7 @@ import sys
 import os
 
 Usage ="""\033[1mUsage:
-./{} \033[0m\033[91mcorewarv1 \033[92mcorewarv2 \033[94mchampion_directory \033[95mnbr_tests \033[96mdiv_flag
+./{} \033[0m\033[91mcorewarv1 \033[92mcorewarv2 \033[94mchampion_directory \033[95mnbr_tests \033[96div_flag
 \t\033[91mcorewarv1:\t\texperimental corewar program
 \t\033[92mcorewarv2:\t\tcontrol corewar program
 \t\033[94mchampion_directory:\tdirectory containing champions to be tested
@@ -34,13 +34,7 @@ def main(argc, argv):
 		init_files(corev1, corev2)
 		for i in range(0, total):
 			error = error + test_corewar(corev1, corev2, champ_list, i, find_div)
-		percentage = ((total - error) * 100 / total)
-		grade = 91
-		if (percentage == 100):
-			grade = 92
-		elif (percentage > 75):
-			grade = 93
-		print("Times ran:{} Number of fails:\033[91m{}\033[0m Percentage passed:\033[{}m{}\033[0m".format(total, error, grade, percentage))
+		print_grade(error, total)
 	else:
 		print(Usage)
 
@@ -62,7 +56,7 @@ def test_corewar(v1, v2, champ_list, iteration, find_div):
 		player_list.append(champ_list[random.randint(0, len(champ_list) - 1)])
 		i = i + 1
 	player_list = ' '.join(player_list)
-	if is_diff(v1, v2, cycles, player_list):
+	if is_diff(v1, v2, cycles, player_list, 1):
 		fail_at = "Did not search for cycle"
 		if find_div:
 			fail_at = find_divergence(v1, v2, cycles, player_list)
@@ -70,6 +64,8 @@ def test_corewar(v1, v2, champ_list, iteration, find_div):
 			log.write("\033[1mFailed Test {}:\033[0m\ncycles: {}\nplayers: {}\nFail at cycle: {}\n\n".format(iteration, cycles, player_list, fail_at))
 		print("\033[91m\033[1mTest {} failure\033[0m".format(iteration))
 		return (1)
+	else:
+		print("\033[92m\033[1mTest {} Success\033[0m".format(iteration))
 	return (0)
 
 #runs corewar executable and returns a lowercase string of the output
@@ -84,11 +80,13 @@ def run_corewar(corewar, command_line):
 	return result.lower()
 
 #Checks to see if the output is different for i number of cycles returns true if they are different
-def	is_diff(v1, v2, i, player_list):
+def	is_diff(v1, v2, i, player_list, final_flag):
 	command = "-d {} {}".format(i, player_list)
 	out1 = run_corewar(v1, command)
 	out2 = run_corewar(v2, command)
 	if (out1 == out2):
+		return 0
+	elif final_flag == 1 and len(out1) == 0 or len(out2) == 0:
 		return 0
 	with open("cor_diff.log", "a") as diff:
 		diff.write("< {}\n> {}\nplayers: {}\nFail at cycle: {}\n\n".format(v1, v2, player_list, i))
@@ -103,7 +101,7 @@ def find_divergence(v1, v2, cycles, player_list):
 
 	while (start < end):
 		mid = (end - start) / 2 + start
-		check = is_diff(v1, v2, mid, player_list)
+		check = is_diff(v1, v2, mid, player_list, 0)
 		color = 92
 		if check == 1:
 			color = 91
@@ -114,4 +112,16 @@ def find_divergence(v1, v2, cycles, player_list):
 			start = mid + 1
 	return end
 	
+#print the final grade for the unit test
+def print_grade(error, total):
+	percent = (total - error) * 100  / total
+	grade = 91
+	if (percent == 100):
+		grade = 92
+	elif (percent > 75):
+		grade = 93
+	print("\033[1mFailed {} out of {} tests. Grade:\033[{}m{}\033[0m".format(error, total, grade, percent))
+	with open("cor_diff.log", "a") as out:
+		out.write("Failed {} out of {} tests. Grade:{}".format(error, total, percent))
+
 main(len(sys.argv), sys.argv)
