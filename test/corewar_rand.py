@@ -18,7 +18,7 @@ Usage ="""\033[1mUsage:
 def init_files(corev1, corev2):
 	open(corev1 + ".log","w").close()
 	open(corev2 + ".log","w").close()
-	open("cor_rand_diff.log","w").close()
+	open("rand_cor_diff.log","w").close()
 	
 def main(argc, argv):
 	error = 0
@@ -74,9 +74,9 @@ def test_corewar(v1, v2, champion, cycles):
 
 #appends the diff to the log file
 def app_log(v1, v2, player, i):
-	with open("cor_rand_diff.log", "a") as diff:
+	with open("rand_cor_diff.log", "a") as diff:
 		diff.write("< {}\n> {}\nplayers: {}\nFail at cycle: {}\n\n".format(v1, v2, player, i))
-		os.system("diff -i {} {} >> unit_diff.log".format(v1 + ".log", v2 + ".log"))
+		os.system("diff -i {} {} >> rand_cor_diff.log".format(v1 + ".log", v2 + ".log"))
 
 #Checks to see if the output is different for i number of cycles returns true if they are different
 def	is_diff(v1, v2, i, player_list, final_flag):
@@ -127,7 +127,7 @@ def print_grade(error, total):
 	elif (percent > 75):
 		grade = 93
 	print("\033[1mFailed {} out of {} tests. Grade:\033[{}m{}\033[0m".format(error, total, grade, percent))
-	with open("cor_rand_diff.log", "a") as out:
+	with open("rand_cor_diff.log", "a") as out:
 		out.write("Failed {} out of {} tests. Grade:{}".format(error, total, percent))
 
 main(len(sys.argv), sys.argv)
