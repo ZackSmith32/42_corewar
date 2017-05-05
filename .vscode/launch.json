@@ -10,7 +10,7 @@
 			"args":	[
 						"-p",
 						"-v",
-						"test/champs/Gagnant.cor",
+						"test/champs/championships/2014/gbir/_.cor",
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",

@@ -13,7 +13,7 @@
 #include <corewar.h>
 
 static int			flatten(uint8_t *arena, struct s_process *process,
-						struct s_parameter *param)
+						struct s_parameter *param, uint8_t *pc_og)
 {
 	if (param->param_type == T_REG)
 	{
@@ -27,7 +27,7 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 	{
 		change_end(param->param_val.arr, IND_SIZE);
 		param->param_val.val %= IDX_MOD;
-		read_arena(arena, process->pc + (t_ind)param->param_val.val,
+		read_arena(arena, pc_og + (t_ind)param->param_val.val,
 			param->param_val.arr, DIR_SIZE);
 		change_end(param->param_val.arr, DIR_SIZE);
 		param->param_val.val = (t_s_op_arg)(t_dir)param->param_val.val;
@@ -50,8 +50,8 @@ int				sti(struct s_game *game, struct s_process *process)
 	if (-1 == parse_and_validate_parameters(game, process, params))
 		return (0);
 	if (--params[0].param_val.val >= REG_NUMBER
-		|| -1 == flatten(game->arena, process, &params[1])
-		|| -1 == flatten(game->arena, process, &params[2]))
+		|| -1 == flatten(game->arena, process, &params[1], pc_og)
+		|| -1 == flatten(game->arena, process, &params[2], pc_og))
 		return (0);
 	offset = (t_s_op_arg)(params[1].param_val.val + params[2].param_val.val)
 				% IDX_MOD;
