@@ -6,7 +6,7 @@
 #    By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/28 14:46:03 by kdavis           ###   ########.fr        #
+#    Updated: 2017/05/06 11:42:16 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC = \
 			live_st_zjmp.c \
 			ld_lld.c \
 			ldi_lldi.c \
+			move_one.c \
 			validate_parameters.c \
 			parse_parameters.c \
 		) \

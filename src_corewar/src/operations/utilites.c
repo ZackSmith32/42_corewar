@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   utilites.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/04/05 13:46:56 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/05/06 11:41:48 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
-
-int			move_one(struct s_game *game, struct s_process *process)
-{
-	move_pc(game->arena, &process->pc, 1);
-	return (0);
-}
 
 void		move_pc(uint8_t *arena, uint8_t **pc, int move)
 {
