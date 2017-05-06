@@ -10,7 +10,10 @@
 			"args":	[
 						"-p",
 						"-v",
-						"test/champs/championships/2014/gudepard/Kappa.cor",
+						"test/champs/championships/2014/srabah-m/littlepuppy.cor",
+						"test/champs/championships/2014/dcohen/loose.cor",
+						"test/champs/championships/2014/gbir/_.cor",
+						"test/champs/slider2.cor",
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",

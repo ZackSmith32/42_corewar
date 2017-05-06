@@ -13,6 +13,11 @@ Usage ="""\033[1mUsage:
 \t\033[94mchampion_directory:\tdirectory containing champions to be tested
 \t\033[95mcycle_limit:\t\toptional number of cycles to run (10000 default)""".format(os.path.basename(__file__))
 
+multi_tests = [
+		"test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/championships/2014/dcohen/loose.cor test/champs/championships/2014/gbir/_.cor test/champs/slider2.cor",
+		"test/champs/Octobre_Rouge_V4.2.cor test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gjestin/salamahenagalabadoun.cor",
+		"test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gleger/Machine-gun.cor test/champs/jumper.cor",
+		]
 
 def init_files(corev1, corev2):
 	open(corev1 + ".log","w").close()
@@ -30,19 +35,25 @@ def main(argc, argv):
 		corev2 = argv[2]
 		init_files(corev1, corev2)
 		champ_list = create_champlist(argv[3])
-		total = len(champ_list)
-		for champion in champ_list:
-			fail_cycle = test_corewar(corev1, corev2, champion, limit)
-			pa = 0
-			if (fail_cycle != limit):
-				pa = 1
-				print("\033[9{}m{} Fails at:{}\033[0m".format(2 - pa, champion, fail_cycle))
-			else:
-				print("\033[9{}m{} Does not Fail ({} cycles ran)\033[0m".format(2 - pa, champion, fail_cycle))
-			error = error + pa
+		error = loop_list(corev1, corev2, champ_list, limit)
+		error = error + loop_list(corev1, corev2, multi_tests, limit)
+		total = len(champ_list) + len(multi_tests)
 		print_grade(error, total)
 	else:
 		print(Usage)
+
+def	loop_list(corev1, corev2, champ_list, limit):
+	error = 0
+	for champion in champ_list:
+		fail_cycle = test_corewar(corev1, corev2, champion, limit)
+		pa = 0
+		if (fail_cycle != limit):
+			pa = 1
+			print("\033[9{}m{} Fails at:{}\033[0m".format(2 - pa, champion, fail_cycle))
+		else:
+			print("\033[9{}m{} Does not Fail ({} cycles ran)\033[0m".format(2 - pa, champion, fail_cycle))
+		error = error + pa
+	return (error)
 
 #creates a list of all the champions in the current directory
 def	create_champlist(direct):
