@@ -42,7 +42,7 @@ static int				step_processes(struct s_game *game)
 	while (link && (p = link->content))
 	{
 		if (p->needs_op_update == true)
-			load_op(p);
+			load_op(p); 
 		p->countdown--;
 		if (p->countdown == 0)
 		{
