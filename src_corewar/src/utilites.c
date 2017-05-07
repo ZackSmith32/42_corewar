@@ -18,7 +18,7 @@ void				change_end(void *val, size_t size)
 	uint8_t *start;
 	uint8_t	*end;
 
- 	start = (uint8_t*)val;
+	start = (uint8_t*)val;
 	end = start + size - 1;
 	while (end > start)
 	{
