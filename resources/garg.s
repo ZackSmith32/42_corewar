@@ -15,5 +15,10 @@ live:		live	%1
 			ldi		r2, %:hello,r1
 			sti		r1, %200, r2
 			add		r4, r2, r2
+			fork	%50
 			and		r1, %0, r1
 			zjmp	%:live
+
+#clone:		ld		%:kill,r1
+
+#kill:		st 		1,7000
