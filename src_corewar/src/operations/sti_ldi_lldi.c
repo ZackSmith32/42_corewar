@@ -105,6 +105,7 @@ int				ldi(struct s_game *game, struct s_process *process)
 				% IDX_MOD;
 	read_arena(game->arena, pc_og + offset,
 		(uint8_t*)&process->registors[params[2].param_val.val], REG_SIZE);
+//	process->carry = process->registors[params[2].param_val.val] == 0;
 	return (0);
 }
 
@@ -124,5 +125,6 @@ int				lldi(struct s_game *game, struct s_process *process)
 	offset = (t_s_op_arg)(params[0].param_val.val + params[1].param_val.val);
 	read_arena(game->arena, pc_og + offset,
 		(uint8_t*)&process->registors[params[2].param_val.val], REG_SIZE);
+	process->carry = process->registors[params[2].param_val.val] == 0;
 	return (0);
 }
