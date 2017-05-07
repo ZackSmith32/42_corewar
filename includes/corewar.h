@@ -25,6 +25,7 @@
 # include <fcntl.h>
 # include <ncurses.h>
 # include <time.h>
+# include <typedefs.h>
 
 struct					s_champ
 {
@@ -55,11 +56,9 @@ struct					s_flag
 ** called_live: if the process called the live operation in the last cycle
 */
 
-typedef uint32_t		t_registor;
-
 struct					s_process
 {
-	t_registor		registors[REG_NUMBER];
+	t_reg			registors[REG_NUMBER];
 	_Bool			carry;
 	uint8_t			*pc;
 	unsigned int	countdown;
@@ -123,29 +122,6 @@ typedef struct			s_op
 	_Bool		encoding_byte;
 	_Bool		dir_as_ind;
 }						t_op;
-
-typedef uint32_t		t_op_arg; //can anyone this of a case when this needs to be unsigned??
-typedef int32_t			t_s_op_arg;
-typedef int32_t			t_dir;
-typedef uint32_t		t_reg;
-typedef int32_t			t_s_reg;
-
-# if IND_SIZE == 1
-
-typedef int8_t			t_ind;
-# endif
-# if IND_SIZE == 2
-
-typedef int16_t			t_ind;
-# endif
-# if IND_SIZE == 4
-
-typedef int32_t			t_ind;
-# endif
-# if IND_SIZE == 8
-
-typedef int64_;
-# endif
 
 union					u_val
 {

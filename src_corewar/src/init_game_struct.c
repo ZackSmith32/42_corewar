@@ -73,7 +73,7 @@ static int				add_process(t_list **processes, uint8_t *pc,
 	if (NULL == (p = (struct s_process*)malloc(sizeof(*p))))
 		return (-1);
 	ft_bzero(p, sizeof(*p));
-	p->registors[0] = ~(t_registor)champ_index;
+	p->registors[0] = ~(t_reg)champ_index;
 	change_end(&p->registors[0], sizeof(p->registors[0]));
 	p->pc = pc;
 	p->op_code = *pc;
