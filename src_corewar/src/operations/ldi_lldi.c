@@ -76,7 +76,7 @@ static int			ll_flatten(uint8_t *arena, struct s_process *process,
 	else if (param->param_type == T_IND)
 	{
 		change_end(param->param_val.arr, IND_SIZE);
-		read_arena(arena, pc_og + (t_ind)param->param_val.val,
+		read_arena(arena, pc_og + (t_s_op_arg)(t_ind)param->param_val.val,
 			param->param_val.arr, IND_SIZE);
 		change_end(param->param_val.arr, IND_SIZE);
 		param->param_val.val = (t_s_op_arg)(t_ind)param->param_val.val;
