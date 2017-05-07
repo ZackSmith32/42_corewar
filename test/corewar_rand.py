@@ -38,9 +38,9 @@ def main(argc, argv):
 			pa = 0
 			if (fail_cycle != limit):
 				pa = 1
-				print("\033[9{}m{} Fails at:{}\033[0m".format(2 - pa, champion, fail_cycle))
+				print("\033[9{}m{}. {} Fails at:{}\033[0m".format(2 - pa, i, champion, fail_cycle))
 			else:
-				print("\033[9{}m{} Does not Fail ({} cycles ran)\033[0m".format(2 - pa, champion, fail_cycle))
+				print("\033[9{}m{}. {} Does not Fail ({} cycles ran)\033[0m".format(2 - pa, i, champion, fail_cycle))
 			error = error + pa
 		print_grade(error, total)
 	else:
