@@ -17,6 +17,7 @@ multi_tests = [
 		"test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/championships/2014/dcohen/loose.cor test/champs/championships/2014/gbir/_.cor test/champs/slider2.cor",
 		"test/champs/Octobre_Rouge_V4.2.cor test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gjestin/salamahenagalabadoun.cor",
 		"test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gleger/Machine-gun.cor test/champs/jumper.cor",
+		"test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/examples/fluttershy.cor test/champs/championships/2014/gudepard/Kappa.cor",
 		]
 
 def init_files(corev1, corev2):
