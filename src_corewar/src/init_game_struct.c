@@ -139,6 +139,7 @@ int						init_game_struct(char **champs, struct s_game *game)
 		return (-1);
 	}
 	ft_bzero(game, sizeof(*game));
+	g_flags.pid = 0;
 	game->champ_count = champ_count;
 	game->cycles_to_death = CYCLE_TO_DIE;
 	game->end_state = NOT_OVER;
