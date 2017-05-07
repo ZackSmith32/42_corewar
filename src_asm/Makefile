@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/04/26 16:33:40 by kdavis           ###   ########.fr        #
+#    Updated: 2017/05/07 15:14:16 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ build:
 
 clean:
 	rm -rf build
-	$(MAKE) -C $(LIB) clean
+	$(MAKE) -C $(LIB) fclean
 
 fclean: clean
 	rm -rf $(NAME)

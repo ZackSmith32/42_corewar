@@ -84,9 +84,10 @@ def app_log(v1, v2, player, i):
 
 #Checks to see if the output is different for i number of cycles returns true if they are different
 def	is_diff(v1, v2, i, player_list, final_flag):
-	command = "-d {} {}".format(i, player_list)
-	out1 = run_corewar(v1, command)
-	out2 = run_corewar(v2, command)
+	command1 = "-dump {} {}".format(i, player_list)
+	command2 = "-d {} {}".format(i, player_list)
+	out1 = run_corewar(v1, command1)
+	out2 = run_corewar(v2, command2)
 	if (out1 == out2):
 		return 0
 	elif final_flag == 1 and len(out1) == 0 or len(out2) == 0:

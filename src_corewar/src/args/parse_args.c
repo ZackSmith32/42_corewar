@@ -110,9 +110,10 @@ int			parse_args(int ac, char ***av, char **champ)
 	(ac == 1) ? print_usage(**av) : parse_init(flag_set, champ, &flags);
 	while (++(*av) && **av && ***av == '-' && ++(**av))
 	{
-		if ((func_code = ft_strchr(flags, ***av) - flags) < NFLAGS
-				&& ++(**av) && ***av == 0
-				&& -1 == (flag_set[func_code])(av, champ) && (g_error = 3))
+		if (((func_code = ft_strchr(flags, ***av) - flags) > NFLAGS
+				|| 0 == is_valid_flag(**av, func_code)
+				|| -1 == (flag_set[func_code])(av, champ))
+				&& (g_error = 3))
 			return (-1);
 		if (g_flags.flag_test)
 			print_flag_status();

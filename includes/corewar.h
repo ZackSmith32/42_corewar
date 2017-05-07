@@ -179,6 +179,7 @@ int						flag_v(char ***av, char **champ);
 int						flag_f(char ***av, char **champ);
 int						flag_w(char ***av, char **champ);
 void					print_usage(char *filename);
+int						is_valid_flag(char *flag, uintmax_t func_code);
 
 /*
 ** game_init.c

@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/05/03 21:01:25 by kdavis           ###   ########.fr        #
+#    Updated: 2017/05/07 15:13:07 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,12 @@ force:
 	@true
 
 clean:
-	$(MAKE) fclean -C $(COREWAR_DIR)
-	$(MAKE) fclean -C $(ASM_DIR)
+	$(MAKE) -C $(COREWAR_DIR) fclean
+	$(MAKE) -C $(ASM_DIR) fclean
+
 fclean: clean
 	rm -f $(COREWAR) $(ASM)
+
 re: fclean all
 
 test: all
