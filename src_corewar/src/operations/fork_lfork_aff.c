@@ -27,7 +27,7 @@ static int		add_process(uint8_t *arena, struct s_process *base_process,
 //		p->op_code = 0;
 //	else
 //		p->op_code = *p->pc;
-	p->countdown = g_op_tab[p->op_code].cycles_required;
+//	p->countdown = g_op_tab[p->op_code].cycles_required;
 	p->pid = g_flags.pid++;
 	if (NULL == (link = lstnew(p)))
 		return (-1);
