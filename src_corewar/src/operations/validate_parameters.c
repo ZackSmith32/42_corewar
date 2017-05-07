@@ -64,8 +64,9 @@ char	parse_and_validate_parameters(struct s_game *game,
 	uint8_t **pc_temp;
 
 	pc_temp = &process->pc;
-	ern = check_param_count(g_op_tab[process->op_code],
-			*mask_ptr(game->arena, (*pc_temp + 1)));
+	ern = 0;
+//	ern = check_param_count(g_op_tab[process->op_code],
+//			*mask_ptr(game->arena, (*pc_temp + 1)));
 /*	if (-1 == check_param_count(g_op_tab[process->op_code],
 		*mask_ptr(game->arena, (*pc_temp + 1))))
 		return (-1);*/

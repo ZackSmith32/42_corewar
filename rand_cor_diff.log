@@ -1,28 +1,10 @@
-11c11
-< 0x0280 : 00 00 00 00 00 00 00 0b 54 07 02 08 09 00 00 00 00 00 00 00 00 02 90 00 00 00 00 00 00 00 00 0b 54 07 02 08 09 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 07 02 08 09 00 00 00 
+56c56
+< 0x0dc0 : 09 00 ee 03 70 ff ff 01 ff ff ff fd c6 11 30 0f ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 03 ff ff 01 ff ff ff fd 03 70 02 00 ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 
 ---
-> 0x0280 : 00 00 00 00 00 00 00 0b 54 07 02 08 09 00 00 00 00 00 00 00 00 00 00 0b 54 00 00 00 00 00 00 0b 54 07 02 08 09 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0b 54 07 02 08 09 00 00 00 
+> 0x0dc0 : 09 00 ee 03 70 ff ff 01 ff ff ff fd c6 11 30 0f ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 03 ff ff 01 ff ff ff fd 00 00 00 20 ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 
 < corewar
 > test/cor_corewar
-players: test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/championships/2014/dcohen/loose.cor test/champs/championships/2014/gbir/_.cor test/champs/slider2.cor
-Fail at cycle: 5523
+players: test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/examples/fluttershy.cor test/champs/championships/2014/gudepard/Kappa.cor
+Fail at cycle: 12210
 
-2c2
-< 0x0040 : 17 03 70 01 00 0d 02 90 00 00 00 00 0f 01 ff ff ff fd 09 ff fb 01 00 00 00 2a 0c 00 17 03 70 01 00 0d 02 90 00 00 00 00 0f 01 ff ff ff ff 09 ff fb 01 00 00 00 2a 0c ff a7 03 70 01 00 0d 02 90 
----
-> 0x0040 : 17 03 70 01 00 0d 02 90 00 00 00 00 0f 01 ff ff ff ff 09 ff fb 01 00 00 00 2a 0c 00 17 03 70 01 00 0d 02 90 00 00 00 00 0f 01 ff ff ff ff 09 ff fb 01 00 00 00 2a 0c ff a7 03 70 01 00 0d 02 90 
-< corewar
-> test/cor_corewar
-players: test/champs/Octobre_Rouge_V4.2.cor test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gjestin/salamahenagalabadoun.cor
-Fail at cycle: 6796
-
-44c44
-< 0x0ac0 : 09 00 37 01 ff ff ff fd 0a 94 ff fb 03 01 0b 64 01 ff 53 03 04 54 03 04 03 08 54 05 03 68 01 00 1c 00 01 94 ff 00 00 00 00 ff db 08 54 03 03 03 09 ff 31 ff ff ff fd 0b 68 01 00 07 00 01 01 00 
----
-> 0x0ac0 : 09 00 37 01 ff ff ff fd 0a 94 ff fb 03 01 0b 64 01 ff 53 03 04 54 03 04 03 08 54 05 03 68 01 00 1c 00 01 94 ff fb 03 01 0b ff db 08 54 03 03 03 09 ff 31 ff ff ff fd 0b 68 01 00 07 00 01 01 00 
-< corewar
-> test/cor_corewar
-players: test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gleger/Machine-gun.cor test/champs/jumper.cor
-Fail at cycle: 6475
-
-Failed 3 out of 100 tests. Grade:97
+Failed 1 out of 100 tests. Grade:99
