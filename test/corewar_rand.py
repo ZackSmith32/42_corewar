@@ -75,6 +75,8 @@ def test_corewar(v1, v2, champion, limit):
 			app_log(v1, v2, champion, fail_at)
 		else:
 			fail_at = limit
+	else:
+		fail_at = limit
 	return (fail_at)
 
 #appends the diff to the log file
