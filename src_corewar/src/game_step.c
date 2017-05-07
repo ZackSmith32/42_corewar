@@ -33,6 +33,7 @@ static void				load_op(struct s_process *p)
 	p->countdown = g_op_tab[p->op_code].cycles_required;
 	p->needs_op_update = false;
 }
+
 static int				step_processes(struct s_game *game)
 {
 	t_list				*link;
