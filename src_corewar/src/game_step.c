@@ -29,7 +29,7 @@ static void				load_op(struct s_process *p)
 {
 	p->op_code = *p->pc;
 	if (p->op_code >= NUMBER_OF_FUNCTIONS)
-			p->op_code = 0;
+		p->op_code = 0;
 	p->countdown = g_op_tab[p->op_code].cycles_required;
 	p->needs_op_update = false;
 }
@@ -43,7 +43,7 @@ static int				step_processes(struct s_game *game)
 	while (link && (p = link->content))
 	{
 		if (p->needs_op_update == true)
-			load_op(p); 
+			load_op(p);
 		p->countdown--;
 		if (p->countdown == 0)
 		{
