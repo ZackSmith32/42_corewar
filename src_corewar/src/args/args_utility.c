@@ -31,3 +31,12 @@ void	print_usage(char *filename)
 		"-Max Champ Size : ", CHAMP_MAX_SIZE, " bytes\n");
 	exit(0);
 }
+
+int		is_valid_flag(char *flag, uintmax_t func_code)
+{
+	if (0 == func_code)
+		return (0 == ft_strcmp(flag, "dump"));
+	else
+		return (1 == ft_strlen(flag));
+	return (0);
+}
