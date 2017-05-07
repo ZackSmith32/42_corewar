@@ -27,7 +27,7 @@ def main(argc, argv):
 		if (argc == 6):
 			limit = int(argv[5])
 		else:
-			limit = 15000
+			limit = 20000
 		corev1 = argv[1]
 		corev2 = argv[2]
 		init_files(corev1, corev2)
@@ -67,13 +67,14 @@ def	create_champlist(direct):
 			ret.append(os.path.join(root, filenames))
 	return (ret)
 
-def test_corewar(v1, v2, champion, cycles):
+def test_corewar(v1, v2, champion, limit):
+	cycles = random.randint(0, limit)
 	fail_at = find_divergence(v1, v2, cycles, champion)
 	if (fail_at != cycles):
 		if is_diff(v1, v2, fail_at, champion, 1):
 			app_log(v1, v2, champion, fail_at)
 		else:
-			fail_at = cycles
+			fail_at = limit
 	return (fail_at)
 
 #appends the diff to the log file
