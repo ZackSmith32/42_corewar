@@ -51,7 +51,7 @@ SRC = \
 			lstsort.c \
 		) \
 		$(addprefix operations/, \
-			sti_ldi_lldi.c \
+			sti.c \
 			add_sub.c \
 			and_or_xor.c \
 			fork_lfork_aff.c \
