@@ -1,0 +1,21 @@
+28c28
+< 0x06c0 : 03 70 0e f9 00 00 00 00 f8 ef 03 70 0e f8 2d 03 70 0e f7 62 03 70 0e f6 97 03 00 00 00 00 03 70 0e f5 0a 03 70 0e f4 3f 03 0b 54 00 00 00 00 03 09 01 8b 70 0e f1 e7 03 70 0e f1 25 03 70 0e f0 
+---
+> 0x06c0 : 03 70 0e f9 00 00 00 00 f8 ef 03 70 0e f8 2d 03 70 0e f7 62 03 70 0e f6 97 03 70 0e f5 d5 03 70 0e f5 0a 03 70 0e f4 3f 03 0b 54 00 00 00 00 03 09 01 8b 70 0e f1 e7 03 70 0e f1 25 03 70 0e f0 
+< ../corewar
+> cor_corewar
+players: champs/championships/2014/ldesgoui/_honeybadger.cor champs/championships/2014/cdivry/youforkmytralala.cor champs/Car.cor
+Fail at cycle: 4823
+SAME:4644
+
+
+63c63
+< 0x0f80 : 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 09 00 13 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 09 00 13 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+---
+> 0x0f80 : 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 09 00 13 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 08 09 00 13 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+< ../corewar
+> cor_corewar
+players: champs/championships/2014/gbir/_.cor champs/championships/2014/gbir/_.cor champs/examples/fluttershy.cor champs/slider2.cor
+Fail at cycle: 4092
+
+Failed 2 out of 1000 tests. Grade:99

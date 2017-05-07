@@ -21,7 +21,7 @@ int		live(struct s_game *game, struct s_process *process)
 	read_arena(game->arena, process->pc + 1, (uint8_t*)&player_name,
 		LIVE_BYTE_SIZE);
 	player_name = ~player_name;
-	game->lives++;
+	game->lives += 1;
 	process->called_live = true;
 	if (player_name < game->champ_count)
 		game->last_live_champ = &game->champs[player_name];

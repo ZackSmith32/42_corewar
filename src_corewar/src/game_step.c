@@ -28,7 +28,7 @@
 static void				load_op(struct s_process *p)
 {
 	p->op_code = *p->pc;
-	if (p->op_code > NUMBER_OF_FUNCTIONS)
+	if (p->op_code >= NUMBER_OF_FUNCTIONS)
 			p->op_code = 0;
 	p->countdown = g_op_tab[p->op_code].cycles_required;
 	p->needs_op_update = false;
@@ -49,14 +49,9 @@ static int				step_processes(struct s_game *game)
 			p->needs_op_update = true;
 			if (-1 == g_op_pointers[p->op_code](game, p))
 				return (-1);
-	//		p->op_code = *p->pc;
-	//		if (p->op_code > NUMBER_OF_FUNCTIONS)
-	//			p->op_code = 0;
-	//		p->countdown = g_op_tab[p->op_code].cycles_required;
 		}
 		link = link->next;
 	}
-	//load_ops(game);
 	return (0);
 }
 

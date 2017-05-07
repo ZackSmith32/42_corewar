@@ -10,9 +10,9 @@
 			"args":	[
 						"-p",
 						"-v",
-						"test/champs/championships/2014/srabah-m/littlepuppy.cor",
-						"test/champs/examples/fluttershy.cor",
-						"test/champs/championships/2014/gudepard/Kappa.cor",
+						"test/champs/championships/2014/ldesgoui/_honeybadger.cor",
+						"test/champs/championships/2014/cdivry/youforkmytralala.cor",
+						"test/champs/Car.cor",
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",

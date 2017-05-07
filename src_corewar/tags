@@ -1,0 +1,263 @@
+add	src/operations/add_sub.c	/^int					add(struct s_game *game, struct s_process /
+add_process	src/operations/fork_lfork_aff.c	/^static int		add_process(uint8_t *arena, struct s_p/
+aff	src/operations/fork_lfork_aff.c	/^int				aff(struct s_game *game, struct s_process */
+and	src/operations/and_or_xor.c	/^int					and(struct s_game *game, struct s_process /
+calc_ldi_offset	src/operations/ldi_lldi.c	/^static t_ind	calc_ldi_offset(struct s_process *pro/
+check_param_count	src/operations/validate_parameters.c	/^int		check_param_count(t_op op, char parameter_enc/
+check_param_type	src/operations/validate_parameters.c	/^int		check_param_type(t_op op, char parameter_enco/
+check_registors	src/operations/utilities2.c	/^int			check_registors(uint8_t op_code, struct s_pa/
+color_code	src/game_print/print_hex.c	/^uint32_t		color_code(t_list *process)$/
+conv_literal	libft/src/ft_printf/pf_append_data.c	/^static int		conv_literal(t_pfflag *fl, t_strvec *l/
+delete_array	libft/src/str/ft_strsplit.c	/^static char	**delete_array(char **array)$/
+fill_champ	src/args/parse_args.c	/^static int	fill_champ(char ***av, char **champ)$/
+flag_d	src/args/flags_tags.c	/^int	flag_d(char ***av, char **champ)$/
+flag_f	src/args/flags_tags2.c	/^int	flag_f(char ***av, char **champ)$/
+flag_n	src/args/flags_tags.c	/^int	flag_n(char ***av, char **champ)$/
+flag_p	src/args/flags_tags.c	/^int	flag_p(char ***av, char **champ)$/
+flag_s	src/args/flags_tags.c	/^int	flag_s(char ***av, char **champ)$/
+flag_v	src/args/flags_tags.c	/^int	flag_v(char ***av, char **champ)$/
+flag_w	src/args/flags_tags2.c	/^int	flag_w(char ***av, char **champ)$/
+flatten	src/operations/and_or_xor.c	/^static int			flatten(uint8_t *arena, struct s_proc/
+fork_op	src/operations/fork_lfork_aff.c	/^int				fork_op(struct s_game *game, struct s_proce/
+format_first	maxlib/convert/ft_utf_32_8.c	/^static unsigned char	format_first(unsigned char c,/
+format_trailing	maxlib/convert/ft_utf_32_8.c	/^static unsigned char	format_trailing(unsigned char/
+ft_absolute	libft/src/ft_io/ft_absolute.c	/^unsigned long long	ft_absolute(long long n)$/
+ft_asprintf	libft/src/ft_printf/ft_asprintf.c	/^int	ft_asprintf(char **ret, const char *format, ../
+ft_atoi	libft/src/ft_io/ft_atoi.c	/^int	ft_atoi(const char *str)$/
+ft_atol	libft/src/ft_io/ft_atol.c	/^long	ft_atol(const char *str)$/
+ft_atoll	libft/src/ft_io/ft_atoll.c	/^long long	ft_atoll(const char *str)$/
+ft_atoui	libft/src/ft_io/ft_atoui.c	/^unsigned int	ft_atoui(const char *str)$/
+ft_atoul	libft/src/ft_io/ft_atoul.c	/^unsigned long	ft_atoul(const char *str)$/
+ft_atoull	libft/src/ft_io/ft_atoull.c	/^unsigned long long	ft_atoull(const char *str)$/
+ft_bitstoa	libft/src/leftovers/ft_bitstoa.c	/^char		*ft_bitstoa(unsigned long long block, int bi/
+ft_bzero	libft/src/memory/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/
+ft_chartoi	libft/src/gnl/ft_getint_base.c	/^int					ft_chartoi(char c, int base)$/
+ft_clearvec	libft/src/vector/ft_clearvec.c	/^void	ft_clearvec(t_vec *self)$/
+ft_delgrid	libft/src/memory/ft_delgrid.c	/^void	ft_delgrid(void ***grid)$/
+ft_dprintf	libft/src/ft_printf/ft_dprintf.c	/^int	ft_dprintf(int fd, const char *format, ...)$/
+ft_getll_base	libft/src/gnl/ft_getint_base.c	/^int					ft_getll_base(char **str, long long *nbr)$/
+ft_grow_vec	libft/src/vector/ft_grow_vec.c	/^int	ft_grow_vec(t_vec *self, size_t requested_byte/
+ft_initialize_vec	libft/src/vector/ft_initialize_vec.c	/^int	ft_initialize_vec(t_vec *vec, uint8_t size, si/
+ft_isalnum	libft/src/type/ft_isalnum.c	/^int	ft_isalnum(int c)$/
+ft_isalpha	libft/src/type/ft_isalpha.c	/^int	ft_isalpha(int c)$/
+ft_isascii	libft/src/type/ft_isascii.c	/^int	ft_isascii(int c)$/
+ft_isdigit	libft/src/type/ft_isdigit.c	/^int	ft_isdigit(int c)$/
+ft_islower	libft/src/type/ft_islower.c	/^int	ft_islower(int c)$/
+ft_isprint	libft/src/type/ft_isprint.c	/^int	ft_isprint(int c)$/
+ft_isupper	libft/src/type/ft_isupper.c	/^int	ft_isupper(int c)$/
+ft_iswhitespace	libft/src/type/ft_iswhitespace.c	/^int	ft_iswhitespace(int c)$/
+ft_itoa	libft/src/ft_io/ft_itoa.c	/^char		*ft_itoa(int n)$/
+ft_itoa_base	libft/src/ft_io/ft_itoa_base.c	/^char			*ft_itoa_base(int n, int base)$/
+ft_llsize_base	libft/src/ft_io/ft_llsize_base.c	/^size_t	ft_llsize_base(long long value, long long b/
+ft_loadnbr	libft/src/ft_io/ft_itoa.c	/^static char	*ft_loadnbr(int n, char *c)$/
+ft_memalloc	libft/src/memory/ft_memalloc.c	/^void	*ft_memalloc(size_t size)$/
+ft_memccpy	libft/src/memory/ft_memccpy.c	/^void	*ft_memccpy(void *dst, const void *src, int c/
+ft_memchr	libft/src/memory/ft_memchr.c	/^void	*ft_memchr(const void *s, int c, size_t n)$/
+ft_memcmp	libft/src/memory/ft_memcmp.c	/^int	ft_memcmp(const void *s1, const void *s2, size/
+ft_memcpy	libft/src/memory/ft_memcpy.c	/^void	*ft_memcpy(void *dst, const void *src, size_t/
+ft_memdel	libft/src/memory/ft_memdel.c	/^void	ft_memdel(void **ap)$/
+ft_memdup	libft/src/memory/ft_memdup.c	/^void	*ft_memdup(const void *content, size_t conten/
+ft_memjoinf	libft/src/memory/ft_memjoinf.c	/^void	*ft_memjoinf(void *s1, void *s2, size_t n1, s/
+ft_memmove	libft/src/memory/ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src, size_/
+ft_memrealloc	libft/src/memory/ft_memrealloc.c	/^void	*ft_memrealloc(void *ptr, size_t new_size)$/
+ft_memreallocf	libft/src/memory/ft_memreallocf.c	/^void	*ft_memreallocf(void *ptr, size_t new_size, s/
+ft_memset	libft/src/memory/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/
+ft_negflag	libft/src/leftovers/ft_negflag.c	/^void	ft_negflag(int *n, int *negative)$/
+ft_new_handle	libft/src/leftovers/ft_new_handle.c	/^void	**ft_new_handle(size_t i, size_t j, size_t ty/
+ft_numlen	maxlib/other/ft_numlen.c	/^int		ft_numlen(long long n, long long base)$/
+ft_numlen_un	maxlib/other/ft_numlen_un.c	/^int		ft_numlen_un(uintmax_t n, uintmax_t base)$/
+ft_power	libft/src/leftovers/ft_power.c	/^unsigned long long	ft_power(unsigned long long nbr/
+ft_printf	libft/src/ft_printf/ft_printf.c	/^int	ft_printf(const char *format, ...)$/
+ft_putbits	libft/src/leftovers/ft_putbits.c	/^void	ft_putbits(unsigned long long block, int bit_/
+ft_putchar	libft/src/ft_io/ft_putchar.c	/^void	ft_putchar(char c)$/
+ft_putchar_fd	libft/src/ft_io/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/
+ft_putendl	libft/src/ft_io/ft_putendl.c	/^void	ft_putendl(char const *s)$/
+ft_putendl_fd	libft/src/ft_io/ft_putendl_fd.c	/^void	ft_putendl_fd(char const *s, int fd)$/
+ft_putnbr	libft/src/ft_io/ft_putnbr.c	/^void	ft_putnbr(int n)$/
+ft_putnbr_fd	libft/src/ft_io/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/
+ft_putnstr_fd	libft/src/ft_io/ft_putnstr_fd.c	/^void	ft_putnstr_fd(int fd, char *str, size_t n)$/
+ft_putnwstr_fd	libft/src/ft_io/ft_putnwstr_fd.c	/^size_t	ft_putnwstr_fd(wchar_t *wstr, size_t n, int/
+ft_putsbase_fd	libft/src/ft_io/ft_putsbase_fd.c	/^void	ft_putsbase_fd(long long n, long long base, i/
+ft_putstr	libft/src/ft_io/ft_putstr.c	/^void	ft_putstr(char const *s)$/
+ft_putstr_fd	libft/src/ft_io/ft_putstr_fd.c	/^void	ft_putstr_fd(char const *s, int fd)$/
+ft_putstrw	maxlib/put/ft_putstrw.c	/^void	ft_putstrw(const wchar_t *str)$/
+ft_putubase_fd	libft/src/ft_io/ft_putubase_fd.c	/^void	ft_putubase_fd(unsigned long long n, unsigned/
+ft_putwchar_fd	libft/src/ft_io/ft_putwchar_fd.c	/^wint_t	ft_putwchar_fd(wint_t wc, int fd)$/
+ft_splcount	libft/src/str/ft_splcount.c	/^unsigned int		ft_splcount(const void *v, char c, s/
+ft_strcat	libft/src/str/ft_strcat.c	/^char	*ft_strcat(char *s1, const char *s2)$/
+ft_strchr	libft/src/str/ft_strchr.c	/^char	*ft_strchr(const char *str, int c)$/
+ft_strchri	maxlib/string/ft_strchri.c	/^int		ft_strchri(const char *str, char c)$/
+ft_strchrrmv	libft/src/str/ft_strchrrmv.c	/^char	*ft_strchrrmv(char *str, char c)$/
+ft_strclr	libft/src/str/ft_strclr.c	/^void	ft_strclr(char *s)$/
+ft_strcmp	libft/src/str/ft_strcmp.c	/^int	ft_strcmp(const char *s1, const char *s2)$/
+ft_strcpy	libft/src/str/ft_strcpy.c	/^char	*ft_strcpy(char *dst, const char *src)$/
+ft_strctchr	libft/src/str/ft_strctchr.c	/^int	ft_strctchr(char *str, char c)$/
+ft_strctrim	libft/src/str/ft_strctrim.c	/^char	*ft_strctrim(char *str, char c)$/
+ft_strd_ull_base	libft/src/gnl/ft_getint_base.c	/^unsigned long long	ft_strd_ull_base(char **str, in/
+ft_strdel	libft/src/str/ft_strdel.c	/^void	ft_strdel(char **as)$/
+ft_strdup	libft/src/str/ft_strdup.c	/^char	*ft_strdup(const char *s1)$/
+ft_strequ	libft/src/str/ft_strequ.c	/^int	ft_strequ(char const *s1, char const *s2)$/
+ft_strfcount	libft/src/str/ft_strfcount.c	/^unsigned int		ft_strfcount(const char *s, int (*dc/
+ft_striter	libft/src/str/ft_striter.c	/^void	ft_striter(char *s, void (*f)(char *))$/
+ft_striteri	libft/src/str/ft_striteri.c	/^void	ft_striteri(char *s, void (*f)(unsigned int, /
+ft_strjoin	libft/src/str/ft_strjoin.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/
+ft_strlcat	libft/src/str/ft_strlcat.c	/^size_t	ft_strlcat(char *s1, const char *s2, size_t/
+ft_strlen	libft/src/ft_io/ft_strlen.c	/^size_t	ft_strlen(const char *s)$/
+ft_strlenw	maxlib/string/ft_strlenw.c	/^size_t		ft_strlenw(const wchar_t *str)$/
+ft_strmap	libft/src/str/ft_strmap.c	/^char	*ft_strmap(char const *s, char (*f)(char))$/
+ft_strmapi	libft/src/str/ft_strmapi.c	/^char	*ft_strmapi(char const *s, char (*f)(unsigned/
+ft_strncat	libft/src/str/ft_strncat.c	/^char	*ft_strncat(char *s1, const char *s2, size_t /
+ft_strnchr	maxlib/string/ft_strnchr.c	/^char	*ft_strnchr(const char *s, int c, size_t n)$/
+ft_strncmp	libft/src/str/ft_strncmp.c	/^int	ft_strncmp(const char *s1, const char *s2, siz/
+ft_strncpy	libft/src/str/ft_strncpy.c	/^char	*ft_strncpy(char *dst, const char *src, size_/
+ft_strndup	libft/src/str/ft_strndup.c	/^char	*ft_strndup(const char *s1, size_t n)$/
+ft_strnequ	libft/src/str/ft_strnequ.c	/^int	ft_strnequ(char const *s1, char const *s2, siz/
+ft_strnew	libft/src/str/ft_strnew.c	/^char	*ft_strnew(size_t size)$/
+ft_strnstr	libft/src/str/ft_strnstr.c	/^char	*ft_strnstr(const char *b, const char *l, siz/
+ft_strplace	maxlib/string/ft_strplace.c	/^char	*ft_strplace(char *dst, const char *src)$/
+ft_strrchr	libft/src/str/ft_strrchr.c	/^char	*ft_strrchr(const char *str, int c)$/
+ft_strrev	libft/src/str/ft_strrev.c	/^char	*ft_strrev(char *str)$/
+ft_strsplit	libft/src/str/ft_strsplit.c	/^char		**ft_strsplit(char const *s, char c)$/
+ft_strstr	libft/src/str/ft_strstr.c	/^char	*ft_strstr(const char *big, const char *littl/
+ft_strsub	libft/src/str/ft_strsub.c	/^char	*ft_strsub(char const *s, unsigned int start,/
+ft_strtrim	libft/src/str/ft_strtrim.c	/^char	*ft_strtrim(char const *s1)$/
+ft_strvgrow	libft/src/str/ft_strvgrow.c	/^size_t	ft_strvgrow(t_strvec *self, size_t index)$/
+ft_tolower	libft/src/type/ft_tolower.c	/^int	ft_tolower(int c)$/
+ft_toupper	libft/src/type/ft_toupper.c	/^int	ft_toupper(int c)$/
+ft_ullsize_base	libft/src/ft_io/ft_ullsize_base.c	/^size_t	ft_ullsize_base(unsigned long long value, u/
+ft_ulltoa_base	libft/src/ft_io/ft_ulltoa_base.c	/^char	*ft_ulltoa_base(unsigned long long n, int bas/
+ft_utf_16_32	maxlib/convert/ft_utf_16_32.c	/^wint_t		ft_utf_16_32(wchar_t **c)$/
+ft_utf_16_8	maxlib/convert/ft_utf_16_8.c	/^unsigned char	*ft_utf_16_8(wchar_t **c)$/
+ft_utf_32_8	maxlib/convert/ft_utf_32_8.c	/^unsigned char			*ft_utf_32_8(wint_t c)$/
+ft_vasprintf	libft/src/ft_printf/ft_vasprintf.c	/^int					ft_vasprintf(t_strvec *ret, const char *fo/
+ft_vdprintf	libft/src/ft_printf/ft_vdprintf.c	/^int	ft_vdprintf(int fd, const char *format, va_lis/
+ft_vecapp	libft/src/vector/ft_vecapp.c	/^int	ft_vecapp(t_vec *self, void *src, size_t n)$/
+ft_wcslen	libft/src/ft_io/ft_wcslen.c	/^size_t	ft_wcslen(const wchar_t *wcs)$/
+ft_wcsnlen	libft/src/ft_io/ft_wcsnlen.c	/^size_t	ft_wcsnlen(const wchar_t *wcs, size_t n)$/
+ft_wcstombs	libft/src/ft_io/ft_wcstombs.c	/^size_t	ft_wcstombs(char *s, const wchar_t *wcs, si/
+ft_wctomb	libft/src/ft_io/ft_wctomb.c	/^int	ft_wctomb(char *s, wchar_t wc)$/
+ft_wrdcnt	maxlib/string/ft_wrdcnt.c	/^size_t	ft_wrdcnt(const char *str, char split)$/
+ft_xorswapi	libft/src/leftovers/ft_xorswap.c	/^void	ft_xorswapi(int *a, int *b)$/
+game_print	src/game_print/game_print.c	/^int				game_print(struct s_game *game)$/
+game_rewind	src/game_print/game_print.c	/^int				game_rewind(char **champ_files, struct s_ga/
+get_length	maxlib/convert/ft_utf_32_8.c	/^static char				get_length(wint_t c)$/
+get_next_line	libft/src/gnl/get_next_line.c	/^ssize_t			get_next_line(const int fd, char **line)/
+get_param_value	src/operations/parse_parameters.c	/^struct s_parameter	get_param_value(struct s_game */
+hex_color	src/game_print/print_hex.c	/^static int		hex_color(t_list *processes, uint8_t */
+int64_	../includes/corewar.h	/^typedef int64_;$/
+is_lower	maxlib/bool/ft_isalpha.c	/^static _Bool	is_lower(int c)$/
+is_upper	maxlib/bool/ft_isalpha.c	/^static _Bool	is_upper(int c)$/
+is_whitespace	maxlib/string/ft_strtrim.c	/^static _Bool	is_whitespace(char c)$/
+key_pause	src/game_print/keyhook.c	/^_Bool	key_pause(int key)$/
+key_rewind	src/game_print/keyhook.c	/^void	key_rewind(int key)$/
+key_scroll	src/game_print/keyhook2.c	/^void	key_scroll(int key)$/
+key_skip	src/game_print/keyhook.c	/^void	key_skip(int key)$/
+key_wait	src/game_print/keyhook.c	/^void	key_wait(int key)$/
+keyhooks	src/game_print/game_print.c	/^static void		keyhooks(void)$/
+ld	src/operations/ld_lld.c	/^int		ld(struct s_game *game, struct s_process *pro/
+ldi	src/operations/ldi_lldi.c	/^int				ldi(struct s_game *game, struct s_process */
+lfork	src/operations/fork_lfork_aff.c	/^int				lfork(struct s_game *game, struct s_process/
+live	src/operations/live_st_zjmp.c	/^int		live(struct s_game *game, struct s_process *p/
+lld	src/operations/ld_lld.c	/^int		lld(struct s_game *game, struct s_process *pr/
+lldi	src/operations/ldi_lldi.c	/^int				lldi(struct s_game *game, struct s_process /
+lstadd	maxlib/list/lstadd.c	/^void	lstadd(t_list **alst, t_list *new)$/
+lstdel	maxlib/list/lstdel.c	/^void	lstdel(t_list **alst, void (*del)(void *))$/
+lstdelone	maxlib/list/lstdelone.c	/^void	lstdelone(t_list **alst, void (*del)(void*))$/
+lstiter	maxlib/list/lstiter.c	/^void	lstiter(t_list *lst, void (*f)(t_list *elem))/
+lstmap	maxlib/list/lstmap.c	/^t_list			*lstmap(t_list *lst, t_list *(*f)(t_list /
+lstnew	maxlib/list/lstnew.c	/^t_list	*lstnew(void *content)$/
+lstprint	maxlib/list/lstprint.c	/^void	lstprint(t_list *link)$/
+lstpush	maxlib/list/lstpush.c	/^void	lstpush(t_list **alst, t_list *new)$/
+lstr_add	maxlib/lstr/lstr_add.c	/^_Bool		lstr_add(t_lstr **start, char *str, _Bool c/
+lstr_finish	maxlib/lstr/lstr_finish.c	/^char			*lstr_finish(t_lstr **start)$/
+lstr_new	maxlib/lstr/lstr_new.c	/^t_lstr		*lstr_new(char *str, _Bool constant)$/
+lstr_print	maxlib/lstr/lstr_print.c	/^void	lstr_print(t_lstr *link)$/
+lstreverse	maxlib/list/lstreverse.c	/^void			lstreverse(t_list **alst)$/
+lstsort	maxlib/list/lstsort.c	/^void		lstsort(t_list **dir_lst, _Bool (compare)(vo/
+mask_ptr	src/operations/utilites.c	/^uint8_t		*mask_ptr(uint8_t *arena, uint8_t *ptr)$/
+matrix_mult	libft/src/matrix/ftmx_mult.c	/^t_matrix	*matrix_mult(t_matrix *m1, t_matrix *m2, /
+modify_carry	src/operations/utilities2.c	/^void		modify_carry(struct s_process *process, t_op/
+move_one	src/operations/utilites.c	/^int			move_one(struct s_game *game, struct s_proce/
+move_pc	src/operations/utilites.c	/^void		move_pc(uint8_t *arena, uint8_t **pc, int mo/
+mx_id	libft/src/matrix/ftmx_id.c	/^float	*mx_id(int dim)$/
+mx_scale	libft/src/matrix/ftmx_scale.c	/^float	*mx_scale(float *sc, int len)$/
+mx_square_mult	libft/src/matrix/ftmx_mult.c	/^float		*mx_square_mult(float *m1, float *m2, int d/
+mx_translate	libft/src/matrix/ftmx_translate.c	/^float	*mx_translate(float *tr, int len)$/
+or	src/operations/and_or_xor.c	/^int					or(struct s_game *game, struct s_process */
+pad_str	libft/src/ft_printf/pf_append_data.c	/^static t_strvec	*pad_str(t_pfflag *fl, t_strvec *t/
+parce_buffer	libft/src/gnl/get_next_line.c	/^static ssize_t	parce_buffer(t_list *lst, char *buf/
+parse_and_validate_parameters	src/operations/validate_parameters.c	/^char	parse_and_validate_parameters(struct s_game */
+parse_args	src/args/parse_args.c	/^int			parse_args(int ac, char ***av, char **champ)/
+parse_exit	src/args/parse_args.c	/^static void	parse_exit(void)$/
+parse_init	src/args/parse_args.c	/^static void	parse_init(int (*flag_set[NFLAGS])(cha/
+parse_parameters	src/operations/parse_parameters.c	/^int					parse_parameters(struct s_game *game,$/
+pf_alloc_ret	libft/src/ft_printf/pf_alloc_ret.c	/^int	pf_alloc_ret(int ret, char *s1, char *s2, char/
+pf_append_data	libft/src/ft_printf/pf_append_data.c	/^int				pf_append_data(t_vdata *data, t_pfflag *fl,/
+pf_c	libft/src/ft_printf/pf_str_funcs.c	/^int			pf_c(t_vdata *data, t_pfflag *fl, t_strvec */
+pf_cleanup	libft/src/ft_printf/ft_vasprintf.c	/^static int			pf_cleanup(int result, va_list ap,$/
+pf_di	libft/src/ft_printf/pf_nbr_funcs.c	/^int			pf_di(t_vdata *data, t_pfflag *fl, t_strvec /
+pf_farray	libft/src/ft_printf/pf_funcarray.c	/^int	pf_farray(int ret)$/
+pf_fs_end	libft/src/ft_printf/pf_flag_reader.c	/^static const char	*pf_fs_end(const char *str, t_pf/
+pf_getdata	libft/src/ft_printf/pf_flag_reader.c	/^static t_vdata		pf_getdata(t_pfflag *fl, va_list a/
+pf_isflmc	libft/src/ft_printf/pf_flag_reader.c	/^static int			pf_isflmc(char c)$/
+pf_o	libft/src/ft_printf/pf_nbr_funcs.c	/^int			pf_o(t_vdata *data, t_pfflag *fl, t_strvec */
+pf_putcstr	libft/src/ft_printf/ft_vasprintf.c	/^static const char	*pf_putcstr(const char *str, t_s/
+pf_read_format	libft/src/ft_printf/pf_flag_reader.c	/^const char			*pf_read_format(const char *fstr, va_/
+pf_s	libft/src/ft_printf/pf_str_funcs.c	/^int			pf_s(t_vdata *data, t_pfflag *fl, t_strvec */
+pf_set_lm	libft/src/ft_printf/pf_flag_reader.c	/^static int			pf_set_lm(const char *fstr, int lm)$/
+pf_slen	libft/src/ft_printf/pf_str_funcs.c	/^static int	pf_slen(t_pfflag *fl, int size)$/
+pf_ub	libft/src/ft_printf/pf_nbr_funcs.c	/^int			pf_ub(t_vdata *data, t_pfflag *fl, t_strvec /
+pf_ulltoa_base	libft/src/ft_printf/pf_nbr_funcs.c	/^static char	*pf_ulltoa_base(unsigned long long n, /
+pf_xp	libft/src/ft_printf/pf_nbr_funcs.c	/^int			pf_xp(t_vdata *data, t_pfflag *fl, t_strvec /
+plength	maxlib/string/ft_strsplit.c	/^static size_t	plength(const char *str, char split)/
+print_byte_in_hex	src/game_print/print_hex.c	/^static void		print_byte_in_hex(uint8_t byte, int c/
+print_flag_status	src/args/parse_args.c	/^static void	print_flag_status(void)$/
+print_game_over	src/game_print/game_print.c	/^static void		print_game_over(struct s_game *game)$/
+print_game_state	src/game_print/print_hex.c	/^void			print_game_state(struct s_game *game)$/
+print_hex	src/game_print/print_hex.c	/^void			print_hex(void *loc, void *writer_loc, size/
+print_process	src/game_print/print_process.c	/^void		print_process(uint8_t *arena, struct s_proce/
+print_processes	src/game_print/print_process.c	/^void		print_processes(uint8_t *arena, t_list *proc/
+print_usage	src/args/args_utility.c	/^void	print_usage(char *filename)$/
+read_arena	src/operations/utilites.c	/^uint8_t		*read_arena(uint8_t *arena, uint8_t *aren/
+read_line	libft/src/gnl/get_next_line.c	/^static ssize_t	read_line(t_list *lst, size_t o, ch/
+recurs	maxlib/put/ft_putnbr.c	/^static void		recurs(int n)$/
+recurse_me	maxlib/list/lstdel.c	/^void	recurse_me(t_list **alst, void (*del)(void *)/
+rep_mask	maxlib/convert/ft_itoa_base.c	/^static char		rep_mask(int num, _Bool uppercase)$/
+reverse_bytes	src/operations/utilities2.c	/^void		reverse_bytes(uint8_t *ptr, size_t size, uin/
+scan_list	libft/src/gnl/get_next_line.c	/^static t_list	*scan_list(t_list **fd_lst, const in/
+search_line	libft/src/gnl/get_next_line.c	/^static ssize_t	search_line(t_list *lst, char **lin/
+set_parameter	src/operations/parse_parameters.c	/^void				set_parameter(uint8_t *arena, uint8_t **pc/
+simple_dump	src/game_print/game_print.c	/^static void		simple_dump(uint8_t *arena, size_t si/
+st	src/operations/live_st_zjmp.c	/^int		st(struct s_game *game, struct s_process *pro/
+static_bitloader	libft/src/leftovers/ft_bitstoa.c	/^static char	*static_bitloader(char *str, unsigned /
+static_loader	libft/src/ft_io/ft_itoa_base.c	/^static char		*static_loader(char *str, int n, int /
+sti	src/operations/sti.c	/^int				sti(struct s_game *game, struct s_process */
+sub	src/operations/add_sub.c	/^int					sub(struct s_game *game, struct s_process /
+t_arg_type	../includes/op.h	/^typedef char	t_arg_type;$/
+t_asm	../includes/asm.h	/^}				t_asm;$/
+t_cmdinfo	../includes/asm.h	/^}				t_cmdinfo;$/
+t_dir	../includes/corewar.h	/^typedef int32_t			t_dir;$/
+t_header	../includes/op.h	/^}					t_header;$/
+t_ind	../includes/corewar.h	/^typedef int8_t			t_ind;$/
+t_label	../includes/asm.h	/^}				t_label;$/
+t_label_calls	../includes/asm.h	/^}				t_label_calls;$/
+t_list	libft/includes/list.h	/^}					t_list;$/
+t_matrix	libft/includes/ft_matrix.h	/^}				t_matrix;$/
+t_op	../includes/corewar.h	/^}						t_op;$/
+t_op_arg	../includes/corewar.h	/^typedef uint32_t		t_op_arg; \/\/can anyone this of/
+t_op_parse	../includes/asm.h	/^}				t_op_parse;$/
+t_parseinfo	../includes/asm.h	/^}				t_parseinfo;$/
+t_pf_print	libft/includes/ft_printf.h	/^}						t_pf_print;$/
+t_pfflag	libft/includes/ft_printf.h	/^}						t_pfflag;$/
+t_reg	../includes/corewar.h	/^typedef uint32_t		t_reg;$/
+t_registor	../includes/corewar.h	/^typedef uint32_t		t_registor;$/
+t_s_op_arg	../includes/corewar.h	/^typedef int32_t			t_s_op_arg;$/
+t_s_reg	../includes/corewar.h	/^typedef int32_t			t_s_reg;$/
+t_strvec	libft/includes/ft_string.h	/^}				t_strvec;$/
+t_vdata	libft/includes/ft_printf.h	/^}						t_vdata;$/
+t_vec	libft/includes/ft_vector.h	/^}				t_vec;$/
+total_length	maxlib/lstr/lstr_finish.c	/^static size_t	total_length(t_lstr *link)$/
+win_resize	src/game_print/keyhook.c	/^void	win_resize(void)$/
+write_arena	src/operations/utilites.c	/^uint8_t		*write_arena(uint8_t *arena, uint8_t *are/
+xor	src/operations/and_or_xor.c	/^int					xor(struct s_game *game, struct s_process /
+zjmp	src/operations/live_st_zjmp.c	/^int		zjmp(struct s_game *game, struct s_process *p/
