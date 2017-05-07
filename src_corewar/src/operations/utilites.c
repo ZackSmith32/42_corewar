@@ -41,7 +41,7 @@ uint8_t		*read_arena(uint8_t *arena, uint8_t *arena_ptr,
 	return (norm_ptr);
 }
 
-uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr,
+uint8_t		*write_arena(struct s_game *game, uint8_t *arena_ptr,
 				uint8_t *norm_ptr, size_t size)
 {
 	size_t		i;
@@ -49,8 +49,9 @@ uint8_t		*write_arena(uint8_t *arena, uint8_t *arena_ptr,
 	i = 0;
 	while (i < size)
 	{
-		*mask_ptr(arena, &arena_ptr[i]) = norm_ptr[i];
+		*mask_ptr(game->arena, &arena_ptr[i]) = norm_ptr[i];
 		i++;
 	}
+	arena_writer(game, arena_ptr, size, game->last_write_index + 1);
 	return (arena_ptr);
 }
