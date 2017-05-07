@@ -10,9 +10,10 @@
 			"args":	[
 						"-p",
 						"-v",
-						"test/champs/championships/2014/ldesgoui/_honeybadger.cor",
-						"test/champs/championships/2014/cdivry/youforkmytralala.cor",
-						"test/champs/Car.cor",
+						"test/champs/championships/2014/tdemay/champ.cor",
+						"test/champs/championships/2014/lsirigna/live.cor",
+						"test/champs/championships/2014/ekocevar/mandragore.cor",
+						"test/champs/championships/2014/fcorre/ultimate-surrender.cor",
 					],
 			"stopAtEntry": true,
 			"cwd": "${workspaceRoot}",

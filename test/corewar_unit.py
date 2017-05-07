@@ -20,6 +20,9 @@ multi_tests = [
 		"test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/examples/fluttershy.cor test/champs/championships/2014/gudepard/Kappa.cor", #Ensures proper comparison for op_code vs Number of functions
 		"test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/cdivry/youforkmytralala.cor test/champs/Car.cor", #index functions read ind size bytes from map
 		"test/champs/championships/2014/gbir/_.cor test/champs/championships/2014/gbir/_.cor test/champs/examples/fluttershy.cor test/champs/slider2.cor", #Modify the carry in lldi
+		"test/champs/championships/2014/tdemay/champ.cor test/champs/championships/2014/lsirigna/live.cor test/champs/championships/2014/ekocevar/mandragore.cor test/champs/championships/2014/fcorre/ultimate-surrender.cor",#start testing at this line
+		"test/champs/championships/2014/gleger/Machine-gun.cor test/champs/championships/2014/lsirigna/live.cor test/champs/championships/2014/evlasova/terminator.cor",
+		"test/champs/championships/2014/gjestin/salamahenagalabadoun.cor test/champs/championships/2014/lsirigna/live.cor test/champs/championships/2014/gudepard/Kappa.cor test/champs/championships/2014/brandazz/Rainbow_dash.cor",
 		]
 
 def init_files(corev1, corev2):

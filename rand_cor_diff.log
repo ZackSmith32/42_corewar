@@ -1,10 +1,1 @@
-56c56
-< 0x0dc0 : 09 00 ee 03 70 ff ff 01 ff ff ff fd c6 11 30 0f ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 03 ff ff 01 ff ff ff fd 03 70 02 00 ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 
----
-> 0x0dc0 : 09 00 ee 03 70 ff ff 01 ff ff ff fd c6 11 30 0f ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 03 ff ff 01 ff ff ff fd 00 00 00 20 ff ff 01 00 ff ff 01 ff ff ff fd 03 70 02 00 0f 03 70 
-< corewar
-> test/cor_corewar
-players: test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/examples/fluttershy.cor test/champs/championships/2014/gudepard/Kappa.cor
-Fail at cycle: 12210
-
-Failed 1 out of 100 tests. Grade:99
+Failed 0 out of 100 tests. Grade:100
