@@ -13,22 +13,6 @@
 #include <corewar.h>
 
 /*
-**	Validate that the parameter encoding byte is encoding the correct number of
-**		parameters for this oerartion.
-*/
-/*
-int		check_param_count(t_op op, char parameter_encoding)
-{
-	if ((parameter_encoding & 0x03) != 0 && op.argc == 3)
-		return (-1);
-	if ((parameter_encoding & 0x0f) != 0 && op.argc == 2)
-		return (-1);
-	if ((parameter_encoding & 0x3f) != 0 && op.argc == 1)
-		return (-1);
-	return (0);
-}
-*/
-/*
 **	Validate that the parameter encoding byte matches the parameters that are
 **		alowed for this operation
 */

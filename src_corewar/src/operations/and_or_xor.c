@@ -12,10 +12,6 @@
 
 #include <corewar.h>
 
-/*
-** todo: make int16_t a typedef that changes on IND_SIZE
-*/
-
 static int			flatten(uint8_t *arena, struct s_process *process,
 						struct s_parameter *param, uint8_t *pc_og)
 {

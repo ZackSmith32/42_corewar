@@ -12,7 +12,6 @@
 
 #include <corewar.h>
 
-//TODO: do forks get op immediatly or at the end of cycle
 static int		add_process(uint8_t *arena, struct s_process *base_process,
 						t_ind offset, t_list **processes)
 {

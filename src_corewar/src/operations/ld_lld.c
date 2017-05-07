@@ -12,10 +12,6 @@
 
 #include <corewar.h>
 
-/*
-**	TODO: what is up with this expection zack! D: D:
-*/
-
 int		ld(struct s_game *game, struct s_process *process)
 {
 	struct s_parameter	params[g_op_tab[0x02].argc];

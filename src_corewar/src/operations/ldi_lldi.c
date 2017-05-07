@@ -61,7 +61,6 @@ int				ldi(struct s_game *game, struct s_process *process)
 	return (0);
 }
 
-//TODO: combine ll_flatten with l_flatten
 static int			ll_flatten(uint8_t *arena, struct s_process *process,
 						struct s_parameter *param, uint8_t *pc_og)
 {
