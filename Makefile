@@ -6,7 +6,7 @@
 #    By: mburson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/23 19:31:26 by mburson           #+#    #+#              #
-#    Updated: 2017/05/07 15:13:07 by kdavis           ###   ########.fr        #
+#    Updated: 2017/05/07 16:45:13 by kdavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,13 @@ fclean: clean
 
 re: fclean all
 
-test: all
-	./test/corewar_unit.py corewar test/cor_corewar test/champs 15000
+test: $(COREWAR)
+	./test/corewar_unit.py corewar resources/corewar resources/champs 15000
 
-rand: all
-	./test/corewar_rand.py corewar test/cor_corewar test/champs 100
+rand: $(COREWAR)
+	./test/corewar_rand.py corewar resources/corewar resources/champs 100
+
+champions: $(ASM)
+	./test/test_asm.py asm resources/champs
+
 .PHONY: all clean fclean re
