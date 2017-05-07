@@ -21,6 +21,7 @@ def init_files(corev1, corev2):
 	open("rand_cor_diff.log","w").close()
 	
 def main(argc, argv):
+	played = []
 	error = 0
 	if (argc >= 4):
 		if (argc == 6):
@@ -34,6 +35,8 @@ def main(argc, argv):
 		total = int(argv[4])
 		for i in range(0, total):
 			champion = create_players(champ_list)
+			while (champion in played):
+				champion = create_players(champ_list)
 			fail_cycle = test_corewar(corev1, corev2, champion, limit)
 			pa = 0
 			if (fail_cycle != limit):
@@ -41,6 +44,7 @@ def main(argc, argv):
 				print("\033[9{}m{}. {} Fails at:{}\033[0m".format(2 - pa, i, champion, fail_cycle))
 			else:
 				print("\033[9{}m{}. {} Does not Fail ({} cycles ran)\033[0m".format(2 - pa, i, champion, fail_cycle))
+			played.append(champion)
 			error = error + pa
 		print_grade(error, total)
 	else:
