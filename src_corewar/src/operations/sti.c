@@ -56,7 +56,8 @@ int				sti(struct s_game *game, struct s_process *process)
 		return (0);
 	offset = (t_s_op_arg)(params[1].param_val.val + params[2].param_val.val)
 				% IDX_MOD;
-	write_arena(game->arena, pc_og + offset,
+	game->last_write_index = process->champ_index;
+	write_arena(game, pc_og + offset,
 		(uint8_t*)&process->registors[params[0].param_val.val], REG_SIZE);
 	return (0);
 }
