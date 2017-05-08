@@ -45,5 +45,6 @@ void				arena_writer(struct s_game *game, uint8_t *loc,
 						size_t offset, uint8_t champ_index)
 {
 	while (offset--)
-		(loc - game->arena + game->arena_writer)[offset] = champ_index;
+		*mask_ptr(game->arena_writer,
+			&(loc - game->arena + game->arena_writer)[offset]) = champ_index;
 }
