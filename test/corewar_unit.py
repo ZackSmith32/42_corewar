@@ -14,15 +14,15 @@ Usage ="""\033[1mUsage:
 \t\033[95mcycle_limit:\t\toptional number of cycles to run (10000 default)""".format(os.path.basename(__file__))
 
 multi_tests = [
-		"test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/championships/2014/dcohen/loose.cor test/champs/championships/2014/gbir/_.cor test/champs/slider2.cor",
-		"test/champs/Octobre_Rouge_V4.2.cor test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gjestin/salamahenagalabadoun.cor", #Ensures that you do not handle op arg max count
-		"test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/gleger/Machine-gun.cor test/champs/jumper.cor",
-		"test/champs/championships/2014/srabah-m/littlepuppy.cor test/champs/examples/fluttershy.cor test/champs/championships/2014/gudepard/Kappa.cor", #Ensures proper comparison for op_code vs Number of functions
-		"test/champs/championships/2014/ldesgoui/_honeybadger.cor test/champs/championships/2014/cdivry/youforkmytralala.cor test/champs/Car.cor", #index functions read ind size bytes from map
-		"test/champs/championships/2014/gbir/_.cor test/champs/championships/2014/gbir/_.cor test/champs/examples/fluttershy.cor test/champs/slider2.cor", #Modify the carry in lldi
-		"test/champs/championships/2014/tdemay/champ.cor test/champs/championships/2014/lsirigna/live.cor test/champs/championships/2014/ekocevar/mandragore.cor test/champs/championships/2014/fcorre/ultimate-surrender.cor",#start testing at this line
-		"test/champs/championships/2014/gleger/Machine-gun.cor test/champs/championships/2014/lsirigna/live.cor test/champs/championships/2014/evlasova/terminator.cor",
-		"test/champs/championships/2014/gjestin/salamahenagalabadoun.cor test/champs/championships/2014/lsirigna/live.cor test/champs/championships/2014/gudepard/Kappa.cor test/champs/championships/2014/brandazz/Rainbow_dash.cor",
+		"resources/champs/championships/2014/srabah-m/littlepuppy.cor resources/champs/championships/2014/dcohen/loose.cor resources/champs/championships/2014/gbir/_.cor resources/champs/slider2.cor",
+		"resources/champs/Octobre_Rouge_V4.2.cor resources/champs/championships/2014/ldesgoui/_honeybadger.cor resources/champs/championships/2014/gjestin/salamahenagalabadoun.cor", #Ensures that you do not handle op arg max count
+		"resources/champs/championships/2014/ldesgoui/_honeybadger.cor resources/champs/championships/2014/gleger/Machine-gun.cor resources/champs/jumper.cor",
+		"resources/champs/championships/2014/srabah-m/littlepuppy.cor resources/champs/examples/fluttershy.cor resources/champs/championships/2014/gudepard/Kappa.cor", #Ensures proper comparison for op_code vs Number of functions
+		"resources/champs/championships/2014/ldesgoui/_honeybadger.cor resources/champs/championships/2014/cdivry/youforkmytralala.cor resources/champs/Car.cor", #index functions read ind size bytes from map
+		"resources/champs/championships/2014/gbir/_.cor resources/champs/championships/2014/gbir/_.cor resources/champs/examples/fluttershy.cor resources/champs/slider2.cor", #Modify the carry in lldi
+		"resources/champs/championships/2014/tdemay/champ.cor resources/champs/championships/2014/lsirigna/live.cor resources/champs/championships/2014/ekocevar/mandragore.cor resources/champs/championships/2014/fcorre/ultimate-surrender.cor",#start resourcesing at this line
+		"resources/champs/championships/2014/gleger/Machine-gun.cor resources/champs/championships/2014/lsirigna/live.cor resources/champs/championships/2014/evlasova/terminator.cor",
+		"resources/champs/championships/2014/gjestin/salamahenagalabadoun.cor resources/champs/championships/2014/lsirigna/live.cor resources/champs/championships/2014/gudepard/Kappa.cor resources/champs/championships/2014/brandazz/Rainbow_dash.cor",
 		]
 
 def init_files(corev1, corev2):
