@@ -96,6 +96,7 @@ struct					s_game
 	enum e_end_state	end_state;
 	unsigned int		lives;
 	unsigned int		cycle_count;
+	unsigned int		last_write_index;
 	t_strvec			aff_out;
 };
 
@@ -232,7 +233,7 @@ int						move_one(struct s_game *game,
 uint8_t					*mask_ptr(uint8_t *arena, uint8_t *ptr);
 uint8_t					*read_arena(uint8_t *arena, uint8_t *arena_ptr,
 							uint8_t *norm_ptr, size_t size);
-uint8_t					*write_arena(uint8_t *arena, uint8_t *arena_ptr,
+uint8_t					*write_arena(struct s_game *game, uint8_t *arena_ptr,
 							uint8_t *norm_ptr, size_t size);
 void					reverse_bytes(uint8_t *ptr, size_t size, uint8_t *dest);
 
