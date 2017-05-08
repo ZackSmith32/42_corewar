@@ -70,7 +70,7 @@ OBJ = $(SRC:.c=.o)
 
 HEADERS = -I $(INCLUDES) -I ./libft/includes
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
