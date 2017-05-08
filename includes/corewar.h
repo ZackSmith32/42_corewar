@@ -160,8 +160,8 @@ extern int32_t			g_error;
 # define V_PROCESS		0x2
 # define V_REGISTORS	0x4
 
-# define OCTET_PER_LINE	64
-# define HEX_HEADER		1
+# define OCTET_PER_LINE	32
+# define HEX_HEADER		false
 # define MAX_PROCESS	300
 
 # define NUMBER_OF_FUNCTIONS 17

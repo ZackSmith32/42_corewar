@@ -12,7 +12,7 @@
 
 #include <corewar.h>
 
-static int			flatten(uint8_t *arena, struct s_process *process,
+static int		flatten(uint8_t *arena, struct s_process *process,
 						struct s_parameter *param, uint8_t *pc_og)
 {
 	if (param->param_type == T_REG)
@@ -21,22 +21,22 @@ static int			flatten(uint8_t *arena, struct s_process *process,
 			return (-1);
 		param->param_val.val = process->registors[param->param_val.val];
 		change_end(param->param_val.arr, REG_SIZE);
-		param->param_val.val = (t_s_op_arg)(t_s_reg)param->param_val.val;
+		param->param_val.val = (t_s_op_arg)((t_s_reg)param->param_val.val);
 	}
 	else if (param->param_type == T_IND)
 	{
 		change_end(param->param_val.arr, IND_SIZE);
-		param->param_val.val = ((t_s_op_arg)(t_ind)param->param_val.val)
+		param->param_val.val = ((t_s_op_arg)((t_ind)param->param_val.val))
 			% IDX_MOD;
-		read_arena(arena, pc_og + (t_s_op_arg)(t_ind)param->param_val.val,
+		read_arena(arena, pc_og + (t_s_op_arg)((t_ind)param->param_val.val),
 			param->param_val.arr, DIR_SIZE);
 		change_end(param->param_val.arr, DIR_SIZE);
-		param->param_val.val = (t_s_op_arg)(t_dir)param->param_val.val;
+		param->param_val.val = (t_s_op_arg)((t_dir)param->param_val.val);
 	}
 	else if (param->param_type == T_DIR)
 	{
 		change_end(param->param_val.arr, IND_SIZE);
-		param->param_val.val = (t_s_op_arg)(t_ind)param->param_val.val;
+		param->param_val.val = (t_s_op_arg)((t_ind)param->param_val.val);
 	}
 	return (0);
 }
