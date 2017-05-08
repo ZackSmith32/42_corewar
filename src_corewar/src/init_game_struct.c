@@ -127,6 +127,7 @@ int						init_game_struct(char **champs, struct s_game *game)
 
 	champ_count = 0;
 	i = 0;
+	ft_bzero(game, sizeof(*game));
 	while (i < MAX_PLAYERS)
 	{
 		if (champs[i])
@@ -138,7 +139,6 @@ int						init_game_struct(char **champs, struct s_game *game)
 		g_error = 4;
 		return (-1);
 	}
-	ft_bzero(game, sizeof(*game));
 	g_flags.pid = 0;
 	game->champ_count = champ_count;
 	game->cycles_to_death = CYCLE_TO_DIE;
