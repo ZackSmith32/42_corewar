@@ -39,6 +39,7 @@ static void			handle_error(struct s_game *game)
 	{
 		ft_dprintf(STDERR_FILENO, "corewar: ERROR: %s\n", g_error_msg[g_error]);
 	}
+	endwin();
 	exit(1);
 }
 

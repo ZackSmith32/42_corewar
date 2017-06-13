@@ -14,12 +14,10 @@ test_params.c
 TEST*
 notes
 testing_suite
-diff.log
-Failure.log
-corewar.log
 resources/corewar/champs/cor_examples/
 *.cor
 sti_dirs.s
 sti_dirs.cor
 sti_inds.s
 tags
+*.log
