@@ -30,16 +30,32 @@ Game Settings:
 Pause/Play: space
 
 Framerate:
+
 	+1: e
 	+10: r
 	-1: w
 	-10: q
 
 Frameskip:
+
 	+1: d
 	+10: f
 	-1: s
 	-10: a
+
+Reverse Frameskip:
+    
+	z: -10
+	x: -1
+	c: +1
+	v: +10
+
+Set top proccess on display:
+
+	u: -10
+	i: -1
+	o: +1
+	p: +10
 
 Frameskip can be negative to reverse the game.
 
