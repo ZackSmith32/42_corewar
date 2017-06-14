@@ -1,5 +1,7 @@
 # 42 corewar
 
+Tested on OS X 10.11 and Ubuntu 16.04. Requires ncurses to be installed.
+
 ### Compile:
 
 ```
