@@ -71,5 +71,3 @@ Reference materials incuding compiled macos executables, instruction pdf's, and 
 
 ![screenshot](/resources/screenshots/corewar1.gif)
 
-![screenshot](/resources/screenshots/2.png)
-
