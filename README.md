@@ -36,8 +36,8 @@ Framerate:
 	-10: q
 
 Frameskip:
-	+1: f
-	+10: d
+	+1: d
+	+10: f
 	-1: s
 	-10: a
 
