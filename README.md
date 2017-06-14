@@ -67,7 +67,7 @@ This is a copy of school 42's implementaion. Code dumped at any time when run wi
 
 Reference materials incuding compiled macos executables, instruction pdf's, and champtions can be found in /resources.
 
-![screenshot](/resources/screenshots/1.png)
+![screenshot](/resources/screenshots/corewar1.gif)
 
 ![screenshot](/resources/screenshots/2.png)
 
