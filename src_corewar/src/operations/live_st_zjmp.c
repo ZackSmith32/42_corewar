@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 15:51:38 by zsmith            #+#    #+#             */
-/*   Updated: 2017/05/04 16:47:40 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/06/14 14:39:35 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 int		live(struct s_game *game, struct s_process *process)
 {
+	uint32_t	player_raw;
 	uint32_t	player_name;
 
-	read_arena(game->arena, process->pc + 1, (uint8_t*)&player_name,
+	read_arena(game->arena, process->pc + 1, (uint8_t*)&player_raw,
 		LIVE_BYTE_SIZE);
+	reverse_bytes((uint8_t*)&player_raw, sizeof(player_name), (uint8_t*)&player_name);///
 	player_name = ~player_name;
 	game->lives += 1;
 	process->called_live = true;
