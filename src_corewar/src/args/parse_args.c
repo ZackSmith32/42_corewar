@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 23:57:01 by aphan             #+#    #+#             */
-/*   Updated: 2017/03/29 21:09:22 by aphan            ###   ########.fr       */
+/*   Updated: 2017/06/14 20:25:38 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	fill_champ(char ***av, char **champ)
 	{
 		while (champ[i])
 			i++;
-		if (MAX_PLAYERS < i)
+		if (MAX_PLAYERS <= i)
 			return (-1);
 		champ[i] = **av;
 		++(*av);
