@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/06/14 20:12:02 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/06/15 12:57:42 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ struct					s_flag
 };
 
 /*
-** pc is the locaiton of the next instruction of execute
+** pc: 			the locaiton of the next instruction of execute
+** countdown:	number of cycles until process executes operation
+** op_code:		current operation the process is working on
 ** called_live: if the process called the live operation in the last cycle
+** champ_index:	player index the process currently corresponds to
+** pid:			process id
 */
 
 struct					s_process
