@@ -33,31 +33,31 @@ Pause/Play: space
 
 Framerate:
 
-	+1: e
-	+10: r
-	-1: w
-	-10: q
+	q: -10
+	w: -1
+	e: +1
+	r: +10
 
 Frameskip:
 
-	+1: d
-	+10: f
-	-1: s
-	-10: a
+	a: -25
+	s: -1
+	d: +1
+	f: +25
 
 Reverse Frameskip:
     
-	z: -10
+	z: -25
 	x: -1
 	c: +1
-	v: +10
+	v: +25
 
 Set top proccess on display:
 
-	u: -10
+	u: Default top process
 	i: -1
 	o: +1
-	p: +10
+	p: +100
 
 Frameskip can be negative to reverse the game.
 
@@ -71,3 +71,30 @@ Reference materials incuding compiled macos executables, instruction pdf's, and 
 
 ![screenshot](/resources/screenshots/corewar1.gif)
 
+## Assembler:
+
+	Usage: ./asm <champion.s>
+    
+   The assembler converts a file containing assembly instructions into a champion binary.
+
+###	.S File Format Example:
+
+	.name "Name of champion"
+    .comment "What your champion screams when
+    			it bathes in the blood of its enemies"   
+ 
+    #instruction	var1,	var2,				var3 ...
+       	sti			r1,		%:example_label,	%1
+         ld			50, 	r4
+            
+    example_label:
+    	live	%10
+ 		zjmp	%:live
+ 
+ Special characters:
+* ':' Label character: Proceeds the creation of a label, and preceeds the usage of a label
+* '#' Comment character: Preceeds comments
+* ';' Alternate comment character
+* '0x': Preceeds numbers in hexadecimal format
+* '%' Direct character: Preceeds direct variables. Direct variables will use the raw value of the variable.
+* 'r' Registry character: Preceeds a registry number
