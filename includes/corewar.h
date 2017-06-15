@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:52:02 by mburson           #+#    #+#             */
-/*   Updated: 2017/05/04 16:43:16 by kdavis           ###   ########.fr       */
+/*   Updated: 2017/06/14 20:12:02 by kdavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ extern int32_t			g_error;
 # define V_PROCESS		0x2
 # define V_REGISTORS	0x4
 
-# define OCTET_PER_LINE	32
-# define HEX_HEADER		false
+# define OCTET_PER_LINE	64
+# define HEX_HEADER		true
 # define MAX_PROCESS	300
 
 # define NUMBER_OF_FUNCTIONS 17
