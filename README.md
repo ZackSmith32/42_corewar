@@ -79,8 +79,6 @@ This is a copy of school 42's implementaion. Code dumped at any time when run wi
 
 Reference materials incuding compiled macos executables, instruction pdf's, and champtions can be found in /resources.
 
-![screenshot](/resources/screenshots/corewar1.gif)
-
 ## Assembler:
 
 	Usage: ./asm <champion.s>
@@ -93,9 +91,9 @@ Reference materials incuding compiled macos executables, instruction pdf's, and 
     .comment "What your champion screams when
     			it bathes in the blood of its enemies"   
  
-    #instruction	var1,	var2,				var3 ...
-       	sti			r1,		%:example_label,	%1
-         ld			50, 	r4
+    #instruction	var1,		var2,			var3 ...
+    	sti	r1,		%:example_label,	%1
+    	ld	50, 		r4
             
     example_label:
     	live	%10
@@ -108,3 +106,4 @@ Reference materials incuding compiled macos executables, instruction pdf's, and 
 * '0x': Preceeds numbers in hexadecimal format
 * '%' Direct character: Preceeds direct variables. Direct variables will use the raw value of the variable.
 * 'r' Registry character: Preceeds a registry number
+* Variables that are not preceeded by either '%' or 'r' are indirect variables. The process will use the value in memory that is located at the offset of the indirect variable.
