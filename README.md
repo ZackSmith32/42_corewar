@@ -68,6 +68,3 @@ Set top proccess on display:
 	i: -1
 	o: +1
 	p: +10
-
-Frameskip can be negative to reverse the game.
-
