@@ -80,8 +80,7 @@ Frameskip can be negative to reverse the game.
 ###	.S File Format Example:
 
 	.name "Name of champion"
-    .comment "What your champion screams when
-    			it bathes in the blood of its enemies"   
+    .comment "What your champion screams when it bathes in the blood of its enemies"   
  
     #instruction	var1,		var2,			var3 ...
     	sti	r1,		%:example_label,	%1
@@ -89,7 +88,7 @@ Frameskip can be negative to reverse the game.
             
     example_label:
     	live	%10
- 		zjmp	%:live
+ 		zjmp	%:example_label
  
  Special characters:
 * ':' Label character: Proceeds the creation of a label, and preceeds the usage of a label
