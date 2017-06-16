@@ -12,13 +12,13 @@ This is a copy of school 42's implementaion. Code dumped at any time when run wi
 
 Reference materials incuding compiled macos executables, instruction pdf's, and champtions can be found in /resources.
 
-### Compile:
+### Compile and Run:
 
 ```
 make
 make champions
+./corewar -p -v  resources/champs/Gagnant.cor resources/champs/examples/helltrain.cor ~/Hercules/bull/corewar/ressources/knut.cor resources/champs/examples/bee_gees.cor
 ```
-
 ## Start Simulation:
 
 ```
