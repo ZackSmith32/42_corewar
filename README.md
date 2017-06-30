@@ -17,7 +17,7 @@ Reference materials incuding compiled macos executables, instruction pdf's, and 
 ```
 make
 make champions
-./corewar -p -v  resources/champs/Gagnant.cor resources/champs/examples/helltrain.cor resources/knut.cor resources/champs/examples/bee_gees.cor
+./corewar -p -v  resources/champs/Gagnant.cor resources/champs/examples/helltrain.cor resources/champs/knut.cor resources/champs/examples/bee_gees.cor
 ```
 ## Start Simulation:
 
